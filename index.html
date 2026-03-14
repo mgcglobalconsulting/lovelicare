@@ -208,6 +208,7 @@
   <span class="mobile-nav-item" onclick="navTo('wellness-assistant')" data-nav>Wellness Assistant</span>
   <span class="mobile-nav-item" onclick="navTo('online-store')" data-nav>Shop</span>
   <span class="mobile-nav-item" onclick="navTo('contact')" data-nav>Contact</span>
+  <span class="mobile-nav-item" onclick="navTo('client-login')" data-nav>🔑 Client Portal</span>
   <div style="margin-top:24px">
     <button class="vagaro-glass-btn" onclick="openVagaro();document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow=''" style="width:100%;justify-content:center">📅 Book Appointment</button>
   </div>
@@ -266,7 +267,7 @@
 
       <!-- CTA + Mobile Toggle -->
       <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
-        <a href="https://lovelicare.com/m/account" target="_blank" class="btn-glass btn-glass-sm" style="font-size:.6rem;padding:8px 14px">Sign In</a>
+        <button onclick="navTo('client-login')" class="btn-glass btn-glass-sm" style="font-size:.6rem;padding:8px 14px">Client Portal</button>
         <!-- PART 3: Vagaro Glass Button — natively integrated -->
         <button class="vagaro-glass-btn" onclick="openVagaro()" aria-label="Book Appointment">
           <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5"/></svg>
@@ -927,63 +928,254 @@
   </div></div>
 </div>
 
+<!-- ════════════════════════════════════════════
+     PAGE: CLIENT PORTAL LOGIN
+════════════════════════════════════════════ -->
+<div class="lc-page" id="page-client-login">
+  <div class="portal-bg">
+    <!-- Ambient orbs -->
+    <div class="portal-orb portal-orb-1"></div>
+    <div class="portal-orb portal-orb-2"></div>
+    <div class="portal-orb portal-orb-3"></div>
+
+    <div class="portal-wrap">
+      <!-- Left: brand panel -->
+      <div class="portal-brand-panel lc-reveal">
+        <div class="portal-logo-mark">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4C9.373 4 4 9.373 4 16s5.373 12 12 12 12-5.373 12-12S22.627 4 16 4zm0 4c1.5 0 2.9.35 4.14.96L7.96 20.14A7.958 7.958 0 018 16c0-4.418 3.582-8 8-8zm0 16c-1.5 0-2.9-.35-4.14-.96l12.18-12.18c.4 1.24.96 2.64.96 4.14 0 4.418-3.582 8-8 8z" fill="rgba(201,169,110,0.9)"/></svg>
+        </div>
+        <div class="portal-brand-name">LoveLi<span>Care</span></div>
+        <div class="portal-brand-sub">Client Portal</div>
+        <p class="portal-brand-desc">Your personal wellness dashboard — appointments, history, forms, and care plans all in one place.</p>
+
+        <div class="portal-feature-list">
+          <div class="portal-feature"><span class="portal-feature-icon">📅</span><span>View & manage appointments</span></div>
+          <div class="portal-feature"><span class="portal-feature-icon">📋</span><span>Access intake forms & records</span></div>
+          <div class="portal-feature"><span class="portal-feature-icon">💊</span><span>Review your treatment plans</span></div>
+          <div class="portal-feature"><span class="portal-feature-icon">🛍</span><span>Order history & subscriptions</span></div>
+          <div class="portal-feature"><span class="portal-feature-icon">💬</span><span>Secure messaging with your care team</span></div>
+        </div>
+
+        <div class="portal-trust-row">
+          <div class="portal-trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+            HIPAA Secure
+          </div>
+          <div class="portal-trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+            256-bit Encrypted
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: login card -->
+      <div class="portal-card lc-reveal delay-1">
+        <div class="portal-card-header">
+          <div class="portal-card-eyebrow">Welcome back</div>
+          <h2 class="portal-card-title">Sign in to your<br><span>Account</span></h2>
+          <p class="portal-card-sub">Access your wellness journey, appointments, and care history.</p>
+        </div>
+
+        <!-- External login CTA — routes to Vagaro/Wix member portal -->
+        <div class="portal-login-cta">
+          <a href="https://lovelicare.com/m/account" target="_blank" class="portal-btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+            Sign In to My Account
+          </a>
+          <div class="portal-divider"><span>or</span></div>
+          <a href="https://lovelicare.com/m/bookings" target="_blank" class="portal-btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5"/></svg>
+            View My Bookings
+          </a>
+        </div>
+
+        <div class="portal-card-links">
+          <span onclick="navTo('home')" class="portal-back-link">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+            Back to Site
+          </span>
+          <span class="portal-card-dot">·</span>
+          <a href="mailto:LoveLiCareSvcs@gmail.com" class="portal-back-link">Need Help?</a>
+          <span class="portal-card-dot">·</span>
+          <button onclick="openVagaro()" class="portal-back-link" style="background:none;border:none;cursor:pointer;font-size:inherit;color:inherit;font-family:inherit">Book Appointment</button>
+        </div>
+
+        <div class="portal-new-client">
+          <div class="portal-new-label">New to LoveLi Care?</div>
+          <p>Book your complimentary consultation and we'll create your account during your first visit.</p>
+          <button onclick="openVagaro('Complimentary Consultation')" class="portal-btn-ghost">Book a Consultation →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </main>
+
+<!-- ══ PRE-FOOTER CTA BAND ══ -->
+<div class="footer-cta-band">
+  <div class="lc-container">
+    <div class="footer-cta-inner">
+      <div class="footer-cta-text">
+        <div class="footer-cta-eyebrow">Ready to Begin?</div>
+        <h2>Your Wellness Journey<br>Starts <em style="font-style:italic;color:var(--gold)">Here</em></h2>
+        <p>Board-certified care · Towson, MD · MD · DC · VA · PA</p>
+      </div>
+      <div class="footer-cta-actions">
+        <button class="vagaro-glass-btn" onclick="openVagaro()" style="font-size:.78rem;padding:14px 28px">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5"/></svg>
+          Book Appointment
+        </button>
+        <a href="tel:4106165451" class="btn-glass" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.15);font-size:.76rem;padding:12px 22px">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          410-616-5451
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ══ FOOTER ══ -->
 <footer class="lc-footer">
-  <div class="lc-container">
-    <div class="footer-grid">
-      <div>
-        <span class="footer-brand">LoveLi<span>Care</span></span>
-        <p class="footer-tagline">Med Spa & Wellness Lounge — Where clinical precision meets compassionate, personalized care. Serving Towson, MD and the MD/DC/VA region.</p>
-        <div style="display:flex;gap:10px;margin-top:18px">
-          <a href="https://www.facebook.com/337743627433167" target="_blank" class="btn-glass btn-glass-sm" style="font-size:.62rem">Facebook ↗</a>
-          <a href="https://www.instagram.com/lovelicare" target="_blank" class="btn-glass btn-glass-sm" style="font-size:.62rem">Instagram ↗</a>
+
+  <!-- Decorative SVG leaf accents -->
+  <svg class="footer-leaf-accent top-right" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M280 20C280 20 150 30 80 120C10 210 20 280 20 280C20 280 100 200 160 150C220 100 280 20 280 20Z" fill="white"/>
+    <path d="M260 40C200 80 120 140 60 240" stroke="white" stroke-width="1.5" stroke-dasharray="4 8"/>
+  </svg>
+  <svg class="footer-leaf-accent bottom-left" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M220 20C220 20 100 40 50 110C0 180 20 220 20 220C20 220 80 160 130 110C180 60 220 20 220 20Z" fill="white"/>
+  </svg>
+
+  <div class="footer-main">
+    <div class="lc-container">
+      <div class="footer-top-line"></div>
+
+      <div class="footer-grid">
+
+        <!-- ── Brand Column ── -->
+        <div class="footer-brand-col">
+          <span class="footer-brand">LoveLi<span>Care</span></span>
+          <p class="footer-tagline">Med Spa & Wellness Lounge — Where clinical precision meets compassionate, personalized care. Towson, MD · Serving MD · DC · VA · PA.</p>
+
+          <!-- Social icons -->
+          <div class="footer-social" style="margin-top:20px">
+            <a href="https://www.facebook.com/337743627433167" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/lovelicare" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.google.com/search?q=LoveLi+Care+Med+Spa+Towson+MD" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Google Reviews">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+            </a>
+          </div>
+
+          <!-- Credential badges -->
+          <div class="footer-badges">
+            <div class="footer-badge">
+              <div class="footer-badge-icon">🏥</div>
+              <div><span class="footer-badge-text">NP-CRNP Board Certified</span><span class="footer-badge-sub">Libra Robertson, NP-CRNP</span></div>
+            </div>
+            <div class="footer-badge">
+              <div class="footer-badge-icon">🔒</div>
+              <div><span class="footer-badge-text">HIPAA Compliant</span><span class="footer-badge-sub">Patient Privacy Protected</span></div>
+            </div>
+            <div class="footer-badge">
+              <div class="footer-badge-icon">⚕️</div>
+              <div><span class="footer-badge-text">Medical Director Oversight</span><span class="footer-badge-sub">Maryland Licensed Practice</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Services Column ── -->
+        <div class="footer-col">
+          <h5>Our Services</h5>
+          <ul>
+            <li><span onclick="navTo('medical-aesthetics')"><span class="footer-col-icon">💉</span>Medical Aesthetics</span></li>
+            <li><span onclick="navTo('body-contouring')"><span class="footer-col-icon">✨</span>Body Contouring</span></li>
+            <li><span onclick="navTo('body-contouring')"><span class="footer-col-icon">🔥</span>Snatch Protocol™</span></li>
+            <li><span onclick="navTo('weight-management')"><span class="footer-col-icon">⚖️</span>Weight Management</span></li>
+            <li><span onclick="navTo('nutritional-wellness')"><span class="footer-col-icon">💧</span>IV Therapy</span></li>
+            <li><span onclick="navTo('nutrition-counseling')"><span class="footer-col-icon">🥗</span>Nutrition Counseling</span></li>
+            <li><span onclick="navTo('non-emergent-care')"><span class="footer-col-icon">🏥</span>MMCC & Physicals</span></li>
+          </ul>
+        </div>
+
+        <!-- ── Resources Column ── -->
+        <div class="footer-col">
+          <h5>Resources</h5>
+          <ul>
+            <li><span onclick="navTo('vitamin-cheat-sheet')"><span class="footer-col-icon">📊</span>Vitamin Cheat Sheet</span></li>
+            <li><span onclick="navTo('wellness-assistant')"><span class="footer-col-icon">💬</span>AI Wellness Assistant</span></li>
+            <li><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank"><span class="footer-col-icon">🎁</span>Free Meal Plan</a></li>
+            <li><a href="https://lovelicare.com/m/bookings" target="_blank"><span class="footer-col-icon">📅</span>Book Appointment</a></li>
+            <li><a href="https://lovelicare.com/m/account" target="_blank"><span class="footer-col-icon">👤</span>Client Portal</a></li>
+            <li><span onclick="navTo('sitemap')"><span class="footer-col-icon">🗺</span>Site Map</span></li>
+          </ul>
+        </div>
+
+        <!-- ── Contact Column ── -->
+        <div class="footer-col">
+          <h5>Contact Us</h5>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">📍</div>
+            <div><span class="footer-contact-label">Location</span><span class="footer-contact-val">100 E Pennsylvania Ave<br>Suite 304 · Towson, MD 21286</span></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">📞</div>
+            <div><span class="footer-contact-label">Office</span><span class="footer-contact-val"><a href="tel:4106165451">410-616-5451</a></span></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">💬</div>
+            <div><span class="footer-contact-label">Text / WhatsApp</span><span class="footer-contact-val"><a href="tel:4436782254">443-678-2254</a></span></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">✉️</div>
+            <div><span class="footer-contact-label">Email</span><span class="footer-contact-val"><a href="mailto:LoveLiCareSvcs@gmail.com">LoveLiCareSvcs@gmail.com</a></span></div>
+          </div>
+        </div>
+
+        <!-- ── Hours Column ── -->
+        <div class="footer-col">
+          <h5>Hours</h5>
+          <div class="footer-hours">
+            <div class="footer-hours-title">By Appointment</div>
+            <div class="footer-hours-row"><span>Monday – Friday</span><span>9am – 6pm</span></div>
+            <div class="footer-hours-row today"><span>Saturday</span><span>10am – 4pm</span></div>
+            <div class="footer-hours-row"><span>Sunday</span><span>Closed</span></div>
+            <div class="footer-hours-row"><span>Major Holidays</span><span>Closed</span></div>
+          </div>
+          <button onclick="openVagaro()" class="vagaro-glass-btn" style="margin-top:16px;width:100%;justify-content:center;font-size:.72rem;padding:11px 16px">
+            📅 Book Online
+          </button>
+          <a href="https://maps.google.com/?q=100+East+Pennsylvania+Avenue+Towson+MD+21286" target="_blank" class="btn-glass btn-glass-sm" style="margin-top:8px;width:100%;justify-content:center;font-size:.7rem">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            Get Directions
+          </a>
+        </div>
+
+      </div><!-- /footer-grid -->
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 LoveLi Care Med Spa & Wellness Lounge LLC. All Rights Reserved.</p>
+        <div class="footer-bottom-links">
+          <span onclick="navTo('privacy-policy')">Privacy Policy</span>
+          <span onclick="navTo('terms')">Terms & Conditions</span>
+          <a href="https://lovelicare.com/online-store" target="_blank">Store ↗</a>
+          <span onclick="navTo('sitemap')">Site Map</span>
         </div>
       </div>
-      <div class="footer-col">
-        <h5>Services</h5>
-        <ul>
-          <li><span onclick="navTo('medical-aesthetics')">Medical Aesthetics</span></li>
-          <li><span onclick="navTo('body-contouring')">Body Contouring</span></li>
-          <li><span onclick="navTo('weight-management')">Weight Management</span></li>
-          <li><span onclick="navTo('nutritional-wellness')">IV Therapy</span></li>
-          <li><span onclick="navTo('non-emergent-care')">MMCC & Physicals</span></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Resources</h5>
-        <ul>
-          <li><span onclick="navTo('vitamin-cheat-sheet')">Vitamin Cheat Sheet</span></li>
-          <li><span onclick="navTo('wellness-assistant')">Wellness Assistant</span></li>
-          <li><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank">Free Meal Plan ↗</a></li>
-          <li><a href="https://lovelicare.com/m/bookings" target="_blank">Book Appointment ↗</a></li>
-          <li><a href="https://lovelicare.com/m/account" target="_blank">My Account ↗</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Contact</h5>
-        <ul>
-          <li><span>100 E Pennsylvania Ave<br>Suite 304, Towson MD</span></li>
-          <li><a href="tel:4106165451">📞 410-616-5451</a></li>
-          <li><a href="tel:4436782254">💬 443-678-2254</a></li>
-          <li><a href="mailto:LoveLiCareSvcs@gmail.com">✉️ Email Us</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 LoveLi Care Med Spa & Wellness Lounge LLC. All Rights Reserved.</p>
-      <div class="footer-links">
-        <span onclick="navTo('privacy-policy')">Privacy Policy</span>
-        <span onclick="navTo('terms')">Terms</span>
-        <a href="https://lovelicare.com/online-store" target="_blank">Store ↗</a>
-        <span onclick="navTo('sitemap')">Site Map</span>
-      </div>
     </div>
   </div>
+
   <div class="mgc-bar">
-    <p>Liquid Glass Design System by <a href="https://www.mgcglobalconsulting.com" target="_blank">MGC Global Consulting</a> · Mark G. Cartwright · All AI Asset Prompts Documented</p>
+    <div class="lc-container">
+      <p>Liquid Glass Design System by <a href="https://www.mgcglobalconsulting.com" target="_blank">MGC Global Consulting</a> · Mark G. Cartwright · AI-Enhanced Development</p>
+    </div>
   </div>
+
 </footer>
 
 <!-- ══ COOKIE BANNER ══ -->
