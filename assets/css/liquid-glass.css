@@ -402,6 +402,72 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   .portal-brand-panel,.portal-card{padding:32px 24px}
 }
 
+/* ══════════════════════════════════════════════════════════════════════
+   BEFORE / AFTER GALLERY
+   ══════════════════════════════════════════════════════════════════════ */
+.ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.ba-card{background:var(--glass-bg);backdrop-filter:var(--blur-md);-webkit-backdrop-filter:var(--blur-md);border:1px solid var(--glass-border);border-radius:var(--radius-xl);overflow:hidden;transition:transform .3s ease,box-shadow .3s ease}
+.ba-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.14)}
+.ba-pair{display:flex;position:relative;height:220px;overflow:hidden}
+.ba-half{flex:1;position:relative;overflow:hidden}
+.ba-img{width:100%;height:100%;background-size:cover;background-position:center}
+.ba-divider-line{position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(255,255,255,.7);z-index:10;transform:translateX(-50%)}
+.ba-divider-line::before{content:'◈';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,.92);color:#C9A96E;font-size:.7rem;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(201,169,110,.5);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.ba-badge{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);padding:3px 12px;border-radius:20px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.ba-badge-before{background:rgba(0,0,0,.45);color:rgba(255,255,255,.8);backdrop-filter:blur(6px)}
+.ba-badge-after{background:rgba(201,169,110,.85);color:#fff;backdrop-filter:blur(6px)}
+.ba-caption{padding:16px 20px;display:flex;flex-direction:column;gap:4px}
+.ba-caption-service{font-size:.82rem;font-weight:700;color:var(--teal-deep);letter-spacing:.02em}
+.ba-caption-note{font-size:.72rem;color:var(--muted);letter-spacing:.02em}
+
+/* Before/After Gradient Placeholders — Medical Aesthetics */
+.ba-img-btx-before{background:linear-gradient(160deg,hsl(28,14%,72%) 0%,hsl(24,18%,65%) 60%,hsl(20,20%,60%) 100%)}
+.ba-img-btx-after{background:linear-gradient(160deg,hsl(28,30%,80%) 0%,hsl(24,38%,75%) 60%,hsl(20,42%,72%) 100%)}
+.ba-img-filler-before{background:linear-gradient(145deg,hsl(15,22%,70%) 0%,hsl(12,20%,64%) 100%)}
+.ba-img-filler-after{background:linear-gradient(145deg,hsl(18,38%,78%) 0%,hsl(14,42%,72%) 100%)}
+.ba-img-hydra-before{background:linear-gradient(155deg,hsl(30,12%,68%) 0%,hsl(26,16%,62%) 100%)}
+.ba-img-hydra-after{background:linear-gradient(155deg,hsl(32,40%,84%) 0%,hsl(28,48%,78%) 100%)}
+/* Before/After Gradient Placeholders — Body Contouring */
+.ba-img-body1-before{background:linear-gradient(160deg,hsl(210,14%,62%) 0%,hsl(220,12%,56%) 100%)}
+.ba-img-body1-after{background:linear-gradient(160deg,hsl(28,32%,76%) 0%,hsl(20,38%,68%) 100%)}
+.ba-img-body2-before{background:linear-gradient(145deg,hsl(215,16%,60%) 0%,hsl(200,12%,55%) 100%)}
+.ba-img-body2-after{background:linear-gradient(145deg,hsl(22,34%,74%) 0%,hsl(18,40%,66%) 100%)}
+.ba-img-body3-before{background:linear-gradient(155deg,hsl(205,10%,64%) 0%,hsl(215,14%,58%) 100%)}
+.ba-img-body3-after{background:linear-gradient(155deg,hsl(30,36%,80%) 0%,hsl(24,44%,73%) 100%)}
+
+/* ══════════════════════════════════════════════════════════════════════
+   SNATCH PROTOCOL™ PRICING
+   ══════════════════════════════════════════════════════════════════════ */
+.snatch-pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start}
+.snatch-pkg-card{background:var(--glass-bg);backdrop-filter:var(--blur-md);-webkit-backdrop-filter:var(--blur-md);border:1px solid var(--glass-border);border-radius:var(--radius-xl);padding:28px 24px 30px;display:flex;flex-direction:column;gap:0;position:relative;transition:transform .3s,box-shadow .3s}
+.snatch-pkg-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.13)}
+.snatch-pkg-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.snatch-pkg-name{font-size:1.1rem;font-weight:700;color:var(--teal-deep);margin-bottom:14px;line-height:1.2}
+.snatch-pkg-price{font-size:2.6rem;font-weight:800;color:var(--teal-deep);line-height:1;margin-bottom:4px}
+.snatch-pkg-price sup{font-size:1.1rem;vertical-align:super;font-weight:700;margin-right:2px}
+.snatch-pkg-per{font-size:.73rem;color:var(--muted);margin-bottom:20px;line-height:1.4}
+.snatch-pkg-list{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:8px}
+.snatch-pkg-list li{font-size:.8rem;color:var(--body);padding-left:20px;position:relative;line-height:1.4}
+.snatch-pkg-list li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:700;font-size:.75rem}
+.snatch-pkg-card .vagaro-glass-btn{margin-top:auto;font-size:.71rem;padding:12px 20px;width:100%;justify-content:center}
+
+/* Featured card */
+.snatch-pkg-featured{border-color:rgba(201,169,110,.45);background:linear-gradient(145deg,rgba(201,169,110,.12) 0%,var(--glass-bg) 60%);box-shadow:0 4px 32px rgba(201,169,110,.18),inset 0 1px 0 rgba(201,169,110,.25)}
+.snatch-pkg-badge-top{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#B8935A,#C9A96E,#D4B87A);color:#fff;font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 18px;border-radius:0 0 12px 12px;white-space:nowrap;box-shadow:0 4px 12px rgba(201,169,110,.35)}
+.snatch-pkg-featured .snatch-pkg-price{color:#A07840}
+
+/* Elite card */
+.snatch-pkg-elite{border-color:rgba(13,60,60,.3);background:linear-gradient(145deg,rgba(13,60,60,.08) 0%,var(--glass-bg) 60%)}
+.snatch-pkg-elite .snatch-pkg-eyebrow{color:var(--teal)}
+.snatch-pkg-elite .snatch-pkg-price{background:linear-gradient(135deg,var(--teal),var(--teal-deep));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Add-ons grid */
+.snatch-addons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.snatch-addon{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5);border-radius:12px;padding:12px 16px}
+.snatch-addon-icon{font-size:1.3rem;flex-shrink:0}
+.snatch-addon-name{font-size:.8rem;color:var(--teal-deep);font-weight:500;flex:1;line-height:1.3}
+.snatch-addon-price{font-size:.82rem;font-weight:700;color:var(--gold);white-space:nowrap}
+
 /* ── RESPONSIVE ── */
 @media(max-width:1100px){
   .lc-nav-links{display:none}
@@ -414,6 +480,9 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   .col-2{grid-template-columns:1fr;gap:32px}
   .grid-3{grid-template-columns:1fr 1fr}
   .grid-4{grid-template-columns:1fr 1fr}
+  .ba-grid{grid-template-columns:1fr 1fr}
+  .snatch-pricing-grid{grid-template-columns:1fr 1fr}
+  .snatch-addons-grid{grid-template-columns:1fr 1fr}
   .lc-hero{padding:110px 0 52px;min-height:auto}
   .hero-glass-card{padding:36px}
   .lc-section,.lc-glass-section{padding:64px 0}
@@ -421,6 +490,10 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 @media(max-width:640px){
   .grid-3,.grid-4{grid-template-columns:1fr}
+  .ba-grid{grid-template-columns:1fr}
+  .snatch-pricing-grid{grid-template-columns:1fr}
+  .snatch-addons-grid{grid-template-columns:1fr}
+  .ba-pair{height:180px}
   .lc-container{padding:0 1.25rem}
   .lc-h1{font-size:2.2rem}
   .lc-h2{font-size:1.7rem}
