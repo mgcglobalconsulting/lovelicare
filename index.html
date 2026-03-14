@@ -1,1253 +1,1012 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MGC Global Consulting | AI-Powered Strategy, Automation & Operations Systems</title>
-<meta name="description" content="Enterprise AI consulting and systems implementation firm. We design intelligent automation, CRM architecture, and operational systems for organizations scaling beyond manual workflows.">
-<meta name="keywords" content="AI consulting, automation consulting, operations consulting, Notion CRM, Zapier integration, business automation, AI strategy, Maryland consulting, enterprise systems">
-<meta property="og:title" content="MGC Global Consulting | AI-Powered Strategy & Automation">
-<meta property="og:description" content="We design intelligent systems that streamline operations, integrate automation, and help organizations scale with clarity and control.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.mgcglobalconsulting.com">
-<link rel="canonical" href="https://www.mgcglobalconsulting.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LoveLi Care Med Spa & Wellness | Liquid Glass · Towson, MD</title>
+<meta name="description" content="LoveLi Care Med Spa & Wellness Lounge — Expert care for a healthier, happier you. Medical aesthetics, body contouring, IV therapy, weight management, MMCC in Towson, MD."/>
+<meta name="keywords" content="Med Spa Towson MD, Natural Botox Baltimore, Body Contouring Maryland, IV Therapy Towson, MMCC Maryland, LoveLi Care"/>
+<link rel="canonical" href="https://lovelicare.com/"/>
+<meta property="og:title" content="LoveLi Care Med Spa | Liquid Glass Experience · Towson MD"/>
+<meta property="og:image" content="./assets/img/og-image.jpg"/>
+<!-- GoDaddy: all paths are relative for server portability -->
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&family=Italiana&display=swap" rel="stylesheet"/>
+
+<!-- GoDaddy: relative CSS path -->
+<link rel="stylesheet" href="./assets/css/liquid-glass.css"/>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MedicalBusiness","name":"LoveLi Care Med Spa & Wellness Lounge","url":"https://lovelicare.com","telephone":"+14106165451","address":{"@type":"PostalAddress","streetAddress":"100 East Pennsylvania Avenue","addressLocality":"Towson","addressRegion":"MD","postalCode":"21286","addressCountry":"US"},"sameAs":["https://www.facebook.com/337743627433167","https://www.instagram.com/lovelicare"]}
+</script>
+
+<!-- Additional inline styles for page-specific components -->
 <style>
-/* ═══════════════════════════════════════════════
-   RESET & ROOT
-   ═══════════════════════════════════════════════ */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --primary:#135997;--secondary:#1B559E;--navy:#112A60;--navy-deep:#0A1B3F;
-  --charcoal:#19191A;--light-gray:#F6F6F7;--border:#D6D6D6;--white:#FFFFFF;
-  --cyan:#4AAFCF;--gold:#C9A84C;
-  --grad-hero:linear-gradient(135deg,#0A1B3F 0%,#112A60 40%,#135997 100%);
-  --grad-blue:linear-gradient(135deg,#112A60 0%,#1B559E 100%);
-  --font-display:'Sora',sans-serif;
-  --font-body:'Plus Jakarta Sans',sans-serif;
-  --ease:cubic-bezier(0.16,1,0.3,1);
-}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:var(--font-body);color:var(--charcoal);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
-img{max-width:100%;display:block}
-a{text-decoration:none;color:inherit}
-ul{list-style:none}
+/* ── LOADER ── */
+#lc-loader{position:fixed;inset:0;z-index:99999;background:#F5EFE8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .7s,transform .7s}
+#lc-loader.gone{opacity:0;pointer-events:none;transform:scale(1.04)}
+.loader-logo{font-family:'Italiana','Cormorant',Georgia,serif;font-size:clamp(2.4rem,6vw,4rem);color:#2F4F4F;letter-spacing:.06em}
+.loader-logo span{color:#C9A96E}
+.loader-bar{width:180px;height:1.5px;background:rgba(201,169,110,.2);border-radius:999px;overflow:hidden;position:relative}
+.loader-bar::after{content:'';position:absolute;left:-60%;width:60%;height:100%;background:linear-gradient(90deg,transparent,#C9A96E,transparent);animation:lb 1.4s ease .2s forwards}
+@keyframes lb{to{left:150%}}
+.loader-sub{font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(47,79,79,.3);font-family:'DM Sans',sans-serif}
 
-/* ═══════════════════════════════════════════════
-   UTILITY
-   ═══════════════════════════════════════════════ */
-.container{max-width:1200px;margin:0 auto;padding:0 2rem}
-.container-wide{max-width:1400px;margin:0 auto;padding:0 2rem}
+/* ── MOBILE MENU ── */
+#mobile-menu{position:fixed;inset:0;z-index:998;background:rgba(245,239,232,.92);backdrop-filter:blur(32px) saturate(160%);-webkit-backdrop-filter:blur(32px) saturate(160%);padding:100px 32px 40px;display:flex;flex-direction:column;gap:8px;transform:translateX(100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+#mobile-menu.open{transform:translateX(0)}
+.mobile-nav-item{padding:16px 20px;font-family:'Cormorant',Georgia,serif;font-size:1.4rem;font-weight:400;color:rgba(47,79,79,.8);border-radius:14px;cursor:pointer;transition:background .3s}
+.mobile-nav-item:hover{background:rgba(255,255,255,.5);color:#2F4F4F}
+#mobile-toggle{background:none;border:none;cursor:pointer;display:none;width:38px;height:38px;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:50%;background:rgba(255,255,255,.4);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+#mobile-toggle span{width:16px;height:1.5px;background:#2F4F4F;display:block;transition:all .3s;border-radius:2px}
+@media(max-width:1100px){#mobile-toggle{display:flex}}
 
-/* Scroll-triggered animations */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-60px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
-.reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(60px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
-.reveal-right.visible{opacity:1;transform:translateX(0)}
-.reveal-scale{opacity:0;transform:scale(0.9);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
-.reveal-scale.visible{opacity:1;transform:scale(1)}
+/* ── PLANNER COMPONENT ── */
+.planner-ui{padding:40px;display:flex;flex-direction:column;gap:0}
+.planner-dots{display:flex;gap:8px;margin-bottom:32px}
+.planner-dot{flex:1;height:3px;border-radius:2px;background:rgba(201,169,110,.2);transition:background .4s}
+.planner-dot.active{background:#C9A96E}
+.planner-q{font-family:'Cormorant',Georgia,serif;font-size:1.25rem;font-weight:400;color:#2F4F4F;margin-bottom:5px;line-height:1.4}
+.planner-qsub{font-size:.75rem;font-weight:300;color:rgba(47,79,79,.45);margin-bottom:28px}
+.planner-opts{display:flex;flex-direction:column;gap:10px}
+.planner-opt{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);border-radius:12px;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);font-size:.88rem;font-weight:300;color:rgba(47,79,79,.7)}
+.planner-opt:hover{background:rgba(255,255,255,.65);border-color:rgba(201,169,110,.35)}
+.planner-opt.sel{background:rgba(201,169,110,.12);border-color:rgba(201,169,110,.45);color:#2F4F4F;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 0 3px rgba(201,169,110,.12)}
+.planner-opt-circle{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(201,169,110,.4);flex-shrink:0;transition:all .3s}
+.planner-opt.sel .planner-opt-circle{border-color:#C9A96E;background:#C9A96E}
+.planner-nav{display:flex;gap:10px;margin-top:24px}
+.planner-result{text-align:center;padding:20px 0}
 
-/* Stagger delays */
-.delay-1{transition-delay:0.1s}.delay-2{transition-delay:0.2s}.delay-3{transition-delay:0.3s}
-.delay-4{transition-delay:0.4s}.delay-5{transition-delay:0.5s}.delay-6{transition-delay:0.6s}
+/* ── SERVICE STEP ── */
+.svc-step-row{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.5);transition:all .4s}
+.svc-step-row:last-child{border-bottom:none}
+.svc-step-row:hover{padding-left:8px}
+.svc-step-num{font-family:'Italiana','Cormorant',Georgia,serif;font-size:2.2rem;color:rgba(201,169,110,.25);line-height:1;flex-shrink:0;width:44px;transition:color .4s}
+.svc-step-row:hover .svc-step-num{color:#C9A96E}
+.svc-step-name{font-family:'Cormorant',Georgia,serif;font-size:1rem;color:#2F4F4F;margin-bottom:4px;font-weight:400}
+.svc-step-desc{font-size:.78rem;font-weight:300;color:rgba(47,79,79,.5);line-height:1.65}
 
-/* ═══════════════════════════════════════════════
-   SCROLL PROGRESS
-   ═══════════════════════════════════════════════ */
-.scroll-progress{
-  position:fixed;top:0;left:0;width:0%;height:3px;z-index:10001;
-  background:linear-gradient(90deg,var(--cyan),var(--primary),var(--gold));
-  transition:width 0.05s linear;
-}
+/* ── GEAR GRID ── */
+.gear-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gear-opt{background:rgba(255,255,255,.45);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);border-radius:12px;padding:16px;cursor:pointer;transition:all .3s;text-align:center}
+.gear-opt:hover,.gear-opt.sel{background:rgba(201,169,110,.12);border-color:rgba(201,169,110,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 0 2px rgba(201,169,110,.15)}
+.gear-name{font-family:'Cormorant',Georgia,serif;font-size:.95rem;color:#2F4F4F;margin-bottom:4px}
+.gear-price{font-size:.75rem;color:#C9A96E;font-weight:500}
 
-/* ═══════════════════════════════════════════════
-   NAVIGATION
-   ═══════════════════════════════════════════════ */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:10000;
-  padding:1.5rem 0;transition:all 0.5s var(--ease);background:transparent;
-}
-.nav.scrolled{
-  background:rgba(10,27,63,0.97);backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);padding:0.75rem 0;
-  box-shadow:0 4px 40px rgba(0,0,0,0.2);
-}
-.nav-inner{
-  max-width:1400px;margin:0 auto;padding:0 2rem;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none}
-.nav-logo-mark{
-  width:46px;height:46px;border-radius:50%;
-  background:linear-gradient(135deg,var(--cyan) 0%,var(--primary) 50%,var(--navy) 100%);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:white;
-  letter-spacing:-1px;position:relative;overflow:hidden;
-  box-shadow:0 0 0 2px rgba(255,255,255,0.15),0 4px 15px rgba(19,89,151,0.4);
-}
-.nav-logo-mark::after{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  background:linear-gradient(135deg,rgba(255,255,255,0.3),transparent 60%);
-}
-.nav-logo-text{display:flex;flex-direction:column}
-.nav-logo-name{
-  font-family:var(--font-display);font-weight:700;font-size:0.95rem;
-  color:white;letter-spacing:1.5px;text-transform:uppercase;line-height:1.2;
-}
-.nav-logo-sub{font-size:0.65rem;color:rgba(255,255,255,0.5);letter-spacing:2.5px;text-transform:uppercase;font-weight:500}
+/* ── SITEMAP NODES ── */
+.sm-node{background:rgba(255,255,255,.4);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);border-radius:12px;padding:14px 18px;cursor:pointer;transition:all .35s;text-align:center}
+.sm-node:hover{background:rgba(255,255,255,.65);border-color:rgba(201,169,110,.3);transform:translateY(-2px)}
+.sm-node-root{background:rgba(201,169,110,.14);border-color:rgba(201,169,110,.35)}
+.sm-title{font-size:.75rem;font-weight:500;color:#2F4F4F}
+.sm-url{font-size:.58rem;color:rgba(47,79,79,.35);margin-top:3px;font-family:monospace}
+.sm-connector{display:flex;justify-content:center;padding:4px 0;color:rgba(201,169,110,.3);font-size:.85rem}
 
-.nav-links{display:flex;align-items:center;gap:2rem}
-.nav-links a{
-  font-size:0.85rem;color:rgba(255,255,255,0.75);font-weight:500;
-  letter-spacing:0.5px;transition:color 0.3s;position:relative;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
-  background:var(--cyan);transition:width 0.3s var(--ease);
-}
-.nav-links a:hover{color:white}
-.nav-links a:hover::after{width:100%}
+/* ── VITAMIN GUIDE ── */
+.vc-section{margin-bottom:48px}
+.vc-h{font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.5rem;color:#2F4F4F;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.6)}
+.vc-card{background:rgba(255,255,255,.42);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 0 20px rgba(255,255,255,.2),0 4px 16px rgba(0,0,0,.04);border-radius:14px;padding:20px;margin-bottom:12px}
+.vc-card h4{font-family:'Cormorant',Georgia,serif;font-size:1rem;color:#2F4F4F;margin-bottom:6px;font-weight:400}
+.vc-card p{font-size:.82rem;font-weight:300;color:rgba(47,79,79,.6);line-height:1.8}
+.vc-combo{background:rgba(201,169,110,.1);backdrop-filter:blur(16px);border:1px solid rgba(201,169,110,.25);border-radius:12px;padding:20px;margin-top:16px}
+.vc-combo .vc-label{font-size:.52rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:6px}
+.vc-combo p{font-size:.82rem;font-weight:300;color:rgba(47,79,79,.65);line-height:1.75}
 
-.nav-cta{
-  font-size:0.8rem;font-weight:700;color:white!important;
-  background:var(--primary);padding:0.65rem 1.5rem;border-radius:6px;
-  letter-spacing:0.5px;text-transform:uppercase;
-  transition:all 0.3s var(--ease);
-  box-shadow:0 4px 15px rgba(19,89,151,0.4);
-}
-.nav-cta:hover{background:var(--secondary);transform:translateY(-2px);box-shadow:0 6px 25px rgba(19,89,151,0.5)}
-.nav-cta::after{display:none!important}
+/* ── REVIEW WALL STAGGER ── */
+@keyframes floatReview{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.review-float-1{animation:floatReview 6s ease-in-out infinite}
+.review-float-2{animation:floatReview 7s ease-in-out .8s infinite}
+.review-float-3{animation:floatReview 5.5s ease-in-out 1.6s infinite}
+.review-float-4{animation:floatReview 8s ease-in-out 2.4s infinite}
 
-/* Mobile hamburger */
-.nav-mobile-btn{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
-.nav-mobile-btn span{width:24px;height:2px;background:white;transition:all 0.3s var(--ease);border-radius:2px}
-.nav-mobile-btn.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.nav-mobile-btn.active span:nth-child(2){opacity:0}
-.nav-mobile-btn.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+/* ── LEGAL ── */
+.legal-h2{font-family:'Cormorant',Georgia,serif;font-size:1.15rem;color:#2F4F4F;font-weight:400;margin:28px 0 10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.5)}
+.legal-h3{font-size:.88rem;font-weight:500;color:rgba(47,79,79,.75);margin:14px 0 5px}
+.legal-p{font-size:.84rem;font-weight:300;color:rgba(47,79,79,.6);line-height:1.88;margin-bottom:12px}
+.legal-link{color:#C9A96E;text-decoration:none}
 
-.nav-mobile{
-  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
-  background:rgba(10,27,63,0.98);backdrop-filter:blur(30px);
-  z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-  opacity:0;pointer-events:none;transition:opacity 0.4s var(--ease);
-}
-.nav-mobile.open{opacity:1;pointer-events:all;display:flex}
-.nav-mobile a{
-  font-family:var(--font-display);font-size:1.5rem;color:white;
-  font-weight:600;letter-spacing:1px;
-}
+/* ── AI ASSET PROMPT BANNERS (visible in dev, hidden in prod) ── */
+.ai-prompt-banner{display:none}/* Set to display:block in development */
 
-/* ═══════════════════════════════════════════════
-   HERO
-   ═══════════════════════════════════════════════ */
-.hero{
-  min-height:100vh;background:var(--grad-hero);position:relative;
-  display:flex;align-items:center;overflow:hidden;
-}
-/* Animated grid background */
-.hero-grid{
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
-  background-size:80px 80px;
-  animation:gridMove 20s linear infinite;
-}
-@keyframes gridMove{from{transform:translate(0,0)}to{transform:translate(80px,80px)}}
-
-/* World map watermark */
-.hero-map{
-  position:absolute;right:-5%;top:50%;transform:translateY(-50%);
-  width:55%;height:80%;opacity:0.04;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500'%3E%3Cpath fill='%23ffffff' d='M473 47c-3-3-8-3-12-1l-5 5c-2 2-5 3-8 2l-13-4c-4-1-8 0-10 3l-3 5c-2 3-5 5-9 5h-7c-4 0-7 2-9 5l-6 12c-1 3 0 7 3 9l8 5c3 2 4 5 4 8v6c0 4-2 7-5 9l-11 7c-3 2-5 5-5 9v3c0 4 2 8 6 9l15 6c3 1 5 4 5 7v4c0 5-3 9-7 10l-19 6c-4 1-6 5-6 9v12c0 4 3 8 7 9l6 1c4 1 7 4 7 8v14c0 3-2 6-4 8l-10 8c-3 2-4 6-3 9l3 8c1 4 5 6 9 5l12-2c4-1 8 1 10 4l5 9c2 4 6 5 10 4l7-3c3-1 7 0 9 3l8 10c2 3 6 4 10 3l7-3c4-2 8-1 10 2l6 8c2 3 6 5 10 4l14-4c3-1 6 0 8 2l9 12c2 3 6 4 9 3l13-4c4-1 8 1 9 4l4 8c2 3 5 5 9 5h15c4 0 7-2 9-6l4-9c2-4 6-6 10-5l14 3c4 1 8-1 10-5l3-7c2-4 6-6 10-6h8c4 0 8-3 9-7l3-10c1-4 4-7 8-8l12-2c4-1 7-4 8-8l1-7c1-4 4-7 8-8l11-3c4-1 6-4 7-8l2-13c0-4-1-8-5-10l-10-5c-3-2-5-5-5-9v-5c0-4 2-7 5-9l8-5c3-2 5-6 5-10v-8c0-4-3-7-6-9l-10-4c-4-2-6-5-6-9v-3c0-4 2-8 6-9l6-3c4-2 6-5 6-9v-12c0-4-3-8-7-9l-15-4c-3-1-5-4-5-7v-2c0-5 3-9 8-10l8-2c4-1 7-5 7-9v-7c0-4-3-8-7-9l-19-5c-3-1-6-4-7-7l-3-8c-1-4-5-6-9-6h-12c-4 0-7-2-9-5l-6-10c-2-3-5-5-9-5h-11c-3 0-6-2-8-5l-5-7c-2-3-6-5-10-4l-14 3c-3 1-7-1-9-4l-5-7c-2-4-6-5-10-4l-12 3z'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-
-/* Floating orbs */
-.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbFloat 8s ease-in-out infinite}
-.hero-orb-1{width:400px;height:400px;background:rgba(74,175,207,0.12);top:10%;right:15%;animation-delay:0s}
-.hero-orb-2{width:300px;height:300px;background:rgba(19,89,151,0.15);bottom:10%;left:10%;animation-delay:3s}
-.hero-orb-3{width:200px;height:200px;background:rgba(201,168,76,0.08);top:60%;right:40%;animation-delay:5s}
-@keyframes orbFloat{
-  0%,100%{transform:translate(0,0) scale(1)}
-  33%{transform:translate(30px,-20px) scale(1.05)}
-  66%{transform:translate(-20px,30px) scale(0.95)}
-}
-
-.hero-content{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:0 2rem;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-
-.hero-text{padding:2rem 0}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
-  padding:0.5rem 1rem;border-radius:100px;margin-bottom:2rem;
-  font-size:0.75rem;color:rgba(255,255,255,0.7);letter-spacing:1.5px;
-  text-transform:uppercase;font-weight:600;
-  backdrop-filter:blur(10px);
-}
-.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.5)}}
-
-.hero h1{
-  font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);
-  font-weight:800;color:white;line-height:1.1;letter-spacing:-1.5px;
-  margin-bottom:1.5rem;
-}
-.hero h1 .highlight{
-  background:linear-gradient(135deg,var(--cyan),#7BC4E0);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.hero p{
-  font-size:1.15rem;color:rgba(255,255,255,0.65);line-height:1.7;
-  max-width:540px;margin-bottom:2.5rem;font-weight:400;
-}
-.hero-ctas{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
-
-.btn-primary{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  padding:1rem 2rem;background:white;color:var(--navy);
-  font-family:var(--font-display);font-weight:700;font-size:0.85rem;
-  letter-spacing:1px;text-transform:uppercase;border-radius:8px;
-  transition:all 0.4s var(--ease);
-  box-shadow:0 4px 20px rgba(0,0,0,0.15),0 0 0 0 rgba(255,255,255,0.3);
-  position:relative;overflow:hidden;
-}
-.btn-primary::before{
-  content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cyan),var(--primary));
-  opacity:0;transition:opacity 0.4s;
-}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(0,0,0,0.25);color:var(--navy)}
-.btn-primary:hover::before{opacity:0.1}
-.btn-primary span{position:relative;z-index:1}
-.btn-primary svg{position:relative;z-index:1;transition:transform 0.3s var(--ease)}
-.btn-primary:hover svg{transform:translateX(4px)}
-
-.btn-secondary{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  padding:1rem 2rem;background:transparent;color:white;
-  border:1px solid rgba(255,255,255,0.25);
-  font-family:var(--font-display);font-weight:600;font-size:0.85rem;
-  letter-spacing:1px;text-transform:uppercase;border-radius:8px;
-  transition:all 0.4s var(--ease);
-}
-.btn-secondary:hover{
-  background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.4);
-  transform:translateY(-2px);
-}
-
-/* Hero visual side */
-.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
-
-.hero-dashboard{
-  width:100%;max-width:520px;background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.1);border-radius:16px;
-  padding:2rem;backdrop-filter:blur(20px);position:relative;
-  box-shadow:0 25px 60px rgba(0,0,0,0.3);
-}
-.hero-dashboard::before{
-  content:'';position:absolute;inset:-1px;border-radius:16px;
-  background:linear-gradient(135deg,rgba(74,175,207,0.3),transparent,rgba(201,168,76,0.2));
-  z-index:-1;
-}
-
-.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
-.dash-title{font-family:var(--font-display);font-size:0.8rem;color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
-.dash-live{display:flex;align-items:center;gap:0.4rem;font-size:0.7rem;color:var(--cyan);font-weight:600}
-.dash-live-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 1.5s ease-in-out infinite}
-
-.dash-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
-.dash-metric{
-  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
-  border-radius:10px;padding:1rem;
-}
-.dash-metric-label{font-size:0.65rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:0.5rem;font-weight:600}
-.dash-metric-value{
-  font-family:var(--font-display);font-size:1.75rem;font-weight:800;
-  color:white;line-height:1;
-}
-.dash-metric-value .unit{font-size:0.9rem;color:var(--cyan);font-weight:600}
-.dash-metric-change{font-size:0.7rem;color:#4ADE80;font-weight:600;margin-top:0.35rem;display:flex;align-items:center;gap:0.25rem}
-
-.dash-pipeline{margin-top:0.5rem}
-.dash-pipeline-label{font-size:0.65rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:0.75rem;font-weight:600}
-.dash-pipeline-bar{width:100%;height:8px;background:rgba(255,255,255,0.06);border-radius:100px;overflow:hidden;position:relative}
-.dash-pipeline-fill{
-  height:100%;border-radius:100px;width:0%;
-  background:linear-gradient(90deg,var(--cyan),var(--primary),var(--gold));
-  transition:width 2s var(--ease);
-}
-.dash-pipeline-stages{display:flex;justify-content:space-between;margin-top:0.5rem}
-.dash-pipeline-stages span{font-size:0.6rem;color:rgba(255,255,255,0.35);font-weight:500}
-
-/* Floating cards around dashboard */
-.hero-float-card{
-  position:absolute;background:rgba(255,255,255,0.08);backdrop-filter:blur(15px);
-  border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:0.75rem 1rem;
-  animation:float 6s ease-in-out infinite;
-}
-.hero-float-card-1{top:-10%;right:-15%;animation-delay:0s}
-.hero-float-card-2{bottom:-5%;left:-10%;animation-delay:2s}
-.hero-float-card .hfc-label{font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
-.hero-float-card .hfc-value{font-family:var(--font-display);font-size:1.1rem;color:white;font-weight:700;margin-top:0.15rem}
-@keyframes float{
-  0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}
-}
-
-/* Trust strip */
-.trust-strip{
-  position:relative;z-index:2;background:rgba(255,255,255,0.04);
-  border-top:1px solid rgba(255,255,255,0.08);
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  padding:1.25rem 0;
-}
-.trust-strip-inner{
-  max-width:1400px;margin:0 auto;padding:0 2rem;
-  display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;
-}
-.trust-item{
-  font-size:0.72rem;color:rgba(255,255,255,0.4);letter-spacing:2px;
-  text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:0.5rem;
-}
-.trust-item svg{width:16px;height:16px;opacity:0.4}
-
-/* ═══════════════════════════════════════════════
-   SECTION — PROBLEM / SOLUTION
-   ═══════════════════════════════════════════════ */
-.section{padding:6rem 0}
-.section-gray{background:var(--light-gray)}
-.section-dark{background:var(--grad-blue);color:white}
-.section-navy{background:var(--navy-deep);color:white}
-
-.section-header{text-align:center;max-width:700px;margin:0 auto 4rem}
-.section-label{
-  font-size:0.72rem;color:var(--primary);letter-spacing:3px;
-  text-transform:uppercase;font-weight:700;margin-bottom:0.75rem;
-  font-family:var(--font-display);
-}
-.section-dark .section-label{color:var(--cyan)}
-.section-navy .section-label{color:var(--cyan)}
-.section-title{
-  font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);
-  font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:1rem;
-}
-.section-subtitle{font-size:1.05rem;color:#666;line-height:1.7;font-weight:400}
-.section-dark .section-subtitle,.section-navy .section-subtitle{color:rgba(255,255,255,0.6)}
-
-/* Before / After */
-.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:stretch}
-.ba-card{padding:2.5rem;border-radius:16px;position:relative;overflow:hidden}
-.ba-before{background:#FEF2F2;border:1px solid #FECACA}
-.ba-after{background:#EFF6FF;border:1px solid #BFDBFE}
-
-.ba-tag{
-  display:inline-flex;align-items:center;gap:0.4rem;
-  font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  margin-bottom:1.5rem;font-family:var(--font-display);
-}
-.ba-before .ba-tag{color:#DC2626}
-.ba-after .ba-tag{color:var(--primary)}
-.ba-tag-dot{width:8px;height:8px;border-radius:50%}
-.ba-before .ba-tag-dot{background:#DC2626}
-.ba-after .ba-tag-dot{background:var(--primary)}
-
-.ba-list{display:flex;flex-direction:column;gap:1rem}
-.ba-item{
-  display:flex;align-items:flex-start;gap:0.75rem;
-  font-size:0.95rem;line-height:1.6;color:var(--charcoal);
-}
-.ba-icon{width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
-.ba-before .ba-icon{background:#FEE2E2}
-.ba-before .ba-icon svg{color:#DC2626}
-.ba-after .ba-icon{background:#DBEAFE}
-.ba-after .ba-icon svg{color:var(--primary)}
-
-.ba-cta{text-align:center;margin-top:3rem}
-.ba-cta p{font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:var(--charcoal);margin-bottom:1.25rem}
-
-.btn-blue{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  padding:1rem 2.25rem;background:var(--primary);color:white;
-  font-family:var(--font-display);font-weight:700;font-size:0.85rem;
-  letter-spacing:1px;text-transform:uppercase;border-radius:8px;
-  transition:all 0.4s var(--ease);box-shadow:0 4px 20px rgba(19,89,151,0.3);
-  border:none;cursor:pointer;
-}
-.btn-blue:hover{background:var(--secondary);transform:translateY(-3px);box-shadow:0 8px 35px rgba(19,89,151,0.4)}
-.btn-blue svg{transition:transform 0.3s var(--ease)}
-.btn-blue:hover svg{transform:translateX(4px)}
-
-/* ═══════════════════════════════════════════════
-   SERVICES
-   ═══════════════════════════════════════════════ */
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem}
-.service-card{
-  background:white;border:1px solid var(--border);border-radius:14px;
-  padding:2.25rem;position:relative;overflow:hidden;
-  transition:all 0.5s var(--ease);cursor:default;
-}
-.service-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--primary),var(--cyan));
-  transform:scaleX(0);transform-origin:left;transition:transform 0.5s var(--ease);
-}
-.service-card:hover{
-  transform:translateY(-6px);border-color:transparent;
-  box-shadow:0 20px 50px rgba(19,89,151,0.12);
-}
-.service-card:hover::before{transform:scaleX(1)}
-
-.service-icon{
-  width:52px;height:52px;border-radius:12px;
-  background:var(--light-gray);display:flex;align-items:center;justify-content:center;
-  margin-bottom:1.25rem;transition:all 0.5s var(--ease);
-}
-.service-card:hover .service-icon{background:var(--primary)}
-.service-icon svg{width:24px;height:24px;color:var(--primary);transition:color 0.5s}
-.service-card:hover .service-icon svg{color:white}
-
-.service-card h3{
-  font-family:var(--font-display);font-size:1.1rem;font-weight:700;
-  margin-bottom:0.75rem;letter-spacing:-0.3px;
-}
-.service-card p{font-size:0.9rem;color:#666;line-height:1.65}
-.service-card-link{
-  display:inline-flex;align-items:center;gap:0.3rem;
-  font-size:0.8rem;font-weight:700;color:var(--primary);margin-top:1rem;
-  letter-spacing:0.5px;text-transform:uppercase;
-  transition:gap 0.3s var(--ease);
-}
-.service-card:hover .service-card-link{gap:0.6rem}
-
-/* ═══════════════════════════════════════════════
-   ENGAGEMENT PHASES (TIMELINE)
-   ═══════════════════════════════════════════════ */
-.timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
-.timeline::before{
-  content:'';position:absolute;top:36px;left:10%;right:10%;height:2px;
-  background:var(--border);z-index:0;
-}
-.timeline-phase{text-align:center;position:relative;z-index:1}
-.timeline-number{
-  width:72px;height:72px;border-radius:50%;
-  background:white;border:3px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);font-size:1.5rem;font-weight:800;
-  color:var(--primary);margin:0 auto 1.5rem;
-  transition:all 0.5s var(--ease);position:relative;
-}
-.timeline-phase:hover .timeline-number{
-  background:var(--primary);color:white;border-color:var(--primary);
-  transform:scale(1.1);box-shadow:0 8px 30px rgba(19,89,151,0.3);
-}
-.timeline-phase h3{
-  font-family:var(--font-display);font-size:1rem;font-weight:700;
-  margin-bottom:0.5rem;letter-spacing:-0.2px;
-}
-.timeline-phase p{font-size:0.85rem;color:#666;line-height:1.6;max-width:260px;margin:0 auto}
-
-/* ═══════════════════════════════════════════════
-   WHY MGC (DARK SECTION)
-   ═══════════════════════════════════════════════ */
-.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem}
-.why-card{
-  padding:2rem;border-radius:14px;
-  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
-  transition:all 0.5s var(--ease);
-}
-.why-card:hover{
-  background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);
-  transform:translateY(-4px);
-}
-.why-card h3{
-  font-family:var(--font-display);font-size:1rem;font-weight:700;color:white;
-  margin-bottom:0.6rem;
-}
-.why-card p{font-size:0.9rem;color:rgba(255,255,255,0.55);line-height:1.65}
-
-/* ═══════════════════════════════════════════════
-   WHO WE SERVE (TABS)
-   ═══════════════════════════════════════════════ */
-.tab-container{text-align:center}
-.tab-nav{display:flex;justify-content:center;gap:0.5rem;margin-bottom:3rem;flex-wrap:wrap}
-.tab-btn{
-  padding:0.6rem 1.5rem;border-radius:100px;font-size:0.8rem;font-weight:600;
-  background:transparent;border:1px solid var(--border);color:#666;
-  cursor:pointer;transition:all 0.3s var(--ease);font-family:var(--font-body);
-  letter-spacing:0.3px;
-}
-.tab-btn.active,.tab-btn:hover{background:var(--primary);color:white;border-color:var(--primary)}
-.tab-content{display:none;animation:tabFade 0.5s var(--ease)}
-.tab-content.active{display:block}
-@keyframes tabFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-.serve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:left}
-.serve-card{
-  padding:1.75rem;border-radius:12px;background:white;border:1px solid var(--border);
-  transition:all 0.4s var(--ease);
-}
-.serve-card:hover{border-color:var(--primary);box-shadow:0 10px 30px rgba(19,89,151,0.08)}
-.serve-card h4{font-family:var(--font-display);font-size:0.95rem;font-weight:700;margin-bottom:0.4rem}
-.serve-card p{font-size:0.85rem;color:#666;line-height:1.6}
-
-/* ═══════════════════════════════════════════════
-   AUTHORITY
-   ═══════════════════════════════════════════════ */
-.authority-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.authority-text h3{font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin-bottom:1rem;letter-spacing:-0.5px}
-.authority-text p{font-size:1rem;color:#555;line-height:1.7;margin-bottom:1.5rem}
-.authority-not{display:flex;flex-direction:column;gap:0.75rem}
-.authority-not-item{
-  display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;
-  color:#666;padding:0.75rem 1rem;background:var(--light-gray);border-radius:8px;
-}
-.authority-not-item svg{width:18px;height:18px;color:#999;flex-shrink:0}
-
-.authority-visual{
-  position:relative;background:var(--grad-blue);border-radius:20px;
-  padding:3rem;min-height:400px;display:flex;flex-direction:column;justify-content:center;
-  overflow:hidden;
-}
-.authority-visual::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 30% 50%,rgba(74,175,207,0.15),transparent 60%);
-}
-.authority-stat{position:relative;z-index:1;margin-bottom:2rem}
-.authority-stat:last-child{margin-bottom:0}
-.authority-stat-value{
-  font-family:var(--font-display);font-size:2.5rem;font-weight:800;
-  color:white;line-height:1;margin-bottom:0.25rem;
-}
-.authority-stat-label{font-size:0.85rem;color:rgba(255,255,255,0.55);font-weight:500}
-
-/* ═══════════════════════════════════════════════
-   TRUE ASSIST
-   ═══════════════════════════════════════════════ */
-.ta-features{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-bottom:3rem}
-.ta-feature{
-  padding:2rem;border-radius:14px;
-  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
-  transition:all 0.5s var(--ease);text-align:center;
-}
-.ta-feature:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px)}
-.ta-feature-icon{
-  width:56px;height:56px;border-radius:50%;margin:0 auto 1rem;
-  background:rgba(74,175,207,0.15);display:flex;align-items:center;justify-content:center;
-}
-.ta-feature-icon svg{width:24px;height:24px;color:var(--cyan)}
-.ta-feature h3{font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:white;margin-bottom:0.5rem}
-.ta-feature p{font-size:0.83rem;color:rgba(255,255,255,0.5);line-height:1.6}
-
-/* Metrics counter */
-.metrics-strip{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;
-  padding:3rem 0;border-top:1px solid rgba(255,255,255,0.1);
-}
-.metric{text-align:center}
-.metric-value{
-  font-family:var(--font-display);font-size:clamp(2rem,4vw,3.5rem);
-  font-weight:800;color:white;line-height:1;margin-bottom:0.35rem;
-}
-.metric-value .counter{display:inline}
-.metric-label{font-size:0.8rem;color:rgba(255,255,255,0.45);font-weight:500;line-height:1.4}
-
-/* ═══════════════════════════════════════════════
-   FINAL CTA
-   ═══════════════════════════════════════════════ */
-.cta-section{
-  padding:8rem 0;background:var(--navy-deep);position:relative;overflow:hidden;text-align:center;
-}
-.cta-section::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 100%,rgba(19,89,151,0.3),transparent 70%);
-}
-.cta-content{position:relative;z-index:1;max-width:650px;margin:0 auto}
-.cta-content h2{
-  font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.25rem);
-  font-weight:800;color:white;letter-spacing:-1px;line-height:1.15;margin-bottom:1.25rem;
-}
-.cta-content p{font-size:1.1rem;color:rgba(255,255,255,0.55);margin-bottom:2.5rem;line-height:1.7}
-.cta-buttons{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
-.cta-alt{font-size:0.85rem;color:rgba(255,255,255,0.4);margin-top:1.5rem}
-.cta-alt a{color:var(--cyan);font-weight:600;transition:color 0.3s}
-.cta-alt a:hover{color:white}
-
-/* ═══════════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════════ */
-.footer{background:var(--navy-deep);border-top:1px solid rgba(255,255,255,0.06);padding:4rem 0 2rem}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
-.footer-brand p{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.7;margin-top:1rem;max-width:300px}
-.footer-col h4{
-  font-family:var(--font-display);font-size:0.75rem;font-weight:700;
-  color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase;
-  margin-bottom:1.25rem;
-}
-.footer-col a{
-  display:block;font-size:0.88rem;color:rgba(255,255,255,0.55);
-  padding:0.3rem 0;transition:color 0.3s;
-}
-.footer-col a:hover{color:white}
-.footer-bottom{
-  border-top:1px solid rgba(255,255,255,0.06);padding-top:2rem;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
-}
-.footer-bottom p{font-size:0.78rem;color:rgba(255,255,255,0.25)}
-.footer-bottom-links{display:flex;gap:1.5rem}
-.footer-bottom-links a{font-size:0.78rem;color:rgba(255,255,255,0.3);transition:color 0.3s}
-.footer-bottom-links a:hover{color:rgba(255,255,255,0.6)}
-
-/* ═══════════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════════ */
-@media(max-width:1024px){
-  .hero-content{grid-template-columns:1fr;text-align:center}
-  .hero p{margin:0 auto 2.5rem}
-  .hero-ctas{justify-content:center}
-  .hero-visual{display:none}
-  .services-grid{grid-template-columns:repeat(2,1fr)}
-  .timeline{grid-template-columns:repeat(2,1fr);gap:2.5rem}
-  .timeline::before{display:none}
-  .why-grid{grid-template-columns:repeat(2,1fr)}
-  .ta-features{grid-template-columns:repeat(2,1fr)}
-  .metrics-strip{grid-template-columns:repeat(2,1fr)}
-  .authority-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:768px){
-  .section{padding:4rem 0}
-  .nav-links{display:none}
-  .nav-mobile-btn{display:flex}
-  .ba-grid{grid-template-columns:1fr}
-  .services-grid{grid-template-columns:1fr}
-  .timeline{grid-template-columns:1fr}
-  .why-grid{grid-template-columns:1fr}
-  .ta-features{grid-template-columns:1fr}
-  .metrics-strip{grid-template-columns:repeat(2,1fr);gap:1.5rem}
-  .serve-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .hero h1{font-size:2.25rem}
-}
-
-/* ═══════════════════════════════════════════════
-   PARALLAX UTILITY
-   ═══════════════════════════════════════════════ */
-.parallax-layer{transition:transform 0.1s linear;will-change:transform}
+/* ── SECTION TRANSITIONS ── */
+.section-glass-divider{height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.8) 30%,rgba(201,169,110,.25) 50%,rgba(255,255,255,.8) 70%,transparent);box-shadow:0 1px 6px rgba(255,255,255,.6);margin:0}
 </style>
 </head>
 <body>
 
-<!-- SCROLL PROGRESS -->
-<div class="scroll-progress" id="scrollProgress"></div>
+<!-- MESH GRADIENT CANVAS (Part 1: Living Background) -->
+<canvas id="mesh-canvas"></canvas>
 
-<!-- NAVIGATION -->
-<nav class="nav" id="mainNav">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <div class="nav-logo-mark">M</div>
-      <div class="nav-logo-text">
-        <span class="nav-logo-name">MGC Global</span>
-        <span class="nav-logo-sub">Consulting</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#approach">Approach</a>
-      <a href="#why">Why MGC</a>
-      <a href="#trueassist">True Assist</a>
-      <a href="#contact">Contact</a>
-      <a href="https://calendly.com/mark-mgcglobalconsulting/30min" class="nav-cta" target="_blank" rel="noopener">Book a Call</a>
-    </div>
-    <div class="nav-mobile-btn" id="mobileBtn" onclick="toggleMobile()">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</nav>
-
-<!-- Mobile Nav -->
-<div class="nav-mobile" id="mobileNav">
-  <a href="#services" onclick="closeMobile()">Services</a>
-  <a href="#approach" onclick="closeMobile()">Approach</a>
-  <a href="#why" onclick="closeMobile()">Why MGC</a>
-  <a href="#trueassist" onclick="closeMobile()">True Assist</a>
-  <a href="#contact" onclick="closeMobile()">Contact</a>
-  <a href="https://calendly.com/mark-mgcglobalconsulting/30min" class="btn-blue" target="_blank" rel="noopener">Book a Call</a>
+<!-- LOADER -->
+<div id="lc-loader">
+  <div class="loader-logo">LoveLi<span>Care</span></div>
+  <div class="loader-bar"></div>
+  <div class="loader-sub">Biophilic · Clinical · Luxury</div>
 </div>
 
-<!-- ═══════════ HERO ═══════════ -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-map"></div>
-  <div class="hero-orb hero-orb-1"></div>
-  <div class="hero-orb hero-orb-2"></div>
-  <div class="hero-orb hero-orb-3"></div>
+<!-- CURSOR -->
+<div id="lc-cursor"></div>
+<div id="lc-cursor-ring"></div>
 
-  <div class="hero-content">
-    <div class="hero-text">
-      <div class="hero-badge reveal">
-        <span class="hero-badge-dot"></span>
-        Enterprise AI Consulting
+<!-- CONFETTI CANVAS (Part 4: Rose Petals) -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- POST-BOOKING SUCCESS (Part 4) -->
+<div id="booking-success">
+  <div id="booking-success-backdrop" style="position:absolute;inset:0;background:rgba(47,79,79,.2);backdrop-filter:blur(20px)" onclick="document.getElementById('booking-success').classList.remove('active')"></div>
+  <div id="booking-success-card">
+    <div style="font-size:3rem;margin-bottom:20px;animation:floatReview 3s ease-in-out infinite">🌸</div>
+    <div style="font-family:'Italiana','Cormorant',Georgia,serif;font-size:2rem;color:#2F4F4F;margin-bottom:6px">You're Booked!</div>
+    <div style="font-family:'Cormorant',Georgia,serif;font-style:italic;font-size:1rem;color:rgba(47,79,79,.55);margin-bottom:24px">We can't wait to see you, <span id="success-name">Beautiful</span></div>
+    <div style="background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.25);border-radius:12px;padding:20px;margin-bottom:24px">
+      <div style="font-size:.56rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:6px">Your Appointment</div>
+      <div style="font-family:'Cormorant',Georgia,serif;font-size:1.05rem;color:#2F4F4F" id="success-service">Your treatment</div>
+      <div style="font-size:.82rem;font-weight:300;color:rgba(47,79,79,.5);margin-top:4px" id="success-date"></div>
+    </div>
+    <p style="font-size:.78rem;font-weight:300;color:rgba(47,79,79,.5);line-height:1.7;margin-bottom:20px">A WhatsApp welcome card with your prep guide is on its way. 💬</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a href="https://lovelicare.com/prepare" target="_blank" class="btn-glass btn-glass-primary btn-glass-sm">View Prep Guide →</a>
+      <button id="success-close" class="btn-glass btn-glass-sm">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- VAGARO OVERLAY (Part 3) -->
+<div id="vagaro-overlay">
+  <div id="vagaro-overlay-backdrop"></div>
+  <div id="vagaro-modal">
+    <div class="vagaro-modal-header">
+      <div>
+        <div style="font-size:.52rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Book Online</div>
+        <div class="vagaro-modal-title">LoveLi Care</div>
+        <div style="font-size:.75rem;font-weight:300;color:rgba(47,79,79,.45)" id="vagaro-service-label">Select your service below</div>
       </div>
-      <h1 class="reveal delay-1">
-        <span class="highlight">AI-Powered</span> Consulting for Smarter Operations &amp; Scalable Growth
-      </h1>
-      <p class="reveal delay-2">We design intelligent systems that streamline operations, integrate automation, and help organizations scale with clarity and control. No software sales. No theory. Just systems that work.</p>
-      <div class="hero-ctas reveal delay-3">
-        <a href="https://calendly.com/mark-mgcglobalconsulting/30min" class="btn-primary" target="_blank" rel="noopener">
-          <span>Book a Free Strategy Call</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="#services" class="btn-secondary">Explore Our Services</a>
+      <button class="vagaro-close-btn" onclick="closeVagaro()" aria-label="Close">✕</button>
+    </div>
+    <div class="vagaro-modal-body">
+      <!--
+        PART 3: VAGARO OVERLAY SCRIPT
+        Replace the placeholder below with your Vagaro embed:
+        
+        STEP 1: Log into Vagaro → Business Tools → Booking Widget
+        STEP 2: Copy your embed code
+        STEP 3: Replace the .vagaro-iframe-placeholder div with:
+        
+        <div class="vagaro-iframe-wrap">
+          <script src='https://www.vagaro.com//resources/WidgetEmbedCode.min.js'></script>
+          <iframe id="vagaro-iframe" frameborder='0' height='550'
+            src='https://www.vagaro.com/lovelicaremd/book-now'
+            style='width:100%;border:none;border-radius:12px;'
+            title='Book at LoveLi Care'
+          ></iframe>
+        </div>
+        
+        The glass overlay CSS above is already styled to wrap it natively.
+      -->
+      <div class="vagaro-iframe-placeholder">
+        <div style="font-size:2.5rem;opacity:.4">📅</div>
+        <p style="font-size:.88rem;font-weight:300;color:rgba(47,79,79,.5)">Vagaro Booking Widget</p>
+        <p style="font-size:.75rem;color:rgba(47,79,79,.35);max-width:320px;line-height:1.6">Replace this placeholder with your Vagaro embed script from your Vagaro Business Dashboard → Booking Widget.</p>
+        <code>src: vagaro.com/lovelicaremd/book-now</code>
+        <a href="https://www.vagaro.com/lovelicaremd/book-now" target="_blank" class="btn-glass btn-glass-primary btn-glass-sm">Open Vagaro Directly ↗</a>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="hero-visual reveal-right delay-2">
-      <div class="hero-dashboard">
-        <div class="dash-header">
-          <span class="dash-title">Operations Dashboard</span>
-          <span class="dash-live"><span class="dash-live-dot"></span> Live</span>
+<!-- MOBILE MENU -->
+<div id="mobile-menu" role="dialog" aria-label="Mobile Navigation">
+  <span class="mobile-nav-item" onclick="navTo('home')" data-nav>Home</span>
+  <span class="mobile-nav-item" onclick="navTo('services')" data-nav>All Services</span>
+  <span class="mobile-nav-item" onclick="navTo('medical-aesthetics')" data-nav>Medical Aesthetics</span>
+  <span class="mobile-nav-item" onclick="navTo('body-contouring')" data-nav>Body Contouring</span>
+  <span class="mobile-nav-item" onclick="navTo('nutritional-wellness')" data-nav>IV Therapy</span>
+  <span class="mobile-nav-item" onclick="navTo('non-emergent-care')" data-nav>MMCC & Physicals</span>
+  <span class="mobile-nav-item" onclick="navTo('vitamin-cheat-sheet')" data-nav>Vitamin Guide</span>
+  <span class="mobile-nav-item" onclick="navTo('wellness-assistant')" data-nav>Wellness Assistant</span>
+  <span class="mobile-nav-item" onclick="navTo('online-store')" data-nav>Shop</span>
+  <span class="mobile-nav-item" onclick="navTo('contact')" data-nav>Contact</span>
+  <div style="margin-top:24px">
+    <button class="vagaro-glass-btn" onclick="openVagaro();document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow=''" style="width:100%;justify-content:center">📅 Book Appointment</button>
+  </div>
+</div>
+
+<!-- ══ HEADER ══ -->
+<header class="lc-header" id="lc-header">
+  <div class="lc-container">
+    <div class="lc-nav-glass">
+      <!-- Logo -->
+      <div class="lc-logo" onclick="navTo('home')" role="button" tabindex="0" aria-label="LoveLi Care Home">
+        <span>LoveLi<span>Care</span></span>
+        <span class="lc-logo-sub">Med Spa & Wellness Lounge</span>
+      </div>
+
+      <!-- Smart Nav -->
+      <ul class="lc-nav-links" role="menubar">
+        <li role="none"><button role="menuitem" onclick="navTo('home')">Home</button></li>
+
+        <li class="lc-dropdown" role="none">
+          <button role="menuitem" aria-haspopup="true">Services ▾</button>
+          <div class="lc-dropdown-menu" role="menu">
+            <span class="lc-dropdown-label">Beauty</span>
+            <span class="lc-dropdown-menu" style="display:contents">
+              <span onclick="navTo('medical-aesthetics')" role="menuitem" class="lc-dropdown-menu" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;transition:all .2s;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">💉 Medical Aesthetics</span>
+              <span onclick="navTo('body-contouring')" role="menuitem" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;transition:all .2s;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">✨ Body Contouring</span>
+            </span>
+            <div class="lc-dropdown-divider"></div>
+            <span class="lc-dropdown-label">Wellness</span>
+            <span onclick="navTo('weight-management')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">⚖️ Weight Management</span>
+            <span onclick="navTo('nutrition-counseling')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">🥗 Nutrition Counseling</span>
+            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">💧 IV Therapy</span>
+            <div class="lc-dropdown-divider"></div>
+            <span class="lc-dropdown-label">Medical</span>
+            <span onclick="navTo('non-emergent-care')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">🏥 MMCC & Physicals</span>
+          </div>
+        </li>
+
+        <li class="lc-dropdown" role="none">
+          <button role="menuitem" aria-haspopup="true">IV Therapy ▾</button>
+          <div class="lc-dropdown-menu" role="menu">
+            <span class="lc-dropdown-label">Drip Menus</span>
+            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">✨ Build Your Glow</span>
+            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">⚡ Fat Burn & Energy</span>
+            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">🛡 Immunity Fortress</span>
+            <div class="lc-dropdown-divider"></div>
+            <span onclick="navTo('vitamin-cheat-sheet')" style="display:block;padding:9px 14px;font-size:.78rem;color:#C9A96E;border-radius:8px;cursor:pointer;font-weight:500" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">📊 Vitamin Cheat Sheet →</span>
+          </div>
+        </li>
+
+        <li role="none"><button role="menuitem" onclick="navTo('wellness-assistant')">💬 Assistant</button></li>
+        <li role="none"><button role="menuitem" onclick="navTo('online-store')">Shop</button></li>
+        <li role="none"><button role="menuitem" onclick="navTo('contact')">Contact</button></li>
+        <li role="none"><button role="menuitem" onclick="navTo('sitemap')" style="font-size:.65rem;opacity:.55">Map</button></li>
+      </ul>
+
+      <!-- CTA + Mobile Toggle -->
+      <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+        <a href="https://lovelicare.com/m/account" target="_blank" class="btn-glass btn-glass-sm" style="font-size:.6rem;padding:8px 14px">Sign In</a>
+        <!-- PART 3: Vagaro Glass Button — natively integrated -->
+        <button class="vagaro-glass-btn" onclick="openVagaro()" aria-label="Book Appointment">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5"/></svg>
+          Book Now
+        </button>
+        <button id="mobile-toggle" onclick="document.getElementById('mobile-menu').classList.toggle('open');document.body.style.overflow=document.getElementById('mobile-menu').classList.contains('open')?'hidden':''">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ════════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════════ -->
+<div class="lc-page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="lc-hero">
+    <!-- VEO 3 VIDEO ACCENT: Replace with ./assets/video/ripple-loop.mp4 -->
+    <div class="video-bg-container"><div class="video-bg-fallback"></div></div>
+    <div class="lc-container" style="padding-top:40px;padding-bottom:80px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+        <!-- Left: Hero glass card -->
+        <div class="hero-glass-card lc-reveal">
+          <div class="lc-eyebrow">
+            <span class="lc-eyebrow-text">Towson, MD · 100 E Pennsylvania Ave</span>
+            <span class="lc-eyebrow-line"></span>
+          </div>
+          <h1 class="lc-h1" style="margin-bottom:6px">Revitalize<br>Your <span class="lc-gold-em">Health</span></h1>
+          <p style="font-family:'Cormorant',Georgia,serif;font-size:1.15rem;font-style:italic;font-weight:300;color:rgba(47,79,79,.55);margin-bottom:28px;line-height:1.6">Expert care for a healthier, happier you.</p>
+          <p class="lc-lead" style="font-size:.92rem;margin-bottom:36px;max-width:440px">Where advanced clinical science meets compassionate, personalized wellness — all in one luxury lounge in Towson, MD.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px">
+            <!-- PART 3: Native Vagaro glass button -->
+            <button class="vagaro-glass-btn btn-glass-xl" onclick="openVagaro()" style="font-size:.78rem">
+              📅 Book Appointment
+            </button>
+            <button onclick="navTo('wellness-assistant')" class="btn-glass btn-glass-lg">💬 Wellness Assistant</button>
+          </div>
+          <!-- Trust strip -->
+          <div class="trust-glass-strip lc-reveal delay-3">
+            <div class="trust-glass-item"><div class="trust-val">5.0★</div><div class="trust-key">Google Rating</div></div>
+            <div class="trust-glass-item"><div class="trust-val">NP-C</div><div class="trust-key">Board Certified</div></div>
+            <div class="trust-glass-item"><div class="trust-val">HIPAA</div><div class="trust-key">Compliant</div></div>
+            <div class="trust-glass-item"><div class="trust-val">MD·DC·VA</div><div class="trust-key">Region Leader</div></div>
+          </div>
         </div>
-        <div class="dash-metrics">
-          <div class="dash-metric">
-            <div class="dash-metric-label">Conversion Rate</div>
-            <div class="dash-metric-value">34<span class="unit">%</span></div>
-            <div class="dash-metric-change">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
-              +12% this month
+
+        <!-- Right: floating glass info panels -->
+        <div style="display:flex;flex-direction:column;gap:16px" class="lc-reveal delay-2">
+          <!-- AI ASSET: Firefly "Med-Spa of the Future" hero visual -->
+          <!-- FIREFLY PROMPT: "Macro shot, high-end skincare serum on glass surface, morning caustic light, ultra-minimalist, 8K. Med spa luxury." -->
+          <!-- Replace with: <img src="./assets/img/hero-macro.jpg" style="width:100%;border-radius:24px;box-shadow:var(--glass-shadow-elevated)"/> -->
+          <div style="background:linear-gradient(135deg,rgba(201,169,110,.12) 0%,rgba(247,231,206,.25) 50%,rgba(255,255,255,.3) 100%);backdrop-filter:blur(25px) saturate(160%);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 0 20px rgba(255,255,255,.2),0 10px 30px rgba(0,0,0,.05);border-radius:24px;padding:48px;text-align:center;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+            <div style="font-size:3.5rem;filter:drop-shadow(0 4px 8px rgba(201,169,110,.3))">🌸</div>
+            <div style="font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.2rem;color:#2F4F4F">Your Clinical Oasis</div>
+            <p style="font-size:.78rem;font-weight:300;color:rgba(47,79,79,.5);line-height:1.65;max-width:280px">Suite 304 · 100 E Pennsylvania Ave · Where science meets serenity</p>
+            <!-- AI prompt badge -->
+            <div class="ai-prompt-banner" style="background:rgba(255,200,100,.15);border:1px dashed rgba(255,180,50,.4);border-radius:8px;padding:8px 12px;font-size:.62rem;color:rgba(150,100,0,.7);margin-top:8px">
+              📸 FIREFLY ASSET: "Macro skincare, glass surface, morning caustic light, 8K"
             </div>
           </div>
-          <div class="dash-metric">
-            <div class="dash-metric-label">Intake Speed</div>
-            <div class="dash-metric-value">24<span class="unit">hr</span></div>
-            <div class="dash-metric-change">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
-              -48hr faster
-            </div>
-          </div>
-          <div class="dash-metric">
-            <div class="dash-metric-label">Active Leads</div>
-            <div class="dash-metric-value">187</div>
-            <div class="dash-metric-change">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
-              +23 this week
-            </div>
-          </div>
-          <div class="dash-metric">
-            <div class="dash-metric-label">Recovery Rate</div>
-            <div class="dash-metric-value">21<span class="unit">%</span></div>
-            <div class="dash-metric-change">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
-              Stale leads saved
+
+          <!-- Mission glass card -->
+          <div class="glass-card" style="padding:28px">
+            <div style="font-size:.52rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C9A96E;margin-bottom:8px">Our Mission</div>
+            <p style="font-family:'Cormorant',Georgia,serif;font-size:.95rem;font-style:italic;line-height:1.7;color:rgba(47,79,79,.7);font-weight:300">"To nurture confidence, restore balance, and elevate wellness by combining compassionate care with advanced, science-based treatments."</p>
+            <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+              <button onclick="navTo('contact')" class="btn-glass btn-glass-sm">Contact Us</button>
+              <a href="https://lovelicare.com/m/account" target="_blank" class="btn-glass btn-glass-sm">Sign In ↗</a>
             </div>
           </div>
         </div>
-        <div class="dash-pipeline">
-          <div class="dash-pipeline-label">Pipeline Health</div>
-          <div class="dash-pipeline-bar"><div class="dash-pipeline-fill" id="pipelineFill"></div></div>
-          <div class="dash-pipeline-stages">
-            <span>New Leads</span><span>Intake</span><span>Assessment</span><span>Active</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Meal Plan Banner -->
+  <div style="background:linear-gradient(135deg,rgba(201,169,110,.75) 0%,rgba(201,169,110,.55) 100%);backdrop-filter:blur(20px) saturate(160%);border-top:1px solid rgba(255,255,255,.4);border-bottom:1px solid rgba(255,255,255,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.5);padding:18px 0">
+    <div class="lc-container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:3px">🎁 Free Download</div><p style="font-family:'Cormorant',Georgia,serif;font-size:1.1rem;color:white;font-weight:400">Get Your Complimentary 12-Day Weight Loss Meal Plan</p></div>
+      <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass" style="background:rgba(255,255,255,.4);color:#2F4F4F;flex-shrink:0">Get Free Plan ↗</a>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="lc-marquee-wrap">
+    <div class="lc-marquee-track">
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>5.0 Google Stars</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>NP-CRNP Board Certified</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>HIPAA Compliant</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>Maryland Licensed</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>Medical Director Oversight</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>Snatch Protocol™ Exclusive</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>MD · DC · VA · PA</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>WhatsApp Concierge</div>
+      <!-- Duplicate for seamless loop -->
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>5.0 Google Stars</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>NP-CRNP Board Certified</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>HIPAA Compliant</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>Maryland Licensed</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>Medical Director Oversight</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>Snatch Protocol™ Exclusive</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>MD · DC · VA · PA</div>
+      <div class="lc-marquee-item"><span class="lc-marquee-dot"></span>WhatsApp Concierge</div>
+    </div>
+  </div>
+
+  <!-- Services 6-up -->
+  <div class="lc-glass-section">
+    <div class="lc-container">
+      <div style="text-align:center;margin-bottom:56px">
+        <div class="lc-eyebrow" style="justify-content:center"><span class="lc-eyebrow-text">Six Pillars of Care</span></div>
+        <h2 class="lc-h2 lc-reveal">Transform Your Health <span class="lc-gold-em">Today</span></h2>
+        <p class="lc-body lc-reveal delay-1" style="max-width:480px;margin:12px auto">Advanced clinical services designed around your unique wellness goals — all under one roof.</p>
+      </div>
+      <div class="grid-3" style="gap:16px">
+        <!-- FIREFLY ICON PROMPTS embedded as AI asset banners -->
+        <div class="glass-card lc-service-card lc-reveal" onclick="navTo('medical-aesthetics')">
+          <div class="glass-icon glass-icon-rose"><span class="glass-icon-emoji">💉</span></div>
+          <!-- FIREFLY: "3D glass icon, glowing rose center, frosted glass, Apple visionOS, 8K transparent PNG" -->
+          <h3>Medical Aesthetics</h3>
+          <p>Natural Botox, fillers, and skin treatments. Clinical artistry guided by a board-certified NP-CRNP.</p>
+          <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Medical Aesthetics')">Book ↗</button>
+        </div>
+        <div class="glass-card lc-service-card lc-reveal delay-1" onclick="navTo('body-contouring')">
+          <div class="glass-icon glass-icon-gold"><span class="glass-icon-emoji">✨</span></div>
+          <!-- FIREFLY: "3D glass icon, glowing gold center, frosted glass, body contouring concept, 8K" -->
+          <h3>Body Contouring</h3>
+          <p>Non-invasive sculpting without surgery. The Snatch Protocol™ — our exclusive 360° transformation system.</p>
+          <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Snatch Protocol')">Book ↗</button>
+        </div>
+        <div class="glass-card lc-service-card lc-reveal delay-2" onclick="navTo('weight-management')">
+          <div class="glass-icon glass-icon-green"><span class="glass-icon-emoji">⚖️</span></div>
+          <h3>Weight Management</h3>
+          <p>Advanced vitamin therapies, diet modifications, and lifestyle guidance to optimize metabolism and body composition.</p>
+          <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Weight Management')">Book ↗</button>
+        </div>
+        <div class="glass-card lc-service-card lc-reveal delay-1" onclick="navTo('nutrition-counseling')">
+          <div class="glass-icon glass-icon-amber"><span class="glass-icon-emoji">🥗</span></div>
+          <h3>Nutrition Counseling</h3>
+          <p>Personalized dietary and lifestyle guidance tailored to your wellness and aesthetic goals.</p>
+          <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Nutrition Counseling')">Book ↗</button>
+        </div>
+        <div class="glass-card lc-service-card lc-reveal delay-2" onclick="navTo('nutritional-wellness')">
+          <div class="glass-icon glass-icon-blue"><span class="glass-icon-emoji">💧</span></div>
+          <!-- FIREFLY: "3D glass icon, glowing blue water droplet center, frosted glass sphere, 8K transparent PNG" -->
+          <h3>IV & Nutritional Wellness</h3>
+          <p>Custom vitamin infusions to restore energy, brighten skin, and support whole-body wellness.</p>
+          <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('IV Therapy')">Book ↗</button>
+        </div>
+        <div class="glass-card lc-service-card lc-reveal delay-3" onclick="navTo('non-emergent-care')">
+          <div class="glass-icon glass-icon-teal"><span class="glass-icon-emoji">🏥</span></div>
+          <h3>Non-Emergent Care</h3>
+          <p>MMCC certification, physicals, prescription refills, and doctor's notes — efficient clinical care without the ER wait.</p>
+          <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Medical Visit')">Book ↗</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Treatment Planner -->
+  <div class="lc-section" style="position:relative">
+    <div class="lc-container">
+      <div class="col-2">
+        <div>
+          <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Personalized Pathway</span><span class="lc-eyebrow-line"></span></div>
+          <h2 class="lc-h2 lc-reveal delay-1">Find Your <span class="lc-gold-em">Perfect</span><br>Treatment</h2>
+          <p class="lc-lead lc-reveal delay-2" style="margin:20px 0 28px">Answer 3 questions and we'll match you to the exact LoveLi Care service designed for your goals.</p>
+          <div class="glass-card lc-reveal delay-2" style="padding:28px">
+            <div style="font-size:1.4rem;margin-bottom:12px">🌿</div>
+            <h3 class="lc-h3" style="margin-bottom:8px">Complimentary Consultation</h3>
+            <p class="lc-body">Every planner recommendation includes a complimentary clinical consultation with Libra Robertson, NP-CRNP before any treatment begins.</p>
+          </div>
+          <div class="glass-card lc-reveal delay-3" style="padding:28px;margin-top:16px">
+            <div style="font-size:1.4rem;margin-bottom:12px">💬</div>
+            <h3 class="lc-h3" style="margin-bottom:8px;font-size:1rem">NEW: AI Wellness Assistant</h3>
+            <p class="lc-body" style="margin-bottom:16px">Skip the wait — chat with our AI agent before booking.</p>
+            <a href="https://lovelicare.com/wellness-chatbox" target="_blank" class="btn-glass btn-glass-primary btn-glass-sm">Launch Assistant ↗</a>
+          </div>
+        </div>
+
+        <!-- Planner UI -->
+        <div class="glass-strong" style="border-radius:24px;overflow:hidden">
+          <div class="planner-ui">
+            <div class="planner-dots">
+              <div class="planner-dot active" id="planner-dot-1"></div>
+              <div class="planner-dot" id="planner-dot-2"></div>
+              <div class="planner-dot" id="planner-dot-3"></div>
+            </div>
+
+            <!-- Step 1 -->
+            <div id="planner-step-1">
+              <div class="planner-q">What's your primary goal?</div>
+              <div class="planner-qsub">Select the one that resonates most right now</div>
+              <div class="planner-opts">
+                <div class="planner-opt" data-opt="refine" onclick="plannerSelect('refine')"><div class="planner-opt-circle"></div>Refresh & smooth my face naturally</div>
+                <div class="planner-opt" data-opt="sculpt" onclick="plannerSelect('sculpt')"><div class="planner-opt-circle"></div>Reshape and contour my body</div>
+                <div class="planner-opt" data-opt="restore" onclick="plannerSelect('restore')"><div class="planner-opt-circle"></div>Restore my energy & wellness</div>
+                <div class="planner-opt" data-opt="wellness" onclick="plannerSelect('wellness')"><div class="planner-opt-circle"></div>Lose weight & transform my health</div>
+                <div class="planner-opt" data-opt="medical" onclick="plannerSelect('medical')"><div class="planner-opt-circle"></div>MMCC, physical, or medical need</div>
+              </div>
+              <div class="planner-nav"><button class="btn-glass btn-glass-primary" style="flex:1;justify-content:center" onclick="plannerNext(1)">Next →</button></div>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="planner-step-2" style="display:none">
+              <div class="planner-q">When are you looking to start?</div>
+              <div class="planner-qsub">Helps us find the right availability</div>
+              <div class="planner-opts">
+                <div class="planner-opt" onclick="this.closest('.planner-opts').querySelectorAll('.planner-opt').forEach(o=>o.classList.remove('sel'));this.classList.add('sel')"><div class="planner-opt-circle"></div>As soon as possible — I'm ready</div>
+                <div class="planner-opt" onclick="this.closest('.planner-opts').querySelectorAll('.planner-opt').forEach(o=>o.classList.remove('sel'));this.classList.add('sel')"><div class="planner-opt-circle"></div>Within the next 2–4 weeks</div>
+                <div class="planner-opt" onclick="this.closest('.planner-opts').querySelectorAll('.planner-opt').forEach(o=>o.classList.remove('sel'));this.classList.add('sel')"><div class="planner-opt-circle"></div>Still exploring — just researching</div>
+              </div>
+              <div class="planner-nav"><button class="btn-glass btn-glass-sm" onclick="plannerBack(2)">← Back</button><button class="btn-glass btn-glass-primary" style="flex:1;justify-content:center" onclick="plannerNext(2)">Next →</button></div>
+            </div>
+
+            <!-- Step 3 -->
+            <div id="planner-step-3" style="display:none">
+              <div class="planner-q">Have you had aesthetic treatments before?</div>
+              <div class="planner-qsub">No judgment — helps us tailor your consultation</div>
+              <div class="planner-opts">
+                <div class="planner-opt" onclick="this.closest('.planner-opts').querySelectorAll('.planner-opt').forEach(o=>o.classList.remove('sel'));this.classList.add('sel')"><div class="planner-opt-circle"></div>First time — I'm new to this</div>
+                <div class="planner-opt" onclick="this.closest('.planner-opts').querySelectorAll('.planner-opt').forEach(o=>o.classList.remove('sel'));this.classList.add('sel')"><div class="planner-opt-circle"></div>I've had a few treatments before</div>
+                <div class="planner-opt" onclick="this.closest('.planner-opts').querySelectorAll('.planner-opt').forEach(o=>o.classList.remove('sel'));this.classList.add('sel')"><div class="planner-opt-circle"></div>I'm a regular med spa client</div>
+              </div>
+              <div class="planner-nav"><button class="btn-glass btn-glass-sm" onclick="plannerBack(3)">← Back</button><button class="btn-glass btn-glass-primary" style="flex:1;justify-content:center" onclick="plannerSubmit()">Get My Match ✨</button></div>
+            </div>
+
+            <!-- Result -->
+            <div id="planner-result" style="display:none">
+              <div class="planner-result">
+                <div style="font-size:2.5rem;margin-bottom:16px">✨</div>
+                <div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:8px">Your Perfect Match</div>
+                <div style="font-family:'Cormorant',Georgia,serif;font-size:1.3rem;color:#2F4F4F;margin-bottom:10px" id="planner-rec-label"></div>
+                <p style="font-size:.82rem;font-weight:300;color:rgba(47,79,79,.6);line-height:1.7;margin-bottom:24px" id="planner-rec-desc"></p>
+                <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+                  <button class="btn-glass btn-glass-primary" onclick="plannerBookRec()">📅 Book This Service</button>
+                  <button class="btn-glass btn-glass-sm" onclick="plannerReset()">Start Over</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="hero-float-card hero-float-card-1">
-        <div class="hfc-label">Automation</div>
-        <div class="hfc-value">47 tasks/day</div>
-      </div>
-      <div class="hero-float-card hero-float-card-2">
-        <div class="hfc-label">ROI</div>
-        <div class="hfc-value">310% return</div>
-      </div>
     </div>
   </div>
 
-  <div class="trust-strip">
-    <div class="trust-strip-inner">
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Notion Architecture
+  <!-- Reviews -->
+  <div class="lc-glass-section">
+    <div class="lc-container">
+      <div style="text-align:center;margin-bottom:52px">
+        <div class="lc-eyebrow" style="justify-content:center"><span class="lc-eyebrow-text">Don't Take Our Word For It</span></div>
+        <h2 class="lc-h2 lc-reveal">Our Clients <span class="lc-gold-em">Love</span> LoveLi Care</h2>
       </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        Zapier Integration
-      </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        AI Strategy Consulting
-      </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Maryland-Based, Nationally Deployed
+      <div class="grid-4">
+        <div class="glass-card review-glass review-float-1 lc-reveal"><div class="review-stars">★★★★★</div><p class="review-text">"The care I received was exceptional. Libra made me feel so comfortable and the results were incredible — natural and beautiful."</p><span class="review-author">— Google Review · Towson, MD</span></div>
+        <div class="glass-card review-glass review-float-2 lc-reveal delay-1"><div class="review-stars">★★★★★</div><p class="review-text">"Best med spa in Towson by far. The IV therapy had me feeling like a new person. Highly recommend the wellness packages!"</p><span class="review-author">— Google Review · Baltimore, MD</span></div>
+        <div class="glass-card review-glass review-float-3 lc-reveal delay-2"><div class="review-stars">★★★★★</div><p class="review-text">"The body contouring results were unreal. I lost inches and my skin looks firmer. The whole experience felt so luxurious."</p><span class="review-author">— Google Review · Columbia, MD</span></div>
+        <div class="glass-card review-glass review-float-4 lc-reveal delay-3"><div class="review-stars">★★★★★</div><p class="review-text">"Got my MMCC certification here — so easy and professional. Will definitely be back for the IV therapy next."</p><span class="review-author">— Google Review · Annapolis, MD</span></div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ═══════════ PROBLEM / SOLUTION ═══════════ -->
-<section class="section" id="problem">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">The Challenge</div>
-      <h2 class="section-title">The Real Cost of Manual Operations</h2>
-      <p class="section-subtitle">Most organizations lose 10-25% of potential revenue to process failures. Here's what that looks like — and what changes when systems take over.</p>
-    </div>
-    <div class="ba-grid">
-      <div class="ba-card ba-before reveal-left">
-        <div class="ba-tag"><span class="ba-tag-dot"></span> Without Intelligent Systems</div>
-        <div class="ba-list">
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><span>Disconnected software tools creating data silos</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><span>Lead leakage from manual follow-up failures</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><span>No CRM visibility for leadership decisions</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><span>Staff burning out on repetitive tasks</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><span>Scaling requires proportional headcount increases</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><span>Decisions based on gut feeling, not data</span></div>
+<!-- ════════════════════════════════════════════
+     PAGE: BODY CONTOURING (Snatch Protocol)
+════════════════════════════════════════════ -->
+<div class="lc-page" id="page-body-contouring">
+  <div style="padding-top:120px" class="lc-glass-section">
+    <div class="lc-container">
+      <div class="col-2" style="margin-bottom:64px">
+        <div>
+          <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Signature Service · Sculpt</span><span class="lc-eyebrow-line"></span></div>
+          <h1 class="lc-h1 lc-reveal delay-1">The Snatch<br><span class="lc-gold-em">Protocol™</span></h1>
+          <p class="lc-lead lc-reveal delay-2" style="margin:20px 0 32px">LoveLi Care's proprietary 360° body transformation system. Four evidence-based modalities, sequenced by a licensed NP, producing results that conventional methods cannot replicate.</p>
+          <button class="vagaro-glass-btn lc-reveal delay-3" onclick="openVagaro('Snatch Protocol™')" style="font-size:.76rem;padding:14px 32px">Begin My Protocol 📅</button>
+        </div>
+        <!-- Protocol steps -->
+        <div class="glass-strong lc-reveal delay-2" style="padding:40px;border-radius:24px">
+          <div class="svc-step-row"><div class="svc-step-num">1</div><div><div class="svc-step-name">Cavitation Ultrasound</div><div class="svc-step-desc">Precision ultrasonic waves disrupt and emulsify fat cells for measurable inch loss in targeted areas.</div></div></div>
+          <div class="svc-step-row"><div class="svc-step-num">2</div><div><div class="svc-step-name">RF Skin Tightening</div><div class="svc-step-desc">Radiofrequency energy stimulates deep collagen remodeling for lifted, firm, tighter skin results.</div></div></div>
+          <div class="svc-step-row"><div class="svc-step-num">3</div><div><div class="svc-step-name">Wood Therapy Lymphatic Drainage</div><div class="svc-step-desc">Manual lymphatic mobilization reduces fluid retention and enhances overall contouring results.</div></div></div>
+          <div class="svc-step-row"><div class="svc-step-num">4</div><div><div class="svc-step-name">Infrared Body Wrap</div><div class="svc-step-desc">Deep-penetrating infrared heat supports metabolism, detox, and skin elasticity to amplify results.</div></div></div>
         </div>
       </div>
-      <div class="ba-card ba-after reveal-right">
-        <div class="ba-tag"><span class="ba-tag-dot"></span> With MGC Systems Architecture</div>
-        <div class="ba-list">
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Unified systems with single source of truth</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Automated lead capture and pipeline progression</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Real-time executive dashboards for instant visibility</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>AI handles routine tasks while humans decide</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Scale without proportional headcount growth</span></div>
-          <div class="ba-item"><div class="ba-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Every decision backed by operational intelligence</span></div>
+      <!-- Gear upsell -->
+      <div class="glass-gold lc-reveal" style="padding:40px;margin-bottom:40px">
+        <div style="font-size:.54rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C9A96E;margin-bottom:12px">🛍 Snatch Gear™ — Maximize Your Results</div>
+        <h3 class="lc-h3" style="margin-bottom:8px">Complete the Protocol Between Sessions</h3>
+        <p class="lc-body" style="margin-bottom:24px;max-width:540px">Clients who pair Snatch Protocol™ sessions with a Snatch Belt™ worn daily see compounding, accelerated results. Select your gear:</p>
+        <div class="gear-grid" style="max-width:480px;margin-bottom:24px">
+          <div class="gear-opt sel" onclick="document.querySelectorAll('.gear-opt').forEach(g=>g.classList.remove('sel'));this.classList.add('sel')"><div class="gear-name">Snatch Belt Classic</div><div class="gear-price">$89</div></div>
+          <div class="gear-opt" onclick="document.querySelectorAll('.gear-opt').forEach(g=>g.classList.remove('sel'));this.classList.add('sel')"><div class="gear-name">Snatch Belt Pro</div><div class="gear-price">$129</div></div>
+          <div class="gear-opt" onclick="document.querySelectorAll('.gear-opt').forEach(g=>g.classList.remove('sel'));this.classList.add('sel')"><div class="gear-name">Compression Bundle</div><div class="gear-price">$169</div></div>
+          <div class="gear-opt" onclick="document.querySelectorAll('.gear-opt').forEach(g=>g.classList.remove('sel'));this.classList.add('sel')"><div class="gear-name">Recovery Kit</div><div class="gear-price">$219</div></div>
+        </div>
+        <button class="vagaro-glass-btn" onclick="openVagaro('Snatch Protocol™ + Gear')" style="font-size:.72rem">Add Gear + Begin Protocol 📅</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PAGE: MEDICAL AESTHETICS
+════════════════════════════════════════════ -->
+<div class="lc-page" id="page-medical-aesthetics">
+  <div style="padding-top:120px" class="lc-glass-section">
+    <div class="lc-container">
+      <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Refine</span><span class="se-line"></span></div>
+      <h1 class="lc-h1 lc-reveal delay-1" style="margin-bottom:16px">Medical <span class="lc-gold-em">Aesthetics</span></h1>
+      <p class="lc-lead lc-reveal delay-2" style="margin-bottom:48px">Natural results that refresh your look without changing who you are. Clinical artistry guided by Libra Robertson, NP-CRNP.</p>
+      <div class="col-2" style="margin-bottom:48px">
+        <div class="glass-card lc-reveal" style="padding:36px">
+          <div class="glass-icon glass-icon-rose" style="margin-bottom:20px"><span class="glass-icon-emoji">💉</span></div>
+          <h3 class="lc-h3" style="margin-bottom:12px">Botox & Neuromodulators</h3>
+          <p class="lc-body" style="margin-bottom:20px">Soften fine lines and prevent deeper wrinkles with expertly placed neurotoxin treatments that prioritize natural-looking results.</p>
+          <ul class="lc-check" style="margin-bottom:24px">
+            <li>Botox® — FDA-approved neuromodulator</li><li>Dysport — Fast-acting natural movement</li><li>Preventative Botox treatment</li><li>Brow lift without surgery</li><li>Jaw slimming (masseter)</li><li>Hyperhidrosis treatment</li>
+          </ul>
+          <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Natural Botox')">Book Botox 📅</button>
+        </div>
+        <div class="glass-card lc-reveal delay-1" style="padding:36px">
+          <div class="glass-icon glass-icon-rose" style="margin-bottom:20px"><span class="glass-icon-emoji">🌸</span></div>
+          <h3 class="lc-h3" style="margin-bottom:12px">Dermal Fillers</h3>
+          <p class="lc-body" style="margin-bottom:20px">Restore volume, plump lips, and sculpt youthful contours with hyaluronic acid-based fillers precisely mapped to your anatomy.</p>
+          <ul class="lc-check" style="margin-bottom:24px">
+            <li>Lip enhancement — natural volume</li><li>Cheek augmentation & midface lift</li><li>Jawline definition</li><li>Under-eye hollows (tear trough)</li><li>Nasolabial fold softening</li><li>Non-surgical rhinoplasty</li>
+          </ul>
+          <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Dermal Fillers')">Book Fillers 📅</button>
         </div>
       </div>
-    </div>
-    <div class="ba-cta reveal">
-      <p>Sound familiar? Let's fix it.</p>
-      <a href="https://calendly.com/mark-mgcglobalconsulting/30min" class="btn-blue" target="_blank" rel="noopener">
-        Schedule Your Assessment
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ SERVICES ═══════════ -->
-<section class="section section-gray" id="services">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Strategic Services</div>
-      <h2 class="section-title">What We Build</h2>
-      <p class="section-subtitle">Six practice areas. One unified approach. Every engagement connects to measurable business outcomes.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card reveal delay-1">
-        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.5-1.3 4.8-3.5 6.2V17a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2v-1.8C6.3 13.8 5 11.5 5 9a7 7 0 0 1 7-7z"/><line x1="9" y1="21" x2="15" y2="21"/></svg></div>
-        <h3>AI Consulting & Strategy</h3>
-        <p>AI readiness assessment, ROI modeling, tool evaluation, implementation roadmaps, and governance planning. Every AI investment delivers measurable returns.</p>
-        <span class="service-card-link">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </div>
-      <div class="service-card reveal delay-2">
-        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <h3>Automation Architecture</h3>
-        <p>End-to-end automation using Notion, Zapier, and custom integrations. We eliminate manual handoffs, automate status updates, and create routing that scales.</p>
-        <span class="service-card-link">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </div>
-      <div class="service-card reveal delay-3">
-        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3>CRM & Pipeline Optimization</h3>
-        <p>Intelligent CRM systems that capture every lead, route automatically, track every touchpoint, and surface revenue at risk before it's lost.</p>
-        <span class="service-card-link">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </div>
-      <div class="service-card reveal delay-4">
-        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <h3>Operational Systems Design</h3>
-        <p>Backend workflow architecture that gives leadership real-time visibility, enforces accountability, and creates consistency across every interaction.</p>
-        <span class="service-card-link">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </div>
-      <div class="service-card reveal delay-5">
-        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-        <h3>AI Education & Workshops</h3>
-        <p>Executive-level AI education and team workshops that demystify artificial intelligence and prepare organizations for practical, responsible adoption.</p>
-        <span class="service-card-link">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </div>
-      <div class="service-card reveal delay-6">
-        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-        <h3>Retainer & Implementation</h3>
-        <p>Ongoing optimization, automation expansion, and strategic advisory for organizations that want continuous improvement — not one-time projects.</p>
-        <span class="service-card-link">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      <h2 class="lc-h2 lc-reveal" style="text-align:center;margin-bottom:32px;font-size:1.8rem">Skin <span class="lc-gold-em">Treatments</span></h2>
+      <div class="grid-3">
+        <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-blue" style="margin-bottom:16px"><span class="glass-icon-emoji">🌊</span></div><h3 class="lc-h3" style="margin-bottom:8px">HydraFacial MD</h3><p class="lc-body" style="margin-bottom:16px">Multi-step resurfacing: cleanse, exfoliate, extract, and hydrate. Immediate luminous glow with zero downtime.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('HydraFacial')">Book ↗</button></div>
+        <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-gold" style="margin-bottom:16px"><span class="glass-icon-emoji">🔬</span></div><h3 class="lc-h3" style="margin-bottom:8px">Microneedling</h3><p class="lc-body" style="margin-bottom:16px">Collagen induction therapy. Reduces scars, pores, and improves texture and tone through the skin's natural repair.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Microneedling')">Book ↗</button></div>
+        <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji">✨</span></div><h3 class="lc-h3" style="margin-bottom:8px">Chemical Peels</h3><p class="lc-body" style="margin-bottom:16px">Medical-grade exfoliation customized for your skin type. Address hyperpigmentation, acne, and uneven tone.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Chemical Peel')">Book ↗</button></div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ═══════════ ENGAGEMENT MODEL ═══════════ -->
-<section class="section" id="approach">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Our Process</div>
-      <h2 class="section-title">4-Phase Engagement Model</h2>
-      <p class="section-subtitle">A proven methodology that takes organizations from assessment to operational excellence.</p>
-    </div>
-    <div class="timeline">
-      <div class="timeline-phase reveal delay-1">
-        <div class="timeline-number">01</div>
-        <h3>Discovery</h3>
-        <p>30-minute strategic consultation to assess current state, identify pain points, and determine fit.</p>
+<!-- ════════════════════════════════════════════
+     PAGE: IV / NUTRITIONAL WELLNESS
+════════════════════════════════════════════ -->
+<div class="lc-page" id="page-nutritional-wellness">
+  <div style="padding-top:120px" class="lc-glass-section">
+    <div class="lc-container">
+      <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Restore</span><span class="lc-eyebrow-line"></span></div>
+      <h1 class="lc-h1 lc-reveal delay-1">IV & Nutritional <span class="lc-gold-em">Wellness</span></h1>
+      <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 48px;max-width:580px">Give your body the vitamins, minerals, and nutrients it needs to feel refreshed, energized, and balanced. Each treatment is tailored just for you.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px" class="lc-reveal delay-3">
+        <button class="vagaro-glass-btn" onclick="openVagaro('IV Therapy')">📅 Book IV Session</button>
+        <button onclick="navTo('vitamin-cheat-sheet')" class="btn-glass btn-glass-lg">📊 Vitamin Cheat Sheet →</button>
       </div>
-      <div class="timeline-phase reveal delay-2">
-        <div class="timeline-number">02</div>
-        <h3>Blueprint</h3>
-        <p>Detailed architecture plan with workflow diagrams, integration specs, and implementation roadmap.</p>
-      </div>
-      <div class="timeline-phase reveal delay-3">
-        <div class="timeline-number">03</div>
-        <h3>Implementation</h3>
-        <p>Hands-on build, configuration, testing, and team training. We stay until systems are operational.</p>
-      </div>
-      <div class="timeline-phase reveal delay-4">
-        <div class="timeline-number">04</div>
-        <h3>Optimization</h3>
-        <p>Ongoing refinement, automation expansion, and scaling support as your business evolves.</p>
+      <!-- Benefits -->
+      <div class="grid-3" style="margin-bottom:56px">
+        <div class="glass-card lc-reveal" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">⚡</div><h3 class="lc-h3" style="margin-bottom:8px">Boosts Energy</h3><p class="lc-body">Fights fatigue by replenishing B vitamins, CoQ10, and minerals depleted by stress and daily life.</p></div>
+        <div class="glass-card lc-reveal delay-1" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">✨</div><h3 class="lc-h3" style="margin-bottom:8px">Brighter Skin</h3><p class="lc-body">Glutathione, Vitamin C, and Biotin replenish your natural brightening and collagen-building capacity.</p></div>
+        <div class="glass-card lc-reveal delay-2" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">🛡️</div><h3 class="lc-h3" style="margin-bottom:8px">Strengthens Immunity</h3><p class="lc-body">High-dose Vitamin C, Zinc, Selenium, and Vitamin D fortify your immune defenses.</p></div>
+        <div class="glass-card lc-reveal delay-1" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">🧠</div><h3 class="lc-h3" style="margin-bottom:8px">Mood & Clarity</h3><p class="lc-body">Magnesium, B6, Taurine, and Glycine support neurotransmitters for mood, sleep, and focus.</p></div>
+        <div class="glass-card lc-reveal delay-2" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">⚖️</div><h3 class="lc-h3" style="margin-bottom:8px">Weight Support</h3><p class="lc-body">MIC, Carnitine, B12 work together to optimize fat burning and improve body composition.</p></div>
+        <div class="glass-card lc-reveal delay-3" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">🌿</div><h3 class="lc-h3" style="margin-bottom:8px">Gut Health</h3><p class="lc-body">Glutamine, Glycine, and Proline restore gut barrier integrity and improve nutrient absorption.</p></div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ═══════════ WHY MGC ═══════════ -->
-<section class="section section-navy" id="why">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Our Difference</div>
-      <h2 class="section-title">Why Organizations Choose MGC Global</h2>
-      <p class="section-subtitle">We don't deliver presentations. We build operational infrastructure that produces measurable business results.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card reveal delay-1">
-        <h3>Systems-First Methodology</h3>
-        <p>Every recommendation connects to measurable operational outcomes. We think in systems, not pages.</p>
+<!-- ════════════════════════════════════════════
+     PAGE: VITAMIN CHEAT SHEET (compact)
+════════════════════════════════════════════ -->
+<div class="lc-page" id="page-vitamin-cheat-sheet">
+  <div style="padding-top:120px" class="lc-glass-section">
+    <div class="lc-container" style="max-width:1000px">
+      <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Clinical Reference</span><span class="lc-eyebrow-line"></span></div>
+      <h1 class="lc-h1 lc-reveal delay-1" style="margin-bottom:16px">Vitamin <span class="lc-gold-em">Cheat Sheet</span></h1>
+      <p class="lc-lead lc-reveal delay-2" style="margin-bottom:40px">Your complete guide to vitamins, minerals, and nutrients — organized by wellness goal. Use this to personalize your IV therapy protocol.</p>
+      <button onclick="navTo('nutritional-wellness')" class="btn-glass btn-glass-primary lc-reveal delay-3" style="margin-bottom:56px">Browse IV Therapy Menus →</button>
+
+      <div class="vc-section lc-reveal">
+        <div class="vc-h">✨ Skin, Hair & Nails</div>
+        <div class="grid-2" style="gap:12px">
+          <div class="vc-card"><h4>Biotin (B7)</h4><p>Essential for keratin production. Supports stronger hair and nails. Deficiency causes brittle nails and hair thinning.</p></div>
+          <div class="vc-card"><h4>Vitamin C</h4><p>Required for collagen synthesis. Helps skin elasticity and wound healing. Antioxidant protecting against UV damage.</p></div>
+          <div class="vc-card"><h4>Glutathione</h4><p>Master antioxidant. Improves skin clarity, brightening, and pigmentation issues. Detoxifies at cellular level.</p></div>
+          <div class="vc-card"><h4>CoQ10</h4><p>Energizes skin cells and reduces fine lines. Helps maintain firmness and reduce oxidative damage.</p></div>
+        </div>
+        <div class="vc-combo"><div class="vc-label">Most Impactful Combo</div><p><strong>Biotin + Vitamin C + Lysine + Proline + Zinc + Glutathione + CoQ10</strong> — covers collagen production, antioxidant protection, and hair/nail strength.</p></div>
       </div>
-      <div class="why-card reveal delay-2">
-        <h3>Automation Before Hiring</h3>
-        <p>Before you add headcount, we automate. Most organizations recover 20-35% efficiency before their next hire.</p>
+
+      <div class="lc-divider"></div>
+
+      <div class="vc-section lc-reveal">
+        <div class="vc-h">🧠 Stress, Mood, Sleep & Focus</div>
+        <div class="grid-2" style="gap:12px">
+          <div class="vc-card"><h4>Magnesium</h4><p>Calms nervous system via GABA receptors. Deficiency linked to anxiety, irritability, and sleep problems. Supports melatonin.</p></div>
+          <div class="vc-card"><h4>Vitamin B6 (Pyridoxine)</h4><p>Produces serotonin, dopamine, and GABA. Supports mood stability and stress resilience.</p></div>
+          <div class="vc-card"><h4>Taurine</h4><p>Supports calming GABA neurotransmitter. Reduces anxiety and promotes relaxation. Helps with focus under stress.</p></div>
+          <div class="vc-card"><h4>Glycine</h4><p>Lowers core body temperature at night, signaling sleep. Improves sleep onset and quality. Helps mental clarity.</p></div>
+        </div>
+        <div class="vc-combo"><div class="vc-label">Best Mood & Sleep Combo</div><p><strong>Magnesium + B6 + B12 + Folate + Vitamin D + Taurine + Glycine</strong></p></div>
       </div>
-      <div class="why-card reveal delay-3">
-        <h3>Measurable ROI</h3>
-        <p>Every engagement includes success metrics. We measure business outcomes, not deliverable counts.</p>
+
+      <div class="lc-divider"></div>
+
+      <div class="vc-section lc-reveal">
+        <div class="vc-h">⚡ Fat Burn, Energy & Metabolism</div>
+        <div class="grid-2" style="gap:12px">
+          <div class="vc-card"><h4>M.I.C. (Methionine, Inositol, Choline)</h4><p>Classic lipotropic combo that helps mobilize and metabolize fat in the liver.</p></div>
+          <div class="vc-card"><h4>L-Carnitine</h4><p>Shuttles fatty acids into mitochondria so the body can actually burn fat for energy.</p></div>
+          <div class="vc-card"><h4>B12 (Methylcobalamin)</h4><p>Boosts energy production, supports metabolism, and enhances fat mobilization when paired with MIC.</p></div>
+          <div class="vc-card"><h4>Alpha Lipoic Acid (ALA)</h4><p>Potent antioxidant improving insulin sensitivity and fat utilization. Also regenerates Glutathione and Vitamin C.</p></div>
+        </div>
+        <div class="vc-combo"><div class="vc-label">Fastest Fat-Burn Combo</div><p><strong>MIC + Carnitine + B12 + ALA + Chromium + Vitamin D</strong> = more energy, fewer cravings, faster results.</p></div>
       </div>
-      <div class="why-card reveal delay-4">
-        <h3>Real-Time Visibility</h3>
-        <p>Leadership dashboards that show pipeline health, team accountability, and revenue status at a glance.</p>
+
+      <div class="lc-divider"></div>
+
+      <div class="vc-section lc-reveal">
+        <div class="vc-h">🛡️ Detox & Immunity</div>
+        <div class="grid-2" style="gap:12px">
+          <div class="vc-card"><h4>Glutathione (Master Antioxidant)</h4><p>Neutralizes toxins, critical for liver detox Phase II. Protects immune cells and enhances their ability to fight pathogens.</p></div>
+          <div class="vc-card"><h4>NAC (N-Acetylcysteine)</h4><p>Precursor to glutathione — replenishes liver detox reserves. Excellent for long-term liver protection.</p></div>
+          <div class="vc-card"><h4>Zinc</h4><p>Critical for white blood cell development. Helps shorten duration of colds/viruses. Deficiency increases infection risk.</p></div>
+          <div class="vc-card"><h4>Selenium</h4><p>Works with glutathione enzymes to enhance detox capacity. Supports thyroid detoxification.</p></div>
+        </div>
+        <div class="vc-combo"><div class="vc-label">Core Detox Combo</div><p><strong>Glutathione + ALA + Vitamin C + Zinc + Vitamin D</strong> — the five essentials, supported by B vitamins, Selenium, and Taurine.</p></div>
       </div>
-      <div class="why-card reveal delay-5">
-        <h3>Centralized Operations</h3>
-        <p>One system of record. No more scattered spreadsheets, disconnected tools, or information silos.</p>
-      </div>
-      <div class="why-card reveal delay-6">
-        <h3>Future-Ready Architecture</h3>
-        <p>Systems designed to scale. When you grow, your infrastructure grows with you — without rebuilding.</p>
+
+      <div style="text-align:center;margin-top:40px">
+        <button class="vagaro-glass-btn" onclick="openVagaro('IV Therapy')" style="font-size:.78rem">📅 Book Your Custom IV Protocol</button>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ═══════════ AUTHORITY ═══════════ -->
-<section class="section" id="authority">
-  <div class="container">
-    <div class="authority-grid">
-      <div class="authority-text reveal-left">
-        <div class="section-label">Who We Are</div>
-        <h3>A Consulting Firm That Builds Real Systems</h3>
-        <p>MGC Global Consulting LLC works at the intersection of strategy, technology, and operations — designing intelligent infrastructure that scales with your business. We stay until systems are running. We measure results in operational metrics.</p>
-        <div class="authority-not">
-          <div class="authority-not-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            Not a software vendor selling licenses
+<!-- ════════════════════════════════════════════
+     PAGES: Weight Management, Nutrition, Non-Emergent, etc.
+     (Condensed for file size — same glass pattern applies)
+════════════════════════════════════════════ -->
+<div class="lc-page" id="page-weight-management">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
+    <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Optimize</span></div>
+    <h1 class="lc-h1 lc-reveal delay-1">Weight <span class="lc-gold-em">Management</span></h1>
+    <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 40px">Advanced wellness therapies — vitamin injections, diet modifications, and lifestyle recommendations to optimize metabolism, energy, and body composition.</p>
+    <div class="grid-3" style="margin-bottom:40px">
+      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-green" style="margin-bottom:16px"><span class="glass-icon-emoji">💉</span></div><h3 class="lc-h3" style="margin-bottom:8px">Vitamin Injections</h3><p class="lc-body">B12, MIC lipotropic blends to mobilize fat and boost cellular energy production.</p></div>
+      <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji">🥗</span></div><h3 class="lc-h3" style="margin-bottom:8px">Diet Modification</h3><p class="lc-body">Clinically-informed dietary guidance tailored to your metabolic type. Includes our free 12-Day Meal Plan.</p></div>
+      <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-gold" style="margin-bottom:16px"><span class="glass-icon-emoji">🏃</span></div><h3 class="lc-h3" style="margin-bottom:8px">Lifestyle Integration</h3><p class="lc-body">Practical recommendations that complement clinical treatments for lasting results beyond the clinic.</p></div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="vagaro-glass-btn" onclick="openVagaro('Weight Management')">📅 Book Consult</button>
+      <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass btn-glass-primary">🎁 Free 12-Day Meal Plan ↗</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="lc-page" id="page-nutrition-counseling">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
+    <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Nourish</span></div>
+    <h1 class="lc-h1 lc-reveal delay-1">Nutrition <span class="lc-gold-em">Counseling</span></h1>
+    <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 40px">Personalized dietary and lifestyle guidance tailored to each client's wellness and aesthetic goals. Evidence-based nutrition designed just for you.</p>
+    <div class="glass-card lc-reveal" style="padding:40px;max-width:640px;margin-bottom:32px">
+      <h3 class="lc-h3" style="margin-bottom:16px">What's Included</h3>
+      <ul class="lc-check"><li>Comprehensive dietary assessment and analysis</li><li>Personalized meal planning and food selection guidance</li><li>Anti-inflammatory eating plans for skin and body health</li><li>Nutrient optimization for aesthetic treatment outcomes</li><li>Metabolic health and hormonal balance through nutrition</li><li>Ongoing support and plan adjustments as you progress</li></ul>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="vagaro-glass-btn" onclick="openVagaro('Nutrition Counseling')">📅 Book Consult</button>
+      <button onclick="navTo('vitamin-cheat-sheet')" class="btn-glass">📊 Vitamin Guide →</button>
+    </div>
+  </div></div>
+</div>
+
+<div class="lc-page" id="page-non-emergent-care">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
+    <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Concierge Medical</span></div>
+    <h1 class="lc-h1 lc-reveal delay-1">Non-Emergent <span class="lc-gold-em">Care</span></h1>
+    <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 40px">Handle the little things that keep life moving — without long wait times or unnecessary ER visits. Clinical efficiency in a boutique setting.</p>
+    <div class="grid-3" style="margin-bottom:40px">
+      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-teal" style="margin-bottom:16px"><span class="glass-icon-emoji">🌿</span></div><h3 class="lc-h3" style="margin-bottom:8px;color:#C9A96E">MMCC Certification</h3><p class="lc-body" style="margin-bottom:16px">Maryland Medical Cannabis certification. Fast, professional, fully compliant evaluations.</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('MMCC Certification')" style="font-size:.65rem">Book MMCC 📅</button></div>
+      <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-blue" style="margin-bottom:16px"><span class="glass-icon-emoji">🔄</span></div><h3 class="lc-h3" style="margin-bottom:8px">MMCC Renewals</h3><p class="lc-body" style="margin-bottom:16px">Annual MMCC card renewals handled efficiently. Bring your current certification.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('MMCC Renewal')">Book ↗</button></div>
+      <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji">🏃</span></div><h3 class="lc-h3" style="margin-bottom:8px">Medical Physicals</h3><p class="lc-body" style="margin-bottom:16px">Pre-employment, sports, school, and DOT physicals with certified documentation.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Physical Exam')">Book ↗</button></div>
+      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-green" style="margin-bottom:16px"><span class="glass-icon-emoji">💊</span></div><h3 class="lc-h3" style="margin-bottom:8px">Medication Refills</h3><p class="lc-body">Bridge prescriptions for established patients needing continuity between primary provider appointments.</p></div>
+      <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-rose" style="margin-bottom:16px"><span class="glass-icon-emoji">📄</span></div><h3 class="lc-h3" style="margin-bottom:8px">Doctor's Notes</h3><p class="lc-body">Medical documentation for school, work, or travel — issued with proper clinical evaluation. No ER required.</p></div>
+      <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-gold" style="margin-bottom:16px"><span class="glass-icon-emoji">📋</span></div><h3 class="lc-h3" style="margin-bottom:8px">Medical Necessity Letters</h3><p class="lc-body">Documentation for treatments, wellness services, insurance, and workplace accommodation requests.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- Services overview, Contact, Store, Wellness Assistant, Sitemap, Privacy, Terms -->
+<div class="lc-page" id="page-services">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
+    <h1 class="lc-h1 lc-reveal" style="margin-bottom:40px">All <span class="lc-gold-em">Services</span></h1>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <div onclick="navTo('medical-aesthetics')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">💉</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Refine</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Medical Aesthetics</h3><p class="lc-body" style="font-size:.78rem">Botox, fillers, HydraFacial, microneedling, and chemical peels.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('body-contouring')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">✨</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Sculpt</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Body Contouring & Snatch Protocol™</h3><p class="lc-body" style="font-size:.78rem">360° non-invasive body transformation system.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('weight-management')" class="glass lc-reveal delay-2" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">⚖️</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Optimize</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Weight Management</h3><p class="lc-body" style="font-size:.78rem">Vitamin injections, dietary modifications, lifestyle planning.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('nutritional-wellness')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">💧</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Restore</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">IV & Nutritional Wellness Therapy</h3><p class="lc-body" style="font-size:.78rem">Custom vitamin and mineral infusions for whole-body wellness.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('non-emergent-care')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">🏥</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Concierge Medical</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Non-Emergent Care, MMCC & Physicals</h3><p class="lc-body" style="font-size:.78rem">MMCC certification, physicals, refills, doctor's notes.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="lc-page" id="page-contact">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
+    <h1 class="lc-h1 lc-reveal" style="margin-bottom:40px">Contact <span class="lc-gold-em">LoveLi Care</span></h1>
+    <div class="col-2">
+      <div>
+        <div class="glass-card lc-reveal" style="padding:36px;margin-bottom:16px">
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0">📍</div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Address</div><p class="lc-body">100 East Pennsylvania Avenue<br>Towson, MD · Suite 304</p><a href="https://maps.google.com/?q=100+East+Pennsylvania+Avenue+Towson+MD" target="_blank" class="btn-glass btn-glass-sm" style="margin-top:10px;display:inline-flex">Get Directions ↗</a></div></div>
+            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0">📞</div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Phone & Text</div><p class="lc-body">Office: <a href="tel:4106165451" style="color:#C9A96E;text-decoration:none">410-616-5451</a><br>Text: <a href="tel:4436782254" style="color:#C9A96E;text-decoration:none">443-678-2254</a></p></div></div>
+            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0">✉️</div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Email</div><a href="mailto:LoveLiCareSvcs@gmail.com" style="color:#C9A96E;text-decoration:none;font-size:.88rem">LoveLiCareSvcs@gmail.com</a></div></div>
+            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0">🕐</div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Hours</div><p class="lc-body">By Appointment · Closed Major Holidays</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro()" style="margin-top:10px;font-size:.65rem">Book Online 📅</button></div></div>
           </div>
-          <div class="authority-not-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            Not a freelance marketplace for commodity services
+        </div>
+        <div style="display:flex;gap:10px">
+          <a href="https://www.facebook.com/337743627433167" target="_blank" class="btn-glass btn-glass-sm">Facebook ↗</a>
+          <a href="https://www.instagram.com/lovelicare" target="_blank" class="btn-glass btn-glass-sm">Instagram ↗</a>
+        </div>
+      </div>
+      <div class="glass-strong lc-reveal delay-1" style="border-radius:24px;padding:40px">
+        <h3 class="lc-h3" style="margin-bottom:28px">Drop Us a Line</h3>
+        <form class="lc-contact-form">
+          <div class="lc-form-group"><label class="lc-form-label">Your Name</label><input class="lc-form-input" type="text" name="name" placeholder="First & Last Name"/></div>
+          <div class="lc-form-group"><label class="lc-form-label">Email *</label><input class="lc-form-input" type="email" name="email" placeholder="your@email.com" required/></div>
+          <div class="lc-form-group"><label class="lc-form-label">Phone</label><input class="lc-form-input" type="tel" name="phone" placeholder="(443) 000-0000"/></div>
+          <div class="lc-form-group"><label class="lc-form-label">Service Interest</label>
+            <select class="lc-form-select lc-form-input" name="service">
+              <option value="">— Select a service —</option>
+              <option>Medical Aesthetics (Botox / Fillers)</option>
+              <option>Body Contouring / Snatch Protocol™</option>
+              <option>Weight Management</option>
+              <option>IV & Nutritional Wellness Therapy</option>
+              <option>Nutrition Counseling</option>
+              <option>MMCC Certification</option>
+              <option>Medical Physical</option>
+              <option>General Inquiry</option>
+            </select>
           </div>
-          <div class="authority-not-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            Not a coaching program teaching theory without implementation
-          </div>
-          <div class="authority-not-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            Not an agency creating deliverables without operational impact
-          </div>
-        </div>
-      </div>
-      <div class="authority-visual reveal-right">
-        <div class="authority-stat">
-          <div class="authority-stat-value">150+</div>
-          <div class="authority-stat-label">Workflows Automated</div>
-        </div>
-        <div class="authority-stat">
-          <div class="authority-stat-value">30-50%</div>
-          <div class="authority-stat-label">Faster Intake Processing</div>
-        </div>
-        <div class="authority-stat">
-          <div class="authority-stat-value">24-48hr</div>
-          <div class="authority-stat-label">Service Start Capability</div>
-        </div>
+          <div class="lc-form-group"><label class="lc-form-label">Message</label><textarea class="lc-form-textarea" name="message" placeholder="How can we help you?"></textarea></div>
+          <p style="font-size:.62rem;font-weight:300;color:rgba(47,79,79,.35);margin-bottom:16px;line-height:1.6">By providing your phone number you consent to receive text messages from LoveLi Care. Reply STOP to opt out. <span onclick="navTo('privacy-policy')" style="color:#C9A96E;cursor:pointer">Privacy Policy</span></p>
+          <button type="submit" class="btn-glass btn-glass-dark" style="width:100%;justify-content:center">Send Message →</button>
+        </form>
       </div>
     </div>
-  </div>
-</section>
+  </div></div>
+</div>
 
-<!-- ═══════════ TRUE ASSIST ═══════════ -->
-<section class="section section-dark" id="trueassist">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Flagship System</div>
-      <h2 class="section-title">True Assist — Agentic Operations System</h2>
-      <p class="section-subtitle">Built inside Notion. Integrated with Zapier, Gmail, calendars, forms, intake workflows, and reporting logic. For any operations-heavy organization managing complex client journeys.</p>
+<div class="lc-page" id="page-wellness-assistant">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container" style="max-width:800px">
+    <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">NEW · AI-Powered</span></div>
+    <h1 class="lc-h1 lc-reveal delay-1">Wellness <span class="lc-gold-em">Assistant</span></h1>
+    <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 40px">Skip the wait. Our AI wellness agent can help you learn about treatments, find the right protocol for your goals, and get quick answers before booking.</p>
+    <div class="glass-gold lc-reveal" style="padding:56px;text-align:center;margin-bottom:40px;border-radius:28px">
+      <div style="font-size:3.5rem;margin-bottom:20px">💬</div>
+      <h2 class="lc-h2" style="font-size:1.8rem;margin-bottom:12px">Chat with LoveLi Wellness AI</h2>
+      <p class="lc-body" style="max-width:440px;margin:0 auto 28px">Available 24/7. Learn about treatments, compare options, and get personalized guidance — all before you book.</p>
+      <a href="https://lovelicare.com/wellness-chatbox" target="_blank" class="vagaro-glass-btn" style="font-size:.78rem;display:inline-flex">💬 Launch Wellness Assistant ↗</a>
     </div>
-    <div class="ta-features">
-      <div class="ta-feature reveal delay-1">
-        <div class="ta-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <h3>Captures Instantly</h3>
-        <p>Every contact — phone, web, referral, social, email — logged, timestamped, and becomes a trackable CRM record.</p>
-      </div>
-      <div class="ta-feature reveal delay-2">
-        <div class="ta-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
-        <h3>Routes Automatically</h3>
-        <p>Each department receives automated notifications based on workflow logic. Everyone sees only what they need.</p>
-      </div>
-      <div class="ta-feature reveal delay-3">
-        <div class="ta-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-        <h3>Tracks Everything</h3>
-        <p>Every action logged with timestamp, staff member, department, and notes. Full audit trail for leadership.</p>
-      </div>
-      <div class="ta-feature reveal delay-4">
-        <div class="ta-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3>Moves to Revenue</h3>
-        <p>Pipeline stages advance automatically based on bookings, eligibility, and uploads — without human error.</p>
-      </div>
+    <div class="grid-2">
+      <div class="glass-card lc-reveal" style="padding:28px"><h3 class="lc-h3" style="margin-bottom:8px">🔬 Treatment Info</h3><p class="lc-body">Learn about any service — from Botox to IV therapy to MMCC — before deciding to book.</p></div>
+      <div class="glass-card lc-reveal delay-1" style="padding:28px"><h3 class="lc-h3" style="margin-bottom:8px">🎯 Find Your Protocol</h3><p class="lc-body">Describe your goals and the Assistant matches you with the most appropriate LoveLi services.</p></div>
     </div>
-    <div class="metrics-strip reveal">
-      <div class="metric">
-        <div class="metric-value"><span class="counter" data-target="50">0</span>%</div>
-        <div class="metric-label">Faster Intake<br>Processing</div>
-      </div>
-      <div class="metric">
-        <div class="metric-value"><span class="counter" data-target="35">0</span>%</div>
-        <div class="metric-label">Conversion Rate<br>Increase</div>
-      </div>
-      <div class="metric">
-        <div class="metric-value"><span class="counter" data-target="25">0</span>%</div>
-        <div class="metric-label">Revenue<br>Recovery</div>
-      </div>
-      <div class="metric">
-        <div class="metric-value"><span class="counter" data-target="48">0</span><span style="font-size:1.5rem">hr</span></div>
-        <div class="metric-label">Service Start<br>Capability</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </div></div>
+</div>
 
-<!-- ═══════════ FINAL CTA ═══════════ -->
-<section class="cta-section" id="contact">
-  <div class="container">
-    <div class="cta-content reveal">
-      <div class="section-label">Get Started</div>
-      <h2>Ready to Scale<br>Without Chaos?</h2>
-      <p>We work with leadership teams ready to move beyond manual systems and build scalable operations infrastructure. Start with a 30-minute strategic conversation.</p>
-      <div class="cta-buttons">
-        <a href="https://calendly.com/mark-mgcglobalconsulting/30min" class="btn-primary" target="_blank" rel="noopener">
-          <span>Book Your Strategy Session</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-      </div>
-      <p class="cta-alt">Or reach us directly: <a href="mailto:info@mgcglobalconsulting.com">info@mgcglobalconsulting.com</a> &nbsp;|&nbsp; <a href="tel:4109522846">410-952-2846</a></p>
+<div class="lc-page" id="page-online-store">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
+    <h1 class="lc-h1 lc-reveal" style="margin-bottom:40px">Online <span class="lc-gold-em">Store</span></h1>
+    <div class="glass-gold lc-reveal" style="padding:48px;border-radius:24px;margin-bottom:40px;display:flex;gap:40px;align-items:center;flex-wrap:wrap">
+      <div style="flex:1;min-width:240px"><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:10px">🎁 FREE Download</div><h2 class="lc-h2" style="font-size:1.8rem;margin-bottom:12px">12-Day Weight Loss Meal Plan</h2><p class="lc-body" style="margin-bottom:20px">Your complimentary head-start on your wellness journey.</p><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass btn-glass-primary">Get Free Plan ↗</a></div>
+      <div style="text-align:center;flex-shrink:0"><div style="font-size:4rem;filter:drop-shadow(0 4px 12px rgba(201,169,110,.3))">🥗</div><div style="font-family:'Italiana','Cormorant',Georgia,serif;color:#C9A96E;margin-top:8px">Completely Free</div></div>
     </div>
-  </div>
-</section>
+    <div class="grid-4">
+      <a href="https://lovelicare.com/online-store" target="_blank" class="glass-card lc-reveal" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px">🛍</div><h3 class="lc-h3">Browse Store ↗</h3></a>
+      <a href="https://lovelicare.com/m/bookings" target="_blank" class="glass-card lc-reveal delay-1" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px">📅</div><h3 class="lc-h3">My Bookings ↗</h3></a>
+      <a href="https://lovelicare.com/m/orders" target="_blank" class="glass-card lc-reveal delay-2" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px">📦</div><h3 class="lc-h3">My Orders ↗</h3></a>
+      <a href="https://lovelicare.com/m/account" target="_blank" class="glass-card lc-reveal delay-3" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px">👤</div><h3 class="lc-h3">My Account ↗</h3></a>
+    </div>
+    <div class="glass-gold lc-reveal" style="padding:36px;margin-top:24px;text-align:center;border-radius:20px">
+      <h3 class="lc-h3" style="margin-bottom:10px">Subscribe & Save 10%</h3>
+      <p class="lc-body" style="margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto">Get 10% off your first purchase when you join our wellness community.</p>
+      <form class="lc-subscribe-form" style="display:flex;gap:8px;justify-content:center;max-width:360px;margin:0 auto">
+        <input class="lc-form-input" type="email" placeholder="Your email address" style="flex:1"/>
+        <button type="submit" class="btn-glass btn-glass-dark btn-glass-sm">Sign Up</button>
+      </form>
+    </div>
+  </div></div>
+</div>
 
-<!-- ═══════════ FOOTER ═══════════ -->
-<footer class="footer">
-  <div class="container">
+<div class="lc-page" id="page-sitemap">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
+    <h1 class="lc-h1 lc-reveal" style="margin-bottom:40px">Site <span class="lc-gold-em">Map</span></h1>
+    <div style="display:flex;justify-content:center;margin-bottom:8px"><div class="sm-node sm-node-root lc-reveal" onclick="navTo('home')" style="width:160px"><div class="sm-title">🏠 Home</div><div class="sm-url">lovelicare.com</div></div></div>
+    <div class="sm-connector">│</div>
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:32px">
+      <div class="sm-node lc-reveal" onclick="navTo('services')"><div class="sm-title">Services</div><div class="sm-url">/services</div></div>
+      <div class="sm-node lc-reveal delay-1" onclick="navTo('nutritional-wellness')"><div class="sm-title">IV Therapy</div><div class="sm-url">/iv-wellness</div></div>
+      <div class="sm-node lc-reveal delay-2" onclick="navTo('wellness-assistant')"><div class="sm-title">💬 AI Assistant</div><div class="sm-url">/wellness-chatbox</div></div>
+      <div class="sm-node lc-reveal delay-3" onclick="navTo('online-store')"><div class="sm-title">🛍 Store</div><div class="sm-url">/online-store</div></div>
+      <div class="sm-node lc-reveal delay-4" onclick="navTo('contact')"><div class="sm-title">Contact</div><div class="sm-url">/contact</div></div>
+    </div>
+    <div class="lc-divider"></div>
+    <h3 class="lc-h3" style="margin-bottom:24px">Service Pages</h3>
+    <div class="grid-3" style="margin-bottom:36px">
+      <div class="sm-node lc-reveal" onclick="navTo('medical-aesthetics')"><div class="sm-title">💉 Medical Aesthetics</div><div class="sm-url">/medical-aesthetics</div></div>
+      <div class="sm-node lc-reveal delay-1" onclick="navTo('body-contouring')"><div class="sm-title">✨ Body Contouring</div><div class="sm-url">/body-contouring</div></div>
+      <div class="sm-node lc-reveal delay-2" onclick="navTo('weight-management')"><div class="sm-title">⚖️ Weight Management</div><div class="sm-url">/weight-management</div></div>
+      <div class="sm-node lc-reveal" onclick="navTo('nutrition-counseling')"><div class="sm-title">🥗 Nutrition Counseling</div><div class="sm-url">/nutrition-counseling</div></div>
+      <div class="sm-node lc-reveal delay-1" onclick="navTo('nutritional-wellness')"><div class="sm-title">💧 IV & Nutritional Wellness</div><div class="sm-url">/nutritional-wellness</div></div>
+      <div class="sm-node lc-reveal delay-2" onclick="navTo('non-emergent-care')"><div class="sm-title">🏥 Non-Emergent Care</div><div class="sm-url">/non-emergent-care</div></div>
+    </div>
+    <div class="lc-divider"></div>
+    <h3 class="lc-h3" style="margin-bottom:24px">Resources & Account (External)</h3>
+    <div class="grid-4">
+      <div class="sm-node lc-reveal" onclick="navTo('vitamin-cheat-sheet')"><div class="sm-title">📊 Vitamin Cheat Sheet</div></div>
+      <a href="https://lovelicare.com/m/bookings" target="_blank" class="sm-node lc-reveal delay-1" style="text-decoration:none"><div class="sm-title">📅 Book Appointment ↗</div></a>
+      <a href="https://lovelicare.com/m/account" target="_blank" class="sm-node lc-reveal delay-2" style="text-decoration:none"><div class="sm-title">👤 My Account ↗</div></a>
+      <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="sm-node lc-reveal delay-3" style="text-decoration:none"><div class="sm-title">🎁 Free Meal Plan ↗</div></a>
+    </div>
+  </div></div>
+</div>
+
+<div class="lc-page" id="page-privacy-policy">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container" style="max-width:860px">
+    <h1 class="lc-h1 lc-reveal" style="font-size:2.5rem;margin-bottom:8px">Privacy <span class="lc-gold-em">Policy</span></h1>
+    <p style="font-size:.75rem;font-weight:300;color:rgba(47,79,79,.4);margin-bottom:40px">Last updated: August 20, 2025</p>
+    <div class="glass lc-reveal" style="padding:48px">
+      <p class="legal-p">At LoveLi Care Med Spa & Wellness Lounge ("we" or "us"), we value the privacy of individuals who use our websites and related services. This Privacy Notice explains how we collect, use, and share the personal information of users.</p>
+      <div class="legal-h2">Information You Provide to Us</div>
+      <p class="legal-p">We may collect your name, email address, phone number, and mailing address when you register, book appointments, or contact us. Payment information is processed by third-party payment processors.</p>
+      <div class="legal-h2">SMS Consent</div>
+      <p class="legal-p">By providing your phone number you consent to receive text messages from LoveLi Care Med Spa & Wellness regarding your inquiries and updates. Message and data rates may apply. Reply STOP to opt out. Contact: <a href="mailto:lovelicaresvcs@gmail.com" class="legal-link">lovelicaresvcs@gmail.com</a></p>
+      <div class="legal-h2">How We Use Your Information</div>
+      <p class="legal-p">We use collected information to provide and improve our services, process bookings and purchases, communicate with you, and conduct marketing activities.</p>
+      <div class="legal-h2">How We Share Information</div>
+      <p class="legal-p">We may share information with service providers, advertising partners (Google, Meta, LinkedIn, Microsoft), and as required by law. We do not sell your personal information.</p>
+      <div class="legal-h2">Your Choices & Contact</div>
+      <p class="legal-p">You may unsubscribe from marketing emails via any email link. Manage cookies through your browser settings. For all privacy inquiries: <a href="mailto:lovelicaresvcs@gmail.com" class="legal-link">lovelicaresvcs@gmail.com</a></p>
+    </div>
+  </div></div>
+</div>
+
+<div class="lc-page" id="page-terms">
+  <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container" style="max-width:860px">
+    <h1 class="lc-h1 lc-reveal" style="font-size:2.5rem;margin-bottom:40px">Terms & <span class="lc-gold-em">Conditions</span></h1>
+    <div class="glass lc-reveal" style="padding:48px">
+      <p class="legal-p">By using LoveLi Care Med Spa & Wellness Lounge services and website, you agree to these Terms and Conditions.</p>
+      <div class="legal-h2">Medical Disclaimer</div><p class="legal-p">Content is for informational purposes only and does not constitute medical advice. All treatments are performed by licensed professionals. Individual results may vary.</p>
+      <div class="legal-h2">Appointments & Cancellations</div><p class="legal-p">Appointments confirmed upon booking. Cancellations must be made at least 24 hours in advance. Late cancellations or no-shows may be subject to a fee.</p>
+      <div class="legal-h2">Payments & Refunds</div><p class="legal-p">Payment is due at time of service. All sales of services are final. Product returns accepted within 14 days in original condition.</p>
+      <div class="legal-h2">Governing Law</div><p class="legal-p">These terms are governed by the laws of the State of Maryland. Disputes resolved in courts of Baltimore County, Maryland. Contact: <a href="mailto:LoveLiCareSvcs@gmail.com" class="legal-link">LoveLiCareSvcs@gmail.com</a></p>
+    </div>
+  </div></div>
+</div>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer class="lc-footer">
+  <div class="lc-container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="nav-logo" style="margin-bottom:0.5rem">
-          <div class="nav-logo-mark">M</div>
-          <div class="nav-logo-text">
-            <span class="nav-logo-name">MGC Global</span>
-            <span class="nav-logo-sub">Consulting</span>
-          </div>
-        </a>
-        <p>"Making Global Connections"<br><br>101 W Lombard St<br>Baltimore, MD 21202</p>
+      <div>
+        <span class="footer-brand">LoveLi<span>Care</span></span>
+        <p class="footer-tagline">Med Spa & Wellness Lounge — Where clinical precision meets compassionate, personalized care. Serving Towson, MD and the MD/DC/VA region.</p>
+        <div style="display:flex;gap:10px;margin-top:18px">
+          <a href="https://www.facebook.com/337743627433167" target="_blank" class="btn-glass btn-glass-sm" style="font-size:.62rem">Facebook ↗</a>
+          <a href="https://www.instagram.com/lovelicare" target="_blank" class="btn-glass btn-glass-sm" style="font-size:.62rem">Instagram ↗</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
-        <a href="#services">AI Consulting & Strategy</a>
-        <a href="#services">Automation Architecture</a>
-        <a href="#services">CRM Optimization</a>
-        <a href="#services">Systems Design</a>
-        <a href="#services">AI Workshops</a>
-        <a href="#services">Retainer Support</a>
+        <h5>Services</h5>
+        <ul>
+          <li><span onclick="navTo('medical-aesthetics')">Medical Aesthetics</span></li>
+          <li><span onclick="navTo('body-contouring')">Body Contouring</span></li>
+          <li><span onclick="navTo('weight-management')">Weight Management</span></li>
+          <li><span onclick="navTo('nutritional-wellness')">IV Therapy</span></li>
+          <li><span onclick="navTo('non-emergent-care')">MMCC & Physicals</span></li>
+        </ul>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#authority">About</a>
-        <a href="#approach">Our Approach</a>
-        <a href="#trueassist">True Assist</a>
-        <a href="#contact">Contact</a>
+        <h5>Resources</h5>
+        <ul>
+          <li><span onclick="navTo('vitamin-cheat-sheet')">Vitamin Cheat Sheet</span></li>
+          <li><span onclick="navTo('wellness-assistant')">Wellness Assistant</span></li>
+          <li><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank">Free Meal Plan ↗</a></li>
+          <li><a href="https://lovelicare.com/m/bookings" target="_blank">Book Appointment ↗</a></li>
+          <li><a href="https://lovelicare.com/m/account" target="_blank">My Account ↗</a></li>
+        </ul>
       </div>
       <div class="footer-col">
-        <h4>Connect</h4>
-        <a href="tel:4109522846">410-952-2846</a>
-        <a href="mailto:info@mgcglobalconsulting.com">info@mgcglobalconsulting.com</a>
-        <a href="https://calendly.com/mark-mgcglobalconsulting/30min" target="_blank" rel="noopener">Book a Call</a>
-        <a href="https://x.com/just_mgc" target="_blank" rel="noopener">X / Twitter</a>
-        <a href="https://facebook.com/share/17imWSpAHB" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://youtube.com/@markcartwright-k8l" target="_blank" rel="noopener">YouTube</a>
+        <h5>Contact</h5>
+        <ul>
+          <li><span>100 E Pennsylvania Ave<br>Suite 304, Towson MD</span></li>
+          <li><a href="tel:4106165451">📞 410-616-5451</a></li>
+          <li><a href="tel:4436782254">💬 443-678-2254</a></li>
+          <li><a href="mailto:LoveLiCareSvcs@gmail.com">✉️ Email Us</a></li>
+        </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 MGC Global Consulting LLC. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
+      <p>© 2026 LoveLi Care Med Spa & Wellness Lounge LLC. All Rights Reserved.</p>
+      <div class="footer-links">
+        <span onclick="navTo('privacy-policy')">Privacy Policy</span>
+        <span onclick="navTo('terms')">Terms</span>
+        <a href="https://lovelicare.com/online-store" target="_blank">Store ↗</a>
+        <span onclick="navTo('sitemap')">Site Map</span>
       </div>
     </div>
   </div>
+  <div class="mgc-bar">
+    <p>Liquid Glass Design System by <a href="https://www.mgcglobalconsulting.com" target="_blank">MGC Global Consulting</a> · Mark G. Cartwright · All AI Asset Prompts Documented</p>
+  </div>
 </footer>
 
-<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<!-- ══ COOKIE BANNER ══ -->
+<div id="lc-cookie">
+  <p>This website uses cookies to optimize your experience. <span onclick="navTo('privacy-policy')" style="color:#C9A96E;cursor:pointer">Privacy Policy</span></p>
+  <button id="lc-cookie-accept" class="btn-glass btn-glass-dark btn-glass-sm">Accept</button>
+</div>
+
+<!-- GoDaddy: relative JS path -->
+<script src="./assets/js/liquid-glass.js"></script>
+
 <script>
-// ── Scroll Progress Bar ──
-function updateScrollProgress() {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = (scrollTop / docHeight) * 100;
-  document.getElementById('scrollProgress').style.width = progress + '%';
-}
-
-// ── Navigation Scroll State ──
-function handleNavScroll() {
-  const nav = document.getElementById('mainNav');
-  if (window.scrollY > 80) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-}
-
-// ── Mobile Navigation ──
-function toggleMobile() {
-  const btn = document.getElementById('mobileBtn');
-  const nav = document.getElementById('mobileNav');
-  btn.classList.toggle('active');
-  nav.classList.toggle('open');
-  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-}
-function closeMobile() {
-  const btn = document.getElementById('mobileBtn');
-  const nav = document.getElementById('mobileNav');
-  btn.classList.remove('active');
-  nav.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// ── Scroll Reveal (Intersection Observer) ──
-function initReveal() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-    observer.observe(el);
-  });
-}
-
-// ── Animated Counters ──
-function initCounters() {
-  const counters = document.querySelectorAll('.counter');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !entry.target.dataset.counted) {
-        entry.target.dataset.counted = 'true';
-        const target = parseInt(entry.target.dataset.target);
-        const duration = 2000;
-        const start = performance.now();
-        
-        function updateCounter(currentTime) {
-          const elapsed = currentTime - start;
-          const progress = Math.min(elapsed / duration, 1);
-          // Ease out cubic
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = Math.round(eased * target);
-          entry.target.textContent = current;
-          if (progress < 1) {
-            requestAnimationFrame(updateCounter);
-          }
-        }
-        requestAnimationFrame(updateCounter);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  counters.forEach(counter => observer.observe(counter));
-}
-
-// ── Pipeline Fill Animation ──
-function initPipeline() {
-  const fill = document.getElementById('pipelineFill');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        setTimeout(() => { fill.style.width = '78%'; }, 500);
-      }
-    });
-  }, { threshold: 0.3 });
-  if (fill) observer.observe(fill);
-}
-
-// ── Parallax on Hero Orbs ──
-function initParallax() {
-  const orbs = document.querySelectorAll('.hero-orb');
-  window.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 2;
-    const y = (e.clientY / window.innerHeight - 0.5) * 2;
-    orbs.forEach((orb, i) => {
-      const speed = (i + 1) * 15;
-      orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-    });
-  });
-}
-
-// ── Smooth Scroll for Anchor Links ──
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      const offset = 80;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  });
-});
-
-// ── Initialize Everything ──
-window.addEventListener('scroll', () => {
-  updateScrollProgress();
-  handleNavScroll();
-}, { passive: true });
-
-document.addEventListener('DOMContentLoaded', () => {
-  initReveal();
-  initCounters();
-  initPipeline();
-  initParallax();
-  // Trigger hero animations immediately
+// ── LOADER ──
+window.addEventListener('load', () => {
   setTimeout(() => {
-    document.querySelectorAll('.hero .reveal, .hero .reveal-right').forEach(el => {
-      el.classList.add('visible');
+    document.getElementById('lc-loader')?.classList.add('gone');
+    // Trigger initial reveals
+    document.querySelectorAll('#page-home .lc-reveal').forEach(el => {
+      setTimeout(() => el.classList.add('in'), 200);
     });
-  }, 300);
+  }, 1200);
 });
 </script>
+
 </body>
 </html>
