@@ -14,7 +14,7 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&family=Italiana&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 
 <!-- GoDaddy: relative CSS path -->
 <link rel="stylesheet" href="./assets/css/liquid-glass.css"/>
@@ -137,7 +137,7 @@
 <div id="booking-success">
   <div id="booking-success-backdrop" style="position:absolute;inset:0;background:rgba(47,79,79,.2);backdrop-filter:blur(20px)" onclick="document.getElementById('booking-success').classList.remove('active')"></div>
   <div id="booking-success-card">
-    <div style="font-size:3rem;margin-bottom:20px;animation:floatReview 3s ease-in-out infinite">🌸</div>
+    <div style="font-size:3rem;margin-bottom:20px;animation:floatReview 3s ease-in-out infinite"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2a4 4 0 010 6 4 4 0 010-6zM12 16a4 4 0 010 6 4 4 0 010-6zM2 12a4 4 0 016 0 4 4 0 01-6 0zM16 12a4 4 0 016 0 4 4 0 01-6 0z"/></svg></div>
     <div style="font-family:'Italiana','Cormorant',Georgia,serif;font-size:2rem;color:#2F4F4F;margin-bottom:6px">You're Booked!</div>
     <div style="font-family:'Cormorant',Georgia,serif;font-style:italic;font-size:1rem;color:rgba(47,79,79,.55);margin-bottom:24px">We can't wait to see you, <span id="success-name">Beautiful</span></div>
     <div style="background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.25);border-radius:12px;padding:20px;margin-bottom:24px">
@@ -145,7 +145,7 @@
       <div style="font-family:'Cormorant',Georgia,serif;font-size:1.05rem;color:#2F4F4F" id="success-service">Your treatment</div>
       <div style="font-size:.82rem;font-weight:300;color:rgba(47,79,79,.5);margin-top:4px" id="success-date"></div>
     </div>
-    <p style="font-size:.78rem;font-weight:300;color:rgba(47,79,79,.5);line-height:1.7;margin-bottom:20px">A WhatsApp welcome card with your prep guide is on its way. 💬</p>
+    <p style="font-size:.78rem;font-weight:300;color:rgba(47,79,79,.5);line-height:1.7;margin-bottom:20px">A WhatsApp welcome card with your prep guide is on its way. <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
       <a href="https://lovelicare.com/prepare" target="_blank" class="btn-glass btn-glass-primary btn-glass-sm">View Prep Guide →</a>
       <button id="success-close" class="btn-glass btn-glass-sm">Done</button>
@@ -185,12 +185,10 @@
         
         The glass overlay CSS above is already styled to wrap it natively.
       -->
-      <div class="vagaro-iframe-placeholder">
-        <div style="font-size:2.5rem;opacity:.4">📅</div>
-        <p style="font-size:.88rem;font-weight:300;color:rgba(47,79,79,.5)">Vagaro Booking Widget</p>
-        <p style="font-size:.75rem;color:rgba(47,79,79,.35);max-width:320px;line-height:1.6">Replace this placeholder with your Vagaro embed script from your Vagaro Business Dashboard → Booking Widget.</p>
-        <code>src: vagaro.com/lovelicaremd/book-now</code>
-        <a href="https://www.vagaro.com/lovelicaremd/book-now" target="_blank" class="btn-glass btn-glass-primary btn-glass-sm">Open Vagaro Directly ↗</a>
+      <div class="vagaro-iframe-wrap">
+        <div class="vagaro" style="width:100%;padding:0;border:0;margin:0 auto;text-align:center;">
+          <script type="text/javascript" src="https://www.vagaro.com//resources/WidgetEmbeddedLoader/OZqoCpGpC3OcT3qmV35y6RuRFXoSlXYO61Cq7fYO61WO4pUUeJUtjP0dDxkJEvwRapWUgZawifCs7fYJEPwMc9CxkPwOc9gPcXo?v=nBJyqzpTZDKw9yPOouby533oymTvlveFxwbT10YlI1de#"></script>
+        </div>
       </div>
     </div>
   </div>
@@ -208,9 +206,9 @@
   <span class="mobile-nav-item" onclick="navTo('wellness-assistant')" data-nav>Wellness Assistant</span>
   <span class="mobile-nav-item" onclick="navTo('online-store')" data-nav>Shop</span>
   <span class="mobile-nav-item" onclick="navTo('contact')" data-nav>Contact</span>
-  <span class="mobile-nav-item" onclick="navTo('client-login')" data-nav>🔑 Client Portal</span>
+  <span class="mobile-nav-item" onclick="navTo('client-login')" data-nav><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.6 7.6a5.5 5.5 0 11-7.8 7.8 5.5 5.5 0 017.8-7.8zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg> Client Portal</span>
   <div style="margin-top:24px">
-    <button class="vagaro-glass-btn" onclick="openVagaro();document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow=''" style="width:100%;justify-content:center">📅 Book Appointment</button>
+    <button class="vagaro-glass-btn" onclick="openVagaro();document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow=''" style="width:100%;justify-content:center"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Appointment</button>
   </div>
 </div>
 
@@ -233,17 +231,17 @@
           <div class="lc-dropdown-menu" role="menu">
             <span class="lc-dropdown-label">Beauty</span>
             <span class="lc-dropdown-menu" style="display:contents">
-              <span onclick="navTo('medical-aesthetics')" role="menuitem" class="lc-dropdown-menu" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;transition:all .2s;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">💉 Medical Aesthetics</span>
-              <span onclick="navTo('body-contouring')" role="menuitem" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;transition:all .2s;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">✨ Body Contouring</span>
+              <span onclick="navTo('medical-aesthetics')" role="menuitem" class="lc-dropdown-menu" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;transition:all .2s;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg> Medical Aesthetics</span>
+              <span onclick="navTo('body-contouring')" role="menuitem" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;transition:all .2s;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg> Body Contouring</span>
             </span>
             <div class="lc-dropdown-divider"></div>
             <span class="lc-dropdown-label">Wellness</span>
-            <span onclick="navTo('weight-management')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">⚖️ Weight Management</span>
-            <span onclick="navTo('nutrition-counseling')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">🥗 Nutrition Counseling</span>
-            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">💧 IV Therapy</span>
+            <span onclick="navTo('weight-management')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg> Weight Management</span>
+            <span onclick="navTo('nutrition-counseling')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg> Nutrition Counseling</span>
+            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg> IV Therapy</span>
             <div class="lc-dropdown-divider"></div>
             <span class="lc-dropdown-label">Medical</span>
-            <span onclick="navTo('non-emergent-care')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">🏥 MMCC & Physicals</span>
+            <span onclick="navTo('non-emergent-care')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg> MMCC & Physicals</span>
           </div>
         </li>
 
@@ -251,15 +249,15 @@
           <button role="menuitem" aria-haspopup="true">IV Therapy ▾</button>
           <div class="lc-dropdown-menu" role="menu">
             <span class="lc-dropdown-label">Drip Menus</span>
-            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">✨ Build Your Glow</span>
-            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">⚡ Fat Burn & Energy</span>
-            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">🛡 Immunity Fortress</span>
+            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg> Build Your Glow</span>
+            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Fat Burn & Energy</span>
+            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Immunity Fortress</span>
             <div class="lc-dropdown-divider"></div>
-            <span onclick="navTo('vitamin-cheat-sheet')" style="display:block;padding:9px 14px;font-size:.78rem;color:#C9A96E;border-radius:8px;cursor:pointer;font-weight:500" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''">📊 Vitamin Cheat Sheet →</span>
+            <span onclick="navTo('vitamin-cheat-sheet')" style="display:block;padding:9px 14px;font-size:.78rem;color:#C9A96E;border-radius:8px;cursor:pointer;font-weight:500" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="2" width="4" height="18" rx="1"/></svg> Vitamin Cheat Sheet →</span>
           </div>
         </li>
 
-        <li role="none"><button role="menuitem" onclick="navTo('wellness-assistant')">💬 Assistant</button></li>
+        <li role="none"><button role="menuitem" onclick="navTo('wellness-assistant')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> Assistant</button></li>
         <li role="none"><button role="menuitem" onclick="navTo('online-store')">Shop</button></li>
         <li role="none"><button role="menuitem" onclick="navTo('contact')">Contact</button></li>
         <li role="none"><button role="menuitem" onclick="navTo('sitemap')" style="font-size:.65rem;opacity:.55">Map</button></li>
@@ -306,9 +304,9 @@
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px">
             <!-- PART 3: Native Vagaro glass button -->
             <button class="vagaro-glass-btn btn-glass-xl" onclick="openVagaro()" style="font-size:.78rem">
-              📅 Book Appointment
+              <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Appointment
             </button>
-            <button onclick="navTo('wellness-assistant')" class="btn-glass btn-glass-lg">💬 Wellness Assistant</button>
+            <button onclick="navTo('wellness-assistant')" class="btn-glass btn-glass-lg"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> Wellness Assistant</button>
           </div>
           <!-- Trust strip -->
           <div class="trust-glass-strip lc-reveal delay-3">
@@ -319,18 +317,55 @@
           </div>
         </div>
 
-        <!-- Right: floating glass info panels -->
+        <!-- Right: Owner portrait with decorative glass frame -->
         <div style="display:flex;flex-direction:column;gap:16px" class="lc-reveal delay-2">
-          <!-- AI ASSET: Firefly "Med-Spa of the Future" hero visual -->
-          <!-- FIREFLY PROMPT: "Macro shot, high-end skincare serum on glass surface, morning caustic light, ultra-minimalist, 8K. Med spa luxury." -->
-          <!-- Replace with: <img src="./assets/img/hero-macro.jpg" style="width:100%;border-radius:24px;box-shadow:var(--glass-shadow-elevated)"/> -->
-          <div style="background:linear-gradient(135deg,rgba(201,169,110,.12) 0%,rgba(247,231,206,.25) 50%,rgba(255,255,255,.3) 100%);backdrop-filter:blur(25px) saturate(160%);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 0 20px rgba(255,255,255,.2),0 10px 30px rgba(0,0,0,.05);border-radius:24px;padding:48px;text-align:center;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
-            <div style="font-size:3.5rem;filter:drop-shadow(0 4px 8px rgba(201,169,110,.3))">🌸</div>
-            <div style="font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.2rem;color:#2F4F4F">Your Clinical Oasis</div>
-            <p style="font-size:.78rem;font-weight:300;color:rgba(47,79,79,.5);line-height:1.65;max-width:280px">Suite 304 · 100 E Pennsylvania Ave · Where science meets serenity</p>
-            <!-- AI prompt badge -->
-            <div class="ai-prompt-banner" style="background:rgba(255,200,100,.15);border:1px dashed rgba(255,180,50,.4);border-radius:8px;padding:8px 12px;font-size:.62rem;color:rgba(150,100,0,.7);margin-top:8px">
-              📸 FIREFLY ASSET: "Macro skincare, glass surface, morning caustic light, 8K"
+
+          <!-- Owner Portrait Card -->
+          <div class="owner-portrait-frame">
+            <!-- Decorative botanical SVG illustrations -->
+            <svg class="owner-decor owner-decor-top-left" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 110 Q10 60 40 40 Q20 80 10 110Z" fill="rgba(201,169,110,.12)" stroke="rgba(201,169,110,.3)" stroke-width=".5"/>
+              <path d="M15 105 Q18 65 45 48 Q25 78 15 105Z" fill="rgba(201,169,110,.08)"/>
+              <path d="M5 115 Q15 50 55 30 Q30 70 5 115Z" fill="none" stroke="rgba(201,169,110,.2)" stroke-width=".5"/>
+              <circle cx="48" cy="32" r="3" fill="rgba(201,169,110,.2)"/>
+              <circle cx="55" cy="25" r="2" fill="rgba(201,169,110,.15)"/>
+              <path d="M40 45 Q50 20 65 15" fill="none" stroke="rgba(201,169,110,.15)" stroke-width=".5" stroke-dasharray="2 3"/>
+            </svg>
+            <svg class="owner-decor owner-decor-top-right" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M110 110 Q110 60 80 40 Q100 80 110 110Z" fill="rgba(201,169,110,.12)" stroke="rgba(201,169,110,.3)" stroke-width=".5"/>
+              <path d="M105 105 Q102 65 75 48 Q95 78 105 105Z" fill="rgba(201,169,110,.08)"/>
+              <circle cx="72" cy="32" r="3" fill="rgba(201,169,110,.2)"/>
+              <circle cx="65" cy="25" r="2" fill="rgba(201,169,110,.15)"/>
+              <path d="M80 45 Q70 20 55 15" fill="none" stroke="rgba(201,169,110,.15)" stroke-width=".5" stroke-dasharray="2 3"/>
+            </svg>
+            <svg class="owner-decor owner-decor-bottom" viewBox="0 0 300 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 50 Q60 20 100 35 Q140 5 180 30 Q220 10 260 40 Q280 25 295 45" fill="none" stroke="rgba(201,169,110,.2)" stroke-width=".7"/>
+              <path d="M30 48 Q70 25 110 38 Q150 10 190 32" fill="none" stroke="rgba(201,169,110,.12)" stroke-width=".5"/>
+              <circle cx="100" cy="33" r="2.5" fill="rgba(201,169,110,.18)"/>
+              <circle cx="180" cy="28" r="2" fill="rgba(201,169,110,.15)"/>
+              <circle cx="260" cy="38" r="1.8" fill="rgba(201,169,110,.12)"/>
+            </svg>
+
+            <!-- Gold corner accents -->
+            <div class="owner-corner owner-corner-tl"></div>
+            <div class="owner-corner owner-corner-tr"></div>
+            <div class="owner-corner owner-corner-bl"></div>
+            <div class="owner-corner owner-corner-br"></div>
+
+            <!-- Photo container with glass overlay -->
+            <div class="owner-photo-container">
+              <img src="./assets/img/owner-portrait.png" alt="LoveLi Care Med Spa Owner — Board-Certified NP-CRNP" class="owner-photo"/>
+              <!-- Glass shine overlay -->
+              <div class="owner-photo-shine"></div>
+            </div>
+
+            <!-- Name plate with glass styling -->
+            <div class="owner-nameplate">
+              <div class="owner-nameplate-inner">
+                <div style="font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#C9A96E;margin-bottom:2px">Founder & Clinical Director</div>
+                <div style="font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.2rem;color:#2F4F4F;line-height:1.3">Libra T. Robertson</div>
+                <div style="font-size:.68rem;font-weight:300;color:rgba(47,79,79,.5);margin-top:4px;letter-spacing:.02em">NP-CRNP · Board Certified · Towson, MD</div>
+              </div>
             </div>
           </div>
 
@@ -351,7 +386,7 @@
   <!-- Free Meal Plan Banner -->
   <div style="background:linear-gradient(135deg,rgba(201,169,110,.75) 0%,rgba(201,169,110,.55) 100%);backdrop-filter:blur(20px) saturate(160%);border-top:1px solid rgba(255,255,255,.4);border-bottom:1px solid rgba(255,255,255,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.5);padding:18px 0">
     <div class="lc-container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:3px">🎁 Free Download</div><p style="font-family:'Cormorant',Georgia,serif;font-size:1.1rem;color:white;font-weight:400">Get Your Complimentary 12-Day Weight Loss Meal Plan</p></div>
+      <div><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:3px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg> Free Download</div><p style="font-family:'Cormorant',Georgia,serif;font-size:1.1rem;color:white;font-weight:400">Get Your Complimentary 12-Day Weight Loss Meal Plan</p></div>
       <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass" style="background:rgba(255,255,255,.4);color:#2F4F4F;flex-shrink:0">Get Free Plan ↗</a>
     </div>
   </div>
@@ -390,40 +425,40 @@
       <div class="grid-3" style="gap:16px">
         <!-- FIREFLY ICON PROMPTS embedded as AI asset banners -->
         <div class="glass-card lc-service-card lc-reveal" onclick="navTo('medical-aesthetics')">
-          <div class="glass-icon glass-icon-rose"><span class="glass-icon-emoji">💉</span></div>
+          <div class="glass-icon glass-icon-rose"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg></span></div>
           <!-- FIREFLY: "3D glass icon, glowing rose center, frosted glass, Apple visionOS, 8K transparent PNG" -->
           <h3>Medical Aesthetics</h3>
           <p>Natural Botox, fillers, and skin treatments. Clinical artistry guided by a board-certified NP-CRNP.</p>
           <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Medical Aesthetics')">Book ↗</button>
         </div>
         <div class="glass-card lc-service-card lc-reveal delay-1" onclick="navTo('body-contouring')">
-          <div class="glass-icon glass-icon-gold"><span class="glass-icon-emoji">✨</span></div>
+          <div class="glass-icon glass-icon-gold"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></span></div>
           <!-- FIREFLY: "3D glass icon, glowing gold center, frosted glass, body contouring concept, 8K" -->
           <h3>Body Contouring</h3>
           <p>Non-invasive sculpting without surgery. The Snatch Protocol™ — our exclusive 360° transformation system.</p>
           <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Snatch Protocol')">Book ↗</button>
         </div>
         <div class="glass-card lc-service-card lc-reveal delay-2" onclick="navTo('weight-management')">
-          <div class="glass-icon glass-icon-green"><span class="glass-icon-emoji">⚖️</span></div>
+          <div class="glass-icon glass-icon-green"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg></span></div>
           <h3>Weight Management</h3>
           <p>Advanced vitamin therapies, diet modifications, and lifestyle guidance to optimize metabolism and body composition.</p>
           <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Weight Management')">Book ↗</button>
         </div>
         <div class="glass-card lc-service-card lc-reveal delay-1" onclick="navTo('nutrition-counseling')">
-          <div class="glass-icon glass-icon-amber"><span class="glass-icon-emoji">🥗</span></div>
+          <div class="glass-icon glass-icon-amber"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg></span></div>
           <h3>Nutrition Counseling</h3>
           <p>Personalized dietary and lifestyle guidance tailored to your wellness and aesthetic goals.</p>
           <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Nutrition Counseling')">Book ↗</button>
         </div>
         <div class="glass-card lc-service-card lc-reveal delay-2" onclick="navTo('nutritional-wellness')">
-          <div class="glass-icon glass-icon-blue"><span class="glass-icon-emoji">💧</span></div>
+          <div class="glass-icon glass-icon-blue"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg></span></div>
           <!-- FIREFLY: "3D glass icon, glowing blue water droplet center, frosted glass sphere, 8K transparent PNG" -->
           <h3>IV & Nutritional Wellness</h3>
           <p>Custom vitamin infusions to restore energy, brighten skin, and support whole-body wellness.</p>
           <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('IV Therapy')">Book ↗</button>
         </div>
         <div class="glass-card lc-service-card lc-reveal delay-3" onclick="navTo('non-emergent-care')">
-          <div class="glass-icon glass-icon-teal"><span class="glass-icon-emoji">🏥</span></div>
+          <div class="glass-icon glass-icon-teal"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></span></div>
           <h3>Non-Emergent Care</h3>
           <p>MMCC certification, physicals, prescription refills, and doctor's notes — efficient clinical care without the ER wait.</p>
           <button class="btn-glass btn-glass-sm" onclick="event.stopPropagation();openVagaro('Medical Visit')">Book ↗</button>
@@ -441,12 +476,12 @@
           <h2 class="lc-h2 lc-reveal delay-1">Find Your <span class="lc-gold-em">Perfect</span><br>Treatment</h2>
           <p class="lc-lead lc-reveal delay-2" style="margin:20px 0 28px">Answer 3 questions and we'll match you to the exact LoveLi Care service designed for your goals.</p>
           <div class="glass-card lc-reveal delay-2" style="padding:28px">
-            <div style="font-size:1.4rem;margin-bottom:12px">🌿</div>
+            <div style="font-size:1.4rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.8 21.2M17 8c4-1 7.5 2 7 6.5S17 21 12 21c-3 0-5.5-1-7.2-2.5"/><path d="M17 8C17 8 20 4 20 2"/></svg></div>
             <h3 class="lc-h3" style="margin-bottom:8px">Complimentary Consultation</h3>
             <p class="lc-body">Every planner recommendation includes a complimentary clinical consultation with Libra Robertson, NP-CRNP before any treatment begins.</p>
           </div>
           <div class="glass-card lc-reveal delay-3" style="padding:28px;margin-top:16px">
-            <div style="font-size:1.4rem;margin-bottom:12px">💬</div>
+            <div style="font-size:1.4rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
             <h3 class="lc-h3" style="margin-bottom:8px;font-size:1rem">NEW: AI Wellness Assistant</h3>
             <p class="lc-body" style="margin-bottom:16px">Skip the wait — chat with our AI agent before booking.</p>
             <a href="https://lovelicare.com/wellness-chatbox" target="_blank" class="btn-glass btn-glass-primary btn-glass-sm">Launch Assistant ↗</a>
@@ -497,18 +532,18 @@
                 <div class="planner-opt" onclick="this.closest('.planner-opts').querySelectorAll('.planner-opt').forEach(o=>o.classList.remove('sel'));this.classList.add('sel')"><div class="planner-opt-circle"></div>I've had a few treatments before</div>
                 <div class="planner-opt" onclick="this.closest('.planner-opts').querySelectorAll('.planner-opt').forEach(o=>o.classList.remove('sel'));this.classList.add('sel')"><div class="planner-opt-circle"></div>I'm a regular med spa client</div>
               </div>
-              <div class="planner-nav"><button class="btn-glass btn-glass-sm" onclick="plannerBack(3)">← Back</button><button class="btn-glass btn-glass-primary" style="flex:1;justify-content:center" onclick="plannerSubmit()">Get My Match ✨</button></div>
+              <div class="planner-nav"><button class="btn-glass btn-glass-sm" onclick="plannerBack(3)">← Back</button><button class="btn-glass btn-glass-primary" style="flex:1;justify-content:center" onclick="plannerSubmit()">Get My Match <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></button></div>
             </div>
 
             <!-- Result -->
             <div id="planner-result" style="display:none">
               <div class="planner-result">
-                <div style="font-size:2.5rem;margin-bottom:16px">✨</div>
+                <div style="font-size:2.5rem;margin-bottom:16px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div>
                 <div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:8px">Your Perfect Match</div>
                 <div style="font-family:'Cormorant',Georgia,serif;font-size:1.3rem;color:#2F4F4F;margin-bottom:10px" id="planner-rec-label"></div>
                 <p style="font-size:.82rem;font-weight:300;color:rgba(47,79,79,.6);line-height:1.7;margin-bottom:24px" id="planner-rec-desc"></p>
                 <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-                  <button class="btn-glass btn-glass-primary" onclick="plannerBookRec()">📅 Book This Service</button>
+                  <button class="btn-glass btn-glass-primary" onclick="plannerBookRec()"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book This Service</button>
                   <button class="btn-glass btn-glass-sm" onclick="plannerReset()">Start Over</button>
                 </div>
               </div>
@@ -547,7 +582,7 @@
           <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Signature Service · Sculpt</span><span class="lc-eyebrow-line"></span></div>
           <h1 class="lc-h1 lc-reveal delay-1">The Snatch<br><span class="lc-gold-em">Protocol™</span></h1>
           <p class="lc-lead lc-reveal delay-2" style="margin:20px 0 32px">LoveLi Care's proprietary 360° body transformation system. Four evidence-based modalities, sequenced by a licensed NP, producing results that conventional methods cannot replicate.</p>
-          <button class="vagaro-glass-btn lc-reveal delay-3" onclick="openVagaro('Snatch Protocol™')" style="font-size:.76rem;padding:14px 32px">Begin My Protocol 📅</button>
+          <button class="vagaro-glass-btn lc-reveal delay-3" onclick="openVagaro('Snatch Protocol™')" style="font-size:.76rem;padding:14px 32px">Begin My Protocol <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
         </div>
         <!-- Protocol steps -->
         <div class="glass-strong lc-reveal delay-2" style="padding:40px;border-radius:24px">
@@ -559,7 +594,7 @@
       </div>
       <!-- Gear upsell -->
       <div class="glass-gold lc-reveal" style="padding:40px;margin-bottom:40px">
-        <div style="font-size:.54rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C9A96E;margin-bottom:12px">🛍 Snatch Gear™ — Maximize Your Results</div>
+        <div style="font-size:.54rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C9A96E;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg> Snatch Gear™ — Maximize Your Results</div>
         <h3 class="lc-h3" style="margin-bottom:8px">Complete the Protocol Between Sessions</h3>
         <p class="lc-body" style="margin-bottom:24px;max-width:540px">Clients who pair Snatch Protocol™ sessions with a Snatch Belt™ worn daily see compounding, accelerated results. Select your gear:</p>
         <div class="gear-grid" style="max-width:480px;margin-bottom:24px">
@@ -568,7 +603,7 @@
           <div class="gear-opt" onclick="document.querySelectorAll('.gear-opt').forEach(g=>g.classList.remove('sel'));this.classList.add('sel')"><div class="gear-name">Compression Bundle</div><div class="gear-price">$169</div></div>
           <div class="gear-opt" onclick="document.querySelectorAll('.gear-opt').forEach(g=>g.classList.remove('sel'));this.classList.add('sel')"><div class="gear-name">Recovery Kit</div><div class="gear-price">$219</div></div>
         </div>
-        <button class="vagaro-glass-btn" onclick="openVagaro('Snatch Protocol™ + Gear')" style="font-size:.72rem">Add Gear + Begin Protocol 📅</button>
+        <button class="vagaro-glass-btn" onclick="openVagaro('Snatch Protocol™ + Gear')" style="font-size:.72rem">Add Gear + Begin Protocol <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
       </div>
 
       <!-- ── SNATCH PROTOCOL™ PRICING ──────────────────────────────────── -->
@@ -590,7 +625,7 @@
               <li>Lymphatic drainage</li>
               <li>Infrared body wrap</li>
             </ul>
-            <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Snatch Protocol™ — Single Session')">Book Now 📅</button>
+            <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Snatch Protocol™ — Single Session')">Book Now <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
           </div>
           <div class="snatch-pkg-card">
             <div class="snatch-pkg-eyebrow">Most Popular</div>
@@ -603,7 +638,7 @@
               <li>Recommended monthly cadence</li>
               <li>Progress tracking included</li>
             </ul>
-            <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Snatch Protocol™ — 3-Session Pack')">Book 3-Pack 📅</button>
+            <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Snatch Protocol™ — 3-Session Pack')">Book 3-Pack <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
           </div>
           <div class="snatch-pkg-card snatch-pkg-featured">
             <div class="snatch-pkg-badge-top">Best Value ✦</div>
@@ -618,7 +653,7 @@
               <li>Snatch Belt™ Classic included</li>
               <li>Priority scheduling</li>
             </ul>
-            <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Snatch Protocol™ — 6-Session Pack')">Book 6-Pack 📅</button>
+            <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Snatch Protocol™ — 6-Session Pack')">Book 6-Pack <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
           </div>
           <div class="snatch-pkg-card snatch-pkg-elite">
             <div class="snatch-pkg-eyebrow">VIP Experience</div>
@@ -633,7 +668,7 @@
               <li>Add-on upgrades at 20% off</li>
               <li>Personalized nutrition guide</li>
             </ul>
-            <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Elite Protocol™ — 12-Session VIP')">Book Elite 📅</button>
+            <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Elite Protocol™ — 12-Session VIP')">Book Elite <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
           </div>
         </div>
         <!-- Add-ons -->
@@ -641,12 +676,12 @@
           <h3 class="lc-h3" style="margin-bottom:6px;text-align:center">Enhance Your <span class="lc-gold-em">Session</span></h3>
           <p class="lc-body" style="text-align:center;margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto;font-size:.9rem">Add any targeted upgrade to any session for amplified results.</p>
           <div class="snatch-addons-grid">
-            <div class="snatch-addon"><span class="snatch-addon-icon">💧</span><span class="snatch-addon-name">Extended Lymphatic Drainage</span><span class="snatch-addon-price">+$49</span></div>
-            <div class="snatch-addon"><span class="snatch-addon-icon">🌡️</span><span class="snatch-addon-name">Infrared Wrap Upgrade (60 min)</span><span class="snatch-addon-price">+$39</span></div>
-            <div class="snatch-addon"><span class="snatch-addon-icon">🌿</span><span class="snatch-addon-name">Detox Body Wrap</span><span class="snatch-addon-price">+$59</span></div>
-            <div class="snatch-addon"><span class="snatch-addon-icon">⚡</span><span class="snatch-addon-name">EMS Muscle Toning</span><span class="snatch-addon-price">+$69</span></div>
-            <div class="snatch-addon"><span class="snatch-addon-icon">💊</span><span class="snatch-addon-name">IV Recovery Infusion</span><span class="snatch-addon-price">+$129</span></div>
-            <div class="snatch-addon"><span class="snatch-addon-icon">🧴</span><span class="snatch-addon-name">Contouring Cream Application</span><span class="snatch-addon-price">+$29</span></div>
+            <div class="snatch-addon"><span class="snatch-addon-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg></span><span class="snatch-addon-name">Extended Lymphatic Drainage</span><span class="snatch-addon-price">+$49</span></div>
+            <div class="snatch-addon"><span class="snatch-addon-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V3a2 2 0 00-4 0v11.8a4 4 0 104 0z"/></svg></span><span class="snatch-addon-name">Infrared Wrap Upgrade (60 min)</span><span class="snatch-addon-price">+$39</span></div>
+            <div class="snatch-addon"><span class="snatch-addon-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.8 21.2M17 8c4-1 7.5 2 7 6.5S17 21 12 21c-3 0-5.5-1-7.2-2.5"/><path d="M17 8C17 8 20 4 20 2"/></svg></span><span class="snatch-addon-name">Detox Body Wrap</span><span class="snatch-addon-price">+$59</span></div>
+            <div class="snatch-addon"><span class="snatch-addon-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><span class="snatch-addon-name">EMS Muscle Toning</span><span class="snatch-addon-price">+$69</span></div>
+            <div class="snatch-addon"><span class="snatch-addon-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4.5" width="15" height="15" rx="7.5" transform="rotate(45 12 12)"/><path d="M8.5 8.5l7 7"/></svg></span><span class="snatch-addon-name">IV Recovery Infusion</span><span class="snatch-addon-price">+$129</span></div>
+            <div class="snatch-addon"><span class="snatch-addon-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="8" width="10" height="13" rx="2"/><path d="M10 8V5a2 2 0 012-2v0a2 2 0 012 2v3M7 13h10"/></svg></span><span class="snatch-addon-name">Contouring Cream Application</span><span class="snatch-addon-price">+$29</span></div>
           </div>
         </div>
         <p class="lc-reveal delay-3" style="text-align:center;margin-top:14px;font-size:.75rem;color:var(--muted);letter-spacing:.04em">*Inch loss visible at completion of 6-session protocol. Results vary by individual body composition.</p>
@@ -700,29 +735,29 @@
       <p class="lc-lead lc-reveal delay-2" style="margin-bottom:48px">Natural results that refresh your look without changing who you are. Clinical artistry guided by Libra Robertson, NP-CRNP.</p>
       <div class="col-2" style="margin-bottom:48px">
         <div class="glass-card lc-reveal" style="padding:36px">
-          <div class="glass-icon glass-icon-rose" style="margin-bottom:20px"><span class="glass-icon-emoji">💉</span></div>
+          <div class="glass-icon glass-icon-rose" style="margin-bottom:20px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg></span></div>
           <h3 class="lc-h3" style="margin-bottom:12px">Botox & Neuromodulators</h3>
           <p class="lc-body" style="margin-bottom:20px">Soften fine lines and prevent deeper wrinkles with expertly placed neurotoxin treatments that prioritize natural-looking results.</p>
           <ul class="lc-check" style="margin-bottom:24px">
             <li>Botox® — FDA-approved neuromodulator</li><li>Dysport — Fast-acting natural movement</li><li>Preventative Botox treatment</li><li>Brow lift without surgery</li><li>Jaw slimming (masseter)</li><li>Hyperhidrosis treatment</li>
           </ul>
-          <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Natural Botox')">Book Botox 📅</button>
+          <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Natural Botox')">Book Botox <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
         </div>
         <div class="glass-card lc-reveal delay-1" style="padding:36px">
-          <div class="glass-icon glass-icon-rose" style="margin-bottom:20px"><span class="glass-icon-emoji">🌸</span></div>
+          <div class="glass-icon glass-icon-rose" style="margin-bottom:20px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2a4 4 0 010 6 4 4 0 010-6zM12 16a4 4 0 010 6 4 4 0 010-6zM2 12a4 4 0 016 0 4 4 0 01-6 0zM16 12a4 4 0 016 0 4 4 0 01-6 0z"/></svg></span></div>
           <h3 class="lc-h3" style="margin-bottom:12px">Dermal Fillers</h3>
           <p class="lc-body" style="margin-bottom:20px">Restore volume, plump lips, and sculpt youthful contours with hyaluronic acid-based fillers precisely mapped to your anatomy.</p>
           <ul class="lc-check" style="margin-bottom:24px">
             <li>Lip enhancement — natural volume</li><li>Cheek augmentation & midface lift</li><li>Jawline definition</li><li>Under-eye hollows (tear trough)</li><li>Nasolabial fold softening</li><li>Non-surgical rhinoplasty</li>
           </ul>
-          <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Dermal Fillers')">Book Fillers 📅</button>
+          <button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('Dermal Fillers')">Book Fillers <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
         </div>
       </div>
       <h2 class="lc-h2 lc-reveal" style="text-align:center;margin-bottom:32px;font-size:1.8rem">Skin <span class="lc-gold-em">Treatments</span></h2>
       <div class="grid-3">
-        <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-blue" style="margin-bottom:16px"><span class="glass-icon-emoji">🌊</span></div><h3 class="lc-h3" style="margin-bottom:8px">HydraFacial MD</h3><p class="lc-body" style="margin-bottom:16px">Multi-step resurfacing: cleanse, exfoliate, extract, and hydrate. Immediate luminous glow with zero downtime.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('HydraFacial')">Book ↗</button></div>
-        <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-gold" style="margin-bottom:16px"><span class="glass-icon-emoji">🔬</span></div><h3 class="lc-h3" style="margin-bottom:8px">Microneedling</h3><p class="lc-body" style="margin-bottom:16px">Collagen induction therapy. Reduces scars, pores, and improves texture and tone through the skin's natural repair.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Microneedling')">Book ↗</button></div>
-        <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji">✨</span></div><h3 class="lc-h3" style="margin-bottom:8px">Chemical Peels</h3><p class="lc-body" style="margin-bottom:16px">Medical-grade exfoliation customized for your skin type. Address hyperpigmentation, acne, and uneven tone.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Chemical Peel')">Book ↗</button></div>
+        <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-blue" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0 4 3 6 0"/><path d="M2 17c2-3 4-3 6 0s4 3 6 0 4-3 6 0 4 3 6 0"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">HydraFacial MD</h3><p class="lc-body" style="margin-bottom:16px">Multi-step resurfacing: cleanse, exfoliate, extract, and hydrate. Immediate luminous glow with zero downtime.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('HydraFacial')">Book ↗</button></div>
+        <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-gold" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4"/><path d="M12 13v4M8 21h8M12 17a5 5 0 005-5"/><path d="M9 5l-2-2M15 5l2-2"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Microneedling</h3><p class="lc-body" style="margin-bottom:16px">Collagen induction therapy. Reduces scars, pores, and improves texture and tone through the skin's natural repair.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Microneedling')">Book ↗</button></div>
+        <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Chemical Peels</h3><p class="lc-body" style="margin-bottom:16px">Medical-grade exfoliation customized for your skin type. Address hyperpigmentation, acne, and uneven tone.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Chemical Peel')">Book ↗</button></div>
       </div>
 
       <!-- ── MEDICAL AESTHETICS BEFORE / AFTER ─────────────────────────── -->
@@ -772,17 +807,17 @@
       <h1 class="lc-h1 lc-reveal delay-1">IV & Nutritional <span class="lc-gold-em">Wellness</span></h1>
       <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 48px;max-width:580px">Give your body the vitamins, minerals, and nutrients it needs to feel refreshed, energized, and balanced. Each treatment is tailored just for you.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px" class="lc-reveal delay-3">
-        <button class="vagaro-glass-btn" onclick="openVagaro('IV Therapy')">📅 Book IV Session</button>
-        <button onclick="navTo('vitamin-cheat-sheet')" class="btn-glass btn-glass-lg">📊 Vitamin Cheat Sheet →</button>
+        <button class="vagaro-glass-btn" onclick="openVagaro('IV Therapy')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book IV Session</button>
+        <button onclick="navTo('vitamin-cheat-sheet')" class="btn-glass btn-glass-lg"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="2" width="4" height="18" rx="1"/></svg> Vitamin Cheat Sheet →</button>
       </div>
       <!-- Benefits -->
       <div class="grid-3" style="margin-bottom:56px">
-        <div class="glass-card lc-reveal" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">⚡</div><h3 class="lc-h3" style="margin-bottom:8px">Boosts Energy</h3><p class="lc-body">Fights fatigue by replenishing B vitamins, CoQ10, and minerals depleted by stress and daily life.</p></div>
-        <div class="glass-card lc-reveal delay-1" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">✨</div><h3 class="lc-h3" style="margin-bottom:8px">Brighter Skin</h3><p class="lc-body">Glutathione, Vitamin C, and Biotin replenish your natural brightening and collagen-building capacity.</p></div>
-        <div class="glass-card lc-reveal delay-2" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">🛡️</div><h3 class="lc-h3" style="margin-bottom:8px">Strengthens Immunity</h3><p class="lc-body">High-dose Vitamin C, Zinc, Selenium, and Vitamin D fortify your immune defenses.</p></div>
-        <div class="glass-card lc-reveal delay-1" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">🧠</div><h3 class="lc-h3" style="margin-bottom:8px">Mood & Clarity</h3><p class="lc-body">Magnesium, B6, Taurine, and Glycine support neurotransmitters for mood, sleep, and focus.</p></div>
-        <div class="glass-card lc-reveal delay-2" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">⚖️</div><h3 class="lc-h3" style="margin-bottom:8px">Weight Support</h3><p class="lc-body">MIC, Carnitine, B12 work together to optimize fat burning and improve body composition.</p></div>
-        <div class="glass-card lc-reveal delay-3" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px">🌿</div><h3 class="lc-h3" style="margin-bottom:8px">Gut Health</h3><p class="lc-body">Glutamine, Glycine, and Proline restore gut barrier integrity and improve nutrient absorption.</p></div>
+        <div class="glass-card lc-reveal" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h3 class="lc-h3" style="margin-bottom:8px">Boosts Energy</h3><p class="lc-body">Fights fatigue by replenishing B vitamins, CoQ10, and minerals depleted by stress and daily life.</p></div>
+        <div class="glass-card lc-reveal delay-1" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div><h3 class="lc-h3" style="margin-bottom:8px">Brighter Skin</h3><p class="lc-body">Glutathione, Vitamin C, and Biotin replenish your natural brightening and collagen-building capacity.</p></div>
+        <div class="glass-card lc-reveal delay-2" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 class="lc-h3" style="margin-bottom:8px">Strengthens Immunity</h3><p class="lc-body">High-dose Vitamin C, Zinc, Selenium, and Vitamin D fortify your immune defenses.</p></div>
+        <div class="glass-card lc-reveal delay-1" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 00-7 7c0 2.4 1.2 4.5 3 5.7V22h8v-7.3c1.8-1.2 3-3.3 3-5.7a7 7 0 00-7-7z"/><path d="M9 12h6M12 9v6"/></svg></div><h3 class="lc-h3" style="margin-bottom:8px">Mood & Clarity</h3><p class="lc-body">Magnesium, B6, Taurine, and Glycine support neurotransmitters for mood, sleep, and focus.</p></div>
+        <div class="glass-card lc-reveal delay-2" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg></div><h3 class="lc-h3" style="margin-bottom:8px">Weight Support</h3><p class="lc-body">MIC, Carnitine, B12 work together to optimize fat burning and improve body composition.</p></div>
+        <div class="glass-card lc-reveal delay-3" style="padding:28px;text-align:center"><div style="font-size:2.2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.8 21.2M17 8c4-1 7.5 2 7 6.5S17 21 12 21c-3 0-5.5-1-7.2-2.5"/><path d="M17 8C17 8 20 4 20 2"/></svg></div><h3 class="lc-h3" style="margin-bottom:8px">Gut Health</h3><p class="lc-body">Glutamine, Glycine, and Proline restore gut barrier integrity and improve nutrient absorption.</p></div>
       </div>
     </div>
   </div>
@@ -800,7 +835,7 @@
       <button onclick="navTo('nutritional-wellness')" class="btn-glass btn-glass-primary lc-reveal delay-3" style="margin-bottom:56px">Browse IV Therapy Menus →</button>
 
       <div class="vc-section lc-reveal">
-        <div class="vc-h">✨ Skin, Hair & Nails</div>
+        <div class="vc-h"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg> Skin, Hair & Nails</div>
         <div class="grid-2" style="gap:12px">
           <div class="vc-card"><h4>Biotin (B7)</h4><p>Essential for keratin production. Supports stronger hair and nails. Deficiency causes brittle nails and hair thinning.</p></div>
           <div class="vc-card"><h4>Vitamin C</h4><p>Required for collagen synthesis. Helps skin elasticity and wound healing. Antioxidant protecting against UV damage.</p></div>
@@ -813,7 +848,7 @@
       <div class="lc-divider"></div>
 
       <div class="vc-section lc-reveal">
-        <div class="vc-h">🧠 Stress, Mood, Sleep & Focus</div>
+        <div class="vc-h"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 00-7 7c0 2.4 1.2 4.5 3 5.7V22h8v-7.3c1.8-1.2 3-3.3 3-5.7a7 7 0 00-7-7z"/><path d="M9 12h6M12 9v6"/></svg> Stress, Mood, Sleep & Focus</div>
         <div class="grid-2" style="gap:12px">
           <div class="vc-card"><h4>Magnesium</h4><p>Calms nervous system via GABA receptors. Deficiency linked to anxiety, irritability, and sleep problems. Supports melatonin.</p></div>
           <div class="vc-card"><h4>Vitamin B6 (Pyridoxine)</h4><p>Produces serotonin, dopamine, and GABA. Supports mood stability and stress resilience.</p></div>
@@ -826,7 +861,7 @@
       <div class="lc-divider"></div>
 
       <div class="vc-section lc-reveal">
-        <div class="vc-h">⚡ Fat Burn, Energy & Metabolism</div>
+        <div class="vc-h"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Fat Burn, Energy & Metabolism</div>
         <div class="grid-2" style="gap:12px">
           <div class="vc-card"><h4>M.I.C. (Methionine, Inositol, Choline)</h4><p>Classic lipotropic combo that helps mobilize and metabolize fat in the liver.</p></div>
           <div class="vc-card"><h4>L-Carnitine</h4><p>Shuttles fatty acids into mitochondria so the body can actually burn fat for energy.</p></div>
@@ -839,7 +874,7 @@
       <div class="lc-divider"></div>
 
       <div class="vc-section lc-reveal">
-        <div class="vc-h">🛡️ Detox & Immunity</div>
+        <div class="vc-h"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Detox & Immunity</div>
         <div class="grid-2" style="gap:12px">
           <div class="vc-card"><h4>Glutathione (Master Antioxidant)</h4><p>Neutralizes toxins, critical for liver detox Phase II. Protects immune cells and enhances their ability to fight pathogens.</p></div>
           <div class="vc-card"><h4>NAC (N-Acetylcysteine)</h4><p>Precursor to glutathione — replenishes liver detox reserves. Excellent for long-term liver protection.</p></div>
@@ -850,7 +885,7 @@
       </div>
 
       <div style="text-align:center;margin-top:40px">
-        <button class="vagaro-glass-btn" onclick="openVagaro('IV Therapy')" style="font-size:.78rem">📅 Book Your Custom IV Protocol</button>
+        <button class="vagaro-glass-btn" onclick="openVagaro('IV Therapy')" style="font-size:.78rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Your Custom IV Protocol</button>
       </div>
     </div>
   </div>
@@ -866,13 +901,13 @@
     <h1 class="lc-h1 lc-reveal delay-1">Weight <span class="lc-gold-em">Management</span></h1>
     <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 40px">Advanced wellness therapies — vitamin injections, diet modifications, and lifestyle recommendations to optimize metabolism, energy, and body composition.</p>
     <div class="grid-3" style="margin-bottom:40px">
-      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-green" style="margin-bottom:16px"><span class="glass-icon-emoji">💉</span></div><h3 class="lc-h3" style="margin-bottom:8px">Vitamin Injections</h3><p class="lc-body">B12, MIC lipotropic blends to mobilize fat and boost cellular energy production.</p></div>
-      <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji">🥗</span></div><h3 class="lc-h3" style="margin-bottom:8px">Diet Modification</h3><p class="lc-body">Clinically-informed dietary guidance tailored to your metabolic type. Includes our free 12-Day Meal Plan.</p></div>
-      <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-gold" style="margin-bottom:16px"><span class="glass-icon-emoji">🏃</span></div><h3 class="lc-h3" style="margin-bottom:8px">Lifestyle Integration</h3><p class="lc-body">Practical recommendations that complement clinical treatments for lasting results beyond the clinic.</p></div>
+      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-green" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Vitamin Injections</h3><p class="lc-body">B12, MIC lipotropic blends to mobilize fat and boost cellular energy production.</p></div>
+      <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Diet Modification</h3><p class="lc-body">Clinically-informed dietary guidance tailored to your metabolic type. Includes our free 12-Day Meal Plan.</p></div>
+      <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-gold" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="M7 21l3-7 3 2 4-5M16 11l-4 5-3-2-3 7"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Lifestyle Integration</h3><p class="lc-body">Practical recommendations that complement clinical treatments for lasting results beyond the clinic.</p></div>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <button class="vagaro-glass-btn" onclick="openVagaro('Weight Management')">📅 Book Consult</button>
-      <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass btn-glass-primary">🎁 Free 12-Day Meal Plan ↗</a>
+      <button class="vagaro-glass-btn" onclick="openVagaro('Weight Management')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Consult</button>
+      <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass btn-glass-primary"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg> Free 12-Day Meal Plan ↗</a>
     </div>
   </div></div>
 </div>
@@ -887,8 +922,8 @@
       <ul class="lc-check"><li>Comprehensive dietary assessment and analysis</li><li>Personalized meal planning and food selection guidance</li><li>Anti-inflammatory eating plans for skin and body health</li><li>Nutrient optimization for aesthetic treatment outcomes</li><li>Metabolic health and hormonal balance through nutrition</li><li>Ongoing support and plan adjustments as you progress</li></ul>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <button class="vagaro-glass-btn" onclick="openVagaro('Nutrition Counseling')">📅 Book Consult</button>
-      <button onclick="navTo('vitamin-cheat-sheet')" class="btn-glass">📊 Vitamin Guide →</button>
+      <button class="vagaro-glass-btn" onclick="openVagaro('Nutrition Counseling')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Consult</button>
+      <button onclick="navTo('vitamin-cheat-sheet')" class="btn-glass"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="2" width="4" height="18" rx="1"/></svg> Vitamin Guide →</button>
     </div>
   </div></div>
 </div>
@@ -899,12 +934,12 @@
     <h1 class="lc-h1 lc-reveal delay-1">Non-Emergent <span class="lc-gold-em">Care</span></h1>
     <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 40px">Handle the little things that keep life moving — without long wait times or unnecessary ER visits. Clinical efficiency in a boutique setting.</p>
     <div class="grid-3" style="margin-bottom:40px">
-      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-teal" style="margin-bottom:16px"><span class="glass-icon-emoji">🌿</span></div><h3 class="lc-h3" style="margin-bottom:8px;color:#C9A96E">MMCC Certification</h3><p class="lc-body" style="margin-bottom:16px">Maryland Medical Cannabis certification. Fast, professional, fully compliant evaluations.</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('MMCC Certification')" style="font-size:.65rem">Book MMCC 📅</button></div>
-      <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-blue" style="margin-bottom:16px"><span class="glass-icon-emoji">🔄</span></div><h3 class="lc-h3" style="margin-bottom:8px">MMCC Renewals</h3><p class="lc-body" style="margin-bottom:16px">Annual MMCC card renewals handled efficiently. Bring your current certification.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('MMCC Renewal')">Book ↗</button></div>
-      <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji">🏃</span></div><h3 class="lc-h3" style="margin-bottom:8px">Medical Physicals</h3><p class="lc-body" style="margin-bottom:16px">Pre-employment, sports, school, and DOT physicals with certified documentation.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Physical Exam')">Book ↗</button></div>
-      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-green" style="margin-bottom:16px"><span class="glass-icon-emoji">💊</span></div><h3 class="lc-h3" style="margin-bottom:8px">Medication Refills</h3><p class="lc-body">Bridge prescriptions for established patients needing continuity between primary provider appointments.</p></div>
-      <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-rose" style="margin-bottom:16px"><span class="glass-icon-emoji">📄</span></div><h3 class="lc-h3" style="margin-bottom:8px">Doctor's Notes</h3><p class="lc-body">Medical documentation for school, work, or travel — issued with proper clinical evaluation. No ER required.</p></div>
-      <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-gold" style="margin-bottom:16px"><span class="glass-icon-emoji">📋</span></div><h3 class="lc-h3" style="margin-bottom:8px">Medical Necessity Letters</h3><p class="lc-body">Documentation for treatments, wellness services, insurance, and workplace accommodation requests.</p></div>
+      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-teal" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.8 21.2M17 8c4-1 7.5 2 7 6.5S17 21 12 21c-3 0-5.5-1-7.2-2.5"/><path d="M17 8C17 8 20 4 20 2"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px;color:#C9A96E">MMCC Certification</h3><p class="lc-body" style="margin-bottom:16px">Maryland Medical Cannabis certification. Fast, professional, fully compliant evaluations.</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('MMCC Certification')" style="font-size:.65rem">Book MMCC <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button></div>
+      <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-blue" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9A9 9 0 0120.5 6L23 4M.5 20l2.5-2a9 9 0 0017-3"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">MMCC Renewals</h3><p class="lc-body" style="margin-bottom:16px">Annual MMCC card renewals handled efficiently. Bring your current certification.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('MMCC Renewal')">Book ↗</button></div>
+      <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="M7 21l3-7 3 2 4-5M16 11l-4 5-3-2-3 7"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Medical Physicals</h3><p class="lc-body" style="margin-bottom:16px">Pre-employment, sports, school, and DOT physicals with certified documentation.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Physical Exam')">Book ↗</button></div>
+      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-green" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4.5" width="15" height="15" rx="7.5" transform="rotate(45 12 12)"/><path d="M8.5 8.5l7 7"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Medication Refills</h3><p class="lc-body">Bridge prescriptions for established patients needing continuity between primary provider appointments.</p></div>
+      <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-rose" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Doctor's Notes</h3><p class="lc-body">Medical documentation for school, work, or travel — issued with proper clinical evaluation. No ER required.</p></div>
+      <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-gold" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 2h6v3H9zM9 10h6M9 14h4"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Medical Necessity Letters</h3><p class="lc-body">Documentation for treatments, wellness services, insurance, and workplace accommodation requests.</p></div>
     </div>
   </div></div>
 </div>
@@ -914,11 +949,11 @@
   <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
     <h1 class="lc-h1 lc-reveal" style="margin-bottom:40px">All <span class="lc-gold-em">Services</span></h1>
     <div style="display:flex;flex-direction:column;gap:2px">
-      <div onclick="navTo('medical-aesthetics')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">💉</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Refine</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Medical Aesthetics</h3><p class="lc-body" style="font-size:.78rem">Botox, fillers, HydraFacial, microneedling, and chemical peels.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
-      <div onclick="navTo('body-contouring')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">✨</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Sculpt</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Body Contouring & Snatch Protocol™</h3><p class="lc-body" style="font-size:.78rem">360° non-invasive body transformation system.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
-      <div onclick="navTo('weight-management')" class="glass lc-reveal delay-2" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">⚖️</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Optimize</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Weight Management</h3><p class="lc-body" style="font-size:.78rem">Vitamin injections, dietary modifications, lifestyle planning.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
-      <div onclick="navTo('nutritional-wellness')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">💧</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Restore</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">IV & Nutritional Wellness Therapy</h3><p class="lc-body" style="font-size:.78rem">Custom vitamin and mineral infusions for whole-body wellness.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
-      <div onclick="navTo('non-emergent-care')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem">🏥</div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Concierge Medical</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Non-Emergent Care, MMCC & Physicals</h3><p class="lc-body" style="font-size:.78rem">MMCC certification, physicals, refills, doctor's notes.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('medical-aesthetics')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Refine</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Medical Aesthetics</h3><p class="lc-body" style="font-size:.78rem">Botox, fillers, HydraFacial, microneedling, and chemical peels.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('body-contouring')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Sculpt</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Body Contouring & Snatch Protocol™</h3><p class="lc-body" style="font-size:.78rem">360° non-invasive body transformation system.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('weight-management')" class="glass lc-reveal delay-2" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Optimize</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Weight Management</h3><p class="lc-body" style="font-size:.78rem">Vitamin injections, dietary modifications, lifestyle planning.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('nutritional-wellness')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Restore</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">IV & Nutritional Wellness Therapy</h3><p class="lc-body" style="font-size:.78rem">Custom vitamin and mineral infusions for whole-body wellness.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('non-emergent-care')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Concierge Medical</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Non-Emergent Care, MMCC & Physicals</h3><p class="lc-body" style="font-size:.78rem">MMCC certification, physicals, refills, doctor's notes.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
     </div>
   </div></div>
 </div>
@@ -930,10 +965,10 @@
       <div>
         <div class="glass-card lc-reveal" style="padding:36px;margin-bottom:16px">
           <div style="display:flex;flex-direction:column;gap:20px">
-            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0">📍</div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Address</div><p class="lc-body">100 East Pennsylvania Avenue<br>Towson, MD · Suite 304</p><a href="https://maps.google.com/?q=100+East+Pennsylvania+Avenue+Towson+MD" target="_blank" class="btn-glass btn-glass-sm" style="margin-top:10px;display:inline-flex">Get Directions ↗</a></div></div>
-            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0">📞</div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Phone & Text</div><p class="lc-body">Office: <a href="tel:4106165451" style="color:#C9A96E;text-decoration:none">410-616-5451</a><br>Text: <a href="tel:4436782254" style="color:#C9A96E;text-decoration:none">443-678-2254</a></p></div></div>
-            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0">✉️</div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Email</div><a href="mailto:LoveLiCareSvcs@gmail.com" style="color:#C9A96E;text-decoration:none;font-size:.88rem">LoveLiCareSvcs@gmail.com</a></div></div>
-            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0">🕐</div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Hours</div><p class="lc-body">By Appointment · Closed Major Holidays</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro()" style="margin-top:10px;font-size:.65rem">Book Online 📅</button></div></div>
+            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Address</div><p class="lc-body">100 East Pennsylvania Avenue<br>Towson, MD · Suite 304</p><a href="https://maps.google.com/?q=100+East+Pennsylvania+Avenue+Towson+MD" target="_blank" class="btn-glass btn-glass-sm" style="margin-top:10px;display:inline-flex">Get Directions ↗</a></div></div>
+            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7 12.8 12.8 0 00.7 2.8 2 2 0 01-.4 2.1L8 10a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4 12.8 12.8 0 002.8.7A2 2 0 0122 17z"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Phone & Text</div><p class="lc-body">Office: <a href="tel:4106165451" style="color:#C9A96E;text-decoration:none">410-616-5451</a><br>Text: <a href="tel:4436782254" style="color:#C9A96E;text-decoration:none">443-678-2254</a></p></div></div>
+            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Email</div><a href="mailto:LoveLiCareSvcs@gmail.com" style="color:#C9A96E;text-decoration:none;font-size:.88rem">LoveLiCareSvcs@gmail.com</a></div></div>
+            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Hours</div><p class="lc-body">By Appointment · Closed Major Holidays</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro()" style="margin-top:10px;font-size:.65rem">Book Online <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button></div></div>
           </div>
         </div>
         <div style="display:flex;gap:10px">
@@ -975,14 +1010,14 @@
     <h1 class="lc-h1 lc-reveal delay-1">Wellness <span class="lc-gold-em">Assistant</span></h1>
     <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 40px">Skip the wait. Our AI wellness agent can help you learn about treatments, find the right protocol for your goals, and get quick answers before booking.</p>
     <div class="glass-gold lc-reveal" style="padding:56px;text-align:center;margin-bottom:40px;border-radius:28px">
-      <div style="font-size:3.5rem;margin-bottom:20px">💬</div>
+      <div style="font-size:3.5rem;margin-bottom:20px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
       <h2 class="lc-h2" style="font-size:1.8rem;margin-bottom:12px">Chat with LoveLi Wellness AI</h2>
       <p class="lc-body" style="max-width:440px;margin:0 auto 28px">Available 24/7. Learn about treatments, compare options, and get personalized guidance — all before you book.</p>
-      <a href="https://lovelicare.com/wellness-chatbox" target="_blank" class="vagaro-glass-btn" style="font-size:.78rem;display:inline-flex">💬 Launch Wellness Assistant ↗</a>
+      <a href="https://lovelicare.com/wellness-chatbox" target="_blank" class="vagaro-glass-btn" style="font-size:.78rem;display:inline-flex"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> Launch Wellness Assistant ↗</a>
     </div>
     <div class="grid-2">
-      <div class="glass-card lc-reveal" style="padding:28px"><h3 class="lc-h3" style="margin-bottom:8px">🔬 Treatment Info</h3><p class="lc-body">Learn about any service — from Botox to IV therapy to MMCC — before deciding to book.</p></div>
-      <div class="glass-card lc-reveal delay-1" style="padding:28px"><h3 class="lc-h3" style="margin-bottom:8px">🎯 Find Your Protocol</h3><p class="lc-body">Describe your goals and the Assistant matches you with the most appropriate LoveLi services.</p></div>
+      <div class="glass-card lc-reveal" style="padding:28px"><h3 class="lc-h3" style="margin-bottom:8px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4"/><path d="M12 13v4M8 21h8M12 17a5 5 0 005-5"/><path d="M9 5l-2-2M15 5l2-2"/></svg> Treatment Info</h3><p class="lc-body">Learn about any service — from Botox to IV therapy to MMCC — before deciding to book.</p></div>
+      <div class="glass-card lc-reveal delay-1" style="padding:28px"><h3 class="lc-h3" style="margin-bottom:8px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Find Your Protocol</h3><p class="lc-body">Describe your goals and the Assistant matches you with the most appropriate LoveLi services.</p></div>
     </div>
   </div></div>
 </div>
@@ -991,14 +1026,14 @@
   <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
     <h1 class="lc-h1 lc-reveal" style="margin-bottom:40px">Online <span class="lc-gold-em">Store</span></h1>
     <div class="glass-gold lc-reveal" style="padding:48px;border-radius:24px;margin-bottom:40px;display:flex;gap:40px;align-items:center;flex-wrap:wrap">
-      <div style="flex:1;min-width:240px"><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:10px">🎁 FREE Download</div><h2 class="lc-h2" style="font-size:1.8rem;margin-bottom:12px">12-Day Weight Loss Meal Plan</h2><p class="lc-body" style="margin-bottom:20px">Your complimentary head-start on your wellness journey.</p><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass btn-glass-primary">Get Free Plan ↗</a></div>
-      <div style="text-align:center;flex-shrink:0"><div style="font-size:4rem;filter:drop-shadow(0 4px 12px rgba(201,169,110,.3))">🥗</div><div style="font-family:'Italiana','Cormorant',Georgia,serif;color:#C9A96E;margin-top:8px">Completely Free</div></div>
+      <div style="flex:1;min-width:240px"><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:10px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg> FREE Download</div><h2 class="lc-h2" style="font-size:1.8rem;margin-bottom:12px">12-Day Weight Loss Meal Plan</h2><p class="lc-body" style="margin-bottom:20px">Your complimentary head-start on your wellness journey.</p><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass btn-glass-primary">Get Free Plan ↗</a></div>
+      <div style="text-align:center;flex-shrink:0"><div style="font-size:4rem;filter:drop-shadow(0 4px 12px rgba(201,169,110,.3))"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg></div><div style="font-family:'Italiana','Cormorant',Georgia,serif;color:#C9A96E;margin-top:8px">Completely Free</div></div>
     </div>
     <div class="grid-4">
-      <a href="https://lovelicare.com/online-store" target="_blank" class="glass-card lc-reveal" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px">🛍</div><h3 class="lc-h3">Browse Store ↗</h3></a>
-      <a href="https://lovelicare.com/m/bookings" target="_blank" class="glass-card lc-reveal delay-1" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px">📅</div><h3 class="lc-h3">My Bookings ↗</h3></a>
-      <a href="https://lovelicare.com/m/orders" target="_blank" class="glass-card lc-reveal delay-2" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px">📦</div><h3 class="lc-h3">My Orders ↗</h3></a>
-      <a href="https://lovelicare.com/m/account" target="_blank" class="glass-card lc-reveal delay-3" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px">👤</div><h3 class="lc-h3">My Account ↗</h3></a>
+      <a href="https://lovelicare.com/online-store" target="_blank" class="glass-card lc-reveal" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg></div><h3 class="lc-h3">Browse Store ↗</h3></a>
+      <a href="https://lovelicare.com/m/bookings" target="_blank" class="glass-card lc-reveal delay-1" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3 class="lc-h3">My Bookings ↗</h3></a>
+      <a href="https://lovelicare.com/m/orders" target="_blank" class="glass-card lc-reveal delay-2" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.7l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.7l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></div><h3 class="lc-h3">My Orders ↗</h3></a>
+      <a href="https://lovelicare.com/m/account" target="_blank" class="glass-card lc-reveal delay-3" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3 class="lc-h3">My Account ↗</h3></a>
     </div>
     <div class="glass-gold lc-reveal" style="padding:36px;margin-top:24px;text-align:center;border-radius:20px">
       <h3 class="lc-h3" style="margin-bottom:10px">Subscribe & Save 10%</h3>
@@ -1014,32 +1049,32 @@
 <div class="lc-page" id="page-sitemap">
   <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
     <h1 class="lc-h1 lc-reveal" style="margin-bottom:40px">Site <span class="lc-gold-em">Map</span></h1>
-    <div style="display:flex;justify-content:center;margin-bottom:8px"><div class="sm-node sm-node-root lc-reveal" onclick="navTo('home')" style="width:160px"><div class="sm-title">🏠 Home</div><div class="sm-url">lovelicare.com</div></div></div>
+    <div style="display:flex;justify-content:center;margin-bottom:8px"><div class="sm-node sm-node-root lc-reveal" onclick="navTo('home')" style="width:160px"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg> Home</div><div class="sm-url">lovelicare.com</div></div></div>
     <div class="sm-connector">│</div>
     <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:32px">
       <div class="sm-node lc-reveal" onclick="navTo('services')"><div class="sm-title">Services</div><div class="sm-url">/services</div></div>
       <div class="sm-node lc-reveal delay-1" onclick="navTo('nutritional-wellness')"><div class="sm-title">IV Therapy</div><div class="sm-url">/iv-wellness</div></div>
-      <div class="sm-node lc-reveal delay-2" onclick="navTo('wellness-assistant')"><div class="sm-title">💬 AI Assistant</div><div class="sm-url">/wellness-chatbox</div></div>
-      <div class="sm-node lc-reveal delay-3" onclick="navTo('online-store')"><div class="sm-title">🛍 Store</div><div class="sm-url">/online-store</div></div>
+      <div class="sm-node lc-reveal delay-2" onclick="navTo('wellness-assistant')"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> AI Assistant</div><div class="sm-url">/wellness-chatbox</div></div>
+      <div class="sm-node lc-reveal delay-3" onclick="navTo('online-store')"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg> Store</div><div class="sm-url">/online-store</div></div>
       <div class="sm-node lc-reveal delay-4" onclick="navTo('contact')"><div class="sm-title">Contact</div><div class="sm-url">/contact</div></div>
     </div>
     <div class="lc-divider"></div>
     <h3 class="lc-h3" style="margin-bottom:24px">Service Pages</h3>
     <div class="grid-3" style="margin-bottom:36px">
-      <div class="sm-node lc-reveal" onclick="navTo('medical-aesthetics')"><div class="sm-title">💉 Medical Aesthetics</div><div class="sm-url">/medical-aesthetics</div></div>
-      <div class="sm-node lc-reveal delay-1" onclick="navTo('body-contouring')"><div class="sm-title">✨ Body Contouring</div><div class="sm-url">/body-contouring</div></div>
-      <div class="sm-node lc-reveal delay-2" onclick="navTo('weight-management')"><div class="sm-title">⚖️ Weight Management</div><div class="sm-url">/weight-management</div></div>
-      <div class="sm-node lc-reveal" onclick="navTo('nutrition-counseling')"><div class="sm-title">🥗 Nutrition Counseling</div><div class="sm-url">/nutrition-counseling</div></div>
-      <div class="sm-node lc-reveal delay-1" onclick="navTo('nutritional-wellness')"><div class="sm-title">💧 IV & Nutritional Wellness</div><div class="sm-url">/nutritional-wellness</div></div>
-      <div class="sm-node lc-reveal delay-2" onclick="navTo('non-emergent-care')"><div class="sm-title">🏥 Non-Emergent Care</div><div class="sm-url">/non-emergent-care</div></div>
+      <div class="sm-node lc-reveal" onclick="navTo('medical-aesthetics')"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg> Medical Aesthetics</div><div class="sm-url">/medical-aesthetics</div></div>
+      <div class="sm-node lc-reveal delay-1" onclick="navTo('body-contouring')"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg> Body Contouring</div><div class="sm-url">/body-contouring</div></div>
+      <div class="sm-node lc-reveal delay-2" onclick="navTo('weight-management')"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg> Weight Management</div><div class="sm-url">/weight-management</div></div>
+      <div class="sm-node lc-reveal" onclick="navTo('nutrition-counseling')"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg> Nutrition Counseling</div><div class="sm-url">/nutrition-counseling</div></div>
+      <div class="sm-node lc-reveal delay-1" onclick="navTo('nutritional-wellness')"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg> IV & Nutritional Wellness</div><div class="sm-url">/nutritional-wellness</div></div>
+      <div class="sm-node lc-reveal delay-2" onclick="navTo('non-emergent-care')"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg> Non-Emergent Care</div><div class="sm-url">/non-emergent-care</div></div>
     </div>
     <div class="lc-divider"></div>
     <h3 class="lc-h3" style="margin-bottom:24px">Resources & Account (External)</h3>
     <div class="grid-4">
-      <div class="sm-node lc-reveal" onclick="navTo('vitamin-cheat-sheet')"><div class="sm-title">📊 Vitamin Cheat Sheet</div></div>
-      <a href="https://lovelicare.com/m/bookings" target="_blank" class="sm-node lc-reveal delay-1" style="text-decoration:none"><div class="sm-title">📅 Book Appointment ↗</div></a>
-      <a href="https://lovelicare.com/m/account" target="_blank" class="sm-node lc-reveal delay-2" style="text-decoration:none"><div class="sm-title">👤 My Account ↗</div></a>
-      <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="sm-node lc-reveal delay-3" style="text-decoration:none"><div class="sm-title">🎁 Free Meal Plan ↗</div></a>
+      <div class="sm-node lc-reveal" onclick="navTo('vitamin-cheat-sheet')"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="2" width="4" height="18" rx="1"/></svg> Vitamin Cheat Sheet</div></div>
+      <a href="https://lovelicare.com/m/bookings" target="_blank" class="sm-node lc-reveal delay-1" style="text-decoration:none"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Appointment ↗</div></a>
+      <a href="https://lovelicare.com/m/account" target="_blank" class="sm-node lc-reveal delay-2" style="text-decoration:none"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> My Account ↗</div></a>
+      <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="sm-node lc-reveal delay-3" style="text-decoration:none"><div class="sm-title"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg> Free Meal Plan ↗</div></a>
     </div>
   </div></div>
 </div>
@@ -1098,11 +1133,11 @@
         <p class="portal-brand-desc">Your personal wellness dashboard — appointments, history, forms, and care plans all in one place.</p>
 
         <div class="portal-feature-list">
-          <div class="portal-feature"><span class="portal-feature-icon">📅</span><span>View & manage appointments</span></div>
-          <div class="portal-feature"><span class="portal-feature-icon">📋</span><span>Access intake forms & records</span></div>
-          <div class="portal-feature"><span class="portal-feature-icon">💊</span><span>Review your treatment plans</span></div>
-          <div class="portal-feature"><span class="portal-feature-icon">🛍</span><span>Order history & subscriptions</span></div>
-          <div class="portal-feature"><span class="portal-feature-icon">💬</span><span>Secure messaging with your care team</span></div>
+          <div class="portal-feature"><span class="portal-feature-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span>View & manage appointments</span></div>
+          <div class="portal-feature"><span class="portal-feature-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 2h6v3H9zM9 10h6M9 14h4"/></svg></span><span>Access intake forms & records</span></div>
+          <div class="portal-feature"><span class="portal-feature-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4.5" width="15" height="15" rx="7.5" transform="rotate(45 12 12)"/><path d="M8.5 8.5l7 7"/></svg></span><span>Review your treatment plans</span></div>
+          <div class="portal-feature"><span class="portal-feature-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg></span><span>Order history & subscriptions</span></div>
+          <div class="portal-feature"><span class="portal-feature-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span><span>Secure messaging with your care team</span></div>
         </div>
 
         <div class="portal-trust-row">
@@ -1223,15 +1258,15 @@
           <!-- Credential badges -->
           <div class="footer-badges">
             <div class="footer-badge">
-              <div class="footer-badge-icon">🏥</div>
+              <div class="footer-badge-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
               <div><span class="footer-badge-text">NP-CRNP Board Certified</span><span class="footer-badge-sub">Libra Robertson, NP-CRNP</span></div>
             </div>
             <div class="footer-badge">
-              <div class="footer-badge-icon">🔒</div>
+              <div class="footer-badge-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
               <div><span class="footer-badge-text">HIPAA Compliant</span><span class="footer-badge-sub">Patient Privacy Protected</span></div>
             </div>
             <div class="footer-badge">
-              <div class="footer-badge-icon">⚕️</div>
+              <div class="footer-badge-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8M8 6h8"/><path d="M5 12a7 7 0 0014 0"/><path d="M8 22c2-2 2-4 4-6 2 2 2 4 4 6"/></svg></div>
               <div><span class="footer-badge-text">Medical Director Oversight</span><span class="footer-badge-sub">Maryland Licensed Practice</span></div>
             </div>
           </div>
@@ -1241,13 +1276,13 @@
         <div class="footer-col">
           <h5>Our Services</h5>
           <ul>
-            <li><span onclick="navTo('medical-aesthetics')"><span class="footer-col-icon">💉</span>Medical Aesthetics</span></li>
-            <li><span onclick="navTo('body-contouring')"><span class="footer-col-icon">✨</span>Body Contouring</span></li>
-            <li><span onclick="navTo('body-contouring')"><span class="footer-col-icon">🔥</span>Snatch Protocol™</span></li>
-            <li><span onclick="navTo('weight-management')"><span class="footer-col-icon">⚖️</span>Weight Management</span></li>
-            <li><span onclick="navTo('nutritional-wellness')"><span class="footer-col-icon">💧</span>IV Therapy</span></li>
-            <li><span onclick="navTo('nutrition-counseling')"><span class="footer-col-icon">🥗</span>Nutrition Counseling</span></li>
-            <li><span onclick="navTo('non-emergent-care')"><span class="footer-col-icon">🏥</span>MMCC & Physicals</span></li>
+            <li><span onclick="navTo('medical-aesthetics')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg></span>Medical Aesthetics</span></li>
+            <li><span onclick="navTo('body-contouring')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></span>Body Contouring</span></li>
+            <li><span onclick="navTo('body-contouring')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.4 0 8-3.6 8-8 0-5.3-5-9.7-8-12-3 2.3-8 6.7-8 12 0 4.4 3.6 8 8 8z"/><path d="M12 22c2 0 4-1.8 4-4 0-2.7-2.5-5-4-6.2-1.5 1.2-4 3.5-4 6.2 0 2.2 2 4 4 4z"/></svg></span>Snatch Protocol™</span></li>
+            <li><span onclick="navTo('weight-management')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg></span>Weight Management</span></li>
+            <li><span onclick="navTo('nutritional-wellness')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg></span>IV Therapy</span></li>
+            <li><span onclick="navTo('nutrition-counseling')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg></span>Nutrition Counseling</span></li>
+            <li><span onclick="navTo('non-emergent-care')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></span>MMCC & Physicals</span></li>
           </ul>
         </div>
 
@@ -1255,12 +1290,12 @@
         <div class="footer-col">
           <h5>Resources</h5>
           <ul>
-            <li><span onclick="navTo('vitamin-cheat-sheet')"><span class="footer-col-icon">📊</span>Vitamin Cheat Sheet</span></li>
-            <li><span onclick="navTo('wellness-assistant')"><span class="footer-col-icon">💬</span>AI Wellness Assistant</span></li>
-            <li><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank"><span class="footer-col-icon">🎁</span>Free Meal Plan</a></li>
-            <li><a href="https://lovelicare.com/m/bookings" target="_blank"><span class="footer-col-icon">📅</span>Book Appointment</a></li>
-            <li><a href="https://lovelicare.com/m/account" target="_blank"><span class="footer-col-icon">👤</span>Client Portal</a></li>
-            <li><span onclick="navTo('sitemap')"><span class="footer-col-icon">🗺</span>Site Map</span></li>
+            <li><span onclick="navTo('vitamin-cheat-sheet')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="2" width="4" height="18" rx="1"/></svg></span>Vitamin Cheat Sheet</span></li>
+            <li><span onclick="navTo('wellness-assistant')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span>AI Wellness Assistant</span></li>
+            <li><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg></span>Free Meal Plan</a></li>
+            <li><a href="https://lovelicare.com/m/bookings" target="_blank"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>Book Appointment</a></li>
+            <li><a href="https://lovelicare.com/m/account" target="_blank"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>Client Portal</a></li>
+            <li><span onclick="navTo('sitemap')"><span class="footer-col-icon"><svg class="lc-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg></span>Site Map</span></li>
           </ul>
         </div>
 
@@ -1268,19 +1303,19 @@
         <div class="footer-col">
           <h5>Contact Us</h5>
           <div class="footer-contact-item">
-            <div class="footer-contact-icon">📍</div>
+            <div class="footer-contact-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
             <div><span class="footer-contact-label">Location</span><span class="footer-contact-val">100 E Pennsylvania Ave<br>Suite 304 · Towson, MD 21286</span></div>
           </div>
           <div class="footer-contact-item">
-            <div class="footer-contact-icon">📞</div>
+            <div class="footer-contact-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7 12.8 12.8 0 00.7 2.8 2 2 0 01-.4 2.1L8 10a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4 12.8 12.8 0 002.8.7A2 2 0 0122 17z"/></svg></div>
             <div><span class="footer-contact-label">Office</span><span class="footer-contact-val"><a href="tel:4106165451">410-616-5451</a></span></div>
           </div>
           <div class="footer-contact-item">
-            <div class="footer-contact-icon">💬</div>
+            <div class="footer-contact-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
             <div><span class="footer-contact-label">Text / WhatsApp</span><span class="footer-contact-val"><a href="tel:4436782254">443-678-2254</a></span></div>
           </div>
           <div class="footer-contact-item">
-            <div class="footer-contact-icon">✉️</div>
+            <div class="footer-contact-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg></div>
             <div><span class="footer-contact-label">Email</span><span class="footer-contact-val"><a href="mailto:LoveLiCareSvcs@gmail.com">LoveLiCareSvcs@gmail.com</a></span></div>
           </div>
         </div>
@@ -1296,7 +1331,7 @@
             <div class="footer-hours-row"><span>Major Holidays</span><span>Closed</span></div>
           </div>
           <button onclick="openVagaro()" class="vagaro-glass-btn" style="margin-top:16px;width:100%;justify-content:center;font-size:.72rem;padding:11px 16px">
-            📅 Book Online
+            <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Online
           </button>
           <a href="https://maps.google.com/?q=100+East+Pennsylvania+Avenue+Towson+MD+21286" target="_blank" class="btn-glass btn-glass-sm" style="margin-top:8px;width:100%;justify-content:center;font-size:.7rem">
             <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
