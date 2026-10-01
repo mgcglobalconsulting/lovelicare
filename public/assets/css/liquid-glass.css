@@ -558,3 +558,18 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
   #vagaro-modal{border-radius:var(--radius-xl) var(--radius-xl) 0 0;position:fixed;bottom:0;top:auto;max-height:90vh;width:100%;max-width:100%}
   #vagaro-overlay{align-items:flex-end}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   MOBILE FIX — inline two-column grids (index.html) can't be reached by
+   class media queries, so collapse them here. Remove once inline styles
+   move into classes.
+   ══════════════════════════════════════════════════════════════════════ */
+@media(max-width:860px){
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:32px!important}
+  [style*="grid-template-columns:64px 1fr auto"]{grid-template-columns:48px 1fr!important}
+  [style*="grid-template-columns:64px 1fr auto"]>:nth-child(3){grid-column:1/-1}
+}
+@media(max-width:520px){
+  .lc-header button[onclick="navTo('client-login')"]{display:none}
+  .lc-header .vagaro-glass-btn{padding:9px 14px;font-size:.62rem}
+}

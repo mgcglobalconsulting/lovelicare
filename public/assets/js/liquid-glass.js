@@ -101,13 +101,22 @@
 
   document.querySelectorAll('.lc-reveal').forEach(el => revealObs.observe(el));
 
+  const heroArrow = document.getElementById('hero-scroll-arrow');
+
   window.addEventListener('scroll', () => {
     if (header) header.classList.toggle('scrolled', window.scrollY > 60);
+    if (heroArrow) heroArrow.classList.toggle('sa-hidden', window.scrollY > window.innerHeight * 0.35);
   }, { passive: true });
 })();
 
 /* ── PAGE NAVIGATION ──────────────────────────────────────────────────── */
-function navTo(pageId) {
+function navTo(pageId, fromHistory) {
+  // Give each page a shareable URL (#medical-aesthetics) and working back button
+  if (!fromHistory && document.getElementById('page-' + pageId)) {
+    const hash = pageId === 'home' ? location.pathname : '#' + pageId;
+    if (location.hash !== '#' + pageId) history.pushState({ page: pageId }, '', hash);
+  }
+
   // Close mobile menu if open
   const mob = document.getElementById('mobile-menu');
   if (mob) { mob.classList.remove('open'); document.body.style.overflow = ''; }
@@ -129,6 +138,13 @@ function navTo(pageId) {
     if (home) home.classList.add('active');
   }
 }
+
+function navFromHash() {
+  const id = location.hash.slice(1);
+  navTo(id && document.getElementById('page-' + id) ? id : 'home', true);
+}
+window.addEventListener('popstate', navFromHash);
+document.addEventListener('DOMContentLoaded', () => { if (location.hash) navFromHash(); });
 
 /* ── VAGARO OVERLAY ───────────────────────────────────────────────────── */
 function openVagaro(serviceLabel) {
@@ -304,6 +320,95 @@ function plannerReset() {
     d.classList.toggle('active', i === 0);
   });
 }
+
+/* ── CONTACT FORM SUBMISSION ──────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('.lc-contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('[type="submit"]');
+    const data = Object.fromEntries(new FormData(form));
+
+    if (!data.email) return;
+
+    const origText = btn.textContent;
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const body = `
+      <p><strong>Name:</strong> ${data.name || '—'}</p>
+      <p><strong>Email:</strong> ${data.email}</p>
+      <p><strong>Phone:</strong> ${data.phone || '—'}</p>
+      <p><strong>Service:</strong> ${data.service || '—'}</p>
+      <p><strong>Message:</strong><br>${(data.message || '').replace(/\n/g, '<br>')}</p>
+    `;
+
+    try {
+      const res = await fetch('/draft', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: 'LoveLiCareSvcs@gmail.com',
+          subject: `New Inquiry from ${data.name || data.email} — ${data.service || 'General'}`,
+          body
+        })
+      });
+
+      if (res.ok) {
+        form.innerHTML = `
+          <div style="text-align:center;padding:32px 0">
+            <div style="font-size:2.5rem;margin-bottom:16px">🌸</div>
+            <h3 class="lc-h3" style="margin-bottom:8px">Message Received!</h3>
+            <p class="lc-body">Thank you, ${data.name ? data.name.split(' ')[0] : 'friend'}. We'll be in touch within 24 hours.</p>
+            <p class="lc-body" style="margin-top:8px;font-size:.78rem;opacity:.6">Need a faster response? Text us at <a href="sms:4436782254" style="color:#C9A96E">443-678-2254</a></p>
+          </div>`;
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      btn.textContent = origText;
+      btn.disabled = false;
+      const err = form.querySelector('.lc-form-error') || document.createElement('p');
+      err.className = 'lc-form-error';
+      err.style.cssText = 'color:#C9A96E;font-size:.8rem;margin-bottom:12px';
+      err.textContent = 'Something went wrong. Please email us directly at LoveLiCareSvcs@gmail.com';
+      if (!form.querySelector('.lc-form-error')) form.prepend(err);
+    }
+  });
+});
+
+/* ── SUBSCRIBE FORM ───────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  const subForm = document.querySelector('.lc-subscribe-form');
+  if (!subForm) return;
+
+  subForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const input = subForm.querySelector('input[type="email"]');
+    const btn   = subForm.querySelector('[type="submit"]');
+    if (!input || !input.value) return;
+
+    const origText = btn.textContent;
+    btn.textContent = '…';
+    btn.disabled = true;
+
+    try {
+      await fetch('/draft', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: 'LoveLiCareSvcs@gmail.com',
+          subject: 'New Wellness Community Subscriber',
+          body: `<p>New subscriber: <strong>${input.value}</strong></p><p>Source: Online Store subscribe form</p>`
+        })
+      });
+    } catch { /* silent — still show success */ }
+
+    subForm.innerHTML = `<p style="font-size:.84rem;color:#C9A96E;text-align:center;padding:8px 0">🌸 You're in! Check your inbox for your 10% off code.</p>`;
+  });
+});
 
 /* ── COOKIE BANNER ────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {

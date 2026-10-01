@@ -112,6 +112,25 @@
 
 /* ── SECTION TRANSITIONS ── */
 .section-glass-divider{height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.8) 30%,rgba(201,169,110,.25) 50%,rgba(255,255,255,.8) 70%,transparent);box-shadow:0 1px 6px rgba(255,255,255,.6);margin:0}
+
+/* ── HERO SCROLL ARROW ── */
+.hero-scroll-arrow{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;z-index:10;opacity:0;transition:opacity .5s;animation:saFadeIn .9s ease 2.4s forwards}
+.hero-scroll-arrow:hover{opacity:1!important}
+.hero-scroll-arrow:hover .hero-scroll-chevron{background:rgba(255,255,255,.8);border-color:rgba(201,169,110,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 0 0 7px rgba(201,169,110,.1)}
+.hero-scroll-label{font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(47,79,79,.38);font-family:'DM Sans',sans-serif;font-weight:400}
+.hero-scroll-chevron{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.52);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border:1px solid rgba(255,255,255,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.88),0 4px 16px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;transition:all .35s cubic-bezier(.16,1,.3,1);animation:heroBounce 2.6s ease-in-out infinite}
+@keyframes heroBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes saFadeIn{from{opacity:0}to{opacity:.65}}
+.hero-scroll-arrow.sa-hidden{opacity:0!important;pointer-events:none}
+
+/* ── SECTION ARROWS ── */
+.section-arrow-wrap{display:flex;flex-direction:column;align-items:center;padding:4px 0;position:relative;z-index:1}
+.section-arrow-line{width:1px;background:linear-gradient(to bottom,transparent,rgba(201,169,110,.28),transparent)}
+.section-arrow-line-top{height:32px}
+.section-arrow-line-bot{height:28px}
+.section-arrow-pill{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.54);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid rgba(255,255,255,.68);box-shadow:inset 0 1px 0 rgba(255,255,255,.88),0 2px 10px rgba(0,0,0,.04);animation:saPulse 3.4s ease-in-out infinite}
+.section-arrow-wrap.sa-delay .section-arrow-pill{animation-delay:.8s}
+@keyframes saPulse{0%,100%{transform:translateY(0);box-shadow:inset 0 1px 0 rgba(255,255,255,.88),0 2px 10px rgba(0,0,0,.04),0 0 0 0 rgba(201,169,110,.14)}55%{transform:translateY(5px);box-shadow:inset 0 1px 0 rgba(255,255,255,.88),0 2px 10px rgba(0,0,0,.04),0 0 0 10px rgba(201,169,110,0)}}
 </style>
 </head>
 <body>
@@ -206,6 +225,7 @@
   <span class="mobile-nav-item" onclick="navTo('wellness-assistant')" data-nav>Wellness Assistant</span>
   <span class="mobile-nav-item" onclick="navTo('online-store')" data-nav>Shop</span>
   <span class="mobile-nav-item" onclick="navTo('contact')" data-nav>Contact</span>
+  <span class="mobile-nav-item" onclick="navTo('prepare')" data-nav>Prepare for Visit</span>
   <span class="mobile-nav-item" onclick="navTo('client-login')" data-nav><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.6 7.6a5.5 5.5 0 11-7.8 7.8 5.5 5.5 0 017.8-7.8zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg> Client Portal</span>
   <div style="margin-top:24px">
     <button class="vagaro-glass-btn" onclick="openVagaro();document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow=''" style="width:100%;justify-content:center"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Appointment</button>
@@ -354,7 +374,7 @@
 
             <!-- Photo container with glass overlay -->
             <div class="owner-photo-container">
-              <img src="./assets/img/owner-portrait.png" alt="LoveLi Care Med Spa Owner — Board-Certified NP-CRNP" class="owner-photo"/>
+              <img src="./assets/img/owner-portrait.jpg" alt="LoveLi Care Med Spa Owner — Board-Certified NP-CRNP" class="owner-photo" width="1024" height="1536" loading="lazy" decoding="async"/>
               <!-- Glass shine overlay -->
               <div class="owner-photo-shine"></div>
             </div>
@@ -381,6 +401,15 @@
         </div>
       </div>
     </div>
+
+  <!-- SCROLL ARROW -->
+  <div class="hero-scroll-arrow" id="hero-scroll-arrow" onclick="window.scrollBy({top:window.innerHeight*.72,behavior:'smooth'})" aria-label="Scroll to explore">
+    <span class="hero-scroll-label">Explore</span>
+    <div class="hero-scroll-chevron">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2F4F4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+  </div>
+
   </section>
 
   <!-- Free Meal Plan Banner -->
@@ -465,6 +494,15 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Section Arrow: Services → Planner -->
+  <div class="section-arrow-wrap lc-reveal">
+    <div class="section-arrow-line section-arrow-line-top"></div>
+    <div class="section-arrow-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2F4F4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="section-arrow-line section-arrow-line-bot"></div>
   </div>
 
   <!-- Treatment Planner -->
@@ -552,6 +590,15 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Section Arrow: Planner → Reviews -->
+  <div class="section-arrow-wrap sa-delay lc-reveal">
+    <div class="section-arrow-line section-arrow-line-top"></div>
+    <div class="section-arrow-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2F4F4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="section-arrow-line section-arrow-line-bot"></div>
   </div>
 
   <!-- Reviews -->
@@ -1194,6 +1241,188 @@
   </div>
 </div>
 
+
+<!-- ════════════════════════════════════════════
+     PAGE: PREPARE FOR YOUR APPOINTMENT
+════════════════════════════════════════════ -->
+<div class="lc-page" id="page-prepare">
+  <div style="padding-top:120px" class="lc-glass-section">
+    <div class="lc-container">
+
+      <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">Before You Arrive</span><span class="lc-eyebrow-line"></span></div>
+      <h1 class="lc-h1 lc-reveal delay-1">Prepare for Your <span class="lc-gold-em">Appointment</span></h1>
+      <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 48px;max-width:620px">A little preparation makes all the difference. Follow these guidelines to arrive ready, relaxed, and get the most from your LoveLi Care treatment.</p>
+
+      <!-- General arrival tips -->
+      <div class="glass lc-reveal" style="padding:36px;border-radius:20px;margin-bottom:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:1.4rem;flex-shrink:0">🕐</div>
+          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Arrive on time</div><p class="lc-body" style="font-size:.82rem">Plan to arrive 10 minutes early to complete any intake forms and get settled.</p></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:1.4rem;flex-shrink:0">💧</div>
+          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Hydrate well</div><p class="lc-body" style="font-size:.82rem">Drink plenty of water before your visit — especially for IV therapy and body treatments.</p></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:1.4rem;flex-shrink:0">📋</div>
+          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Bring your ID</div><p class="lc-body" style="font-size:.82rem">A valid photo ID is required. For MMCC appointments, also bring your patient registry documents.</p></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:1.4rem;flex-shrink:0">💊</div>
+          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">List your medications</div><p class="lc-body" style="font-size:.82rem">Have a current list of medications, supplements, and any known allergies ready to share.</p></div>
+        </div>
+      </div>
+
+      <!-- Service-specific prep -->
+      <h2 class="lc-h2 lc-reveal" style="margin-bottom:28px">Service-Specific <span class="lc-gold-em">Prep Guide</span></h2>
+
+      <!-- Botox / Fillers -->
+      <div class="glass-card lc-reveal" style="padding:36px;margin-bottom:16px">
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px">
+          <div style="font-size:1.6rem">💉</div>
+          <div>
+            <h3 class="lc-h3" style="margin-bottom:4px">Medical Aesthetics — Botox & Dermal Fillers</h3>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">24–48 hours before your appointment</p>
+          </div>
+        </div>
+        <ul class="lc-check">
+          <li>Avoid blood thinners (aspirin, ibuprofen, naproxen) for 24–48 hours unless prescribed by your doctor</li>
+          <li>Skip fish oil, Vitamin E, and herbal supplements (ginkgo, ginseng) for 48 hours prior</li>
+          <li>No alcohol for 24 hours before your appointment</li>
+          <li>Arrive with a clean, makeup-free face if possible</li>
+          <li>Avoid strenuous exercise the day of your appointment</li>
+          <li>Notify us if you have a history of cold sores before any filler near the lips</li>
+        </ul>
+      </div>
+
+      <!-- Body Contouring -->
+      <div class="glass-card lc-reveal delay-1" style="padding:36px;margin-bottom:16px">
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px">
+          <div style="font-size:1.6rem">✨</div>
+          <div>
+            <h3 class="lc-h3" style="margin-bottom:4px">Body Contouring & Snatch Protocol™</h3>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">Day of and 24 hours before</p>
+          </div>
+        </div>
+        <ul class="lc-check">
+          <li>Drink at least 2 liters of water the day before and the day of your session</li>
+          <li>Eat a light meal 1–2 hours before — do not come on an empty stomach</li>
+          <li>Wear comfortable, loose-fitting clothing you can easily remove for treatment areas</li>
+          <li>Avoid caffeine for 4 hours prior to help your lymphatic system process effectively</li>
+          <li>Do not apply lotion, oils, or creams to the treatment area on the day of your visit</li>
+          <li>Remove all jewelry from the treatment area before arriving</li>
+        </ul>
+      </div>
+
+      <!-- IV Therapy -->
+      <div class="glass-card lc-reveal delay-2" style="padding:36px;margin-bottom:16px">
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px">
+          <div style="font-size:1.6rem">💧</div>
+          <div>
+            <h3 class="lc-h3" style="margin-bottom:4px">IV & Nutritional Wellness Therapy</h3>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">Day of your infusion</p>
+          </div>
+        </div>
+        <ul class="lc-check">
+          <li>Hydrate generously before your session — well-hydrated veins make the infusion faster and more comfortable</li>
+          <li>Eat a small meal or snack 30–60 minutes before to prevent lightheadedness</li>
+          <li>Wear a short-sleeve or loose top with easy access to the arm</li>
+          <li>Plan to relax for 30–60 minutes during your drip — bring a book, headphones, or just unwind</li>
+          <li>Avoid alcohol the night before for best results</li>
+          <li>Let us know about any kidney conditions or sensitivities to specific vitamins</li>
+        </ul>
+      </div>
+
+      <!-- Weight Management / Nutrition -->
+      <div class="glass-card lc-reveal" style="padding:36px;margin-bottom:16px">
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px">
+          <div style="font-size:1.6rem">⚖️</div>
+          <div>
+            <h3 class="lc-h3" style="margin-bottom:4px">Weight Management & Nutrition Counseling</h3>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">For your initial consultation</p>
+          </div>
+        </div>
+        <ul class="lc-check">
+          <li>Bring a 3-day food journal or notes on your typical daily eating patterns</li>
+          <li>Note your current medications, supplements, and any diagnosed conditions</li>
+          <li>Write down your primary health goals and any previous weight loss attempts</li>
+          <li>Wear light clothing if body measurements will be taken</li>
+          <li>Bring your most recent bloodwork or lab results if available</li>
+          <li>Be ready to discuss your lifestyle — sleep, stress levels, and activity habits</li>
+        </ul>
+      </div>
+
+      <!-- MMCC -->
+      <div class="glass-card lc-reveal delay-1" style="padding:36px;margin-bottom:16px">
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px">
+          <div style="font-size:1.6rem">🌿</div>
+          <div>
+            <h3 class="lc-h3" style="margin-bottom:4px">MMCC Certification & Renewal</h3>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">Maryland Medical Cannabis Commission</p>
+          </div>
+        </div>
+        <ul class="lc-check">
+          <li>Register at <strong>mmcc.maryland.gov</strong> prior to your appointment and bring your patient registry ID number</li>
+          <li>Bring a valid government-issued photo ID</li>
+          <li>For renewals: bring your current MMCC card and any relevant medical records</li>
+          <li>Prepare to discuss the qualifying condition(s) you are seeking certification for</li>
+          <li>Bring a list of current medications and any previous treatments tried for your condition</li>
+          <li>Appointments are typically 15–30 minutes — be on time to avoid rescheduling</li>
+        </ul>
+      </div>
+
+      <!-- Physicals -->
+      <div class="glass-card lc-reveal delay-2" style="padding:36px;margin-bottom:40px">
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px">
+          <div style="font-size:1.6rem">🏃</div>
+          <div>
+            <h3 class="lc-h3" style="margin-bottom:4px">Medical Physicals (Pre-Employment, Sports, DOT)</h3>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">For all physical examination types</p>
+          </div>
+        </div>
+        <ul class="lc-check">
+          <li>Bring your completed physical form from your employer, school, or organization — or download it in advance</li>
+          <li>Wear loose, comfortable clothing for easy examination</li>
+          <li>DOT physicals: bring your commercial driver's license and any corrective lenses (glasses or contacts)</li>
+          <li>Bring a list of current medications and relevant medical history</li>
+          <li>Avoid heavy meals 2 hours before if a urine sample may be required</li>
+          <li>Results and completed forms are typically provided same day</li>
+        </ul>
+      </div>
+
+      <!-- Aftercare + CTA -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px" class="lc-reveal">
+        <div class="glass-gold" style="padding:32px;border-radius:18px">
+          <h3 class="lc-h3" style="margin-bottom:12px">🌸 General Aftercare</h3>
+          <ul class="lc-check" style="font-size:.84rem">
+            <li>Stay hydrated — especially after IV therapy and body treatments</li>
+            <li>Avoid intense exercise for 24 hours after aesthetic injectables</li>
+            <li>Apply SPF daily following any skin treatment</li>
+            <li>Follow all provider-specific aftercare instructions provided at your visit</li>
+          </ul>
+        </div>
+        <div class="glass" style="padding:32px;border-radius:18px;display:flex;flex-direction:column;justify-content:space-between">
+          <div>
+            <h3 class="lc-h3" style="margin-bottom:8px">Questions before your visit?</h3>
+            <p class="lc-body" style="font-size:.84rem;margin-bottom:20px">Our team is happy to walk you through anything before you arrive. Text, call, or email us.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a href="tel:4106165451" class="btn-glass btn-glass-sm" style="justify-content:center">📞 410-616-5451</a>
+            <a href="sms:4436782254" class="btn-glass btn-glass-sm" style="justify-content:center">💬 Text 443-678-2254</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap" class="lc-reveal">
+        <button class="vagaro-glass-btn" onclick="openVagaro()">📅 Book Your Appointment</button>
+        <button onclick="navTo('services')" class="btn-glass btn-glass-lg">← View All Services</button>
+        <button onclick="navTo('contact')" class="btn-glass">Contact Us</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 </main>
 
 <!-- ══ PRE-FOOTER CTA BAND ══ -->
@@ -1290,6 +1519,7 @@
         <div class="footer-col">
           <h5>Resources</h5>
           <ul>
+            <li><span onclick="navTo('prepare')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><path d="M9 12h6M9 16h4"/></svg></span>Prepare for Your Visit</span></li>
             <li><span onclick="navTo('vitamin-cheat-sheet')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="2" width="4" height="18" rx="1"/></svg></span>Vitamin Cheat Sheet</span></li>
             <li><span onclick="navTo('wellness-assistant')"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span>AI Wellness Assistant</span></li>
             <li><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank"><span class="footer-col-icon"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg></span>Free Meal Plan</a></li>
