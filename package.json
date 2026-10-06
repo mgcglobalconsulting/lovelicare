@@ -3,14 +3,28 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "build": "echo 'No build step required'",
     "start": "node server.js",
-    "scrape": "node scripts/scrape-site.js"
+    "scrape": "node scripts/scrape-site.js",
+    "google-auth": "node scripts/google-auth.js",
+    "audit:contrast": "node docs/testing/audit-contrast.js",
+    "audit:visual": "node docs/testing/verify-visual.js",
+    "serve:static": "python3 -m http.server 4321 --bind 127.0.0.1 --directory public",
+    "notes:list": "node scripts/sync-notes.js list",
+    "notes:push": "node scripts/sync-notes.js push",
+    "notes:obsidian": "node scripts/sync-notes.js obsidian",
+    "audit:dashboard": "node docs/testing/audit-dashboard.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
+    "@supabase/supabase-js": "^2.117.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "firecrawl": "^4.42.1",
     "googleapis": "^140.0.0"
+  },
+  "devDependencies": {
+    "ws": "^8.18.0",
+    "pngjs": "^7.0.0"
   }
 }

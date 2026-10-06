@@ -23,7 +23,7 @@
     r: 280 + Math.random() * 220,
     vx: (Math.random() - 0.5) * 0.35,
     vy: (Math.random() - 0.5) * 0.35,
-    hue: [30, 38, 46, 180, 165, 22][i],
+    hue: [30, 38, 46, 22, 18, 28][i],  // 180/165 were cyan-teal: off-palette
     sat: [25, 30, 40, 15, 20, 35][i],
     light: [88, 90, 85, 82, 86, 92][i],
     alpha: 0.18 + Math.random() * 0.12,
@@ -63,27 +63,101 @@
   drawMesh();
 })();
 
-/* ── CUSTOM CURSOR ────────────────────────────────────────────────────── */
-(function initCursor() {
+/* ── GUIDED POINTER ───────────────────────────────────────────────────────
+   Augments the native cursor; never replaces it. The ring eases toward the
+   pointer, snaps toward the centre of whatever is clickable, and reports state
+   on <html> so the styling stays in CSS.
+
+   State flags go on <html>, not <body> — the Vagaro widget overwrites
+   body.className and would silently wipe them.
+─────────────────────────────────────────────────────────────────────────── */
+(function initGuidedPointer() {
   const dot  = document.getElementById('lc-cursor');
   const ring = document.getElementById('lc-cursor-ring');
   if (!dot || !ring) return;
 
-  let mx = 0, my = 0, rx = 0, ry = 0;
+  // Anyone on touch, or who asked for less motion, keeps the plain OS cursor.
+  const fine = window.matchMedia('(hover:hover) and (pointer:fine)');
+  const still = window.matchMedia('(prefers-reduced-motion:reduce)');
+  if (!fine.matches || still.matches) {
+    dot.style.display = ring.style.display = 'none';
+    return;
+  }
+
+  const root = document.documentElement;
+  const INTERACTIVE = 'a,button,[role="button"],[onclick],input,select,textarea,summary,.lc-dropdown-item,.mobile-nav-item,.lc-logo';
+  const TEXT = 'p,h1,h2,h3,h4,li,span.lc-body,.lc-body';
+
+  let mx = innerWidth / 2, my = innerHeight / 2;   // true pointer
+  let rx = mx, ry = my;                            // eased ring
+  let targetX = null, targetY = null;              // magnet point
+  let raf = null;
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    dot.style.left  = mx + 'px';
-    dot.style.top   = my + 'px';
+    dot.style.transform = `translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;
+    root.classList.remove('lc-cursor-out');
+
+    const el = e.target instanceof Element ? e.target : null;
+    const hit = el && el.closest(INTERACTIVE);
+
+    if (hit) {
+      root.classList.add('lc-point');
+      root.classList.remove('lc-text');
+      // Pull the ring gently toward the target's centre so it reads as locked on.
+      const r = hit.getBoundingClientRect();
+      if (r.width < 420 && r.height < 220) {
+        targetX = r.left + r.width / 2;
+        targetY = r.top + r.height / 2;
+      } else {
+        targetX = targetY = null;
+      }
+    } else {
+      root.classList.remove('lc-point');
+      targetX = targetY = null;
+      root.classList.toggle('lc-text', Boolean(el && el.closest(TEXT)));
+    }
   }, { passive: true });
 
-  (function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(animateRing);
+  document.addEventListener('mousedown', () => root.classList.add('lc-press'), { passive: true });
+  document.addEventListener('mouseup',   () => root.classList.remove('lc-press'), { passive: true });
+  document.addEventListener('mouseleave', () => root.classList.add('lc-cursor-out'), { passive: true });
+  document.addEventListener('mouseenter', () => root.classList.remove('lc-cursor-out'), { passive: true });
+
+  // Keyboard users get the same "this is the target" signal, parked on the
+  // focused element, so the halo is not a mouse-only affordance.
+  document.addEventListener('focusin', e => {
+    const el = e.target;
+    if (!(el instanceof Element) || !el.matches(INTERACTIVE)) return;
+    if (!el.matches(':focus-visible')) return;
+    const r = el.getBoundingClientRect();
+    mx = targetX = r.left + r.width / 2;
+    my = targetY = r.top + r.height / 2;
+    root.classList.add('lc-point');
+    root.classList.remove('lc-cursor-out');
+    dot.style.transform = `translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;
+  });
+
+  (function animate() {
+    // Magnet pull is weaker than the follow, so the ring leans toward a target
+    // without detaching from the pointer.
+    const gx = targetX === null ? mx : mx + (targetX - mx) * 0.35;
+    const gy = targetY === null ? my : my + (targetY - my) * 0.35;
+    rx += (gx - rx) * 0.18;
+    ry += (gy - ry) * 0.18;
+    ring.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
+    raf = requestAnimationFrame(animate);
   })();
+
+  // Stop the loop when the tab is hidden.
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { cancelAnimationFrame(raf); raf = null; }
+    else if (!raf) raf = requestAnimationFrame(function loop() {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      ring.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
+      raf = requestAnimationFrame(loop);
+    });
+  });
 })();
 
 /* ── SCROLL: HEADER + REVEALS ─────────────────────────────────────────── */
@@ -109,6 +183,136 @@
   }, { passive: true });
 })();
 
+/* ── DROPDOWN NAVIGATION ──────────────────────────────────────────────────
+   WAI-ARIA disclosure navigation pattern. The old menu opened on :hover only,
+   so it was unusable by tap and by keyboard, and a 10px dead gap between the
+   trigger and the panel closed it mid-reach. This gives it:
+     · click / tap to toggle (works on touch)
+     · hover to open with intent delay, and a grace period before closing
+     · full keyboard support: Enter, Space, arrows, Home/End, Escape, Tab-out
+     · aria-expanded kept in sync, focus returned to the trigger on Escape
+   WCAG 2.1 SC 1.4.13 (Content on Hover or Focus) requires dismissible and
+   hoverable content, which the hover bridge in CSS and Escape handling cover.
+─────────────────────────────────────────────────────────────────────────── */
+(function initDropdownNav() {
+  const OPEN_DELAY  = 90;   // ms of hover before opening — avoids flicker on pass-through
+  const CLOSE_DELAY = 280;  // ms of grace after leaving — avoids closing mid-reach
+
+  function setup() {
+    const dropdowns = Array.from(document.querySelectorAll('.lc-dropdown'));
+    if (!dropdowns.length) return;
+
+    // Flag on <html>, not <body>: the Vagaro widget overwrites body.className.
+    document.documentElement.classList.add('lc-nav-js');
+
+    let openTimer = null, closeTimer = null;
+    const clearTimers = () => { clearTimeout(openTimer); clearTimeout(closeTimer); };
+
+    function close(dd) {
+      dd.classList.remove('open');
+      const trigger = dd.querySelector('.lc-dropdown-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    function closeAll(except) {
+      dropdowns.forEach(dd => { if (dd !== except) close(dd); });
+    }
+
+    function open(dd) {
+      closeAll(dd);
+      dd.classList.add('open');
+      const trigger = dd.querySelector('.lc-dropdown-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    // navTo() calls this so a dropdown never lingers over a freshly opened page.
+    window.lcCloseDropdowns = () => { clearTimers(); closeAll(null); };
+
+    dropdowns.forEach(dd => {
+      const trigger = dd.querySelector('.lc-dropdown-trigger');
+      const panel   = dd.querySelector('.lc-dropdown-menu');
+      if (!trigger || !panel) return;
+      const items = () => Array.from(panel.querySelectorAll('.lc-dropdown-item'));
+
+      // ── Pointer: click toggles. Works for mouse and touch alike. ──
+      trigger.addEventListener('click', e => {
+        e.stopPropagation();
+        clearTimers();
+        dd.classList.contains('open') ? close(dd) : open(dd);
+      });
+
+      // ── Hover with intent, on fine pointers only ──
+      if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+        dd.addEventListener('mouseenter', () => {
+          clearTimers();
+          openTimer = setTimeout(() => open(dd), OPEN_DELAY);
+        });
+        dd.addEventListener('mouseleave', () => {
+          clearTimers();
+          closeTimer = setTimeout(() => close(dd), CLOSE_DELAY);
+        });
+      }
+
+      // ── Keyboard on the trigger ──
+      trigger.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(dd);
+          const first = items()[0];
+          if (first) first.focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          open(dd);
+          const all = items();
+          if (all.length) all[all.length - 1].focus();
+        } else if (e.key === 'Escape') {
+          close(dd);
+        }
+      });
+
+      // ── Keyboard inside the panel ──
+      panel.addEventListener('keydown', e => {
+        const all = items();
+        const i = all.indexOf(document.activeElement);
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          all[(i + 1) % all.length]?.focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          all[(i - 1 + all.length) % all.length]?.focus();
+        } else if (e.key === 'Home') {
+          e.preventDefault(); all[0]?.focus();
+        } else if (e.key === 'End') {
+          e.preventDefault(); all[all.length - 1]?.focus();
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          close(dd);
+          trigger.focus();   // focus must not be lost when the panel disappears
+        }
+      });
+
+      // Tabbing (or clicking) out of the dropdown closes it.
+      dd.addEventListener('focusout', e => {
+        if (!dd.contains(e.relatedTarget)) close(dd);
+      });
+    });
+
+    // Click anywhere else, or press Escape anywhere, to dismiss.
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.lc-dropdown')) { clearTimers(); closeAll(null); }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { clearTimers(); closeAll(null); }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setup);
+  } else {
+    setup();
+  }
+})();
+
 /* ── PAGE NAVIGATION ──────────────────────────────────────────────────── */
 function navTo(pageId, fromHistory) {
   // Give each page a shareable URL (#medical-aesthetics) and working back button
@@ -121,6 +325,9 @@ function navTo(pageId, fromHistory) {
   const mob = document.getElementById('mobile-menu');
   if (mob) { mob.classList.remove('open'); document.body.style.overflow = ''; }
 
+  // Close any open desktop dropdown — otherwise it hangs over the new page
+  if (window.lcCloseDropdowns) window.lcCloseDropdowns();
+
   document.querySelectorAll('.lc-page').forEach(p => p.classList.remove('active'));
 
   const target = document.getElementById('page-' + pageId);
@@ -131,6 +338,9 @@ function navTo(pageId, fromHistory) {
     // Trigger reveals for newly visible page
     setTimeout(() => {
       target.querySelectorAll('.lc-reveal:not(.in)').forEach(el => el.classList.add('in'));
+      // Grids mounted on this page were never observed while hidden — wire them
+      // and reveal whatever is already in view, or they stay at opacity:0.
+      if (window.lcWireGrids) window.lcWireGrids(target);
     }, 100);
   } else {
     // Fallback: show home
@@ -337,22 +547,19 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    const body = `
-      <p><strong>Name:</strong> ${data.name || '—'}</p>
-      <p><strong>Email:</strong> ${data.email}</p>
-      <p><strong>Phone:</strong> ${data.phone || '—'}</p>
-      <p><strong>Service:</strong> ${data.service || '—'}</p>
-      <p><strong>Message:</strong><br>${(data.message || '').replace(/\n/g, '<br>')}</p>
-    `;
-
     try {
-      const res = await fetch('/draft', {
+      // Each field is sent under its own name so it lands in its own labeled
+      // column in Supabase (contact_inquiries), not flattened into an email body.
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          to: 'LoveLiCareSvcs@gmail.com',
-          subject: `New Inquiry from ${data.name || data.email} — ${data.service || 'General'}`,
-          body
+          name:    data.name    || '',
+          email:   data.email,
+          phone:   data.phone   || '',
+          service: data.service || '',
+          message: data.message || '',
+          pageUrl: window.location.href
         })
       });
 
@@ -362,7 +569,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div style="font-size:2.5rem;margin-bottom:16px">🌸</div>
             <h3 class="lc-h3" style="margin-bottom:8px">Message Received!</h3>
             <p class="lc-body">Thank you, ${data.name ? data.name.split(' ')[0] : 'friend'}. We'll be in touch within 24 hours.</p>
-            <p class="lc-body" style="margin-top:8px;font-size:.78rem;opacity:.6">Need a faster response? Text us at <a href="sms:4436782254" style="color:#C9A96E">443-678-2254</a></p>
+            <p class="lc-body" style="margin-top:8px;font-size:.78rem;opacity:.6">Need a faster response? Text us at <a href="sms:4436782254" style="color:var(--gold-text)">443-678-2254</a></p>
           </div>`;
       } else {
         throw new Error('Server error');
@@ -372,7 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.disabled = false;
       const err = form.querySelector('.lc-form-error') || document.createElement('p');
       err.className = 'lc-form-error';
-      err.style.cssText = 'color:#C9A96E;font-size:.8rem;margin-bottom:12px';
+      err.style.cssText = 'color:var(--gold-text);font-size:.8rem;margin-bottom:12px';
       err.textContent = 'Something went wrong. Please email us directly at LoveLiCareSvcs@gmail.com';
       if (!form.querySelector('.lc-form-error')) form.prepend(err);
     }
@@ -395,18 +602,26 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.disabled = true;
 
     try {
-      await fetch('/draft', {
+      const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          to: 'LoveLiCareSvcs@gmail.com',
-          subject: 'New Wellness Community Subscriber',
-          body: `<p>New subscriber: <strong>${input.value}</strong></p><p>Source: Online Store subscribe form</p>`
+          email: input.value.trim(),
+          pageUrl: window.location.href
         })
       });
-    } catch { /* silent — still show success */ }
+      if (!response.ok) throw new Error('Subscription request failed');
 
-    subForm.innerHTML = `<p style="font-size:.84rem;color:#C9A96E;text-align:center;padding:8px 0">🌸 You're in! Check your inbox for your 10% off code.</p>`;
+      subForm.innerHTML = `<p style="font-size:.84rem;color:var(--gold-text);text-align:center;padding:8px 0">🌸 You're in! Check your inbox for your 10% off code.</p>`;
+    } catch {
+      btn.textContent = origText;
+      btn.disabled = false;
+      const error = subForm.querySelector('.lc-subscribe-error') || document.createElement('p');
+      error.className = 'lc-subscribe-error';
+      error.style.cssText = 'font-size:.78rem;color:#9b3a44;text-align:center;margin-top:10px';
+      error.textContent = 'We could not complete your signup. Please try again or email us directly.';
+      if (!subForm.querySelector('.lc-subscribe-error')) subForm.append(error);
+    }
   });
 });
 
@@ -424,3 +639,112 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('lc_cookie_ok', '1');
   });
 });
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INTERACTION LAYER — scroll progress, staggered reveals, pointer tilt.
+   Pairs with the INTERACTION LAYER block in liquid-glass.css.
+   Honours prefers-reduced-motion: bails out entirely and leaves the page
+   static but fully usable.
+   ══════════════════════════════════════════════════════════════════════════ */
+(function () {
+  var still = window.matchMedia('(prefers-reduced-motion:reduce)');
+
+  function start() {
+    if (still.matches) return;
+
+    /* 1 ── Scroll progress hairline ───────────────────────────────────── */
+    var bar = document.createElement('div');
+    bar.id = 'lc-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+
+    var queued = false;
+    function paintProgress() {
+      var d = document.documentElement;
+      var max = d.scrollHeight - d.clientHeight;
+      var p = max > 0 ? Math.min(Math.max(d.scrollTop / max, 0), 1) : 0;
+      bar.style.transform = 'scaleX(' + p + ')';
+      queued = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!queued) { queued = true; requestAnimationFrame(paintProgress); }
+    }, { passive: true });
+    paintProgress();
+
+    /* 2 ── Staggered grid reveals ─────────────────────────────────────── */
+    var GRIDS = '.grid-2,.grid-3,.grid-4,.ba-grid';
+
+    function indexGrid(g) {
+      for (var i = 0; i < g.children.length; i++) {
+        g.children[i].style.setProperty('--i', i);
+      }
+    }
+
+    var gridObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('lc-in');
+          gridObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    function wireGrids(root) {
+      (root || document).querySelectorAll(GRIDS).forEach(function (g) {
+        if (g.dataset.lcStagger) return;
+        g.dataset.lcStagger = '1';
+        indexGrid(g);
+        gridObs.observe(g);
+      });
+    }
+    wireGrids();
+
+    // SPA page switches mount new grids — pick them up, and reveal any grid
+    // already in view on the freshly shown page.
+    window.lcWireGrids = function (root) {
+      wireGrids(root);
+      (root || document).querySelectorAll(GRIDS).forEach(function (g) {
+        var r = g.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) g.classList.add('lc-in');
+      });
+    };
+
+    /* 3 ── Pointer tilt on cards ──────────────────────────────────────── */
+    // Only for devices with a real pointer; touch gets the hover lift alone.
+    if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    document.documentElement.classList.add('lc-tilt-on');
+
+    var TILT = '.glass-card,.lc-service-card,.vc-card';
+    var MAX = 4;      // degrees — deliberately subtle; this is a clinic, not a toy
+    var active = null;
+
+    document.addEventListener('pointermove', function (e) {
+      var card = e.target.closest ? e.target.closest(TILT) : null;
+      if (card !== active && active) reset(active);
+      active = card;
+      if (!card) return;
+
+      var r = card.getBoundingClientRect();
+      var cx = (e.clientX - r.left) / r.width - 0.5;
+      var cy = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--ry', (cx * MAX).toFixed(2) + 'deg');
+      card.style.setProperty('--rx', (-cy * MAX).toFixed(2) + 'deg');
+      card.style.setProperty('--ty', '-4px');
+    }, { passive: true });
+
+    function reset(el) {
+      el.style.setProperty('--rx', '0deg');
+      el.style.setProperty('--ry', '0deg');
+      el.style.setProperty('--ty', '0px');
+    }
+    document.addEventListener('pointerleave', function () {
+      if (active) { reset(active); active = null; }
+    }, true);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();

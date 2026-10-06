@@ -1,0 +1,991 @@
+/* ==========================================================================
+   LoveLi Care — Owner Dashboard
+   Surface: /dashboard.html · separate bundle (R7: never inside index.html)
+
+   Palette authority: libra-lovelicare-images/brand/BRANDING.md
+   Tokens come from tokens.css, which is linked FIRST in dashboard.html.
+   This file adds no new colour. Every value below resolves to a Bare+ token.
+
+   The design thesis, applied (CLAUDE.md "Color — the thing to get right"):
+     1. VALUE RHYTHM — espresso sidebar → bone field → mist cards. A hard
+        lightness gap at every boundary. No two mid-tones ever touch.
+     2. CARAMEL AS METAL — hairlines, the active-nav rail, chart strokes,
+        the ™. Never a filled button. Never body copy.
+     3. MATERIAL DEPTH — inner highlight + long soft espresso-tinted shadow.
+        Shadows carry espresso, not black, so the page stays warm.
+     4. ESPRESSO PUNCTUATION — the sidebar is the full-bleed dark section.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- RESET */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--c-bone);
+  color: var(--c-espresso);
+  font-family: var(--f-ui);
+  font-size: var(--t-sm);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 { margin: 0; font-weight: 400; letter-spacing: var(--tr-heading); }
+p  { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* Caramel focus ring — the one place the accent is allowed to be loud,
+   because an invisible focus ring is an accessibility failure. */
+:focus-visible {
+  outline: 2px solid var(--c-gold);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ------------------------------------------------------------ PRIMITIVES */
+:root {
+  --dash-sidebar-w: 248px;
+  --dash-gutter: 28px;
+  --dash-radius: 14px;
+  --dash-radius-sm: 9px;
+
+  /* Espresso-tinted, never black. */
+  --dash-shadow: 0 1px 2px rgba(60, 43, 37, .04),
+                 0 10px 30px -12px rgba(60, 43, 37, .16);
+  --dash-shadow-lift: 0 2px 4px rgba(60, 43, 37, .05),
+                      0 18px 44px -14px rgba(60, 43, 37, .22);
+  --dash-inset: inset 0 1px 0 rgba(255, 253, 250, .9);
+
+  --dash-hair: rgba(189, 174, 169, .5);   /* greige hairline */
+  --dash-hair-gold: rgba(201, 169, 110, .42);
+}
+
+/* Caramel hairline, used as a decorative rule. Metal, not paint. */
+.rule-gold {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, var(--dash-hair-gold) 18%, var(--dash-hair-gold) 82%, transparent);
+  border: 0;
+  margin: 0;
+}
+
+/* =========================================================================
+   LAYOUT
+   ========================================================================= */
+.dash {
+  display: grid;
+  grid-template-columns: var(--dash-sidebar-w) 1fr;
+  min-height: 100vh;
+}
+
+/* ------------------------------------------------------------- SIDEBAR
+   The full-bleed espresso section. Text here is shell; muted text is greige,
+   which BRANDING.md permits ON DARK ONLY. */
+.side {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--c-ink);
+  background-image: linear-gradient(170deg, var(--c-espresso) 0%, var(--c-ink) 62%);
+  color: var(--c-shell);
+  padding: 22px 0 16px;
+  overflow-y: auto;
+}
+
+.side__brand {
+  padding: 0 20px 18px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.side__mark {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, rgba(201, 169, 110, .26), rgba(201, 169, 110, .07));
+  border: 1px solid var(--dash-hair-gold);
+  color: var(--c-gold);          /* gold on dark measures ~7:1 — legal here */
+  font-family: var(--f-display);
+  font-size: 15px;
+  line-height: 1;
+}
+
+.side__name {
+  font-family: var(--f-display);
+  font-size: 15px;
+  letter-spacing: .01em;
+  color: var(--c-bone);
+  line-height: 1.2;
+}
+
+.side__role {
+  display: block;
+  font-size: var(--t-2xs);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  color: var(--c-greige);
+  margin-top: 3px;
+}
+
+.side__section {
+  padding: 16px 20px 7px;
+  font-size: var(--t-2xs);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  color: var(--c-greige);
+}
+
+.side__nav { padding: 0 10px; }
+
+.side__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: var(--dash-radius-sm);
+  color: var(--c-shell);
+  font-size: var(--t-sm);
+  text-align: left;
+  transition: background .18s ease, color .18s ease;
+}
+
+.side__link svg { width: 16px; height: 16px; flex: none; opacity: .82; }
+
+.side__link:hover { background: rgba(244, 241, 235, .07); }
+
+.side__link[aria-current="true"] {
+  background: rgba(244, 241, 235, .11);
+  color: var(--c-bone);
+}
+
+/* The caramel rail — active-nav marker. Metal. */
+.side__link[aria-current="true"]::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 7px;
+  bottom: 7px;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
+  background: var(--c-gold);
+}
+
+.side__link[aria-current="true"] svg { opacity: 1; color: var(--c-gold); }
+
+.side__count {
+  margin-left: auto;
+  font-size: var(--t-2xs);
+  font-variant-numeric: tabular-nums;
+  /* NOT greige. The .1 bone wash lifts the espresso ground to ~rgb(87,76,71),
+     where greige measures 3.8:1 and fails AA. Shell clears it at ~6.1:1.
+     BRANDING.md lists shell as body text on dark, so this stays in-system. */
+  color: var(--c-shell);
+  background: rgba(244, 241, 235, .1);
+  border-radius: 20px;
+  padding: 1px 7px;
+}
+
+.side__foot {
+  margin-top: auto;
+  padding: 14px 20px 0;
+  border-top: 1px solid rgba(244, 241, 235, .12);
+  font-size: var(--t-2xs);
+  color: var(--c-greige);
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------- MAIN */
+.main { min-width: 0; display: flex; flex-direction: column; }
+
+/* ------------------------------------------------------------- TOPBAR */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(244, 241, 235, .86);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1px solid var(--dash-hair);
+  padding: 15px var(--dash-gutter) 0;
+}
+
+.top__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.top__title {
+  font-family: var(--f-display);
+  font-size: var(--t-xl);
+  color: var(--c-ink);
+  line-height: 1.15;
+}
+
+.top__sub {
+  margin-top: 3px;
+  font-size: var(--t-xs);
+  color: var(--c-cacao);
+}
+
+.top__spacer { margin-left: auto; }
+
+.top__actions { display: flex; align-items: center; gap: 9px; }
+
+/* Filter bar — the dropdowns live here. */
+.filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 0 13px;
+}
+
+.filters__reset {
+  font-size: var(--t-xs);
+  color: var(--c-cacao);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 7px 2px;
+  align-self: center;
+}
+
+.filters__reset:hover { color: var(--c-espresso); }
+
+/* -------------------------------------------------------------- BUTTONS
+   Caramel never fills a button. Primary is espresso. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: var(--t-xs);
+  letter-spacing: .02em;
+  border: 1px solid transparent;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+  white-space: nowrap;
+}
+
+.btn svg { width: 14px; height: 14px; }
+
+.btn--primary { background: var(--c-espresso); color: var(--c-bone); }
+.btn--primary:hover { background: var(--c-cacao); }
+
+.btn--ghost {
+  background: var(--c-mist);
+  color: var(--c-espresso);
+  border-color: var(--dash-hair);
+  box-shadow: var(--dash-inset);
+}
+.btn--ghost:hover { border-color: var(--c-clay); background: #fff; }
+
+.btn[aria-pressed="true"] {
+  background: var(--c-espresso);
+  color: var(--c-bone);
+  border-color: var(--c-espresso);
+}
+
+/* =========================================================================
+   MODE BANNER — demo data is never allowed to be mistaken for live data.
+   ========================================================================= */
+.modebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px var(--dash-gutter);
+  font-size: var(--t-xs);
+  border-bottom: 1px solid var(--dash-hair);
+}
+
+.modebar--demo {
+  background: var(--c-shell);
+  color: var(--c-espresso);
+}
+
+.modebar--live {
+  background: var(--c-mist);
+  color: var(--c-espresso);
+}
+
+.modebar__tag {
+  font-size: var(--t-2xs);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--c-espresso);
+  color: var(--c-bone);
+  flex: none;
+}
+
+.modebar__text { min-width: 0; }
+.modebar__text strong { font-weight: 600; }
+.modebar__actions { margin-left: auto; display: flex; gap: 8px; flex: none; }
+
+/* ------------------------------------------------------------- CONTENT */
+.content {
+  padding: 22px var(--dash-gutter) 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.panel { scroll-margin-top: 150px; }
+
+.panel__head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.panel__title {
+  font-family: var(--f-display);
+  font-size: var(--t-lg);
+  color: var(--c-ink);
+}
+
+.panel__note {
+  font-size: var(--t-xs);
+  color: var(--c-cacao);
+}
+
+.panel__spacer { margin-left: auto; }
+
+/* =========================================================================
+   CARDS — mist surfaces lifting off the bone field.
+   ========================================================================= */
+.card {
+  background: var(--c-mist);
+  border: 1px solid var(--dash-hair);
+  border-radius: var(--dash-radius);
+  box-shadow: var(--dash-shadow), var(--dash-inset);
+  padding: 16px 17px;
+  position: relative;
+  transition: box-shadow .22s ease, transform .22s ease;
+}
+
+.card--pad0 { padding: 0; overflow: hidden; }
+
+.grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(214px, 1fr));
+}
+
+.grid--2 { grid-template-columns: minmax(0, 1.32fr) minmax(0, 1fr); }
+.grid--half { grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); }
+
+/* ---------------------------------------------------------- METRIC TILE */
+.tile__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.tile__label {
+  font-size: var(--t-2xs);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  color: var(--c-cacao);
+}
+
+.tile__icon {
+  margin-left: auto;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: var(--c-sand);
+  color: var(--c-cacao);
+}
+.tile__icon svg { width: 14px; height: 14px; }
+
+.tile__value {
+  font-family: var(--f-display);
+  font-size: var(--t-3xl);
+  line-height: 1;
+  color: var(--c-ink);
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.tile__delta {
+  font-family: var(--f-ui);
+  font-size: var(--t-2xs);
+  letter-spacing: .02em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.tile__delta--up   { background: rgba(107, 122, 94, .17); color: #46523B; }
+.tile__delta--down { background: rgba(158, 75, 66, .15);  color: #7E3A33; }
+.tile__delta--flat { background: var(--c-sand);           color: var(--c-cacao); }
+
+/* Provenance line — every tile declares its source and freshness.
+   This is the honesty rule made visible. */
+.tile__meta {
+  margin-top: 11px;
+  padding-top: 9px;
+  border-top: 1px solid var(--dash-hair);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--t-2xs);
+  color: var(--c-cacao);
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+/* The table name must stay readable; the freshness stamp is what yields. */
+.tile__meta .tile__src { flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; }
+.tile__meta > span:last-child { flex: none; white-space: nowrap; }
+
+.tile__src {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: .01em;
+  color: var(--c-cacao);
+  background: var(--c-sand);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+.tile__sparkline { margin-top: 12px; display: block; width: 100%; height: 34px; }
+
+/* ------------------------------------------------------------- BADGES */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--t-2xs);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge--demo {
+  background: var(--c-espresso);
+  color: var(--c-bone);
+}
+
+.badge--empty {
+  background: var(--c-sand);
+  color: var(--c-cacao);
+  border: 1px solid var(--dash-hair);
+}
+
+.badge--live {
+  background: rgba(107, 122, 94, .17);
+  color: #46523B;
+}
+
+/* ------------------------------------------------------- STATUS PILLS
+   Earth-tone only. A Bootstrap red would break the system. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--t-2xs);
+  letter-spacing: .03em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+.pill::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.pill--new       { background: rgba(110, 86, 78, .14);  color: #5B4740; }
+.pill--contacted { background: rgba(168, 116, 46, .16); color: #7A5420; }
+.pill--booked    { background: rgba(107, 122, 94, .18); color: #46523B; }
+.pill--closed    { background: var(--c-sand);           color: var(--c-cacao); }
+.pill--spam      { background: rgba(158, 75, 66, .15);  color: #7E3A33; }
+
+/* =========================================================================
+   LISTBOX — the dropdowns.
+   Real combobox semantics: aria-expanded, aria-controls, aria-activedescendant,
+   roving selection, full keyboard support, typeahead. Bound to a URL param.
+   ========================================================================= */
+.lb { position: relative; display: flex; flex-direction: column; gap: 5px; }
+
+.lb__label {
+  font-size: var(--t-2xs);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  color: var(--c-cacao);
+  padding-left: 2px;
+}
+
+.lb__btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 158px;
+  padding: 8px 11px;
+  background: var(--c-mist);
+  border: 1px solid var(--dash-hair);
+  border-radius: var(--dash-radius-sm);
+  box-shadow: var(--dash-inset);
+  font-size: var(--t-xs);
+  color: var(--c-espresso);
+  text-align: left;
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+
+.lb__btn:hover { border-color: var(--c-clay); }
+
+.lb__btn[aria-expanded="true"] {
+  border-color: var(--c-cacao);
+  box-shadow: var(--dash-inset), 0 0 0 3px rgba(110, 86, 78, .1);
+}
+
+.lb__val { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.lb__caret {
+  width: 11px;
+  height: 11px;
+  flex: none;
+  color: var(--c-cacao);
+  transition: transform .2s ease;
+}
+
+.lb__btn[aria-expanded="true"] .lb__caret { transform: rotate(180deg); }
+
+/* A filter that is away from its default gets a caramel hairline underscore —
+   so an active filter is visible without a coloured fill. */
+.lb__btn[data-dirty="true"] { border-color: var(--dash-hair-gold); }
+.lb__btn[data-dirty="true"]::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-gold);
+}
+
+.lb__pop {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 100%;
+  max-height: 290px;
+  overflow-y: auto;
+  padding: 5px;
+  background: var(--c-mist);
+  border: 1px solid var(--dash-hair);
+  border-radius: var(--dash-radius-sm);
+  box-shadow: var(--dash-shadow-lift);
+  /* Caramel edge-sheen on the glass. */
+  background-image: linear-gradient(var(--c-mist), var(--c-mist)),
+                    linear-gradient(135deg, var(--dash-hair-gold), transparent 42%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.lb__pop[hidden] { display: none; }
+
+.lb__opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 9px;
+  border-radius: 6px;
+  font-size: var(--t-xs);
+  color: var(--c-espresso);
+  cursor: pointer;
+  scroll-margin: 5px;
+}
+
+.lb__opt:hover,
+.lb__opt.is-active { background: var(--c-sand); }
+
+.lb__opt[aria-selected="true"] { font-weight: 600; }
+
+.lb__opt[aria-selected="true"] .lb__tick { opacity: 1; }
+
+.lb__tick {
+  margin-left: auto;
+  width: 13px;
+  height: 13px;
+  flex: none;
+  opacity: 0;
+  color: var(--c-gold-ink);
+}
+
+.lb__optcount {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-cacao);
+  background: var(--c-sand);
+  border-radius: 4px;
+  padding: 0 5px;
+  margin-left: auto;
+}
+
+.lb__opt[aria-selected="true"] .lb__optcount { background: var(--c-shell); }
+
+/* =========================================================================
+   FUNNEL
+   ========================================================================= */
+.funnel { display: flex; flex-direction: column; gap: 3px; }
+
+.funnel__row { display: grid; grid-template-columns: 1fr; gap: 5px; padding: 9px 0; }
+
+.funnel__row + .funnel__row { border-top: 1px solid var(--dash-hair); }
+
+.funnel__meta { display: flex; align-items: baseline; gap: 9px; }
+
+.funnel__name { font-size: var(--t-xs); color: var(--c-espresso); }
+
+.funnel__n {
+  margin-left: auto;
+  font-family: var(--f-display);
+  font-size: var(--t-lg);
+  color: var(--c-ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.funnel__pct {
+  font-size: var(--t-2xs);
+  color: var(--c-cacao);
+  font-variant-numeric: tabular-nums;
+  min-width: 42px;
+  text-align: right;
+}
+
+.funnel__track {
+  height: 9px;
+  border-radius: 999px;
+  background: var(--c-sand);
+  overflow: hidden;
+}
+
+.funnel__fill {
+  height: 100%;
+  border-radius: 999px;
+  /* Value rhythm inside the bar: espresso → cacao, never a hue shift. */
+  background: linear-gradient(90deg, var(--c-espresso), var(--c-cacao));
+  transition: width .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.funnel__drop {
+  font-size: var(--t-2xs);
+  color: var(--c-cacao);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.funnel__drop strong { color: #7E3A33; font-weight: 600; }
+
+/* =========================================================================
+   BAR LIST — "what people are asking"
+   ========================================================================= */
+.bars { display: flex; flex-direction: column; gap: 11px; }
+
+.bar__meta { display: flex; align-items: baseline; gap: 9px; margin-bottom: 5px; }
+.bar__name { font-size: var(--t-xs); color: var(--c-espresso); }
+.bar__n {
+  margin-left: auto;
+  font-size: var(--t-xs);
+  color: var(--c-cacao);
+  font-variant-numeric: tabular-nums;
+}
+
+.bar__track { height: 7px; border-radius: 999px; background: var(--c-sand); overflow: hidden; }
+
+.bar__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--c-cacao);
+  transition: width .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.bar:first-child .bar__fill { background: var(--c-espresso); }
+
+/* Question list */
+.qlist { display: flex; flex-direction: column; }
+
+.qlist__item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  font-size: var(--t-xs);
+  color: var(--c-espresso);
+  line-height: 1.5;
+}
+
+.qlist__item + .qlist__item { border-top: 1px solid var(--dash-hair); }
+
+.qlist__n {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-2xs);
+  color: var(--c-cacao);
+  background: var(--c-sand);
+  border-radius: 5px;
+  padding: 1px 6px;
+  height: fit-content;
+}
+
+/* =========================================================================
+   TABLE — inquiry queue
+   ========================================================================= */
+.tablewrap { overflow-x: auto; }
+
+table.t { width: 100%; border-collapse: collapse; font-size: var(--t-xs); }
+
+table.t th {
+  text-align: left;
+  font-size: var(--t-2xs);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  color: var(--c-cacao);
+  font-weight: 400;
+  padding: 11px 14px;
+  background: var(--c-sand);
+  border-bottom: 1px solid var(--dash-hair);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+
+table.t td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--dash-hair);
+  color: var(--c-espresso);
+  vertical-align: middle;
+}
+
+table.t tbody tr:last-child td { border-bottom: 0; }
+table.t tbody tr { transition: background .15s ease; }
+table.t tbody tr:hover { background: var(--c-bone); }
+
+.t__who { display: flex; flex-direction: column; gap: 1px; }
+.t__name { color: var(--c-ink); }
+.t__mail { font-size: var(--t-2xs); color: var(--c-cacao); }
+.t__when { color: var(--c-cacao); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.t__msg {
+  color: var(--c-cacao);
+  max-width: 330px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.45;
+}
+
+/* =========================================================================
+   EMPTY STATES — Tier 2, deferred until the Vagaro replacement ships.
+   Designed for, never invented.
+   ========================================================================= */
+.empty {
+  border: 1px dashed var(--c-clay);
+  background: var(--c-bone);
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-height: 136px;
+  justify-content: center;
+}
+
+.empty__label {
+  font-size: var(--t-2xs);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  color: var(--c-cacao);
+}
+
+.empty__dash {
+  font-family: var(--f-display);
+  font-size: var(--t-2xl);
+  /* Large text (>=24px) only needs 3.0:1, which clay clears here -- but it is
+     a glyph standing in for a value, so it gets the text-legal tone anyway. */
+  color: var(--c-cacao);
+  line-height: 1;
+}
+
+.empty__why { font-size: var(--t-2xs); color: var(--c-cacao); line-height: 1.5; }
+
+/* =========================================================================
+   CONNECTORS
+   ========================================================================= */
+.conn { display: flex; align-items: center; gap: 13px; }
+
+.conn__dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.conn__dot--live    { background: var(--c-success); box-shadow: 0 0 0 3px rgba(107,122,94,.2); }
+.conn__dot--empty   { background: var(--c-clay); }
+.conn__dot--off     { background: var(--c-greige); }
+.conn__dot--pending { background: var(--c-warn); box-shadow: 0 0 0 3px rgba(168,116,46,.17); }
+
+.conn__body { min-width: 0; flex: 1; }
+.conn__name { font-size: var(--t-xs); color: var(--c-ink); }
+.conn__state { font-size: var(--t-2xs); color: var(--c-cacao); margin-top: 2px; line-height: 1.45; }
+
+/* =========================================================================
+   CHART
+   ========================================================================= */
+.chart { display: block; width: 100%; height: 180px; overflow: visible; }
+
+.chart__axis { font-size: 9px; fill: var(--c-cacao); font-family: var(--f-ui); }
+
+.chart__grid { stroke: var(--dash-hair); stroke-width: 1; }
+
+.legend { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 11px; }
+.legend__item { display: flex; align-items: center; gap: 6px; font-size: var(--t-2xs); color: var(--c-cacao); }
+.legend__key { width: 14px; height: 2px; border-radius: 2px; flex: none; }
+
+/* =========================================================================
+   TOAST
+   ========================================================================= */
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 15px;
+  border-radius: var(--dash-radius-sm);
+  background: var(--c-ink);
+  color: var(--c-bone);
+  font-size: var(--t-xs);
+  box-shadow: var(--dash-shadow-lift);
+  border: 1px solid rgba(201, 169, 110, .3);
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.toast.is-on { opacity: 1; transform: translateY(0); }
+
+/* =========================================================================
+   SKIP LINK + A11Y
+   ========================================================================= */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 300;
+  padding: 10px 16px;
+  background: var(--c-espresso);
+  color: var(--c-bone);
+  border-radius: 0 0 8px 0;
+  font-size: var(--t-xs);
+}
+.skip:focus { left: 0; }
+
+.sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+@media (max-width: 1100px) {
+  .grid--2 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  :root { --dash-gutter: 18px; }
+  .dash { grid-template-columns: 1fr; }
+  .side {
+    position: static;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    padding: 12px 14px;
+    gap: 14px;
+  }
+  /* The brand block wraps to four lines at phone width and pushes the whole
+     header down. On mobile the mark alone identifies the surface; the owner
+     name is already implied by being signed in. */
+  .side__brand { padding: 0; flex: none; }
+  .side__name { white-space: nowrap; }
+  .side__role { display: none; }
+  .side__section, .side__foot { display: none; }
+  .side__nav { display: flex; gap: 5px; padding: 0; }
+  .side__link { white-space: nowrap; padding: 7px 11px; }
+  .side__link[aria-current="true"]::before {
+    left: 11px; right: 11px; top: auto; bottom: -1px;
+    width: auto; height: 2px; border-radius: 2px 2px 0 0;
+  }
+  .side__count { display: none; }
+  .top { position: static; }
+  .tile__value { font-size: var(--t-2xl); }
+}
+
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; }
+  .grid--half { grid-template-columns: 1fr; }
+  .lb__btn { min-width: 0; }
+  .lb { flex: 1 1 140px; }
+}
+
+/* =========================================================================
+   MOTION
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+@media print {
+  .side, .top, .modebar__actions, .toast { display: none; }
+  .card { break-inside: avoid; box-shadow: none; }
+}

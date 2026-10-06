@@ -13,8 +13,8 @@
       --gold: #C9A96E;
       --gold-light: rgba(201,169,110,0.18);
       --gold-border: rgba(201,169,110,0.35);
-      --bg: #0f1a14;
-      --bg2: #162019;
+      --bg: #241915;
+      --bg2: #241915;
       --glass: rgba(255,255,255,0.045);
       --glass-border: rgba(255,255,255,0.10);
       --glass-hover: rgba(255,255,255,0.08);
@@ -40,9 +40,9 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 15% 20%, rgba(44,95,60,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 60% at 15% 20%, rgba(107,122,94,0.18) 0%, transparent 60%),
         radial-gradient(ellipse 50% 50% at 85% 80%, rgba(201,169,110,0.08) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(22,32,25,0.95) 0%, transparent 100%);
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(36,25,21,0.95) 0%, transparent 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -54,6 +54,7 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
+      height: 100dvh;
       max-width: 780px;
       margin: 0 auto;
       padding: 0 16px;
@@ -73,7 +74,7 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(201,169,110,0.25), rgba(44,95,60,0.3));
+      background: linear-gradient(135deg, rgba(201,169,110,0.25), rgba(107,122,94,0.3));
       border: 1px solid var(--gold-border);
       display: flex;
       align-items: center;
@@ -86,7 +87,7 @@
       font-family: 'Italiana', serif;
       font-size: 1.25rem;
       font-weight: 400;
-      color: var(--gold);
+      color:var(--gold-text);
       letter-spacing: 0.04em;
     }
 
@@ -96,6 +97,14 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-top: 2px;
+    }
+
+    .return-link {
+      display: inline-block;
+      margin-top: 8px;
+      color:var(--gold-text);
+      font-size: 0.75rem;
+      text-underline-offset: 3px;
     }
 
     .status-dot {
@@ -111,8 +120,8 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #5cb878;
-      box-shadow: 0 0 6px rgba(92,184,120,0.6);
+      background: #6B7A5E;
+      box-shadow: 0 0 6px rgba(107,122,94,0.6);
       animation: pulse 2.5s ease-in-out infinite;
     }
 
@@ -166,7 +175,7 @@
     }
 
     .msg.bot .msg-avatar {
-      background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(44,95,60,0.25));
+      background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(107,122,94,0.25));
       border: 1px solid var(--gold-border);
     }
 
@@ -237,7 +246,7 @@
       border-radius: 20px;
       border: 1px solid var(--gold-border);
       background: var(--gold-light);
-      color: var(--gold);
+      color:var(--gold-text);
       font-size: 0.75rem;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
@@ -298,7 +307,7 @@
       border-radius: 50%;
       border: 1px solid var(--gold-border);
       background: linear-gradient(135deg, rgba(201,169,110,0.25), rgba(201,169,110,0.12));
-      color: var(--gold);
+      color:var(--gold-text);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -323,7 +332,7 @@
       letter-spacing: 0.03em;
     }
 
-    .footer-note a { color: var(--gold); text-decoration: none; }
+    .footer-note a { color:var(--gold-text); text-decoration: none; }
     .footer-note a:hover { text-decoration: underline; }
 
     /* ── Welcome message ── */
@@ -342,7 +351,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.6rem;
       font-weight: 300;
-      color: var(--gold);
+      color:var(--gold-text);
       letter-spacing: 0.02em;
       margin-bottom: 8px;
     }
@@ -365,6 +374,7 @@
       <div class="header-text">
         <h1>LoveLi Wellness Assistant</h1>
         <p>LoveLi Care Med Spa · Towson, MD</p>
+        <a class="return-link" href="/#wellness-assistant" target="_top">← Return to LoveLi Care</a>
       </div>
       <div class="status-dot">
         <div class="dot"></div>
@@ -373,7 +383,7 @@
     </div>
 
     <!-- Messages -->
-    <div class="chat-messages" id="messages">
+    <div class="chat-messages" id="messages" role="log" aria-label="Chat messages" aria-live="polite">
       <div class="welcome">
         <div class="welcome-icon">✨</div>
         <h2>How can we help you today?</h2>
@@ -396,12 +406,14 @@
       <div class="input-row">
         <textarea
           id="userInput"
+          aria-label="Your message to the wellness assistant"
+          maxlength="4000"
           placeholder="Ask about services, treatments, booking..."
           rows="1"
           onkeydown="handleKey(event)"
           oninput="autoResize(this)"
         ></textarea>
-        <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send">
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send" aria-label="Send message">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="22" y1="2" x2="11" y2="13"></line>
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -425,6 +437,7 @@
 
     let history = [];
     let quickHidden = false;
+    let isSending = false;
 
     function autoResize(el) {
       el.style.height = 'auto';
@@ -439,6 +452,7 @@
     }
 
     function sendQuick(btn) {
+      if (isSending) return;
       inputEl.value = btn.textContent;
       sendMessage();
     }
@@ -481,7 +495,8 @@
 
     async function sendMessage() {
       const text = inputEl.value.trim();
-      if (!text) return;
+      if (!text || isSending) return;
+      isSending = true;
 
       // Hide quick prompts on first send
       if (!quickHidden) {
@@ -510,8 +525,8 @@
         const data = await res.json();
         removeTyping();
 
-        if (data.error) {
-          addMsg('bot', '⚠️ ' + data.error);
+        if (!res.ok || data.error || typeof data.reply !== 'string') {
+          addMsg('bot', '⚠️ ' + (data.error || 'The assistant is temporarily unavailable. Please try again.'));
         } else {
           addMsg('bot', data.reply);
           history.push({ role: 'user', content: text });
@@ -522,14 +537,15 @@
       } catch (err) {
         removeTyping();
         addMsg('bot', 'Sorry, something went wrong. Please try again or call us at 410-616-5451.');
+      } finally {
+        isSending = false;
+        sendBtn.disabled = false;
+        inputEl.focus({ preventScroll: true });
       }
-
-      sendBtn.disabled = false;
-      inputEl.focus();
     }
 
-    // Focus input on load
-    inputEl.focus();
+    // Keep an embedded assistant from pulling focus away from the main site.
+    if (window.self === window.top) inputEl.focus({ preventScroll: true });
   </script>
 </body>
 </html>

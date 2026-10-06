@@ -1,0 +1,232 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "LoveLi Care Med Spa & Wellness Lounge design tokens. Biophilic · Clinical · Luxury. Aesthetic source: ambient luxury villa / sunset lagoon.",
+  "$meta": {
+    "brand": "LoveLi Care Med Spa & Wellness Lounge",
+    "provider": "Libra Robertson, NP-CRNP",
+    "tagline": "Biophilic · Clinical · Luxury",
+    "version": "2.0.0",
+    "palette": "Vagaro 'Bare' — warm monochrome nude",
+    "allocationRule": "65% bone+mist / 20% sand+shell / 10% espresso+ink / 5% cacao+clay+greige",
+    "motionTempoBpm": 122,
+    "authoritativeDoc": "BRANDING.md",
+    "hexSamplingNote": "Core five sampled from the Vagaro 'Bare' template screenshot. Reconcile against Vagaro's own swatch export before production; expect +/-2 per channel."
+  },
+
+  "color": {
+    "$description": "Vagaro 'Bare' warm monochrome. Single hue band ~14-24 degrees across the full value range. All contrast is VALUE contrast — there is no second hue. Failure mode is muddiness: keep a hard value gap between adjacent surfaces.",
+    "core": {
+      "espresso": { "$value": "#3C2B25", "$type": "color", "$description": "Darkest ground, primary dark, buttons, headings on light. hsl(16 24% 19%)." },
+      "cacao":    { "$value": "#6E564E", "$type": "color", "$description": "Secondary dark, accent text on light (6.0:1 vs bone), hover. hsl(15 17% 37%)." },
+      "greige":   { "$value": "#BDAEA9", "$type": "color", "$description": "Hairlines, dividers, muted text ON DARK ONLY. Fails on light (1.9:1). hsl(15 14% 71%)." },
+      "shell":    { "$value": "#E9DAD1", "$type": "color", "$description": "Secondary light ground, body text on dark (9.9:1). hsl(23 38% 86%)." },
+      "bone":     { "$value": "#F4F1EB", "$type": "color", "$description": "Primary light ground. hsl(40 29% 94%)." }
+    },
+    "extension": {
+      "$description": "Derived in-family. Same hue band, no new chroma introduced.",
+      "ink":   { "$value": "#241915", "$type": "color", "$description": "Max-contrast headings, full-bleed dark sections (14.9:1 vs bone)." },
+      "sand":  { "$value": "#EADFD5", "$type": "color", "$description": "Page field behind cards. Matches Bare's own card surround." },
+      "clay":  { "$value": "#A8938B", "$type": "color", "$description": "Secondary buttons, icon strokes, placeholders. NEVER text (2.6:1)." },
+      "mist":  { "$value": "#FAF8F5", "$type": "color", "$description": "Card surfaces lifting off bone, input fields." }
+    },
+    "heritage": {
+      "$description": "OPTIONAL. Existing site equity (51 occurrences of gold). Hue 39 degrees harmonizes with the nude band. If kept: <=3% of any screen, metallic accents only, never a filled button or body text. The system is complete without it — decide once, globally.",
+      "gold":    { "$value": "#C9A96E", "$type": "color", "$description": "DECORATIVE ONLY. Fails as text on any light ground (2.0:1)." },
+      "goldInk": { "$value": "#7A5F33", "$type": "color", "$description": "The only accessible gold for text on light (5.7:1). Simpler: never let gold carry text." }
+    },
+    "semantic": {
+      "light": {
+        "bg":         { "$value": "{color.core.bone}", "$type": "color" },
+        "bgAlt":      { "$value": "{color.extension.sand}", "$type": "color" },
+        "bgWarm":     { "$value": "{color.core.shell}", "$type": "color" },
+        "surface":    { "$value": "{color.extension.mist}", "$type": "color" },
+        "text":       { "$value": "{color.core.espresso}", "$type": "color" },
+        "textStrong": { "$value": "{color.extension.ink}", "$type": "color" },
+        "textMuted":  { "$value": "{color.core.cacao}", "$type": "color" },
+        "textAccent": { "$value": "{color.core.cacao}", "$type": "color" },
+        "rule":       { "$value": "{color.core.greige}", "$type": "color" },
+        "accent":     { "$value": "{color.core.espresso}", "$type": "color", "$description": "In a monochrome system the primary button is simply the darkest value, not a hue." },
+        "success":    { "$value": "#6B7A5E", "$type": "color" },
+        "warn":       { "$value": "#A8742E", "$type": "color" },
+        "error":      { "$value": "#9E4B42", "$type": "color" }
+      },
+      "dark": {
+        "bg":         { "$value": "{color.core.espresso}", "$type": "color" },
+        "bgAlt":      { "$value": "{color.extension.ink}", "$type": "color" },
+        "bgWarm":     { "$value": "{color.core.cacao}", "$type": "color" },
+        "surface":    { "$value": "rgba(233,218,209,0.06)", "$type": "color" },
+        "text":       { "$value": "{color.core.shell}", "$type": "color" },
+        "textStrong": { "$value": "{color.core.bone}", "$type": "color" },
+        "textMuted":  { "$value": "{color.core.greige}", "$type": "color" },
+        "textAccent": { "$value": "{color.core.shell}", "$type": "color" },
+        "rule":       { "$value": "rgba(189,174,169,0.26)", "$type": "color" },
+        "accent":     { "$value": "{color.core.shell}", "$type": "color" },
+        "success":    { "$value": "#9DAE8C", "$type": "color" },
+        "warn":       { "$value": "#D9A961", "$type": "color" },
+        "error":      { "$value": "#D98C84", "$type": "color" }
+      }
+    },
+    "allocation": {
+      "$description": "In a monochrome system the discipline is value restraint, not hue restraint.",
+      "$value": [
+        { "share": "65%", "band": "bone + mist", "role": "primary light field" },
+        { "share": "20%", "band": "sand + shell", "role": "warm secondary grounds" },
+        { "share": "10%", "band": "espresso + ink", "role": "type, dark sections, buttons" },
+        { "share": "5%",  "band": "cacao + clay + greige", "role": "secondary UI, rules" },
+        { "share": "<=3%", "band": "gold", "role": "optional, carved out of the 5%" }
+      ]
+    },
+    "contrastVerified": {
+      "$description": "WCAG 2.1 verified pairs. Use only these for text. Dominant risk: mid-tones that read fine on a calibrated monitor and vanish on a phone in a sunlit room.",
+      "$value": [
+        { "fg": "#241915", "bg": "#F4F1EB", "ratio": 14.9, "pass": "AAA",  "use": "display headings" },
+        { "fg": "#3C2B25", "bg": "#F4F1EB", "ratio": 11.9, "pass": "AAA",  "use": "default body on light" },
+        { "fg": "#3C2B25", "bg": "#E9DAD1", "ratio": 9.9,  "pass": "AAA",  "use": "body on blush ground" },
+        { "fg": "#6E564E", "bg": "#F4F1EB", "ratio": 6.0,  "pass": "AA",   "use": "accent copy, links on light" },
+        { "fg": "#F4F1EB", "bg": "#3C2B25", "ratio": 11.9, "pass": "AAA",  "use": "body on dark" },
+        { "fg": "#E9DAD1", "bg": "#3C2B25", "ratio": 9.9,  "pass": "AAA",  "use": "body on dark" },
+        { "fg": "#BDAEA9", "bg": "#3C2B25", "ratio": 6.3,  "pass": "AA",   "use": "muted text on dark" },
+        { "fg": "#BDAEA9", "bg": "#F4F1EB", "ratio": 1.9,  "pass": "FAIL", "use": "NEVER text — hairlines and dividers only" },
+        { "fg": "#A8938B", "bg": "#F4F1EB", "ratio": 2.6,  "pass": "FAIL", "use": "NEVER text — placeholder only with a visible label" },
+        { "fg": "#C9A96E", "bg": "#F4F1EB", "ratio": 2.0,  "pass": "FAIL", "use": "NEVER text" }
+      ]
+    },
+    "retired": {
+      "$description": "Purge these from public/*.html during migration.",
+      "$value": {
+        "tealCypressPalm": ["#2F4F4F", "#0F2020", "#1A3232", "#1A2E2E", "#173b35", "#0D2020", "#0f1a14"],
+        "lagoonAquaMint":  ["#A8D5BA", "#B3E5FC"],
+        "duplicateGolds":  ["#D4B87A", "#D9BE86", "#d5ad71", "#e0bd84", "#eed3a0", "#f5dfb5", "#F0D98A", "#B8935A"],
+        "pinkCoralStrays": ["#F8BBD0", "#FFCDD2", "#e5b6a9", "#f2cfc4", "#edc0b1", "#e7b8aa"],
+        "amber":           ["#FFB300", "#FFE082"]
+      }
+    }
+  },
+
+  "font": {
+    "family": {
+      "display":   { "$value": "'Marcellus', 'Cormorant Garamond', Georgia, serif", "$type": "fontFamily", "$description": "Inscriptional Roman. Headings 21px and above only." },
+      "editorial": { "$value": "'Cormorant Garamond', Georgia, serif", "$type": "fontFamily", "$description": "Human voice: testimonials, mission, Libra quotes. Italic 300. Never UI." },
+      "ui":        { "$value": "'Jost', system-ui, -apple-system, sans-serif", "$type": "fontFamily", "$description": "Body and all interface. Default weight 300." }
+    },
+    "removed": {
+      "$description": "Families currently loaded in public/*.html that must be removed during consolidation.",
+      "$value": ["Bodoni Moda", "Italiana", "Playfair Display", "Inter", "Mulish", "Montserrat", "Open Sans"]
+    },
+    "size": {
+      "$description": "Base 17px, ratio 1.25 (major third) — calmer than 1.333 for editorial restraint.",
+      "2xs":  { "$value": "0.6875rem", "$type": "dimension" },
+      "xs":   { "$value": "0.8125rem", "$type": "dimension" },
+      "sm":   { "$value": "0.9375rem", "$type": "dimension" },
+      "base": { "$value": "1.0625rem", "$type": "dimension" },
+      "lg":   { "$value": "1.3125rem", "$type": "dimension" },
+      "xl":   { "$value": "1.6875rem", "$type": "dimension" },
+      "2xl":  { "$value": "2.0625rem", "$type": "dimension" },
+      "3xl":  { "$value": "2.625rem",  "$type": "dimension" },
+      "4xl":  { "$value": "3.25rem",   "$type": "dimension" },
+      "5xl":  { "$value": "4.0625rem", "$type": "dimension" },
+      "6xl":  { "$value": "5.0625rem", "$type": "dimension" },
+      "hero":      { "$value": "clamp(2.5rem, 1.4rem + 5.2vw, 4.0625rem)", "$type": "dimension" },
+      "statement": { "$value": "clamp(2rem, 1.1rem + 4.4vw, 5.0625rem)",   "$type": "dimension" },
+      "h2":        { "$value": "clamp(1.75rem, 1.2rem + 2.4vw, 2.625rem)", "$type": "dimension" }
+    },
+    "lineHeight": {
+      "display":   { "$value": 1.08, "$type": "number" },
+      "heading":   { "$value": 1.22, "$type": "number" },
+      "editorial": { "$value": 1.5,  "$type": "number" },
+      "body":      { "$value": 1.65, "$type": "number", "$description": "Load-bearing. Generous leading is the cheapest way to feel unhurried." },
+      "tight":     { "$value": 1.4,  "$type": "number" }
+    },
+    "tracking": {
+      "display": { "$value": "-0.02em", "$type": "dimension" },
+      "heading": { "$value": "-0.01em", "$type": "dimension" },
+      "body":    { "$value": "0",       "$type": "dimension" },
+      "caps":    { "$value": "0.16em",  "$type": "dimension", "$description": "Credential / overline small caps voice." }
+    },
+    "weight": {
+      "body":   { "$value": 300, "$type": "number" },
+      "medium": { "$value": 400, "$type": "number" },
+      "strong": { "$value": 500, "$type": "number" }
+    },
+    "measure": { "$value": "34em", "$type": "dimension", "$description": "~68 characters max." }
+  },
+
+  "space": {
+    "1":  { "$value": "0.25rem", "$type": "dimension" },
+    "2":  { "$value": "0.5rem",  "$type": "dimension" },
+    "3":  { "$value": "0.75rem", "$type": "dimension" },
+    "4":  { "$value": "1rem",    "$type": "dimension" },
+    "5":  { "$value": "1.5rem",  "$type": "dimension" },
+    "6":  { "$value": "2rem",    "$type": "dimension" },
+    "7":  { "$value": "3rem",    "$type": "dimension" },
+    "8":  { "$value": "4rem",    "$type": "dimension" },
+    "9":  { "$value": "6rem",    "$type": "dimension" },
+    "10": { "$value": "8rem",    "$type": "dimension" },
+    "11": { "$value": "10rem",   "$type": "dimension" },
+    "12": { "$value": "14rem",   "$type": "dimension" }
+  },
+
+  "layout": {
+    "container":       { "$value": "1280px", "$type": "dimension" },
+    "containerNarrow": { "$value": "760px",  "$type": "dimension" },
+    "gutter":          { "$value": "clamp(1.5rem, 4vw, 2.5rem)", "$type": "dimension" },
+    "sectionPadY":     { "$value": "clamp(5rem, 11vh, 10rem)",   "$type": "dimension" },
+    "sectionPadYLg":   { "$value": "clamp(7rem, 16vh, 14rem)",   "$type": "dimension" },
+    "editorialSplit":  { "$value": "7fr 5fr", "$type": "dimension", "$description": "Villa variant. Asymmetric reads as architecture; 6/6 reads as template. Alternate direction down the page." }
+  },
+
+  "radius": {
+    "sm":   { "$value": "6px",   "$type": "dimension" },
+    "md":   { "$value": "12px",  "$type": "dimension" },
+    "lg":   { "$value": "20px",  "$type": "dimension" },
+    "pill": { "$value": "999px", "$type": "dimension" },
+    "arch": { "$value": "20rem 20rem 0 0", "$type": "dimension", "$description": "SIGNATURE. Villa archway niche. Use on Libra's portrait, treatment-room photography, service feature media." }
+  },
+
+  "elevation": {
+    "$description": "Pool-surface model: elevation is expressed as translucency, light-catching edges, and warm glow — never conventional drop shadow. Level 3's second shadow is a gold glow, not black: objects appear lit, not weighted.",
+    "0": { "$value": { "border": "1px solid {color.semantic.light.rule}" }, "$type": "shadow" },
+    "1": { "$value": { "background": "rgba(255,249,245,0.055)", "border": "1px solid rgba(201,169,110,0.14)", "backdropFilter": "blur(20px) saturate(115%)" }, "$type": "shadow" },
+    "2": { "$value": { "backdropFilter": "blur(28px) saturate(118%)", "boxShadow": "inset 0 1px 0 rgba(255,255,255,0.10)" }, "$type": "shadow" },
+    "3": { "$value": { "boxShadow": "0 24px 64px -24px rgba(15,32,32,0.50), 0 0 48px -16px rgba(201,169,110,0.14)" }, "$type": "shadow" },
+    "4": { "$value": { "scrim": "rgba(15,32,32,0.72)", "scrimBlur": "blur(12px)" }, "$type": "shadow" }
+  },
+
+  "motion": {
+    "$description": "Derived from the 122 BPM source genre. 1 beat = 492ms, rounded to 480ms base. This derivation is what makes the site feel like the reference, not merely look like it.",
+    "duration": {
+      "quick":    { "$value": "240ms",  "$type": "duration", "$description": "½ beat — hover, focus" },
+      "base":     { "$value": "480ms",  "$type": "duration", "$description": "1 beat — default transition, reveal" },
+      "slow":     { "$value": "720ms",  "$type": "duration", "$description": "1½ beats — panel expand" },
+      "dissolve": { "$value": "1200ms", "$type": "duration", "$description": "~2½ beats — hero crossfade" },
+      "ambient":  { "$value": "16s",    "$type": "duration", "$description": "8-bar phrase — background loop, caustic cycle" },
+      "stagger":  { "$value": "90ms",   "$type": "duration", "$description": "hi-hat subdivision; cap at 6 siblings" }
+    },
+    "easing": {
+      "tide":    { "$value": "cubic-bezier(0.22, 1, 0.36, 1)", "$type": "cubicBezier", "$description": "Default. Long deceleration tail = reverb decay; things settle rather than stop." },
+      "swell":   { "$value": "cubic-bezier(0.65, 0, 0.35, 1)", "$type": "cubicBezier", "$description": "Symmetric — loops, ambient." },
+      "surface": { "$value": "cubic-bezier(0.33, 1, 0.68, 1)", "$type": "cubicBezier", "$description": "Gentle out — hovers." }
+    },
+    "banned": {
+      "$value": ["bounce", "elastic", "overshoot", "spinners", "auto-advancing carousels", "scroll-jacking", "snap-scroll", "marquee", "count-up numbers", "cursor-followers", "parallax beyond 6% travel"]
+    }
+  },
+
+  "gradient": {
+    "$description": "ENVIRONMENTS ONLY. Never apply to a button, text fill, card, icon, or decorative blob. Gradients are environments, not objects — this rule keeps the system from sliding into SaaS.",
+    "horizon": { "$value": "linear-gradient(170deg, #241915 0%, #3C2B25 38%, #6E564E 68%, #BDAEA9 88%, #E9DAD1 100%)", "$type": "gradient" },
+    "dusk":    { "$value": "linear-gradient(180deg, #241915 0%, #3C2B25 55%, #6E564E 100%)", "$type": "gradient" },
+    "plaster": { "$value": "linear-gradient(165deg, #FAF8F5 0%, #F4F1EB 45%, #EADFD5 100%)", "$type": "gradient" },
+    "sunwash": { "$value": "linear-gradient(200deg, #F4F1EB 0%, #EADFD5 52%, #E9DAD1 100%)", "$type": "gradient" }
+  },
+
+  "serviceCategories": {
+    "$description": "Existing site taxonomy. In a monochrome system categories are differentiated by GROUND VALUE and photographic register, never by color coding.",
+    "refine":    { "$value": { "label": "Refine",    "domain": "Medical Aesthetics",                 "ground": "{color.core.bone}",        "register": "Brightest. High-key morning light, mirror-clean." } },
+    "sculpt":    { "$value": { "label": "Sculpt",    "domain": "Body Contouring / Snatch Protocol™", "ground": "{color.extension.ink}",    "register": "Most architectural. Deep shadow, strong directional light, form and edge." } },
+    "optimize":  { "$value": { "label": "Optimize",  "domain": "Weight Management",                  "ground": "{color.extension.mist}",   "register": "Clear, daylit, organized. Charts permitted here." } },
+    "restore":   { "$value": { "label": "Restore",   "domain": "IV & Nutritional Wellness",          "ground": "{color.core.espresso}",    "register": "Deepest, most immersive. Dusk, lantern light, reclined comfort." } },
+    "nourish":   { "$value": { "label": "Nourish",   "domain": "Nutrition Counseling",               "ground": "{color.core.shell}",       "register": "Warmest, most domestic. Teak table, ceramic, real food." } },
+    "concierge": { "$value": { "label": "Concierge Medical", "domain": "Non-Emergent Care",          "ground": "{color.extension.sand}",   "register": "Most restrained. Efficiency signals respect for time." } }
+  }
+}

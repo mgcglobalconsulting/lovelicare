@@ -6,41 +6,72 @@
 /* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
-body{font-family:'Open Sans',system-ui,sans-serif;color:#2F4F4F;background:#F5EFE8;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;cursor:none}
+body{font-family:'Open Sans',system-ui,sans-serif;color:var(--c-espresso);background:var(--c-bone);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
 img{max-width:100%;display:block}
-button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:none}
+button{font-family:'Montserrat',sans-serif;cursor:pointer;border:none;background:none}
 
 /* ── DESIGN TOKENS ── */
 :root{
-  --cream:#F5EFE8;
-  --cream-deep:#EDE4D8;
-  --cream-darker:#E0D5C5;
-  --teal:#2F4F4F;
-  --teal-deep:#1A3232;
-  --teal-richer:#0F2020;
-  --teal-mid:rgba(47,79,79,.7);
-  --teal-soft:rgba(47,79,79,.45);
-  --gold:#C9A96E;
-  --gold-bright:#D4B87A;
-  --gold-light:#F0D98A;
+  /* ══ BARE+ — canonical palette. Authority: brand/BRANDING.md §1.1–1.3 ══
+     Allocation: 65% bone/mist · 20% sand/shell · 10% espresso/ink
+                 · 5% cacao/clay/greige · ≤3% caramel.
+     Caramel NEVER carries text. Use --c-gold-ink (#7A5F33) if it must. */
+  --c-bone:#F4F1EB;      /* primary light ground */
+  --c-mist:#FAF8F5;      /* card surfaces lifting off bone, inputs */
+  --c-sand:#EADFD5;      /* page field behind cards */
+  --c-shell:#E9DAD1;     /* warm blush ground, body text on dark */
+  --c-greige:#BDAEA9;    /* hairlines; text ON DARK ONLY (1.9:1 on light) */
+  --c-clay:#A8938B;      /* secondary buttons, icon strokes — never text */
+  --c-cacao:#6E564E;     /* muted text on light (6.0:1), hover states */
+  --c-espresso:#3C2B25;  /* body on light (11.9:1), buttons, dark ground */
+  --c-ink:#241915;       /* max-contrast headings, full-bleed dark */
+  --c-gold:#C9A96E;      /* CARAMEL — metallic accent only, ≤3%, never text */
+  --c-gold-ink:#7A5F33;  /* the only text-legal caramel on light */
+
+  /* Caramel as TYPE. Raw --c-gold is 2.0:1 on light and fails WCAG, so text
+     defaults to gold-ink; dark grounds opt back into the bright gold below,
+     where it measures ~7:1. Never set `color:var(--gold-text)` directly again. */
+  --gold-text:#654C2D;  /* deepened from #7A5F33: the documented value clears
+                           bone (5.4:1) but not the sand/greige mid-tone grounds
+                           this site also uses. #654C2D clears every light ground. */
+
+  /* Earth-tone status — a Bootstrap red would break the system */
+  --c-success:#6B7A5E;
+  --c-warn:#A8742E;
+  --c-error:#9E4B42;
+
+  /* ══ Legacy aliases → Bare+. Every existing rule inherits the new palette
+     through these. Do not reintroduce raw teal/pink/amber literals. ══ */
+  --cream:var(--c-bone);
+  --cream-deep:var(--c-sand);
+  --cream-darker:var(--c-shell);
+  --teal:var(--c-espresso);
+  --teal-deep:var(--c-ink);
+  --teal-richer:var(--c-ink);
+  --teal-mid:rgba(60,43,37,.72);
+  --teal-soft:rgba(60,43,37,.46);
+  --gold:var(--c-gold);
+  --gold-bright:color-mix(in srgb,var(--c-gold) 82%,#fff);
+  --gold-light:color-mix(in srgb,var(--c-gold) 58%,#fff);
   --gold-pale:rgba(201,169,110,.15);
   --gold-glow:rgba(201,169,110,.3);
-  --white:#FFFFFF;
-  --rose:rgba(220,170,170,.25);
+  --white:var(--c-mist);          /* warm white — never pure #FFF */
+  --rose:rgba(233,218,209,.3);    /* was pink; now shell */
 
-  /* Glass surface system */
-  --glass-cream:rgba(255,250,245,.52);
-  --glass-cream-strong:rgba(255,252,248,.72);
-  --glass-white:rgba(255,255,255,.44);
-  --glass-white-strong:rgba(255,255,255,.68);
-  --glass-white-subtle:rgba(255,255,255,.22);
-  --glass-teal:rgba(30,50,50,.75);
-  --glass-border:rgba(255,255,255,.60);
-  --glass-border-strong:rgba(255,255,255,.80);
+  /* Glass surface system — warmed from white toward mist/sand so panels
+     read as cream rather than grey. This is what makes the glass luxurious. */
+  --glass-cream:rgba(250,248,245,.58);
+  --glass-cream-strong:rgba(250,248,245,.78);
+  --glass-white:rgba(252,250,247,.50);
+  --glass-white-strong:rgba(252,250,247,.74);
+  --glass-white-subtle:rgba(252,250,247,.26);
+  --glass-teal:rgba(36,25,21,.76);
+  --glass-border:rgba(255,253,250,.66);
+  --glass-border-strong:rgba(255,253,250,.86);
   --glass-border-gold:rgba(201,169,110,.40);
-  --glass-border-dark:rgba(255,255,255,.14);
+  --glass-border-dark:rgba(244,241,235,.16);
 
   /* Blur levels */
   --blur-sm:blur(12px) saturate(140%);
@@ -49,12 +80,14 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
   --blur-xl:blur(48px) saturate(200%);
 
   /* Shadows */
-  --shadow-inset:inset 0 1.5px 0 rgba(255,255,255,.80),inset 0 -1px 0 rgba(0,0,0,.05);
-  --shadow-inset-dark:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.3);
-  --shadow-card:0 4px 16px rgba(0,0,0,.06),0 1px 4px rgba(0,0,0,.04);
-  --shadow-lift:0 12px 40px rgba(0,0,0,.10),0 4px 12px rgba(0,0,0,.06);
-  --shadow-float:0 24px 64px rgba(0,0,0,.14),0 8px 24px rgba(0,0,0,.08);
-  --shadow-deep:0 40px 100px rgba(0,0,0,.18),0 12px 32px rgba(0,0,0,.10);
+  /* Shadows carry espresso, not black. Black shadows on a warm palette read
+     grey and dull; espresso-tinted shadows keep the whole page warm. */
+  --shadow-inset:inset 0 1.5px 0 rgba(255,253,250,.85),inset 0 -1px 0 rgba(60,43,37,.05);
+  --shadow-inset-dark:inset 0 1px 0 rgba(244,241,235,.14),inset 0 -1px 0 rgba(36,25,21,.3);
+  --shadow-card:0 4px 16px rgba(60,43,37,.07),0 1px 4px rgba(60,43,37,.05);
+  --shadow-lift:0 12px 40px rgba(60,43,37,.11),0 4px 12px rgba(60,43,37,.07);
+  --shadow-float:0 24px 64px rgba(60,43,37,.15),0 8px 24px rgba(60,43,37,.09);
+  --shadow-deep:0 40px 100px rgba(60,43,37,.19),0 12px 32px rgba(60,43,37,.11);
   --shadow-gold:0 8px 32px rgba(201,169,110,.25),0 2px 8px rgba(201,169,110,.15);
   --shadow-gold-strong:0 16px 48px rgba(201,169,110,.35),0 4px 16px rgba(201,169,110,.2);
 
@@ -73,9 +106,32 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 #confetti-canvas{position:fixed;inset:0;z-index:99998;pointer-events:none}
 
 /* ── CUSTOM CURSOR ── */
-#lc-cursor{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:100000;transform:translate(-50%,-50%);transition:width .15s,height .15s,opacity .2s;mix-blend-mode:multiply;will-change:transform}
-#lc-cursor-ring{position:fixed;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--gold-glow);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),border-color .25s;will-change:transform}
-@media(hover:none){#lc-cursor,#lc-cursor-ring{display:none}}
+/* ── GUIDED POINTER ────────────────────────────────────────────────────────
+   The halo trails the real cursor rather than replacing it, so the OS pointer
+   (including an enlarged or high-contrast one) is always there to fall back on.
+   Both rings carry a dark stroke under a light stroke, which keeps them legible
+   on the cream page and on the dark teal hero without sniffing what is beneath.
+──────────────────────────────────────────────────────────────────────────── */
+#lc-cursor{position:fixed;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 1.5px rgba(36,25,21,.55),0 0 0 3px rgba(255,255,255,.5),0 2px 6px rgba(0,0,0,.25);pointer-events:none;z-index:100000;transform:translate3d(-50%,-50%,0);transition:width .18s var(--ease),height .18s var(--ease),opacity .2s;will-change:transform}
+#lc-cursor-ring{position:fixed;top:0;left:0;width:34px;height:34px;border-radius:50%;border:2px solid var(--gold);box-shadow:0 0 0 1px rgba(36,25,21,.45),inset 0 0 0 1px rgba(255,255,255,.65);pointer-events:none;z-index:99999;transform:translate3d(-50%,-50%,0);transition:width .28s var(--ease),height .28s var(--ease),border-color .28s var(--ease),background .28s var(--ease),opacity .2s;will-change:transform}
+
+/* Over something clickable the ring opens up and fills — the page says
+   "this is a target" before the click, not after. */
+html.lc-point #lc-cursor-ring{width:52px;height:52px;border-color:var(--gold-bright);background:rgba(201,169,110,.16);box-shadow:0 0 0 1px rgba(36,25,21,.5),inset 0 0 0 1px rgba(255,255,255,.75),0 0 18px rgba(201,169,110,.45)}
+html.lc-point #lc-cursor{width:6px;height:6px}
+/* Pressing down gives a physical confirmation. */
+html.lc-press #lc-cursor-ring{width:30px;height:30px;background:rgba(201,169,110,.3)}
+/* Over text the ring narrows to a reading caret rather than sitting as a blob. */
+html.lc-text #lc-cursor-ring{width:3px;height:26px;border-radius:2px;background:rgba(201,169,110,.5)}
+html.lc-text #lc-cursor{opacity:0}
+/* Off-window, hide both so no ghost halo is left behind. */
+html.lc-cursor-out #lc-cursor,html.lc-cursor-out #lc-cursor-ring{opacity:0}
+
+/* Touch, no-pointer, reduced-motion and forced-colors all fall back to the
+   native cursor alone, which is the accessible default. */
+@media(hover:none),(pointer:coarse){#lc-cursor,#lc-cursor-ring{display:none}}
+@media(prefers-reduced-motion:reduce){#lc-cursor,#lc-cursor-ring{display:none}}
+@media(forced-colors:active){#lc-cursor,#lc-cursor-ring{display:none}}
 
 /* ── LAYOUT ── */
 .lc-container{max-width:1200px;margin:0 auto;padding:0 2rem}
@@ -87,25 +143,133 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 
 /* ── HEADER / NAV ── */
 .lc-header{position:fixed;top:0;left:0;right:0;z-index:10000;padding:1.375rem 0;transition:padding .4s var(--ease),background .4s,box-shadow .4s}
-.lc-header.scrolled{padding:.75rem 0;background:rgba(245,239,232,.94);backdrop-filter:var(--blur-lg);-webkit-backdrop-filter:var(--blur-lg);box-shadow:0 1px 0 rgba(255,255,255,.7),0 4px 24px rgba(0,0,0,.07)}
+.lc-header.scrolled{padding:.75rem 0;background:rgba(244,241,235,.94);backdrop-filter:var(--blur-lg);-webkit-backdrop-filter:var(--blur-lg);box-shadow:0 1px 0 rgba(255,255,255,.7),0 4px 24px rgba(0,0,0,.07)}
 .lc-nav-glass{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
 .lc-logo{display:flex;flex-direction:column;cursor:pointer;user-select:none;transition:opacity .2s}
 .lc-logo:hover{opacity:.8}
 .lc-logo>span:first-child{font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.4rem;color:var(--teal);letter-spacing:.05em;line-height:1}
-.lc-logo>span:first-child span{color:var(--gold)}
+.lc-logo>span:first-child span{color:var(--gold-text)}
 .lc-logo-sub{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-soft);font-family:'Open Sans',sans-serif;font-weight:400;margin-top:3px}
 .lc-nav-links{display:flex;align-items:center;gap:.125rem}
-.lc-nav-links button{font-size:.78rem;font-weight:400;color:var(--teal-mid);padding:.5rem .875rem;border-radius:var(--radius-sm);transition:all .2s;white-space:nowrap;background:none;border:none;cursor:none;letter-spacing:.01em}
+.lc-nav-links button{font-size:.78rem;font-weight:400;color:var(--teal-mid);padding:.5rem .875rem;border-radius:var(--radius-sm);transition:all .2s;white-space:nowrap;background:none;border:none;cursor:pointer;letter-spacing:.01em}
 .lc-nav-links button:hover{color:var(--teal);background:rgba(255,255,255,.5)}
 
 /* Dropdown */
+/* ── NAV DROPDOWN ──────────────────────────────────────────────────────────
+   The panel is treated as a pressed apothecary card: a lit top edge, editorial
+   section rules, gold-chipped icons, and a wash that wipes in under the cursor.
+   Structure and behaviour live in the markup and in initDropdownNav(); this file
+   only dresses them, so the keyboard and screen-reader support cannot regress.
+───────────────────────────────────────────────────────────────────────────── */
 .lc-dropdown{position:relative}
-.lc-dropdown-menu{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(-6px);min-width:230px;background:rgba(255,252,248,.94);backdrop-filter:var(--blur-xl);-webkit-backdrop-filter:var(--blur-xl);border:1px solid var(--glass-border);box-shadow:var(--shadow-inset),var(--shadow-deep);border-radius:var(--radius-lg);padding:10px;opacity:0;pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);z-index:200}
-.lc-dropdown:hover .lc-dropdown-menu{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
-.lc-dropdown-label{display:block;font-size:.52rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);padding:8px 14px 4px;margin-top:2px}
-.lc-dropdown-divider{height:1px;background:rgba(201,169,110,.15);margin:6px 8px}
-.lc-dropdown-menu span[onclick],
-.lc-dropdown-menu span[style*="cursor"]{border-radius:var(--radius-sm) !important;font-family:'Open Sans',sans-serif !important}
+
+/* ── Trigger: a gold hairline draws in beneath the label ── */
+.lc-dropdown-trigger{display:inline-flex;align-items:center;gap:6px;position:relative}
+.lc-dropdown-trigger::after{content:'';position:absolute;left:.875rem;right:.875rem;bottom:.3rem;height:1px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);opacity:.9}
+.lc-dropdown-trigger:hover::after,
+.lc-dropdown-trigger[aria-expanded="true"]::after{transform:scaleX(1)}
+.lc-chevron{transition:transform .3s var(--ease),opacity .3s var(--ease);opacity:.5}
+.lc-dropdown-trigger:hover .lc-chevron{opacity:.85}
+.lc-dropdown-trigger[aria-expanded="true"] .lc-chevron{transform:rotate(180deg);opacity:1;color:var(--gold-text)}
+
+/* ── Panel ──
+   Anchored to the trigger's leading edge rather than centred on it: the card
+   reads as hanging from the word it belongs to. */
+.lc-dropdown-menu{position:absolute;top:calc(100% + 12px);left:0;transform:translateY(-8px) scale(.985);transform-origin:top left;min-width:262px;background-color:#FAF8F5;background-image:linear-gradient(168deg,rgba(255,255,255,.75),rgba(247,240,231,.6));backdrop-filter:var(--blur-xl);-webkit-backdrop-filter:var(--blur-xl);border:1px solid var(--glass-border);box-shadow:var(--shadow-inset),var(--shadow-deep);border-radius:var(--radius-lg);padding:12px 11px 11px;opacity:0;pointer-events:none;transition:opacity .26s var(--ease),transform .26s var(--ease);z-index:200}
+
+/* Lit top edge + a soft gold bloom in the upper-left corner. */
+.lc-dropdown-menu::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(201,169,110,.6) 20%,rgba(201,169,110,.6) 80%,transparent) top/100% 1px no-repeat,radial-gradient(130% 80% at 6% 0%,rgba(201,169,110,.14),transparent 62%)}
+/* Film grain, matching the hero's treatment. */
+.lc-dropdown-menu::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.035;mix-blend-mode:multiply;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+
+/* Hover bridge over the 12px gap, so the pointer can reach the card without it
+   closing underneath. Only present while open. */
+.lc-dropdown.open::after{content:'';position:absolute;top:100%;left:0;right:0;height:16px}
+
+.lc-dropdown.open .lc-dropdown-menu{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
+/* Fallback for the moment before the nav script runs, and if it ever fails. */
+html:not(.lc-nav-js) .lc-dropdown:hover .lc-dropdown-menu,
+html:not(.lc-nav-js) .lc-dropdown:focus-within .lc-dropdown-menu{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
+
+/* ── Section rule: label on a baseline, hairline running to the edge ── */
+.lc-dropdown-label{display:flex;align-items:center;gap:10px;font-family:'Open Sans',sans-serif;font-size:.5rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-text);padding:9px 12px 5px;margin:0}
+.lc-dropdown-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(201,169,110,.45),rgba(201,169,110,0))}
+.lc-dropdown-divider{height:1px;background:rgba(201,169,110,.12);margin:5px 12px}
+.lc-dropdown-label+.lc-dropdown-item{margin-top:1px}
+
+/* ── Items ──
+   Cormorant at reading size: these are treatment names, not toolbar commands. */
+.lc-dropdown-item{position:relative;display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:7px 12px;font-family:'Cormorant',Georgia,serif;font-size:1.15rem;font-weight:400;letter-spacing:.012em;line-height:1.25;color:var(--teal);background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;overflow:hidden;transition:color .25s var(--ease),transform .25s var(--ease)}
+/* The wash wipes in from the leading edge rather than flicking on. */
+.lc-dropdown-item::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,rgba(255,255,255,.92),rgba(201,169,110,.10));transform:scaleX(0);transform-origin:left;transition:transform .32s var(--ease);z-index:0}
+.lc-dropdown-item>*{position:relative;z-index:1}
+.lc-dropdown-item:hover{transform:translateX(3px)}
+.lc-dropdown-item:hover::before{transform:scaleX(1)}
+
+/* Icons sit in a gold-tinted chip, which gives the list a steady left rhythm. */
+.lc-dropdown-item .lc-icon{width:27px;height:27px;padding:6px;border-radius:8px;color:var(--gold-text);background:rgba(201,169,110,.10);border:1px solid rgba(201,169,110,.16);transition:background .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease)}
+.lc-dropdown-item:hover .lc-icon{background:rgba(201,169,110,.2);border-color:var(--gold-text);transform:scale(1.06)}
+
+/* A trailing arrow slides in on approach. The accent row already ends in one. */
+.lc-dropdown-item:not(.lc-dropdown-item-accent)::after{content:'→';position:relative;z-index:1;margin-left:auto;padding-left:8px;font-family:'Open Sans',sans-serif;font-size:.72rem;color:var(--gold-text);opacity:0;transform:translateX(-7px);transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.lc-dropdown-item:not(.lc-dropdown-item-accent):hover::after,
+.lc-dropdown-item:not(.lc-dropdown-item-accent):focus-visible::after{opacity:1;transform:translateX(0)}
+
+/* The closing row reads as a footnote to the card. */
+.lc-dropdown-item-accent{margin-top:5px;font-family:'Open Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--gold-text)}
+.lc-dropdown-item-accent .lc-icon{background:rgba(201,169,110,.16)}
+
+/* Keyboard users get a visible target — the site hides the native cursor. */
+.lc-dropdown-item:focus-visible,
+.lc-nav-links button:focus-visible,
+.mobile-nav-item:focus-visible{outline:1.5px solid var(--gold);outline-offset:-1.5px;color:var(--teal)}
+.lc-dropdown-item:focus-visible::before{transform:scaleX(1)}
+
+/* ── The card settles: rows rise in sequence as it opens ── */
+/* Opacity only: rows must not travel under a pointer that is already moving
+   toward them, or the entrance creates a mis-click window. */
+@keyframes lcDropIn{from{opacity:0}to{opacity:1}}
+.lc-dropdown.open .lc-dropdown-item,
+.lc-dropdown.open .lc-dropdown-label{animation:lcDropIn .26s var(--ease) both}
+.lc-dropdown.open .lc-dropdown-label{animation-duration:.32s}
+.lc-dropdown.open>.lc-dropdown-menu>*:nth-child(1){animation-delay:0.02s}
+.lc-dropdown.open>.lc-dropdown-menu>*:nth-child(2){animation-delay:0.04s}
+.lc-dropdown.open>.lc-dropdown-menu>*:nth-child(3){animation-delay:0.06s}
+.lc-dropdown.open>.lc-dropdown-menu>*:nth-child(4){animation-delay:0.08s}
+.lc-dropdown.open>.lc-dropdown-menu>*:nth-child(5){animation-delay:0.10s}
+.lc-dropdown.open>.lc-dropdown-menu>*:nth-child(6){animation-delay:0.12s}
+.lc-dropdown.open>.lc-dropdown-menu>*:nth-child(7){animation-delay:0.14s}
+.lc-dropdown.open>.lc-dropdown-menu>*:nth-child(8){animation-delay:0.16s}
+.lc-dropdown.open>.lc-dropdown-menu>*:nth-child(n+9){animation-delay:.18s}
+
+/* ── Mobile drawer: an indexed directory rather than a stack of links ──
+   #id + class beats the inline <style> block in index.html without !important. */
+#mobile-menu{counter-reset:lcnav}
+#mobile-menu .mobile-nav-item{display:flex;align-items:center;gap:13px;padding:11px 14px;flex-shrink:0;font-family:'Cormorant',Georgia,serif;font-size:1.38rem;font-weight:400;letter-spacing:.01em;color:var(--teal);border-radius:var(--radius);border-bottom:1px solid rgba(201,169,110,.13);transition:background .3s var(--ease),color .3s var(--ease),padding-left .3s var(--ease)}
+#mobile-menu .mobile-nav-item::before{counter-increment:lcnav;content:counter(lcnav,decimal-leading-zero);font-family:'Open Sans',sans-serif;font-size:.56rem;font-weight:600;letter-spacing:.16em;color:var(--gold-text);opacity:.65;min-width:1.5em}
+#mobile-menu .mobile-nav-item:hover,
+#mobile-menu .mobile-nav-item:focus-visible{background:rgba(255,255,255,.55);color:var(--teal);padding-left:20px}
+#mobile-menu .mobile-nav-item:last-of-type{border-bottom:none}
+@keyframes lcDrawerIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+#mobile-menu.open .mobile-nav-item{animation:lcDrawerIn .45s var(--ease) both}
+#mobile-menu.open .mobile-nav-item:nth-child(1){animation-delay:.06s}
+#mobile-menu.open .mobile-nav-item:nth-child(2){animation-delay:.1s}
+#mobile-menu.open .mobile-nav-item:nth-child(3){animation-delay:.14s}
+#mobile-menu.open .mobile-nav-item:nth-child(4){animation-delay:.18s}
+#mobile-menu.open .mobile-nav-item:nth-child(5){animation-delay:.22s}
+#mobile-menu.open .mobile-nav-item:nth-child(6){animation-delay:.26s}
+#mobile-menu.open .mobile-nav-item:nth-child(7){animation-delay:.3s}
+#mobile-menu.open .mobile-nav-item:nth-child(8){animation-delay:.34s}
+#mobile-menu.open .mobile-nav-item:nth-child(9){animation-delay:.38s}
+#mobile-menu.open .mobile-nav-item:nth-child(n+10){animation-delay:.42s}
+
+@media(prefers-reduced-motion:reduce){
+  .lc-dropdown-menu,.lc-chevron,.lc-dropdown-item,.lc-dropdown-item::before,
+  .lc-dropdown-trigger::after,.lc-dropdown-item .lc-icon{transition:none}
+  .lc-dropdown.open .lc-dropdown-item,
+  .lc-dropdown.open .lc-dropdown-label,
+  #mobile-menu.open .mobile-nav-item{animation:none}
+}
 
 /* ── PAGES ── */
 .lc-page{display:none;min-height:100vh}
@@ -115,7 +279,7 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .lc-hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:130px 0 72px;overflow:hidden}
 .video-bg-container{position:absolute;inset:0;z-index:0}
 .video-bg-fallback{position:absolute;inset:0;background:linear-gradient(155deg,#F8F2EB 0%,#EFE6D8 35%,#E8DCCB 65%,#DDD0BC 100%)}
-.video-bg-fallback::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(201,169,110,.08) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(47,79,79,.06) 0%,transparent 50%)}
+.video-bg-fallback::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(201,169,110,.08) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(60,43,37,.06) 0%,transparent 50%)}
 
 /* ── SECTIONS ── */
 .lc-section{padding:88px 0;position:relative}
@@ -130,7 +294,7 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .glass-gold{background:linear-gradient(135deg,rgba(201,169,110,.14) 0%,rgba(240,217,138,.09) 50%,rgba(255,245,220,.12) 100%);backdrop-filter:var(--blur-md);-webkit-backdrop-filter:var(--blur-md);border:1px solid rgba(201,169,110,.35);box-shadow:var(--shadow-inset),var(--shadow-gold);border-radius:var(--radius-xl)}
 
 /* Decorative glass for service sections */
-.glass-deep{background:linear-gradient(160deg,rgba(26,50,50,.88) 0%,rgba(15,32,32,.92) 100%);backdrop-filter:var(--blur-lg);-webkit-backdrop-filter:var(--blur-lg);border:1px solid rgba(255,255,255,.10);box-shadow:var(--shadow-inset-dark),var(--shadow-deep)}
+.glass-deep{background:linear-gradient(160deg,rgba(36,25,21,.88) 0%,rgba(36,25,21,.92) 100%);backdrop-filter:var(--blur-lg);-webkit-backdrop-filter:var(--blur-lg);border:1px solid rgba(255,255,255,.10);box-shadow:var(--shadow-inset-dark),var(--shadow-deep)}
 
 /* ── HERO GLASS CARD ── */
 .hero-glass-card{background:rgba(255,252,248,.58);backdrop-filter:var(--blur-xl);-webkit-backdrop-filter:var(--blur-xl);border:1px solid rgba(255,255,255,.75);box-shadow:inset 0 2px 0 rgba(255,255,255,.92),inset 0 -1px 0 rgba(0,0,0,.03),var(--shadow-deep),0 0 0 0.5px rgba(201,169,110,.1);border-radius:var(--radius-2xl);padding:52px}
@@ -149,12 +313,12 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .glass-icon-emoji{font-size:1.5rem;position:relative;z-index:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
 .glass-icon-svg{position:relative;z-index:1;width:26px;height:26px}
 
-.glass-icon-rose{background:linear-gradient(135deg,#FFCDD2,#F8BBD0,rgba(255,182,193,.6));border:1px solid rgba(255,182,193,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 4px 12px rgba(255,182,193,.35)}
-.glass-icon-gold{background:linear-gradient(135deg,#F0D98A,#C9A96E,rgba(201,169,110,.7));border:1px solid rgba(201,169,110,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),var(--shadow-gold)}
-.glass-icon-green{background:linear-gradient(135deg,#A8D5BA,#68B08A,rgba(100,180,120,.6));border:1px solid rgba(100,180,120,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 12px rgba(100,180,120,.25)}
-.glass-icon-amber{background:linear-gradient(135deg,#FFE082,#FFB300,rgba(255,179,0,.6));border:1px solid rgba(255,179,0,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 12px rgba(255,179,0,.2)}
-.glass-icon-blue{background:linear-gradient(135deg,#B3E5FC,#4FC3F7,rgba(79,195,247,.6));border:1px solid rgba(79,195,247,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 12px rgba(79,195,247,.25)}
-.glass-icon-teal{background:linear-gradient(135deg,#80CBC4,#26A69A,rgba(38,166,154,.6));border:1px solid rgba(38,166,154,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 12px rgba(38,166,154,.2)}
+.glass-icon-rose{background:linear-gradient(135deg,#E9DAD1,#BDAEA9,rgba(189,174,169,.6));border:1px solid rgba(189,174,169,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 4px 12px rgba(255,182,193,.35)}
+.glass-icon-gold{background:linear-gradient(135deg,color-mix(in srgb,#C9A96E 58%,#fff),#C9A96E,rgba(201,169,110,.7));border:1px solid rgba(201,169,110,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),var(--shadow-gold)}
+.glass-icon-green{background:linear-gradient(135deg,color-mix(in srgb,#6B7A5E 55%,#fff),#6B7A5E,rgba(107,122,94,.6));border:1px solid rgba(107,122,94,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 12px rgba(107,122,94,.25)}
+.glass-icon-amber{background:linear-gradient(135deg,color-mix(in srgb,#A8742E 55%,#fff),#A8742E,rgba(168,116,46,.6));border:1px solid rgba(168,116,46,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 12px rgba(255,179,0,.2)}
+.glass-icon-blue{background:linear-gradient(135deg,#E9DAD1,#BDAEA9,rgba(189,174,169,.6));border:1px solid rgba(189,174,169,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 12px rgba(189,174,169,.25)}
+.glass-icon-teal{background:linear-gradient(135deg,#BDAEA9,#A8938B,rgba(168,147,139,.6));border:1px solid rgba(168,147,139,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 12px rgba(168,147,139,.2)}
 
 /* ── CUSTOM ICONS (SVG data-uri) ── */
 .lc-icon{display:inline-flex;align-items:center;justify-content:center;width:1em;height:1em;vertical-align:-.125em;flex-shrink:0}
@@ -165,25 +329,25 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .lc-icon-xl{width:2.2em;height:2.2em}
 .lc-icon-2xl{width:3em;height:3em}
 /* Glass icon SVG replacement */
-.glass-icon-svg-custom{position:relative;z-index:1;width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;color:rgba(47,79,79,.7);filter:drop-shadow(0 1px 2px rgba(0,0,0,.1))}
+.glass-icon-svg-custom{position:relative;z-index:1;width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;color:rgba(60,43,37,.7);filter:drop-shadow(0 1px 2px rgba(0,0,0,.1))}
 
 /* ── BUTTONS ── */
-.btn-glass{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--radius);font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:600;color:var(--teal);background:rgba(255,255,255,.48);backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);border:1px solid var(--glass-border);box-shadow:var(--shadow-inset),var(--shadow-card);transition:all .3s var(--ease);cursor:none;white-space:nowrap;letter-spacing:.01em}
+.btn-glass{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--radius);font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:600;color:var(--c-ink);background:rgba(252,250,247,.82);backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);border:1px solid var(--glass-border);box-shadow:var(--shadow-inset),var(--shadow-card);transition:all .3s var(--ease);cursor:pointer;white-space:nowrap;letter-spacing:.01em}
 .btn-glass:hover{background:rgba(255,255,255,.75);transform:translateY(-2px);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.9),var(--shadow-lift)}
 .btn-glass:active{transform:scale(.98) translateY(0)}
 
-.btn-glass-primary{background:linear-gradient(135deg,rgba(201,169,110,.82),rgba(212,184,122,.68));color:#1A2E2E;border-color:rgba(201,169,110,.45);box-shadow:var(--shadow-inset),var(--shadow-gold);font-weight:500}
+.btn-glass-primary{background:linear-gradient(135deg,rgba(201,169,110,.82),rgba(201,169,110,.68));color:#241915;border-color:var(--gold-text);box-shadow:var(--shadow-inset),var(--shadow-gold);font-weight:500}
 .btn-glass-primary:hover{background:linear-gradient(135deg,rgba(201,169,110,.95),rgba(212,184,122,.82));box-shadow:var(--shadow-inset),var(--shadow-gold-strong)}
 
-.btn-glass-dark{background:rgba(26,50,50,.85);color:rgba(255,255,255,.9);border-color:rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 4px 16px rgba(0,0,0,.2)}
-.btn-glass-dark:hover{background:rgba(26,50,50,.97);color:white;transform:translateY(-2px)}
+.btn-glass-dark{background:rgba(36,25,21,.85);color:rgba(255,255,255,.9);border-color:rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 4px 16px rgba(0,0,0,.2)}
+.btn-glass-dark:hover{background:rgba(36,25,21,.97);color:white;transform:translateY(-2px)}
 
 .btn-glass-sm{padding:7px 15px;font-size:.72rem;border-radius:var(--radius-sm)}
 .btn-glass-lg{padding:14px 28px;font-size:.88rem;border-radius:var(--radius-lg)}
 .btn-glass-xl{padding:16px 36px;font-size:.92rem;border-radius:var(--radius-lg);font-weight:500;letter-spacing:.02em}
 
 /* Vagaro CTA — signature gold button */
-.vagaro-glass-btn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:var(--radius-lg);font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1A2E2E;background:linear-gradient(135deg,rgba(201,169,110,.88),rgba(240,217,138,.65),rgba(201,169,110,.75));backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);border:1px solid rgba(201,169,110,.55);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(0,0,0,.05),var(--shadow-gold);transition:all .3s var(--ease-bounce);cursor:none;letter-spacing:.015em}
+.vagaro-glass-btn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:var(--radius-lg);font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#241915;background:linear-gradient(135deg,rgba(201,169,110,.88),rgba(240,217,138,.65),rgba(201,169,110,.75));backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);border:1px solid rgba(201,169,110,.55);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(0,0,0,.05),var(--shadow-gold);transition:all .3s var(--ease-bounce);cursor:pointer;letter-spacing:.015em}
 .vagaro-glass-btn:hover{transform:translateY(-3px) scale(1.01);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.8),var(--shadow-gold-strong)}
 .vagaro-glass-btn:active{transform:scale(.98)}
 
@@ -193,9 +357,9 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .lc-h3{font-family:'Cormorant',Georgia,serif;font-size:1.18rem;font-weight:400;color:var(--teal)}
 .lc-lead{font-size:1rem;font-weight:300;color:var(--teal-mid);line-height:1.82}
 .lc-body{font-size:.88rem;font-weight:300;color:var(--teal-soft);line-height:1.82}
-.lc-gold-em{color:var(--gold);font-style:normal}
+.lc-gold-em{color:var(--gold-text);font-style:normal}
 .lc-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.lc-eyebrow-text{font-size:.58rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.lc-eyebrow-text{font-size:.58rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-text)}
 .lc-eyebrow-line{flex:1;height:1px;background:linear-gradient(to right,rgba(201,169,110,.45),transparent);max-width:72px}
 .lc-divider{height:1px;background:linear-gradient(to right,transparent,rgba(201,169,110,.2) 20%,rgba(255,255,255,.6) 50%,rgba(201,169,110,.2) 80%,transparent);margin:36px 0}
 
@@ -217,16 +381,16 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 /* ── VAGARO MODAL ── */
 #vagaro-overlay{position:fixed;inset:0;z-index:99000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
 #vagaro-overlay.active{opacity:1;pointer-events:auto}
-#vagaro-overlay-backdrop{position:absolute;inset:0;background:rgba(26,50,50,.3);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%)}
+#vagaro-overlay-backdrop{position:absolute;inset:0;background:rgba(36,25,21,.3);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%)}
 #vagaro-modal{position:relative;z-index:1;background:rgba(255,252,248,.92);backdrop-filter:var(--blur-xl);-webkit-backdrop-filter:var(--blur-xl);border:1px solid rgba(255,255,255,.72);box-shadow:inset 0 2px 0 rgba(255,255,255,.92),var(--shadow-deep);border-radius:var(--radius-2xl);width:92%;max-width:560px;max-height:88vh;overflow-y:auto;transform:translateY(20px) scale(.97);transition:transform .4s var(--ease-bounce)}
 #vagaro-overlay.active #vagaro-modal{transform:translateY(0) scale(1)}
 .vagaro-modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:32px 32px 18px;border-bottom:1px solid rgba(201,169,110,.15)}
 .vagaro-modal-title{font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.7rem;color:var(--teal-deep);line-height:1}
 .vagaro-modal-body{padding:28px 32px 36px}
-.vagaro-close-btn{background:rgba(255,255,255,.5);border:1px solid var(--glass-border);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--teal-mid);cursor:none;transition:all .2s;flex-shrink:0}
+.vagaro-close-btn{background:rgba(255,255,255,.5);border:1px solid var(--glass-border);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--teal-mid);cursor:pointer;transition:all .2s;flex-shrink:0}
 .vagaro-close-btn:hover{background:rgba(255,255,255,.85);color:var(--teal-deep);transform:rotate(90deg)}
 .vagaro-iframe-placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 20px;text-align:center}
-.vagaro-iframe-placeholder code{font-size:.72rem;background:rgba(47,79,79,.06);padding:6px 12px;border-radius:6px;color:var(--teal-mid);font-family:monospace}
+.vagaro-iframe-placeholder code{font-size:.72rem;background:rgba(60,43,37,.06);padding:6px 12px;border-radius:6px;color:var(--teal-mid);font-family:monospace}
 
 /* ── BOOKING SUCCESS ── */
 #booking-success{position:fixed;inset:0;z-index:99500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
@@ -237,6 +401,12 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 /* ── COOKIE BANNER ── */
 #lc-cookie{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:90000;background:rgba(255,252,248,.9);backdrop-filter:var(--blur-lg);-webkit-backdrop-filter:var(--blur-lg);border:1px solid var(--glass-border);box-shadow:var(--shadow-inset),var(--shadow-float);border-radius:var(--radius-lg);padding:14px 22px;display:flex;align-items:center;gap:18px;font-size:.77rem;font-weight:300;color:var(--teal-mid);white-space:nowrap;max-width:92vw}
 #lc-cookie.hidden{display:none}
+/* Narrow screens: nowrap + 92vw overflowed the viewport, so stack instead. */
+@media(max-width:560px){
+  #lc-cookie{left:12px;right:12px;bottom:14px;transform:none;max-width:none;white-space:normal;flex-wrap:wrap;gap:12px;padding:13px 16px;line-height:1.5}
+  #lc-cookie p{flex:1 1 100%}
+  #lc-cookie-accept{width:100%;justify-content:center}
+}
 
 /* ── REVEAL ANIMATIONS ── */
 .lc-reveal{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
@@ -248,7 +418,7 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .lc-form-group{margin-bottom:16px}
 .lc-form-label{display:block;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:7px}
 .lc-form-input{width:100%;padding:12px 16px;background:rgba(255,255,255,.55);backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);border:1px solid var(--glass-border);border-radius:var(--radius);font-family:'Open Sans',sans-serif;font-size:.85rem;color:var(--teal);transition:all .25s;outline:none}
-.lc-form-input:focus{background:rgba(255,255,255,.8);border-color:rgba(201,169,110,.5);box-shadow:0 0 0 3px rgba(201,169,110,.12)}
+.lc-form-input:focus{background:rgba(255,255,255,.8);border-color:var(--gold-text);box-shadow:0 0 0 3px rgba(201,169,110,.12)}
 .lc-form-textarea{min-height:110px;resize:vertical}
 .lc-form-select{appearance:none;cursor:pointer}
 
@@ -257,18 +427,18 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
    ═══════════════════════════════════════════════ ── */
 
 /* Pre-footer CTA band */
-.footer-cta-band{background:linear-gradient(135deg,var(--teal-deep) 0%,#0D2828 50%,var(--teal-richer) 100%);padding:56px 0;position:relative;overflow:hidden}
-.footer-cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 80% 50%,rgba(201,169,110,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 10% 50%,rgba(47,79,79,.4) 0%,transparent 50%)}
+.footer-cta-band{background:linear-gradient(135deg,var(--teal-deep) 0%,#241915 50%,var(--teal-richer) 100%);padding:56px 0;position:relative;overflow:hidden}
+.footer-cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 80% 50%,rgba(201,169,110,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 10% 50%,rgba(60,43,37,.4) 0%,transparent 50%)}
 .footer-cta-band::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,169,110,.4),transparent)}
 .footer-cta-inner{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;z-index:1}
-.footer-cta-text .footer-cta-eyebrow{font-size:.56rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,169,110,.75);margin-bottom:8px}
+.footer-cta-text .footer-cta-eyebrow{font-size:.56rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-text);margin-bottom:8px}
 .footer-cta-text h2{font-family:'Italiana','Cormorant',Georgia,serif;font-size:clamp(1.6rem,3vw,2.4rem);color:rgba(255,255,255,.95);font-weight:400;line-height:1.15;letter-spacing:.02em}
 .footer-cta-text p{font-size:.85rem;font-weight:300;color:rgba(255,255,255,.55);margin-top:8px}
 .footer-cta-actions{display:flex;flex-direction:column;gap:10px;align-items:flex-end;flex-shrink:0}
 
 /* Main footer */
-.lc-footer{background:linear-gradient(180deg,#0D2020 0%,#0A1A1A 60%,#071515 100%);color:rgba(255,255,255,.55);position:relative;overflow:hidden}
-.lc-footer::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 20%,rgba(201,169,110,.06) 0%,transparent 55%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(47,79,79,.3) 0%,transparent 50%);pointer-events:none}
+.lc-footer{background:linear-gradient(180deg,#3C2B25 0%,#2B1E19 58%,#241915 100%);color:rgba(255,255,255,.55);position:relative;overflow:hidden}
+.lc-footer::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 20%,rgba(201,169,110,.06) 0%,transparent 55%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(60,43,37,.3) 0%,transparent 50%);pointer-events:none}
 .footer-leaf-accent{position:absolute;opacity:.04;pointer-events:none}
 .footer-leaf-accent.top-right{top:-60px;right:-40px;width:300px;height:300px}
 .footer-leaf-accent.bottom-left{bottom:-40px;left:-60px;width:240px;height:240px;transform:rotate(180deg)}
@@ -282,13 +452,13 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 
 /* Brand column */
 .footer-brand-col .footer-brand{font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.75rem;color:rgba(255,255,255,.92);letter-spacing:.05em;display:block;margin-bottom:4px;line-height:1}
-.footer-brand-col .footer-brand span{color:var(--gold)}
+.footer-brand-col .footer-brand span{color:var(--gold-text)}
 .footer-brand-col .footer-tagline{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.38);line-height:1.75;margin-top:12px;max-width:240px}
 
 /* Credential badges */
 .footer-badges{display:flex;flex-direction:column;gap:8px;margin-top:24px}
 .footer-badge{display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);transition:all .25s var(--ease)}
-.footer-badge:hover{background:rgba(201,169,110,.08);border-color:rgba(201,169,110,.2)}
+.footer-badge:hover{background:rgba(201,169,110,.08);border-color:var(--gold-text)}
 .footer-badge-icon{width:28px;height:28px;border-radius:8px;background:rgba(201,169,110,.12);border:1px solid rgba(201,169,110,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem}
 .footer-badge-text{font-size:.68rem;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:.03em}
 .footer-badge-sub{font-size:.58rem;color:rgba(255,255,255,.28);display:block;margin-top:1px}
@@ -298,30 +468,30 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .footer-col h5::after{content:'';position:absolute;bottom:-1px;left:0;width:24px;height:1px;background:var(--gold)}
 .footer-col ul{display:flex;flex-direction:column;gap:10px}
 .footer-col ul li span,.footer-col ul li a{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.42);cursor:pointer;transition:color .2s;display:flex;align-items:center;gap:8px;line-height:1.4}
-.footer-col ul li span:hover,.footer-col ul li a:hover{color:var(--gold)}
+.footer-col ul li span:hover,.footer-col ul li a:hover{color:var(--gold-text)}
 .footer-col-icon{font-size:.72rem;opacity:.5;flex-shrink:0}
 
 /* Contact column specifics */
 .footer-contact-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
 .footer-contact-icon{width:30px;height:30px;border-radius:8px;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8rem}
-.footer-contact-label{font-size:.56rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,169,110,.6);display:block;margin-bottom:2px}
+.footer-contact-label{font-size:.56rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);display:block;margin-bottom:2px}
 .footer-contact-val{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.5}
 .footer-contact-val a{color:rgba(255,255,255,.5);transition:color .2s}
-.footer-contact-val a:hover{color:var(--gold)}
+.footer-contact-val a:hover{color:var(--gold-text)}
 
 /* Hours mini-widget */
 .footer-hours{background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.14);border-radius:var(--radius);padding:16px;margin-top:16px}
-.footer-hours-title{font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,169,110,.65);margin-bottom:12px}
+.footer-hours-title{font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);margin-bottom:12px}
 .footer-hours-row{display:flex;justify-content:space-between;font-size:.72rem;font-weight:300;color:rgba(255,255,255,.38);padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .footer-hours-row:last-child{border-bottom:none}
 .footer-hours-row span:last-child{color:rgba(255,255,255,.55)}
-.footer-hours-row.today{color:rgba(201,169,110,.8)}
-.footer-hours-row.today span:last-child{color:var(--gold)}
+.footer-hours-row.today{color:var(--gold-text)}
+.footer-hours-row.today span:last-child{color:var(--gold-text)}
 
 /* Social icons */
 .footer-social{display:flex;gap:8px;margin-top:20px}
 .footer-social-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease);flex-shrink:0}
-.footer-social-btn:hover{background:rgba(201,169,110,.14);border-color:rgba(201,169,110,.28);transform:translateY(-2px)}
+.footer-social-btn:hover{background:rgba(201,169,110,.14);border-color:var(--gold-text);transform:translateY(-2px)}
 .footer-social-btn svg{width:16px;height:16px;fill:rgba(255,255,255,.45);transition:fill .2s}
 .footer-social-btn:hover svg{fill:var(--gold)}
 
@@ -330,13 +500,13 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .footer-copyright{font-size:.7rem;font-weight:300;color:rgba(255,255,255,.28)}
 .footer-bottom-links{display:flex;gap:24px;align-items:center}
 .footer-bottom-links span,.footer-bottom-links a{font-size:.68rem;font-weight:300;color:rgba(255,255,255,.28);cursor:pointer;transition:color .2s;white-space:nowrap}
-.footer-bottom-links span:hover,.footer-bottom-links a:hover{color:rgba(201,169,110,.75)}
+.footer-bottom-links span:hover,.footer-bottom-links a:hover{color:var(--gold-text)}
 
 /* MGC attribution */
 .mgc-bar{border-top:1px solid rgba(255,255,255,.04);padding:14px 0;text-align:center}
 .mgc-bar p{font-size:.62rem;font-weight:300;color:rgba(255,255,255,.18);letter-spacing:.04em}
-.mgc-bar a{color:rgba(201,169,110,.4);transition:color .2s}
-.mgc-bar a:hover{color:rgba(201,169,110,.7)}
+.mgc-bar a{color:var(--gold-text);transition:color .2s}
+.mgc-bar a:hover{color:var(--gold-text)}
 
 /* ── SECTION GLASS DIVIDER ── */
 .section-glass-divider{height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.75) 25%,rgba(201,169,110,.22) 50%,rgba(255,255,255,.75) 75%,transparent);box-shadow:0 1px 8px rgba(255,255,255,.5);margin:0}
@@ -345,22 +515,22 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
    CLIENT PORTAL LOGIN PAGE — JaneApp-inspired glass dark aesthetic
    ══════════════════════════════════════════════════════════════════════ */
 
-.portal-bg{min-height:100vh;background:linear-gradient(145deg,#0A1818 0%,#0D2020 40%,#0A1A14 70%,#080F0F 100%);display:flex;align-items:center;justify-content:center;padding:80px 2rem 60px;position:relative;overflow:hidden}
+.portal-bg{min-height:100vh;background:linear-gradient(145deg,#3C2B25 0%,#32231E 38%,#2A1D18 70%,#241915 100%);display:flex;align-items:center;justify-content:center;padding:80px 2rem 60px;position:relative;overflow:hidden}
 
 /* Ambient glow orbs */
 .portal-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px)}
 .portal-orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,.12) 0%,transparent 70%);top:-100px;right:-100px}
-.portal-orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(47,79,79,.35) 0%,transparent 70%);bottom:-80px;left:-80px}
+.portal-orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(60,43,37,.35) 0%,transparent 70%);bottom:-80px;left:-80px}
 .portal-orb-3{width:300px;height:300px;background:radial-gradient(circle,rgba(201,169,110,.06) 0%,transparent 70%);top:40%;left:30%}
 
 .portal-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:1000px;width:100%;background:rgba(255,255,255,.03);backdrop-filter:blur(40px) saturate(120%);-webkit-backdrop-filter:blur(40px) saturate(120%);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-2xl);overflow:hidden;box-shadow:0 0 0 1px rgba(201,169,110,.06),0 40px 120px rgba(0,0,0,.5),0 8px 32px rgba(0,0,0,.3)}
 
 /* Brand panel (left) */
-.portal-brand-panel{padding:60px 48px;background:linear-gradient(160deg,rgba(26,50,50,.6) 0%,rgba(12,24,24,.8) 100%);border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:0}
+.portal-brand-panel{padding:60px 48px;background:linear-gradient(160deg,rgba(36,25,21,.6) 0%,rgba(36,25,21,.8) 100%);border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:0}
 .portal-logo-mark{width:52px;height:52px;border-radius:14px;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.25);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 0 20px rgba(201,169,110,.1)}
 .portal-brand-name{font-family:'Italiana','Cormorant',Georgia,serif;font-size:2.2rem;color:rgba(255,255,255,.9);letter-spacing:.04em;line-height:1}
-.portal-brand-name span{color:var(--gold)}
-.portal-brand-sub{font-size:.58rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,169,110,.55);margin-top:6px;margin-bottom:20px}
+.portal-brand-name span{color:var(--gold-text)}
+.portal-brand-sub{font-size:.58rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-text);margin-top:6px;margin-bottom:20px}
 .portal-brand-desc{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.38);line-height:1.75;margin-bottom:32px;max-width:280px}
 
 .portal-feature-list{display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
@@ -369,18 +539,18 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 
 .portal-trust-row{display:flex;gap:8px;margin-top:auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)}
 .portal-trust-badge{display:flex;align-items:center;gap:6px;font-size:.62rem;font-weight:500;color:rgba(255,255,255,.3);letter-spacing:.04em}
-.portal-trust-badge svg{color:rgba(201,169,110,.5)}
+.portal-trust-badge svg{color:var(--gold-text)}
 
 /* Login card (right) */
 .portal-card{padding:60px 52px;background:rgba(255,252,248,.04);display:flex;flex-direction:column;gap:28px}
-.portal-card-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,169,110,.6);margin-bottom:6px}
+.portal-card-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-text);margin-bottom:6px}
 .portal-card-title{font-family:'Cormorant',Georgia,serif;font-size:2rem;font-weight:400;color:rgba(255,255,255,.88);line-height:1.15;margin-bottom:8px}
-.portal-card-title span{color:var(--gold)}
+.portal-card-title span{color:var(--gold-text)}
 .portal-card-sub{font-size:.8rem;font-weight:300;color:rgba(255,255,255,.38);line-height:1.7}
 
 .portal-login-cta{display:flex;flex-direction:column;gap:10px}
 
-.portal-btn-primary{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 24px;border-radius:var(--radius-lg);font-size:.85rem;font-weight:500;color:#0D1E1E;background:linear-gradient(135deg,var(--gold-bright),var(--gold),rgba(201,169,110,.85));border:1px solid rgba(201,169,110,.5);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),var(--shadow-gold);transition:all .3s var(--ease-bounce);text-align:center;letter-spacing:.02em}
+.portal-btn-primary{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 24px;border-radius:var(--radius-lg);font-size:.85rem;font-weight:500;color:#241915;background:linear-gradient(135deg,var(--gold-bright),var(--gold),rgba(201,169,110,.85));border:1px solid rgba(201,169,110,.5);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),var(--shadow-gold);transition:all .3s var(--ease-bounce);text-align:center;letter-spacing:.02em}
 .portal-btn-primary:hover{transform:translateY(-2px);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),var(--shadow-gold-strong)}
 
 .portal-btn-secondary{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:var(--radius-lg);font-size:.82rem;font-weight:400;color:rgba(255,255,255,.7);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);transition:all .3s var(--ease);text-align:center}
@@ -389,16 +559,16 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .portal-divider{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,.2);font-size:.7rem;letter-spacing:.1em}
 .portal-divider::before,.portal-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
 
-.portal-btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--radius);font-size:.76rem;font-weight:400;color:rgba(201,169,110,.7);background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.18);transition:all .25s var(--ease);cursor:pointer;margin-top:12px;font-family:'Open Sans',sans-serif}
-.portal-btn-ghost:hover{background:rgba(201,169,110,.12);color:var(--gold);border-color:rgba(201,169,110,.3)}
+.portal-btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--radius);font-size:.76rem;font-weight:400;color:var(--gold-text);background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.18);transition:all .25s var(--ease);cursor:pointer;margin-top:12px;font-family:'Open Sans',sans-serif}
+.portal-btn-ghost:hover{background:rgba(201,169,110,.12);color:var(--gold-text);border-color:var(--gold-text)}
 
 .portal-card-links{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .portal-back-link{font-size:.72rem;font-weight:400;color:rgba(255,255,255,.32);cursor:pointer;transition:color .2s;display:flex;align-items:center;gap:5px;text-decoration:none}
-.portal-back-link:hover{color:rgba(201,169,110,.65)}
+.portal-back-link:hover{color:var(--gold-text)}
 .portal-card-dot{color:rgba(255,255,255,.15);font-size:.6rem}
 
 .portal-new-client{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius-lg);padding:24px;margin-top:auto}
-.portal-new-label{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,169,110,.5);margin-bottom:8px}
+.portal-new-label{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);margin-bottom:8px}
 .portal-new-client p{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.35);line-height:1.65;margin-bottom:0}
 
 @media(max-width:860px){
@@ -423,10 +593,10 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .ba-half{flex:1;position:relative;overflow:hidden}
 .ba-img{width:100%;height:100%;background-size:cover;background-position:center}
 .ba-divider-line{position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(255,255,255,.7);z-index:10;transform:translateX(-50%)}
-.ba-divider-line::before{content:'◈';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,.92);color:#C9A96E;font-size:.7rem;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(201,169,110,.5);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.ba-divider-line::before{content:'◈';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,.92);color:var(--gold-text);font-size:.7rem;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(201,169,110,.5);box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .ba-badge{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);padding:3px 12px;border-radius:20px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 .ba-badge-before{background:rgba(0,0,0,.45);color:rgba(255,255,255,.8);backdrop-filter:blur(6px)}
-.ba-badge-after{background:rgba(201,169,110,.85);color:#fff;backdrop-filter:blur(6px)}
+.ba-badge-after{background:rgba(201,169,110,.92);color:#241915;backdrop-filter:blur(6px)}
 .ba-caption{padding:16px 20px;display:flex;flex-direction:column;gap:4px}
 .ba-caption-service{font-size:.82rem;font-weight:700;color:var(--teal-deep);letter-spacing:.02em}
 .ba-caption-note{font-size:.72rem;color:var(--muted);letter-spacing:.02em}
@@ -452,23 +622,23 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .snatch-pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start}
 .snatch-pkg-card{background:var(--glass-bg);backdrop-filter:var(--blur-md);-webkit-backdrop-filter:var(--blur-md);border:1px solid var(--glass-border);border-radius:var(--radius-xl);padding:28px 24px 30px;display:flex;flex-direction:column;gap:0;position:relative;transition:transform .3s,box-shadow .3s}
 .snatch-pkg-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.13)}
-.snatch-pkg-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.snatch-pkg-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);margin-bottom:6px}
 .snatch-pkg-name{font-size:1.1rem;font-weight:700;color:var(--teal-deep);margin-bottom:14px;line-height:1.2}
 .snatch-pkg-price{font-size:2.6rem;font-weight:800;color:var(--teal-deep);line-height:1;margin-bottom:4px}
 .snatch-pkg-price sup{font-size:1.1rem;vertical-align:super;font-weight:700;margin-right:2px}
 .snatch-pkg-per{font-size:.73rem;color:var(--muted);margin-bottom:20px;line-height:1.4}
 .snatch-pkg-list{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:8px}
 .snatch-pkg-list li{font-size:.8rem;color:var(--body);padding-left:20px;position:relative;line-height:1.4}
-.snatch-pkg-list li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:700;font-size:.75rem}
+.snatch-pkg-list li::before{content:'✓';position:absolute;left:0;color:var(--gold-text);font-weight:700;font-size:.75rem}
 .snatch-pkg-card .vagaro-glass-btn{margin-top:auto;font-size:.71rem;padding:12px 20px;width:100%;justify-content:center}
 
 /* Featured card */
-.snatch-pkg-featured{border-color:rgba(201,169,110,.45);background:linear-gradient(145deg,rgba(201,169,110,.12) 0%,var(--glass-bg) 60%);box-shadow:0 4px 32px rgba(201,169,110,.18),inset 0 1px 0 rgba(201,169,110,.25)}
-.snatch-pkg-badge-top{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#B8935A,#C9A96E,#D4B87A);color:#fff;font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 18px;border-radius:0 0 12px 12px;white-space:nowrap;box-shadow:0 4px 12px rgba(201,169,110,.35)}
+.snatch-pkg-featured{border-color:var(--gold-text);background:linear-gradient(145deg,rgba(201,169,110,.12) 0%,var(--glass-bg) 60%);box-shadow:0 4px 32px rgba(201,169,110,.18),inset 0 1px 0 rgba(201,169,110,.25)}
+.snatch-pkg-badge-top{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,color-mix(in srgb,#C9A96E 78%,#241915),#C9A96E,color-mix(in srgb,#C9A96E 80%,#fff));color:#fff;font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 18px;border-radius:0 0 12px 12px;white-space:nowrap;box-shadow:0 4px 12px rgba(201,169,110,.35)}
 .snatch-pkg-featured .snatch-pkg-price{color:#A07840}
 
 /* Elite card */
-.snatch-pkg-elite{border-color:rgba(13,60,60,.3);background:linear-gradient(145deg,rgba(13,60,60,.08) 0%,var(--glass-bg) 60%)}
+.snatch-pkg-elite{border-color:rgba(60,43,37,.3);background:linear-gradient(145deg,rgba(60,43,37,.08) 0%,var(--glass-bg) 60%)}
 .snatch-pkg-elite .snatch-pkg-eyebrow{color:var(--teal)}
 .snatch-pkg-elite .snatch-pkg-price{background:linear-gradient(135deg,var(--teal),var(--teal-deep));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
@@ -477,10 +647,10 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .snatch-addon{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5);border-radius:12px;padding:12px 16px}
 .snatch-addon-icon{font-size:1.3rem;flex-shrink:0}
 .snatch-addon-name{font-size:.8rem;color:var(--teal-deep);font-weight:500;flex:1;line-height:1.3}
-.snatch-addon-price{font-size:.82rem;font-weight:700;color:var(--gold);white-space:nowrap}
+.snatch-addon-price{font-size:.82rem;font-weight:700;color:var(--gold-text);white-space:nowrap}
 
 /* ── OWNER PORTRAIT ── */
-.owner-portrait-frame{position:relative;border-radius:28px;padding:20px;background:linear-gradient(145deg,rgba(255,252,248,.65) 0%,rgba(247,231,206,.3) 50%,rgba(255,255,255,.45) 100%);backdrop-filter:blur(30px) saturate(170%);-webkit-backdrop-filter:blur(30px) saturate(170%);border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 0 rgba(201,169,110,.1),0 20px 60px rgba(47,79,79,.08),0 4px 20px rgba(201,169,110,.06);overflow:hidden}
+.owner-portrait-frame{position:relative;border-radius:28px;padding:20px;background:linear-gradient(145deg,rgba(255,252,248,.65) 0%,rgba(247,231,206,.3) 50%,rgba(255,255,255,.45) 100%);backdrop-filter:blur(30px) saturate(170%);-webkit-backdrop-filter:blur(30px) saturate(170%);border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 0 rgba(201,169,110,.1),0 20px 60px rgba(60,43,37,.08),0 4px 20px rgba(201,169,110,.06);overflow:hidden}
 .owner-portrait-frame::before{content:'';position:absolute;inset:0;border-radius:28px;background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.4) 0%,transparent 60%);pointer-events:none;z-index:2}
 
 /* Decorative SVG botanicals */
@@ -504,7 +674,7 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 .owner-corner-br::before{bottom:0;right:0}.owner-corner-br::after{bottom:0;right:0}
 
 /* Photo container */
-.owner-photo-container{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/4;box-shadow:0 8px 32px rgba(47,79,79,.12),0 2px 8px rgba(201,169,110,.08),inset 0 0 0 1px rgba(255,255,255,.3)}
+.owner-photo-container{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/4;box-shadow:0 8px 32px rgba(60,43,37,.12),0 2px 8px rgba(201,169,110,.08),inset 0 0 0 1px rgba(255,255,255,.3)}
 .owner-photo{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;transition:transform 6s cubic-bezier(.25,.1,.25,1)}
 .owner-portrait-frame:hover .owner-photo{transform:scale(1.03)}
 
@@ -515,7 +685,7 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
 
 /* Nameplate */
 .owner-nameplate{position:relative;z-index:5;margin-top:14px;text-align:center}
-.owner-nameplate-inner{background:rgba(255,252,248,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.6);border-radius:16px;padding:16px 20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 4px 16px rgba(47,79,79,.05)}
+.owner-nameplate-inner{background:rgba(255,252,248,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.6);border-radius:16px;padding:16px 20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 4px 16px rgba(60,43,37,.05)}
 
 /* Floating sparkle animation for botanicals */
 @keyframes ownerFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
@@ -573,3 +743,225 @@ button{font-family:'Montserrat',sans-serif;cursor:none;border:none;background:no
   .lc-header button[onclick="navTo('client-login')"]{display:none}
   .lc-header .vagaro-glass-btn{padding:9px 14px;font-size:.62rem}
 }
+
+/* ── HOME HERO ── */
+/* ── HOME HERO — luminous light field ──────────────────────────────────────
+   Was a full-bleed dark green slab. Now bone→sand with a low caramel bloom,
+   per BRANDING.md §1.5 (65% of the page belongs to the light field).
+   Depth comes from the warm gradient + the espresso nameplate anchoring the
+   portrait, not from flooding the section dark. */
+.lc-hero.lc-home-hero{
+  aspect-ratio:16/9;
+  min-height:720px;
+  padding:112px 0 28px;
+  color:var(--c-espresso);
+  background-color:var(--c-bone);
+  background-image:
+    radial-gradient(118% 92% at 82% 6%, rgba(201,169,110,.20) 0%, rgba(201,169,110,0) 58%),
+    radial-gradient(96% 78% at 8% 92%, rgba(233,218,209,.78) 0%, rgba(233,218,209,0) 62%),
+    linear-gradient(152deg, var(--c-mist) 0%, var(--c-bone) 44%, var(--c-sand) 100%),
+    repeating-linear-gradient(90deg, rgba(60,43,37,.016) 0 1px, transparent 1px 112px);
+}
+.lc-home-hero .video-bg-container{display:none}
+.lc-home-hero-content{position:relative;z-index:1;width:100%;max-width:1420px;padding:0 4vw}
+.lc-home-hero-layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.82fr);grid-template-areas:"copy portrait";gap:clamp(40px,5vw,84px);align-items:center;width:100%}
+.lc-home-copy{grid-area:copy;max-width:690px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+/* Hero type, re-voiced for the light ground. Ratios vs --c-bone:
+   ink 14.9:1 · espresso 11.9:1 · cacao 6.0:1 · gold-ink 5.4:1 — all AA+. */
+.lc-home-hero .lc-eyebrow-text{color:var(--c-cacao)}
+.lc-home-hero .lc-eyebrow-line{background:linear-gradient(to right,rgba(201,169,110,.85),transparent)}
+.lc-home-title{margin:0 0 12px;color:var(--c-ink);font-family:'Playfair Display','Cormorant',Georgia,serif;font-size:4rem;font-weight:500;line-height:1.04;letter-spacing:-.015em}
+/* The caramel moment in type — gold-ink is the ONLY text-legal caramel. */
+.lc-home-title .lc-gold-em{color:var(--c-gold-ink);font-style:italic}
+.lc-home-subtitle{margin:0 0 18px;color:var(--c-cacao);font-family:'Cormorant',Georgia,serif;font-size:1.35rem;font-style:italic;font-weight:400;line-height:1.35}
+.lc-home-lead{max-width:460px;margin:0 0 30px;color:var(--c-espresso);font-size:.94rem;font-weight:400;line-height:1.75}
+.lc-home-actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 34px}
+/* Primary CTA: solid espresso on light = 11.9:1 and the strongest shape on the
+   page. Caramel appears only as the hairline and the glow. */
+.lc-home-book{color:var(--c-bone);background:linear-gradient(135deg,var(--c-espresso),var(--c-ink));border-color:var(--gold-text);box-shadow:inset 0 1px 0 rgba(201,169,110,.3),0 12px 30px rgba(60,43,37,.22);transition:transform .4s var(--ease),box-shadow .4s var(--ease),background .4s var(--ease)}
+.lc-home-book:hover{background:linear-gradient(135deg,var(--c-cacao),var(--c-espresso));border-color:var(--gold-text);box-shadow:inset 0 1px 0 rgba(201,169,110,.45),0 18px 44px rgba(60,43,37,.3),var(--shadow-gold);transform:translateY(-3px)}
+.lc-home-assistant{color:var(--c-espresso);background:var(--glass-cream-strong);border-color:rgba(168,147,139,.5);box-shadow:inset 0 1px 0 rgba(255,253,250,.9),var(--shadow-card);transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease)}
+.lc-home-assistant:hover{color:var(--c-ink);background:var(--c-mist);border-color:var(--c-gold);box-shadow:inset 0 1px 0 rgba(255,253,250,1),var(--shadow-lift);transform:translateY(-3px)}
+.lc-home-copy .trust-glass-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid rgba(189,174,169,.6);padding-top:17px}
+.lc-home-copy .trust-glass-item{min-width:0;padding:0 12px;text-align:left;background:none;border:0;border-radius:0;box-shadow:none}
+.lc-home-copy .trust-glass-item:first-child{padding-left:0}
+.lc-home-copy .trust-glass-item:hover{transform:none;background:none;box-shadow:none}
+.lc-home-copy .trust-val{color:var(--c-ink);font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:600;line-height:1.35}
+.lc-home-copy .trust-key{margin-top:5px;color:var(--c-espresso);font-size:.52rem;letter-spacing:.12em}
+.lc-home-portrait{grid-area:portrait;position:relative;width:100%;max-width:500px;margin-left:auto}
+.lc-home-hero .owner-portrait-frame{padding:0;overflow:visible;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.lc-home-hero .owner-portrait-frame::before,.lc-home-hero .owner-decor,.lc-home-hero .owner-corner,.lc-home-hero .owner-photo-shine{display:none}
+.lc-home-hero .owner-photo-container{aspect-ratio:5/6;max-height:690px;border-radius:48% 48% 6px 6px / 22% 22% 6px 6px;box-shadow:0 28px 72px rgba(60,43,37,.26),0 0 0 1px rgba(201,169,110,.34)}
+/* waist-up: source is 2:3, head starts ~13% down, waist ~78% */
+.lc-home-hero .owner-photo{object-position:center 25%}
+.lc-home-hero .owner-nameplate{position:absolute;right:16px;bottom:16px;left:16px;margin:0;text-align:left}
+/* The nameplate stays dark on purpose — it is the espresso anchor that gives
+   the light hero depth, and it is the one place caramel may carry text
+   (gold on ink = 7.1:1). */
+.lc-home-hero .owner-nameplate-inner{padding:14px 18px;border:1px solid rgba(201,169,110,.34);border-radius:5px;background:rgba(36,25,21,.93);box-shadow:0 10px 28px rgba(60,43,37,.26);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.owner-role{margin-bottom:3px;color:var(--c-gold);font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.owner-name{color:var(--c-bone);font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;font-weight:500;line-height:1.2;letter-spacing:0}
+.owner-credentials{margin-top:4px;color:var(--c-greige);font-size:.68rem;font-weight:400;letter-spacing:.02em}
+.lc-home-mission{max-width:500px;margin:14px 0 0 auto;color:var(--c-espresso);font-family:'Cormorant',Georgia,serif;font-size:.92rem;font-style:italic;text-align:right}
+.lc-home-hero .hero-scroll-label{color:var(--c-cacao)}
+.lc-home-hero .hero-scroll-chevron{border-color:var(--gold-text)}
+.lc-home-hero .hero-scroll-chevron svg{stroke:var(--c-espresso)}
+.lc-header:not(.scrolled) .lc-logo>span:first-child{color:var(--c-ink)}
+.lc-header:not(.scrolled) .lc-logo>span:first-child span{color:var(--c-cacao)}
+/* The unscrolled header sits on the hero. That hero is now light, so the
+   near-white nav it was built for is close to invisible. Re-voiced to espresso. */
+.lc-header:not(.scrolled) .lc-logo-sub{color:var(--c-cacao)}
+.lc-header:not(.scrolled) .lc-nav-links button,
+.lc-header:not(.scrolled) .lc-nav-links a{color:var(--c-espresso)}
+.lc-header:not(.scrolled) .lc-nav-links button:hover,
+.lc-header:not(.scrolled) .lc-nav-links a:hover{color:var(--c-ink);background:rgba(250,248,245,.72)}
+
+@media(max-width:900px){
+  .lc-hero.lc-home-hero{aspect-ratio:auto;min-height:0;padding:104px 0 52px}
+  .lc-home-hero-layout{grid-template-columns:minmax(0,1fr);grid-template-areas:"portrait" "copy";gap:30px;max-width:650px;margin:0 auto}
+  .lc-home-portrait{max-width:390px;margin:0 auto}
+  .lc-home-hero .owner-photo-container{aspect-ratio:1/1;border-radius:7px}
+  .lc-home-hero .owner-photo{object-position:center 32%}
+  .lc-home-hero .owner-nameplate{position:relative;right:auto;bottom:auto;left:auto;margin-top:8px}
+  .lc-home-copy{max-width:none}
+  .lc-home-title{font-size:3.35rem}
+  .lc-home-mission{text-align:left;margin-left:0}
+}
+@media(max-width:640px){
+  .lc-hero.lc-home-hero{padding:92px 0 44px}
+  .lc-home-hero-content{padding:0 1.25rem}
+  .lc-home-hero-layout{gap:23px}
+  .lc-home-portrait{max-width:440px}
+  .lc-home-title{font-size:2.8rem}
+  .lc-home-subtitle{font-size:1.18rem}
+  .lc-home-lead{font-size:.88rem;margin-bottom:22px}
+  .lc-home-actions{gap:9px;margin-bottom:24px}
+  .lc-home-actions .vagaro-glass-btn,.lc-home-actions .btn-glass{width:100%;justify-content:center}
+  .lc-home-copy .trust-glass-strip{grid-template-columns:1fr 1fr;row-gap:16px}
+  .lc-home-copy .trust-glass-item:nth-child(3){grid-column:1/-1;padding-left:0}
+}
+@media(max-width:360px){
+  .lc-home-title{font-size:2.45rem}
+  .lc-home-copy .trust-val{font-size:.7rem}
+}
+
+/* ── HOME HERO: ATMOSPHERE + CINEMATIC ENTRANCE ──
+   Living backdrop for the hero. Three slow-drifting light orbs read as
+   depth rather than a flat gradient; grain + vignette give it film weight.
+   All pre-states are scoped to .lc-js so the page is fully visible if JS
+   never runs. */
+.hero-atmos{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.wellness-chat-card{padding:clamp(16px,4vw,40px);text-align:center;margin-bottom:40px;border-radius:28px}
+.wellness-chat-frame{display:block;width:100%;height:680px;height:clamp(560px,78dvh,760px);border:0;border-radius:18px;background:#241915}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform}
+.orb-1{width:46vw;height:46vw;left:-9vw;top:-12vw;background:radial-gradient(circle,rgba(201,169,110,.34),transparent 70%);animation:orbDrift1 34s ease-in-out infinite}
+.orb-2{width:40vw;height:40vw;right:-8vw;top:14vw;background:radial-gradient(circle,rgba(233,218,209,.46),transparent 70%);animation:orbDrift2 46s ease-in-out infinite}
+.orb-3{width:34vw;height:34vw;left:26vw;bottom:-16vw;background:radial-gradient(circle,rgba(234,223,213,.5),transparent 70%);animation:orbDrift3 39s ease-in-out infinite}
+@keyframes orbDrift1{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(7vw,5vw,0) scale(1.16)}}
+@keyframes orbDrift2{0%,100%{transform:translate3d(0,0,0) scale(1.1)}50%{transform:translate3d(-6vw,7vw,0) scale(.92)}}
+@keyframes orbDrift3{0%,100%{transform:translate3d(0,0,0) scale(.95)}50%{transform:translate3d(5vw,-6vw,0) scale(1.2)}}
+.hero-grain{position:absolute;inset:-60%;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grainShift 6s steps(5) infinite}
+@keyframes grainShift{0%{transform:translate3d(0,0,0)}20%{transform:translate3d(-3%,2%,0)}40%{transform:translate3d(2%,-3%,0)}60%{transform:translate3d(-2%,-2%,0)}80%{transform:translate3d(3%,1%,0)}100%{transform:translate3d(0,0,0)}}
+.hero-vignette{position:absolute;inset:0;background:radial-gradient(118% 78% at 50% 44%,transparent 46%,rgba(60,43,37,.13) 100%)}
+
+/* Headline rises line by line out of a mask once the intro clears */
+.lc-home-title .tl{display:block;overflow:hidden;padding-bottom:.06em}
+.lc-home-title .tl>span{display:inline-block;will-change:transform}
+.lc-js .lc-home-title .tl>span{transform:translateY(105%)}
+html.intro-done .lc-home-title .tl>span{transform:translateY(0);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+html.intro-done .lc-home-title .tl:nth-child(2)>span{transition-delay:.11s}
+
+/* Portrait settles out of a slight push-in. Scale lives on the container so
+   the existing .owner-photo hover zoom keeps working untouched. */
+.lc-js .lc-home-hero .owner-photo-container{opacity:0;transform:scale(1.055)}
+.lc-home-hero .owner-photo-container{transition:opacity 1.1s ease,transform 1.7s cubic-bezier(.16,1,.3,1)}
+html.intro-done .lc-home-hero .owner-photo-container{opacity:1;transform:scale(1)}
+/* Slow specular pass across the glass, long rest between sweeps */
+.lc-home-hero .owner-photo-container::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(104deg,transparent 38%,rgba(255,249,245,.15) 47%,rgba(255,249,245,.05) 53%,transparent 62%);transform:translateX(-130%)}
+html.intro-done .lc-home-hero .owner-photo-container::after{animation:portraitSheen 11s ease-in-out 3.2s infinite}
+@keyframes portraitSheen{0%{transform:translateX(-130%)}16%,100%{transform:translateX(130%)}}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-orb,.hero-grain{animation:none}
+  .lc-js .lc-home-title .tl>span,.lc-js .lc-home-hero .owner-photo-container{transform:none;opacity:1}
+  .lc-home-hero .owner-photo-container::after,html.intro-done .lc-home-hero .owner-photo-container::after{animation:none;opacity:0}
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INTERACTION LAYER
+   Targets existing classes — no markup changes required.
+   Caramel is the *interaction* colour: it appears on hover, focus, active and
+   progress, and nowhere at rest. That is what keeps it inside the ≤3% budget
+   while still being the thing your eye follows. BRANDING.md §1.3.
+   Everything degrades to static under prefers-reduced-motion.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* 1 ── Scroll progress: a caramel hairline that fills as you read ───────── */
+#lc-progress{position:fixed;top:0;left:0;z-index:1000;height:2px;width:100%;
+  transform:scaleX(0);transform-origin:0 50%;pointer-events:none;will-change:transform;
+  background:linear-gradient(90deg,var(--c-cacao),var(--c-gold),color-mix(in srgb,var(--c-gold) 68%,#fff));
+  box-shadow:0 0 12px rgba(201,169,110,.5)}
+
+/* 2 ── Staggered reveals: children cascade instead of landing together ────
+   Gated on html.lc-js so the content is never hidden when JS is absent or
+   fails — without the gate a script error would blank every grid on the site. */
+html.lc-js .grid-2>*,html.lc-js .grid-3>*,html.lc-js .grid-4>*,html.lc-js .ba-grid>*{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .62s var(--ease),transform .62s var(--ease);
+  transition-delay:calc(var(--i,0)*72ms)}
+html.lc-js .grid-2.lc-in>*,html.lc-js .grid-3.lc-in>*,
+html.lc-js .grid-4.lc-in>*,html.lc-js .ba-grid.lc-in>*{opacity:1;transform:none}
+
+/* 3 ── Cards: lift, caramel bloom, and a tilt that follows the pointer ──── */
+.glass-card,.lc-service-card,.vc-card,.ba-card,.snatch-pkg-card{
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .5s var(--ease);
+  will-change:transform}
+.glass-card:hover,.lc-service-card:hover,.vc-card:hover,.ba-card:hover,.snatch-pkg-card:hover{
+  box-shadow:var(--shadow-float),0 0 0 1px rgba(201,169,110,.34);
+  border-color:var(--gold-text)}
+html.lc-tilt-on .glass-card,html.lc-tilt-on .lc-service-card,html.lc-tilt-on .vc-card{
+  transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px))}
+
+/* 4 ── Shine sweep across primary buttons ──────────────────────────────── */
+.lc-btn,.vagaro-glass-btn,.lc-home-book,.lc-home-assistant{position:relative;overflow:hidden;isolation:isolate}
+.lc-btn::after,.vagaro-glass-btn::after,.lc-home-book::after,.lc-home-assistant::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,253,250,.40) 50%,transparent 62%);
+  transform:translateX(-125%);transition:transform .78s var(--ease)}
+.lc-btn:hover::after,.vagaro-glass-btn:hover::after,.lc-home-book:hover::after,.lc-home-assistant:hover::after{
+  transform:translateX(125%)}
+
+/* 5 ── Nav: caramel hairline tracks the hovered/active item ─────────────── */
+.lc-nav-links>li>a,.lc-nav-links>li>button,.lc-dropdown-trigger{position:relative}
+.lc-nav-links>li>a::after,.lc-nav-links>li>button::after,.lc-dropdown-trigger::after{
+  content:'';position:absolute;left:0;right:0;bottom:-5px;height:1.5px;border-radius:1px;
+  background:linear-gradient(90deg,transparent,var(--c-gold),transparent);
+  transform:scaleX(0);transition:transform .42s var(--ease)}
+.lc-nav-links>li>a:hover::after,.lc-nav-links>li>button:hover::after,
+.lc-dropdown-trigger[aria-expanded="true"]::after{transform:scaleX(1)}
+
+/* 6 ── Dropdown items: caramel rail slides in on hover ─────────────────── */
+.lc-dropdown-item{position:relative;transition:background .3s var(--ease),padding-left .3s var(--ease),color .3s var(--ease)}
+.lc-dropdown-item::before{content:'';position:absolute;left:0;top:50%;height:0;width:2px;border-radius:1px;
+  background:var(--c-gold);transform:translateY(-50%);transition:height .32s var(--ease)}
+.lc-dropdown-item:hover{padding-left:20px;color:var(--c-ink)}
+.lc-dropdown-item:hover::before{height:62%}
+
+/* 7 ── Focus: caramel ring, legible on both grounds. Keyboard users matter. */
+:where(a,button,select,input,textarea,summary,[tabindex]):focus-visible{
+  outline:2px solid var(--c-gold);outline-offset:3px;border-radius:4px}
+
+@media(prefers-reduced-motion:reduce){
+  #lc-progress{display:none}
+  html.lc-js .grid-2>*,html.lc-js .grid-3>*,
+  html.lc-js .grid-4>*,html.lc-js .ba-grid>*{opacity:1;transform:none;transition:none}
+  .glass-card,.lc-service-card,.vc-card,.ba-card,.snatch-pkg-card{transition:none;transform:none}
+  .lc-btn::after,.vagaro-glass-btn::after,.lc-home-book::after,.lc-home-assistant::after{display:none}
+  .lc-nav-links>li>a::after,.lc-nav-links>li>button::after,.lc-dropdown-trigger::after{transition:none}
+  .lc-dropdown-item,.lc-dropdown-item::before{transition:none}
+}
+
+
+/* Dark grounds: caramel type reverts to the bright gold (≈7:1 on espresso/ink). */
+.lc-footer,.portal-bg,.owner-nameplate-inner,.intro-panel,.footer-cta-band,
+.btn-glass-dark,.lc-ground-dark{--gold-text:var(--c-gold)}

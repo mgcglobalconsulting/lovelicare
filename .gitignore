@@ -14,3 +14,14 @@ site-content.md
 
 # Full-resolution source images (web copies live in assets/img/)
 _originals/
+
+# Supabase CLI scratch state (holds the linked project ref, not source)
+supabase/.temp/
+
+# Superseded prototype. Has its OWN .git and 117MB of node_modules — committing
+# it would create a broken submodule and bloat the repo. Kept on disk only.
+lovelicare.chatbox/
+
+# Loose reference screenshots dropped on the project root
+/lovelicare-lobby-redesign.jpg
+/medspa-service-station-example.jpeg

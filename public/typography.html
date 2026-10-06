@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Voice of LoveLi Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Marcellus&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&family=Mulish:wght@200;300;400;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --teal:#3C2B25; --teal-deep:#241915; --teal-night:#241915;
+  --cream:#F5EFE8; --cream-warm:#FCF9F4;
+  --gold:#C9A96E; --gold-bright:#D2B27C; --gold-light:#DFC79A;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--teal-night);color:var(--cream);overflow-x:hidden;
+     font-family:'Jost',system-ui,sans-serif;font-weight:300;line-height:1.7;
+     -webkit-font-smoothing:antialiased}
+
+/* grain + vignette, sitewide */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.eyebrow{font-family:'Jost',sans-serif;font-size:.6rem;font-weight:400;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--gold-text);display:flex;align-items:center;gap:16px}
+.eyebrow::after{content:'';flex:1;max-width:90px;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent)}
+.center .eyebrow{justify-content:center}
+.center .eyebrow::before{content:'';flex:1;max-width:90px;height:1px;
+  background:linear-gradient(270deg,var(--gold),transparent)}
+
+/* ───────────────────── OVERTURE ───────────────────── */
+.overture{min-height:100svh;display:grid;place-items:center;text-align:center;
+  padding:120px 24px;position:relative;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 0%,#3C2B25 0%,var(--teal-deep) 45%,var(--teal-night) 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none}
+.orb.a{width:520px;height:520px;background:rgba(201,169,110,.18);top:-130px;left:-110px;animation:drift 22s ease-in-out infinite}
+.orb.b{width:420px;height:420px;background:rgba(220,170,170,.12);bottom:-120px;right:-90px;animation:drift 28s ease-in-out infinite reverse}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,40px)}}
+
+.overture-inner{position:relative;z-index:2;max-width:860px}
+.wordmark{font-family:'Bodoni Moda',serif;font-weight:400;letter-spacing:.14em;
+  font-size:clamp(1.1rem,2vw,1.35rem);color:var(--cream);opacity:.85;margin-bottom:46px}
+.wordmark span{color:var(--gold-text)}
+.overture h1{font-family:'Bodoni Moda',serif;font-weight:400;
+  font-size:clamp(3rem,8.5vw,6.6rem);line-height:.98;letter-spacing:-.015em;margin:26px 0 0}
+.overture h1 em{font-style:italic;color:var(--gold-text);display:block}
+.lede{font-size:clamp(.95rem,1.5vw,1.08rem);font-weight:200;line-height:1.95;
+  color:rgba(245,239,232,.74);max-width:500px;margin:34px auto 0}
+.scroll-hint{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);z-index:2;
+  font-size:.56rem;letter-spacing:.34em;text-transform:uppercase;color:rgba(245,239,232,.45)}
+.scroll-hint::after{content:'';display:block;width:1px;height:46px;margin:14px auto 0;
+  background:linear-gradient(180deg,var(--gold),transparent);animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.65)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ───────────────────── VOICE BANDS ───────────────────── */
+.band{min-height:100svh;display:grid;place-items:center;padding:110px 24px;position:relative}
+.band-inner{width:min(1040px,100%);display:grid;grid-template-columns:1fr;gap:46px}
+@media(min-width:900px){.band-inner{grid-template-columns:1.25fr .75fr;gap:72px;align-items:center}}
+
+.band.light{background:
+  radial-gradient(100% 70% at 15% 0%,rgba(201,169,110,.1),transparent 60%),
+  linear-gradient(180deg,var(--cream-warm),var(--cream));color:var(--teal)}
+.band.light .lede,.band.light .spec{color:rgba(60,43,37,.72)}
+.band.dark{background:
+  radial-gradient(110% 80% at 85% 10%,rgba(201,169,110,.13),transparent 62%),
+  linear-gradient(180deg,var(--teal-deep),var(--teal-night))}
+
+.band h2{font-size:clamp(2.4rem,6vw,4.3rem);line-height:1.04;letter-spacing:-.01em;
+  font-weight:400;margin:22px 0 20px}
+.band h2 em{font-style:italic;color:var(--gold-text)}
+.band p.body{font-size:1.02rem;line-height:1.95;font-weight:300;max-width:46ch}
+.band .quiet{margin-top:22px;font-size:.92rem;line-height:1.9;opacity:.72;max-width:46ch}
+
+.spec{border-left:1px solid rgba(201,169,110,.32);padding-left:26px;font-size:.8rem;line-height:2.1}
+.spec b{display:block;font-family:'Jost',sans-serif;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;font-size:.56rem;color:var(--gold-text);margin-bottom:12px}
+.spec .pair{font-size:1.02rem;line-height:1.65;margin-bottom:14px}
+.spec .note{font-family:'Jost',sans-serif;font-weight:300;font-size:.78rem;line-height:1.8;opacity:.75}
+
+/* Voice A — recommended */
+.voice-a h2,.voice-a .wm{font-family:'Marcellus',serif}
+.voice-a p,.voice-a .spec .pair{font-family:'Mulish',sans-serif;font-weight:300}
+/* Voice B */
+.voice-b h2,.voice-b .wm{font-family:'Bodoni Moda',serif}
+.voice-b p,.voice-b .spec .pair{font-family:'Jost',sans-serif;font-weight:300}
+/* Voice C */
+.voice-c h2,.voice-c .wm{font-family:'Cormorant Garamond',serif}
+.voice-c p,.voice-c .spec .pair{font-family:'Jost',sans-serif;font-weight:300}
+
+.badge{display:inline-flex;align-items:center;gap:9px;font-family:'Jost',sans-serif;
+  font-size:.56rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--teal-deep);background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  padding:7px 15px;border-radius:999px;box-shadow:0 6px 22px rgba(201,169,110,.4)}
+
+/* in-situ card — shows the face doing real work */
+.situ{margin-top:34px;padding:30px 30px 32px;border-radius:22px;
+  background:rgba(255,252,248,.06);border:1px solid rgba(201,169,110,.26);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 24px 60px rgba(0,0,0,.3);backdrop-filter:blur(14px)}
+.band.light .situ{background:rgba(255,255,255,.62);border-color:var(--gold-text);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.9),0 20px 50px rgba(0,0,0,.08)}
+.situ .svc{font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-text);
+  font-family:'Jost',sans-serif;font-weight:500}
+.situ .nm{font-size:1.62rem;line-height:1.25;margin:9px 0 8px;font-weight:400}
+.situ .ds{font-size:.9rem;line-height:1.85;opacity:.78}
+
+.cta{display:inline-flex;align-items:center;gap:11px;margin-top:28px;
+  font-family:'Jost',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--teal-deep);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  padding:16px 34px;border-radius:999px;text-decoration:none;
+  box-shadow:0 10px 32px rgba(201,169,110,.35);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.cta:hover{transform:translateY(-3px);box-shadow:0 18px 46px rgba(201,169,110,.5)}
+.cta.ghost{background:none;color:var(--gold-text);border:1px solid rgba(201,169,110,.5);box-shadow:none}
+.cta.ghost:hover{background:rgba(201,169,110,.1);box-shadow:0 12px 34px rgba(201,169,110,.2)}
+
+/* ───────────────────── CLOSE ───────────────────── */
+.close{min-height:92svh;display:grid;place-items:center;text-align:center;padding:120px 24px;
+  position:relative;overflow:hidden;
+  background:radial-gradient(120% 95% at 50% 110%,#3C2B25 0%,var(--teal-deep) 50%,var(--teal-night) 100%)}
+.close-inner{position:relative;z-index:2;max-width:720px}
+.close h2{font-family:'Marcellus',serif;font-weight:400;
+  font-size:clamp(2.3rem,6vw,4rem);line-height:1.1;margin:24px 0 18px}
+.close h2 em{font-style:italic;color:var(--gold-text)}
+.rule{width:52px;height:1px;background:var(--gold);margin:30px auto}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .orb,.scroll-hint::after{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ OVERTURE ══ -->
+<section class="overture center">
+  <div class="orb a"></div><div class="orb b"></div>
+  <div class="overture-inner">
+    <div class="wordmark">LOVELI<span>CARE</span></div>
+    <p class="eyebrow">A Question of Voice</p>
+    <h1>Before she reads<br/>a single word<em>she already feels it.</em></h1>
+    <p class="lede">Typography is the first treatment a guest receives. Three voices below —
+       each one sets a different temperature the moment the page opens.</p>
+  </div>
+  <div class="scroll-hint">Begin</div>
+</section>
+
+<!-- ══ VOICE A ══ -->
+<section class="band light voice-a">
+  <div class="band-inner">
+    <div class="reveal">
+      <span class="badge">Recommended</span>
+      <h2>Compassionate care,<br/><em>guided by science.</em></h2>
+      <p class="body">Marcellus carries the calm of a classical inscription — open, unhurried,
+         quietly expensive. Mulish answers it with rounded terminals and a generous x-height,
+         so clinical detail reads soft instead of sterile.</p>
+      <p class="quiet">This is the voice of a practice that is unmistakably medical and
+         unmistakably warm. She exhales when the page loads.</p>
+      <div class="situ">
+        <div class="svc">Detox &amp; Immunity</div>
+        <div class="nm">Glutathione Infusion</div>
+        <div class="ds">The master antioxidant. Clarity at the cellular level —
+          brightening, detoxifying, and quietly restorative.</div>
+      </div>
+      <a class="cta" href="#close">Book This Feeling</a>
+    </div>
+    <div class="spec reveal">
+      <b>Voice One</b>
+      <div class="pair">Marcellus · headings<br/>Mulish · body</div>
+      <p class="note">Moderate-contrast serif with a rounded sans — the pairing the research
+         ties to comfort and trust. Warmest of the three without surrendering authority.
+         The safest choice that is still a real choice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VOICE B ══ -->
+<section class="band dark voice-b">
+  <div class="band-inner">
+    <div class="reveal">
+      <p class="eyebrow">Voice Two</p>
+      <h2>Compassionate care,<br/><em>guided by science.</em></h2>
+      <p class="body">Bodoni Moda is the Didot lineage — razor-thin hairlines against heavy stems,
+         the typographic signature of Vogue and Dior. Jost supplies the Avenir-clean counterweight
+         that keeps it legible.</p>
+      <p class="quiet">The most aspirational of the three. It reads couture, and it photographs
+         beautifully on Instagram — but it runs cooler, and cool is a choice.</p>
+      <div class="situ">
+        <div class="svc">Body Contouring</div>
+        <div class="nm">Snatch Protocol™</div>
+        <div class="ds">Our signature contouring programme. Precision, sculpted over sessions —
+          never rushed, never generic.</div>
+      </div>
+      <a class="cta ghost" href="#close">See It Live</a>
+    </div>
+    <div class="spec reveal">
+      <b>Voice Two</b>
+      <div class="pair">Bodoni Moda · headings<br/>Jost · body</div>
+      <p class="note">The classic luxury formula: high-contrast editorial serif plus a geometric
+         sans. Maximum hierarchy and the strongest emotional hook — at the cost of some warmth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VOICE C ══ -->
+<section class="band light voice-c">
+  <div class="band-inner">
+    <div class="reveal">
+      <p class="eyebrow">Voice Three</p>
+      <h2>Compassionate care,<br/><em>guided by science.</em></h2>
+      <p class="body">Cormorant Garamond is already in your stylesheet. Lighter and more
+         romantic than Marcellus, it leans European and editorial, with Jost keeping
+         the body copy modern and calm.</p>
+      <p class="quiet">The smallest leap from where the site stands today — refined,
+         familiar, and the least disruptive to ship.</p>
+      <div class="situ">
+        <div class="svc">Stress · Mood · Sleep</div>
+        <div class="nm">Magnesium Protocol</div>
+        <div class="ds">For the nervous system that never clocked out. Rest isn't a luxury —
+          it's a deficiency worth correcting.</div>
+      </div>
+      <a class="cta ghost" href="#close">Consider It</a>
+    </div>
+    <div class="spec reveal">
+      <b>Voice Three</b>
+      <div class="pair">Cormorant Garamond · headings<br/>Jost · body</div>
+      <p class="note">Romantic, airy, and already loaded — no new font weight on the page.
+         Elegant, though the least distinctive of the three at small sizes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLOSE ══ -->
+<section class="close center" id="close">
+  <div class="orb a"></div>
+  <div class="close-inner reveal">
+    <p class="eyebrow">Towson, Maryland</p>
+    <h2>Choose the voice —<em>I'll dress the whole house in it.</em></h2>
+    <div class="rule"></div>
+    <p class="lede">Say the word and every one of the seventeen pages speaks in it
+       by the time you next refresh.</p>
+    <a class="cta" href="tel:4106165451">Call 410-616-5451</a>
+  </div>
+</section>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .18 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 2) * 0.12 + 's';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>

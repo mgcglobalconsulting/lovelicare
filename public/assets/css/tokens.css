@@ -1,0 +1,348 @@
+/* ==========================================================================
+   LoveLi Care Med Spa & Wellness Lounge — Design Tokens
+   Biophilic · Clinical · Luxury
+   Palette: Vagaro "Bare" — warm monochrome nude
+   Link this FIRST, before any other stylesheet.
+   ========================================================================== */
+
+:root {
+  /* ---------------------------------------------------------------- COLOR */
+  /* The five — Vagaro "Bare" */
+  --c-espresso: #3C2B25;  /* darkest ground, primary dark, buttons */
+  --c-cacao:    #6E564E;  /* secondary dark, accent text on light */
+  --c-greige:   #BDAEA9;  /* hairlines, muted text ON DARK ONLY */
+  --c-shell:    #E9DAD1;  /* secondary light ground, body text on dark */
+  --c-bone:     #F4F1EB;  /* primary light ground */
+
+  /* Extensions — derived in-family, hue band 14–24°, no new chroma */
+  --c-ink:      #241915;  /* max-contrast headings, full-bleed dark */
+  --c-sand:     #EADFD5;  /* page field behind cards */
+  --c-clay:     #A8938B;  /* secondary buttons, icon strokes */
+  --c-mist:     #FAF8F5;  /* card surfaces lifting off bone, inputs */
+
+  /* Optional heritage accent — ≤3% of any screen, metallic only.
+     NEVER text on light (2.0:1). Delete this block if dropping gold. */
+  --c-gold:     #C9A96E;
+  --c-gold-ink: #7A5F33;  /* the only accessible gold for text on light */
+
+  /* ------------------------------------------------------------- SEMANTIC */
+  --bg:           var(--c-bone);
+  --bg-alt:       var(--c-sand);
+  --bg-warm:      var(--c-shell);
+  --surface:      var(--c-mist);
+  --text:         var(--c-espresso);
+  --text-strong:  var(--c-ink);
+  --text-muted:   var(--c-cacao);
+  --text-accent:  var(--c-cacao);
+  --rule:         var(--c-greige);
+  --rule-soft:    rgba(189, 174, 169, .45);
+  --accent:       var(--c-espresso);
+  --accent-hover: var(--c-cacao);
+  --focus-ring:   var(--c-cacao);
+
+  /* Alerts — desaturated into the warm family. A Bootstrap red breaks the system. */
+  --success: #6B7A5E;
+  --warn:    #A8742E;
+  --error:   #9E4B42;
+
+  /* ------------------------------------------------------- TYPE: families */
+  --f-display:   'Marcellus', 'Cormorant Garamond', Georgia, serif;
+  --f-editorial: 'Cormorant Garamond', Georgia, serif;
+  --f-ui:        'Jost', system-ui, -apple-system, sans-serif;
+
+  /* ---------------------------------------------------------- TYPE: scale */
+  /* base 17px · ratio 1.25 (major third) */
+  --t-2xs:  0.6875rem;  /*  11px */
+  --t-xs:   0.8125rem;  /*  13px */
+  --t-sm:   0.9375rem;  /*  15px */
+  --t-base: 1.0625rem;  /*  17px */
+  --t-lg:   1.3125rem;  /*  21px */
+  --t-xl:   1.6875rem;  /*  27px */
+  --t-2xl:  2.0625rem;  /*  33px */
+  --t-3xl:  2.625rem;   /*  42px */
+  --t-4xl:  3.25rem;    /*  52px */
+  --t-5xl:  4.0625rem;  /*  65px */
+  --t-6xl:  5.0625rem;  /*  81px */
+
+  --t-hero:      clamp(2.5rem,  1.4rem + 5.2vw, 4.0625rem);
+  --t-statement: clamp(2rem,    1.1rem + 4.4vw, 5.0625rem);
+  --t-h2:        clamp(1.75rem, 1.2rem + 2.4vw, 2.625rem);
+
+  --lh-display:   1.08;
+  --lh-heading:   1.22;
+  --lh-editorial: 1.5;
+  --lh-body:      1.65;   /* load-bearing: generous leading = unhurried */
+  --lh-tight:     1.4;
+
+  --tr-display: -0.02em;
+  --tr-heading: -0.01em;
+  --tr-body:     0;
+  --tr-caps:     0.16em;  /* credential / overline voice */
+
+  --w-body:   300;
+  --w-medium: 400;
+  --w-strong: 500;
+
+  --measure: 34em;  /* ~68 characters */
+
+  /* ---------------------------------------------------------------- SPACE */
+  --s-1:  0.25rem;  --s-2:  0.5rem;   --s-3:  0.75rem;  --s-4:  1rem;
+  --s-5:  1.5rem;   --s-6:  2rem;     --s-7:  3rem;     --s-8:  4rem;
+  --s-9:  6rem;     --s-10: 8rem;     --s-11: 10rem;    --s-12: 14rem;
+
+  /* --------------------------------------------------------------- LAYOUT */
+  --container:        1280px;
+  --container-narrow: 760px;
+  --gutter:           clamp(1.5rem, 4vw, 2.5rem);
+  --section-pad-y:    clamp(5rem, 11vh, 10rem);
+  --section-pad-y-lg: clamp(7rem, 16vh, 14rem);
+
+  /* --------------------------------------------------------------- RADIUS */
+  --r-sm:   6px;
+  --r-md:   12px;
+  --r-lg:   20px;
+  --r-pill: 999px;
+  --r-arch: 20rem 20rem 0 0;   /* SIGNATURE: villa archway niche */
+
+  /* ------------------------------------------------------------ ELEVATION */
+  /* Pool-surface model: light, not shadow. Warm glow, never black drop. */
+  --e1-bg:     rgba(250, 248, 245, .62);
+  --e1-border: 1px solid rgba(189, 174, 169, .38);
+  --e1-blur:   blur(20px) saturate(108%);
+
+  --e2-blur:      blur(28px) saturate(112%);
+  --e2-highlight: inset 0 1px 0 rgba(255, 255, 255, .55);
+
+  --e3-glow: 0 24px 64px -24px rgba(60, 43, 37, .22),
+             0  0   48px -16px rgba(110, 86, 78, .10);
+
+  --e4-scrim: rgba(36, 25, 21, .72);
+
+  /* ------------------------------------------------- MOTION (122 BPM) */
+  --d-quick:    240ms;   /* ½ beat  */
+  --d-base:     480ms;   /* 1 beat  */
+  --d-slow:     720ms;   /* 1½ beats */
+  --d-dissolve: 1200ms;  /* ~2½ beats */
+  --d-ambient:  16s;     /* 8-bar phrase */
+  --stagger:    90ms;
+
+  --ease-tide:    cubic-bezier(0.22, 1, 0.36, 1);  /* default */
+  --ease-swell:   cubic-bezier(0.65, 0, 0.35, 1);  /* loops */
+  --ease-surface: cubic-bezier(0.33, 1, 0.68, 1);  /* hovers */
+
+  /* ------------------------------------------------------------ GRADIENTS */
+  /* ENVIRONMENTS ONLY. Never on a button, text fill, card, icon, or blob. */
+  --grad-horizon:  linear-gradient(170deg, #241915 0%, #3C2B25 38%, #6E564E 68%, #BDAEA9 88%, #E9DAD1 100%);
+  --grad-dusk:     linear-gradient(180deg, #241915 0%, #3C2B25 55%, #6E564E 100%);
+  --grad-plaster:  linear-gradient(165deg, #FAF8F5 0%, #F4F1EB 45%, #EADFD5 100%);
+  --grad-sunwash:  linear-gradient(200deg, #F4F1EB 0%, #EADFD5 52%, #E9DAD1 100%);
+
+  --z-base: 0; --z-raised: 10; --z-nav: 100; --z-overlay: 1000;
+}
+
+/* ==========================================================================
+   DARK GROUND
+   Apply to full-bleed "drop" sections via [data-ground="dark"].
+   ========================================================================== */
+
+[data-ground="dark"] {
+  --bg:          var(--c-espresso);
+  --bg-alt:      var(--c-ink);
+  --bg-warm:     var(--c-cacao);
+  --surface:     rgba(233, 218, 209, .06);
+  --text:        var(--c-shell);
+  --text-strong: var(--c-bone);
+  --text-muted:  var(--c-greige);
+  --text-accent: var(--c-shell);
+  --rule:        rgba(189, 174, 169, .26);
+  --rule-soft:   rgba(189, 174, 169, .14);
+  --accent:      var(--c-shell);
+  --accent-hover: var(--c-bone);
+  --focus-ring:  var(--c-shell);
+  --success:     #9DAE8C;
+  --warn:        #D9A961;
+  --error:       #D98C84;
+
+  --e1-bg:        rgba(233, 218, 209, .055);
+  --e1-border:    1px solid rgba(189, 174, 169, .18);
+  --e2-highlight: inset 0 1px 0 rgba(255, 255, 255, .09);
+  --e3-glow:      0 24px 64px -24px rgba(0, 0, 0, .55),
+                  0  0   48px -16px rgba(233, 218, 209, .08);
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-ui);
+  font-size: var(--t-base);
+  font-weight: var(--w-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  color: var(--text-strong);
+  letter-spacing: var(--tr-heading);
+  line-height: var(--lh-heading);
+  margin: 0 0 var(--s-4);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--t-hero); line-height: var(--lh-display); letter-spacing: var(--tr-display); }
+h2 { font-size: var(--t-h2); }
+h3 { font-size: var(--t-2xl); }
+h4 { font-size: var(--t-xl); }
+
+p { margin: 0 0 var(--s-4); max-width: var(--measure); text-wrap: pretty; }
+
+a {
+  color: var(--text-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+  transition: color var(--d-quick) var(--ease-surface);
+}
+a:hover { color: var(--accent-hover); }
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+hr { border: 0; border-top: 1px solid var(--rule-soft); margin: var(--s-8) 0; }
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+/* Credential / overline voice — gallery wall label, not a trust badge */
+.overline {
+  font-family: var(--f-ui);
+  font-size: var(--t-2xs);
+  font-weight: var(--w-strong);
+  letter-spacing: var(--tr-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: var(--lh-tight);
+}
+
+/* Human voice — testimonials, mission, Libra quotes. Never UI. */
+.editorial {
+  font-family: var(--f-editorial);
+  font-weight: 300;
+  font-style: italic;
+  font-size: var(--t-lg);
+  line-height: var(--lh-editorial);
+}
+
+.mark-snatch { font-family: var(--f-display); letter-spacing: var(--tr-heading); }
+
+.container        { width: 100%; max-width: var(--container);        margin-inline: auto; padding-inline: var(--gutter); }
+.container-narrow { width: 100%; max-width: var(--container-narrow); margin-inline: auto; padding-inline: var(--gutter); }
+
+.section    { padding-block: var(--section-pad-y);    background: var(--bg); }
+.section-lg { padding-block: var(--section-pad-y-lg); background: var(--bg); }
+
+/* Villa variant: asymmetric editorial split. Alternate direction down page. */
+.split-7-5, .split-5-7 { display: grid; gap: var(--gutter); grid-template-columns: 1fr; }
+@media (min-width: 900px) {
+  .split-7-5 { grid-template-columns: 7fr 5fr; }
+  .split-5-7 { grid-template-columns: 5fr 7fr; }
+}
+
+/* Signature archway media */
+.media-arch { border-radius: var(--r-arch); overflow: hidden; }
+
+/* Elevation */
+.e1, .e2, .e3 {
+  background: var(--e1-bg);
+  border: var(--e1-border);
+  border-radius: var(--r-md);
+  backdrop-filter: var(--e1-blur);
+  -webkit-backdrop-filter: var(--e1-blur);
+}
+.e2 { backdrop-filter: var(--e2-blur); -webkit-backdrop-filter: var(--e2-blur); box-shadow: var(--e2-highlight); }
+.e3 { backdrop-filter: var(--e2-blur); -webkit-backdrop-filter: var(--e2-blur); box-shadow: var(--e2-highlight), var(--e3-glow); }
+
+/* ==========================================================================
+   ATMOSPHERE — value, texture and light only. Never hue.
+   ========================================================================== */
+
+/* 1. Caustics — rippling water light as pure luminance. Dark grounds only. */
+.caustics { position: relative; isolation: isolate; }
+.caustics::after {
+  content: '';
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: .11;
+  mix-blend-mode: soft-light;
+  background-image: var(--caustics-src, none);
+  background-size: 140% 140%;
+  animation: caustic-drift var(--d-ambient) var(--ease-swell) infinite alternate;
+}
+@keyframes caustic-drift {
+  from { background-position: 0% 0%;     transform: scale(1); }
+  to   { background-position: 100% 100%; transform: scale(1.06); }
+}
+
+/* 2. Frond shadow — palm shadow on plaster. Max .07. Match light direction. */
+.frond-shadow { position: relative; isolation: isolate; }
+.frond-shadow::before {
+  content: '';
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: .07;
+  mix-blend-mode: multiply;
+  background-image: var(--frond-src, none);
+  background-size: cover;
+  background-position: var(--frond-pos, top right);
+}
+
+/* 3. Horizon — environments only */
+.ground-horizon { background: var(--grad-horizon); }
+.ground-dusk    { background: var(--grad-dusk); }
+.ground-plaster { background: var(--grad-plaster); }
+.ground-sunwash { background: var(--grad-sunwash); }
+
+/* ==========================================================================
+   REVEAL — fires once, staggered, capped at 6
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity   var(--d-base) var(--ease-tide),
+              transform var(--d-base) var(--ease-tide);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+.reveal:nth-child(1) { transition-delay: calc(var(--stagger) * 0); }
+.reveal:nth-child(2) { transition-delay: calc(var(--stagger) * 1); }
+.reveal:nth-child(3) { transition-delay: calc(var(--stagger) * 2); }
+.reveal:nth-child(4) { transition-delay: calc(var(--stagger) * 3); }
+.reveal:nth-child(5) { transition-delay: calc(var(--stagger) * 4); }
+.reveal:nth-child(n+6) { transition-delay: calc(var(--stagger) * 5); }
+
+/* ==========================================================================
+   REDUCED MOTION — ambient video must also swap to its poster frame
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Owner Dashboard · LoveLi Care Med Spa</title>
+<meta name="description" content="Internal operations dashboard for LoveLi Care Med Spa &amp; Wellness Lounge."/>
+
+<!-- Internal surface. Never indexed, never linked from the public site. -->
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+
+<!-- Inline so the dashboard never issues a favicon request. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233C2B25'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%23C9A96E' text-anchor='middle'%3ELC%3C/text%3E%3C/svg%3E"/>
+
+<!-- Cormorant Garamond at light weights for display + metric numerals,
+     Jost for the UI voice. The luxury-clinic pairing. -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<link rel="stylesheet" href="./assets/css/tokens.css"/>
+<link rel="stylesheet" href="./assets/css/dashboard.css"/>
+<!-- Theme override: tan field + white-frost panels. Must load last. -->
+<link rel="stylesheet" href="./assets/css/dashboard-theme.css"/>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to dashboard</a>
+
+<div class="dash">
+
+  <!-- ═══════════════════════════════════════════════════════ SIDEBAR ═══ -->
+  <aside class="side">
+    <div class="side__brand">
+      <span class="side__mark" aria-hidden="true">LC</span>
+      <span>
+        <span class="side__name">LoveLi Care</span>
+        <span class="side__role">Owner · Libra T. Robertson, NP-CRNP</span>
+      </span>
+    </div>
+
+    <p class="side__section">Workspace</p>
+    <nav class="side__nav" aria-label="Dashboard sections">
+      <button class="side__link" data-target="#p-today" aria-current="true" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 2h5v5H2z M9 2h5v5H9z M2 9h5v5H2z M9 9h5v5H9z"/></svg>
+        Overview
+        <span class="side__count" id="c-today">—</span>
+      </button>
+
+      <button class="side__link" data-target="#p-journey" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h3V7H2zM6.5 12h3V4h-3zM11 12h3V9h-3z"/></svg>
+        Client journey
+      </button>
+
+      <button class="side__link" data-target="#p-funnel" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h12l-4.5 5v5l-3 1V8z"/></svg>
+        Funnel
+      </button>
+
+      <button class="side__link" data-target="#p-asking" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9a2 2 0 0 1-2 2H6l-3 3V4a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2z"/></svg>
+        What people ask
+        <span class="side__count" id="c-asking">—</span>
+      </button>
+
+      <button class="side__link" data-target="#p-queue" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h9 M5 8h9 M5 12h9 M2 4h.01 M2 8h.01 M2 12h.01"/></svg>
+        Inquiry queue
+        <span class="side__count" id="c-queue">—</span>
+      </button>
+
+      <button class="side__link" data-target="#p-inventory" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 1.5h4v3l1.5 2v7h-7v-7L6 4.5zM5 9h6"/></svg>
+        Inventory
+        <span class="side__count" id="c-inv">—</span>
+      </button>
+
+      <button class="side__link" data-target="#p-audience" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 13v-1a3 3 0 0 0-3-3H5a3 3 0 0 0-3 3v1 M6.5 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg>
+        Audience
+        <span class="side__count" id="c-audience">—</span>
+      </button>
+    </nav>
+
+    <p class="side__section">Not yet live</p>
+    <nav class="side__nav" aria-label="Deferred sections">
+      <button class="side__link" data-target="#p-deferred" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h8v6H4z M6 7V5a2 2 0 0 1 4 0v2"/></svg>
+        Revenue &amp; calendar
+      </button>
+      <button class="side__link" data-target="#p-connectors" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2v4 M10 2v4 M4 6h8v3a4 4 0 0 1-8 0z M8 13v2"/></svg>
+        Connectors
+      </button>
+    </nav>
+
+    <div class="side__foot">
+      <strong>Honesty rule.</strong> No tile shows a number it cannot trace
+      to a row. Deferred metrics stay empty until their source ships.
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════════════════════ MAIN ═══ -->
+  <main class="main" id="main">
+
+    <header class="top">
+      <div class="top__row">
+        <div>
+          <h1 class="top__title" id="greeting">Operations overview</h1>
+          <p class="top__sub">
+            <span id="todaydate">—</span> ·
+            LoveLi Care Med Spa &amp; Wellness Lounge, Towson MD ·
+            <span id="freshness">loading…</span>
+          </p>
+        </div>
+        <div class="top__spacer"></div>
+        <div class="top__actions">
+          <button class="btn btn--ghost" id="refresh" type="button">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8a6 6 0 1 1-1.8-4.2M14 2v4h-4"/></svg>
+            Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Horizontal tab nav with real dropdown menus. Built in JS. -->
+      <nav class="tabs" id="tabs" aria-label="Primary"></nav>
+
+      <!-- Filters. Each is a real combobox bound to a URL parameter. -->
+      <div class="filters" id="filters"></div>
+    </header>
+
+    <div class="modebar" id="modebar">
+      <span class="modebar__tag" id="mode-tag">…</span>
+      <span class="modebar__text" id="mode-text"></span>
+    </div>
+
+    <div class="content">
+
+      <!-- ─────────────────────────────────────────── GREETING + TILES ─ -->
+      <section class="panel" id="p-today" aria-labelledby="h-today">
+        <div class="panel__head">
+          <h2 class="panel__title" id="h-today">Today</h2>
+          <p class="panel__note">Owned data only. Each tile names its table.</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1fr">
+          <div class="hero" id="hero"></div>
+        </div>
+
+        <div class="grid" id="tiles" style="margin-top:14px"></div>
+      </section>
+
+      <hr class="rule-gold"/>
+
+      <!-- ────────────────────────────────────────────── CLIENT JOURNEY ─ -->
+      <section class="panel" id="p-journey" aria-labelledby="h-journey">
+        <div class="panel__head">
+          <h2 class="panel__title" id="h-journey">Client journey</h2>
+          <p class="panel__note" id="journey-note">Where everyone is right now</p>
+        </div>
+        <div class="card">
+          <div class="journey" id="journey"></div>
+          <p class="panel__note" style="margin-top:14px;font-size:var(--t-2xs)">
+            Hollow stages have no owned source yet — they light up when the
+            Vagaro replacement ships. They are never estimated.
+          </p>
+        </div>
+      </section>
+
+      <hr class="rule-gold"/>
+
+      <!-- ──────────────────────────────────────── FUNNEL + WHAT THEY ASK ─ -->
+      <div class="grid grid--2">
+        <section class="panel" id="p-funnel" aria-labelledby="h-funnel">
+          <div class="panel__head">
+            <h2 class="panel__title" id="h-funnel">Funnel</h2>
+            <p class="panel__note">Nested stages — each is a strict subset of the one above</p>
+          </div>
+          <div class="card"><div class="funnel" id="funnel"></div></div>
+        </section>
+
+        <section class="panel" id="p-asking" aria-labelledby="h-asking">
+          <div class="panel__head">
+            <h2 class="panel__title" id="h-asking">What people are asking</h2>
+          </div>
+          <div class="card">
+            <p class="panel__note" style="margin-bottom:12px">
+              Services mentioned across chat sessions and inquiries
+            </p>
+            <div class="bars" id="svcbars"></div>
+            <hr class="rule-gold" style="margin:16px 0 12px"/>
+            <p class="panel__note" style="margin-bottom:4px">Most frequent questions</p>
+            <div class="qlist" id="questions"></div>
+          </div>
+        </section>
+      </div>
+
+      <hr class="rule-gold"/>
+
+      <!-- ─────────────────────────────────────────────── INQUIRY QUEUE ─ -->
+      <section class="panel" id="p-queue" aria-labelledby="h-queue">
+        <div class="panel__head">
+          <h2 class="panel__title" id="h-queue">Inquiry queue</h2>
+          <p class="panel__note">Click a status pill to advance it · new → contacted → booked → closed</p>
+        </div>
+        <div class="card card--pad0">
+          <div class="tablewrap">
+            <table class="t" id="queue">
+              <caption class="sr">Contact inquiries matching the current filters</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Person</th>
+                  <th scope="col">Service</th>
+                  <th scope="col">Message</th>
+                  <th scope="col">Source</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Received</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <hr class="rule-gold"/>
+
+      <!-- ──────────────────────────────────────────────────── INVENTORY ─ -->
+      <section class="panel" id="p-inventory" aria-labelledby="h-inv">
+        <div class="panel__head">
+          <h2 class="panel__title" id="h-inv">Injectable &amp; IV inventory</h2>
+          <p class="panel__note">
+            Transcribed from vial photographs · base count 10 · click ± to adjust
+          </p>
+          <span class="panel__spacer"></span>
+          <span class="badge badge--live" id="inv-summary">—</span>
+        </div>
+        <div class="inv" id="inventory"></div>
+      </section>
+
+      <hr class="rule-gold"/>
+
+      <!-- ───────────────────────────────────────── AUDIENCE + UP NEXT ─ -->
+      <div class="grid grid--2">
+        <section class="panel" id="p-audience" aria-labelledby="h-audience">
+          <div class="panel__head">
+            <h2 class="panel__title" id="h-audience">Audience</h2>
+            <span class="panel__spacer"></span>
+            <span class="tile__value" style="font-size:var(--t-xl)"><span id="growth-total">—</span></span>
+            <span class="tile__delta tile__delta--up" id="growth-added">—</span>
+          </div>
+          <div class="card">
+            <div id="growth"></div>
+            <div class="legend">
+              <span class="legend__item">
+                <span class="legend__key" style="background:var(--c-gold)"></span>
+                Total subscribers
+              </span>
+              <span class="legend__item"><span class="tile__src">newsletter_subscribers</span></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="p-upnext" aria-labelledby="h-upnext">
+          <div class="panel__head">
+            <h2 class="panel__title" id="h-upnext">Up next</h2>
+            <p class="panel__note">Newest inquiries awaiting a reply</p>
+          </div>
+          <div class="card"><div class="unext" id="upnext"></div></div>
+        </section>
+      </div>
+
+      <hr class="rule-gold"/>
+
+      <!-- ──────────────────────────────────────────── DEFERRED (TIER 2) ─ -->
+      <section class="panel" id="p-deferred" aria-labelledby="h-deferred">
+        <div class="panel__head">
+          <h2 class="panel__title" id="h-deferred">Revenue &amp; calendar</h2>
+          <p class="panel__note">
+            Designed for, never invented. These unlock when the Vagaro
+            replacement ships — not before.
+          </p>
+        </div>
+        <div class="grid" id="deferred"></div>
+      </section>
+
+      <hr class="rule-gold"/>
+
+      <!-- ────────────────────────────────────────────────── CONNECTORS ─ -->
+      <section class="panel" id="p-connectors" aria-labelledby="h-conn">
+        <div class="panel__head">
+          <h2 class="panel__title" id="h-conn">Connectors</h2>
+          <p class="panel__note">Real status. A light here always means something.</p>
+        </div>
+        <div class="grid grid--half" id="connectors"></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./assets/js/dashboard-data.js"></script>
+<script src="./assets/js/dashboard.js"></script>
+</body>
+</html>

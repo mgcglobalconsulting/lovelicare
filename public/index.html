@@ -14,7 +14,7 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <!-- GoDaddy: relative CSS path -->
 <link rel="stylesheet" href="./assets/css/liquid-glass.css"/>
@@ -23,25 +23,48 @@
 {"@context":"https://schema.org","@type":"MedicalBusiness","name":"LoveLi Care Med Spa & Wellness Lounge","url":"https://lovelicare.com","telephone":"+14106165451","address":{"@type":"PostalAddress","streetAddress":"100 East Pennsylvania Avenue","addressLocality":"Towson","addressRegion":"MD","postalCode":"21286","addressCountry":"US"},"sameAs":["https://www.facebook.com/337743627433167","https://www.instagram.com/lovelicare"]}
 </script>
 
+<!-- Marks that JS is live, so the intro's hidden pre-states only apply when
+     something is actually there to clear them. Must run before first paint. -->
+<script>document.documentElement.classList.add('lc-js')</script>
+
 <!-- Additional inline styles for page-specific components -->
 <style>
-/* ── LOADER ── */
-#lc-loader{position:fixed;inset:0;z-index:99999;background:#F5EFE8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .7s,transform .7s}
-#lc-loader.gone{opacity:0;pointer-events:none;transform:scale(1.04)}
-.loader-logo{font-family:'Italiana','Cormorant',Georgia,serif;font-size:clamp(2.4rem,6vw,4rem);color:#2F4F4F;letter-spacing:.06em}
-.loader-logo span{color:#C9A96E}
-.loader-bar{width:180px;height:1.5px;background:rgba(201,169,110,.2);border-radius:999px;overflow:hidden;position:relative}
-.loader-bar::after{content:'';position:absolute;left:-60%;width:60%;height:100%;background:linear-gradient(90deg,transparent,#C9A96E,transparent);animation:lb 1.4s ease .2s forwards}
-@keyframes lb{to{left:150%}}
-.loader-sub{font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(47,79,79,.3);font-family:'DM Sans',sans-serif}
+/* ── INTRO: THE APERTURE ──
+   A deep teal field holds the wordmark, then parts horizontally to reveal the
+   hero beneath. Shown only when JS is present (.lc-js), full-length once per
+   session, abbreviated on in-session returns. */
+#lc-intro{position:fixed;inset:0;z-index:99999;pointer-events:none;visibility:hidden}
+.lc-js #lc-intro{visibility:visible}
+#lc-intro.lc-intro-done{display:none}
+.intro-panel{position:absolute;left:0;right:0;height:50.4%;background-color:#241915;background-image:radial-gradient(125% 95% at 50% 50%,#3C2B25 0%,#2B1E19 55%,#241915 100%);background-size:100vw 100vh;background-repeat:no-repeat;will-change:transform;transition:transform .95s cubic-bezier(.76,0,.24,1)}
+.intro-panel-top{top:0;background-position:center top}
+.intro-panel-bottom{bottom:0;background-position:center bottom}
+#lc-intro.split .intro-panel-top{transform:translateY(-100.5%)}
+#lc-intro.split .intro-panel-bottom{transform:translateY(100.5%)}
+.intro-core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:17px;transition:opacity .45s ease,transform .75s cubic-bezier(.16,1,.3,1)}
+#lc-intro.split .intro-core{opacity:0;transform:translateY(-13px)}
+.intro-word{font-family:'Italiana','Cormorant',Georgia,serif;font-size:clamp(2.1rem,6.4vw,4.6rem);line-height:1;color:#FFF9F5;white-space:nowrap;opacity:0;letter-spacing:.54em;padding-left:.54em;animation:introWord 1.15s cubic-bezier(.16,1,.3,1) .14s forwards}
+.intro-word em{font-style:normal;color:#7A5F33}
+@keyframes introWord{to{opacity:1;letter-spacing:.11em;padding-left:.11em}}
+.intro-rule{width:min(290px,44vw);height:1px;background:linear-gradient(90deg,transparent,#C9A96E,transparent);transform:scaleX(0);animation:introRule .95s cubic-bezier(.16,1,.3,1) .04s forwards}
+@keyframes introRule{to{transform:scaleX(1)}}
+.intro-sub{font-family:'Montserrat',sans-serif;font-size:.54rem;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,249,245,.52);text-align:center;padding:0 24px;opacity:0;animation:introSub .7s ease .6s forwards}
+@keyframes introSub{to{opacity:1}}
+/* Returning in-session: skip the typography beat, just part the panels */
+#lc-intro.brief .intro-core{display:none}
+#lc-intro.brief .intro-panel{transition-duration:.6s}
+@media(prefers-reduced-motion:reduce){
+  .intro-word,.intro-rule,.intro-sub{animation:none;opacity:1;letter-spacing:.11em;padding-left:.11em;transform:none}
+  .intro-panel{transition-duration:.35s}
+}
 
 /* ── MOBILE MENU ── */
-#mobile-menu{position:fixed;inset:0;z-index:998;background:rgba(245,239,232,.92);backdrop-filter:blur(32px) saturate(160%);-webkit-backdrop-filter:blur(32px) saturate(160%);padding:100px 32px 40px;display:flex;flex-direction:column;gap:8px;transform:translateX(100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+#mobile-menu{position:fixed;inset:0;z-index:998;background:rgba(245,239,232,.92);backdrop-filter:blur(32px) saturate(160%);-webkit-backdrop-filter:blur(32px) saturate(160%);padding:92px 28px 48px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;transform:translateX(100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
 #mobile-menu.open{transform:translateX(0)}
-.mobile-nav-item{padding:16px 20px;font-family:'Cormorant',Georgia,serif;font-size:1.4rem;font-weight:400;color:rgba(47,79,79,.8);border-radius:14px;cursor:pointer;transition:background .3s}
-.mobile-nav-item:hover{background:rgba(255,255,255,.5);color:#2F4F4F}
+.mobile-nav-item{padding:16px 20px;font-family:'Cormorant',Georgia,serif;font-size:1.4rem;font-weight:400;color:rgba(60,43,37,.8);border-radius:14px;cursor:pointer;transition:background .3s}
+.mobile-nav-item:hover{background:rgba(255,255,255,.5);color:var(--c-espresso)}
 #mobile-toggle{background:none;border:none;cursor:pointer;display:none;width:38px;height:38px;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:50%;background:rgba(255,255,255,.4);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
-#mobile-toggle span{width:16px;height:1.5px;background:#2F4F4F;display:block;transition:all .3s;border-radius:2px}
+#mobile-toggle span{width:16px;height:1.5px;background:var(--c-espresso);display:block;transition:all .3s;border-radius:2px}
 @media(max-width:1100px){#mobile-toggle{display:flex}}
 
 /* ── PLANNER COMPONENT ── */
@@ -49,14 +72,14 @@
 .planner-dots{display:flex;gap:8px;margin-bottom:32px}
 .planner-dot{flex:1;height:3px;border-radius:2px;background:rgba(201,169,110,.2);transition:background .4s}
 .planner-dot.active{background:#C9A96E}
-.planner-q{font-family:'Cormorant',Georgia,serif;font-size:1.25rem;font-weight:400;color:#2F4F4F;margin-bottom:5px;line-height:1.4}
-.planner-qsub{font-size:.75rem;font-weight:300;color:rgba(47,79,79,.45);margin-bottom:28px}
+.planner-q{font-family:'Cormorant',Georgia,serif;font-size:1.25rem;font-weight:400;color:var(--c-espresso);margin-bottom:5px;line-height:1.4}
+.planner-qsub{font-size:.75rem;font-weight:300;color:rgba(60,43,37,.45);margin-bottom:28px}
 .planner-opts{display:flex;flex-direction:column;gap:10px}
-.planner-opt{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);border-radius:12px;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);font-size:.88rem;font-weight:300;color:rgba(47,79,79,.7)}
-.planner-opt:hover{background:rgba(255,255,255,.65);border-color:rgba(201,169,110,.35)}
-.planner-opt.sel{background:rgba(201,169,110,.12);border-color:rgba(201,169,110,.45);color:#2F4F4F;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 0 3px rgba(201,169,110,.12)}
+.planner-opt{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);border-radius:12px;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);font-size:.88rem;font-weight:300;color:rgba(60,43,37,.7)}
+.planner-opt:hover{background:rgba(255,255,255,.65);border-color:var(--gold-text)}
+.planner-opt.sel{background:rgba(201,169,110,.12);border-color:var(--gold-text);color:var(--c-espresso);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 0 3px rgba(201,169,110,.12)}
 .planner-opt-circle{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(201,169,110,.4);flex-shrink:0;transition:all .3s}
-.planner-opt.sel .planner-opt-circle{border-color:#C9A96E;background:#C9A96E}
+.planner-opt.sel .planner-opt-circle{border-color:var(--gold-text);background:#C9A96E}
 .planner-nav{display:flex;gap:10px;margin-top:24px}
 .planner-result{text-align:center;padding:20px 0}
 
@@ -64,35 +87,35 @@
 .svc-step-row{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.5);transition:all .4s}
 .svc-step-row:last-child{border-bottom:none}
 .svc-step-row:hover{padding-left:8px}
-.svc-step-num{font-family:'Italiana','Cormorant',Georgia,serif;font-size:2.2rem;color:rgba(201,169,110,.25);line-height:1;flex-shrink:0;width:44px;transition:color .4s}
-.svc-step-row:hover .svc-step-num{color:#C9A96E}
-.svc-step-name{font-family:'Cormorant',Georgia,serif;font-size:1rem;color:#2F4F4F;margin-bottom:4px;font-weight:400}
-.svc-step-desc{font-size:.78rem;font-weight:300;color:rgba(47,79,79,.5);line-height:1.65}
+.svc-step-num{font-family:'Italiana','Cormorant',Georgia,serif;font-size:2.2rem;color:var(--gold-text);line-height:1;flex-shrink:0;width:44px;transition:color .4s}
+.svc-step-row:hover .svc-step-num{color:var(--gold-text)}
+.svc-step-name{font-family:'Cormorant',Georgia,serif;font-size:1rem;color:var(--c-espresso);margin-bottom:4px;font-weight:400}
+.svc-step-desc{font-size:.78rem;font-weight:300;color:rgba(60,43,37,.5);line-height:1.65}
 
 /* ── GEAR GRID ── */
 .gear-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .gear-opt{background:rgba(255,255,255,.45);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);border-radius:12px;padding:16px;cursor:pointer;transition:all .3s;text-align:center}
-.gear-opt:hover,.gear-opt.sel{background:rgba(201,169,110,.12);border-color:rgba(201,169,110,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 0 2px rgba(201,169,110,.15)}
-.gear-name{font-family:'Cormorant',Georgia,serif;font-size:.95rem;color:#2F4F4F;margin-bottom:4px}
-.gear-price{font-size:.75rem;color:#C9A96E;font-weight:500}
+.gear-opt:hover,.gear-opt.sel{background:rgba(201,169,110,.12);border-color:var(--gold-text);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 0 2px rgba(201,169,110,.15)}
+.gear-name{font-family:'Cormorant',Georgia,serif;font-size:.95rem;color:var(--c-espresso);margin-bottom:4px}
+.gear-price{font-size:.75rem;color:var(--gold-text);font-weight:500}
 
 /* ── SITEMAP NODES ── */
 .sm-node{background:rgba(255,255,255,.4);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);border-radius:12px;padding:14px 18px;cursor:pointer;transition:all .35s;text-align:center}
-.sm-node:hover{background:rgba(255,255,255,.65);border-color:rgba(201,169,110,.3);transform:translateY(-2px)}
-.sm-node-root{background:rgba(201,169,110,.14);border-color:rgba(201,169,110,.35)}
-.sm-title{font-size:.75rem;font-weight:500;color:#2F4F4F}
-.sm-url{font-size:.58rem;color:rgba(47,79,79,.35);margin-top:3px;font-family:monospace}
-.sm-connector{display:flex;justify-content:center;padding:4px 0;color:rgba(201,169,110,.3);font-size:.85rem}
+.sm-node:hover{background:rgba(255,255,255,.65);border-color:var(--gold-text);transform:translateY(-2px)}
+.sm-node-root{background:rgba(201,169,110,.14);border-color:var(--gold-text)}
+.sm-title{font-size:.75rem;font-weight:500;color:var(--c-espresso)}
+.sm-url{font-size:.58rem;color:rgba(60,43,37,.35);margin-top:3px;font-family:monospace}
+.sm-connector{display:flex;justify-content:center;padding:4px 0;color:var(--gold-text);font-size:.85rem}
 
 /* ── VITAMIN GUIDE ── */
 .vc-section{margin-bottom:48px}
-.vc-h{font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.5rem;color:#2F4F4F;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.6)}
+.vc-h{font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.5rem;color:var(--c-espresso);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.6)}
 .vc-card{background:rgba(255,255,255,.42);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 0 20px rgba(255,255,255,.2),0 4px 16px rgba(0,0,0,.04);border-radius:14px;padding:20px;margin-bottom:12px}
-.vc-card h4{font-family:'Cormorant',Georgia,serif;font-size:1rem;color:#2F4F4F;margin-bottom:6px;font-weight:400}
-.vc-card p{font-size:.82rem;font-weight:300;color:rgba(47,79,79,.6);line-height:1.8}
+.vc-card h4{font-family:'Cormorant',Georgia,serif;font-size:1rem;color:var(--c-espresso);margin-bottom:6px;font-weight:400}
+.vc-card p{font-size:.82rem;font-weight:300;color:rgba(60,43,37,.6);line-height:1.8}
 .vc-combo{background:rgba(201,169,110,.1);backdrop-filter:blur(16px);border:1px solid rgba(201,169,110,.25);border-radius:12px;padding:20px;margin-top:16px}
-.vc-combo .vc-label{font-size:.52rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:6px}
-.vc-combo p{font-size:.82rem;font-weight:300;color:rgba(47,79,79,.65);line-height:1.75}
+.vc-combo .vc-label{font-size:.52rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);margin-bottom:6px}
+.vc-combo p{font-size:.82rem;font-weight:300;color:rgba(60,43,37,.65);line-height:1.75}
 
 /* ── REVIEW WALL STAGGER ── */
 @keyframes floatReview{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -102,10 +125,10 @@
 .review-float-4{animation:floatReview 8s ease-in-out 2.4s infinite}
 
 /* ── LEGAL ── */
-.legal-h2{font-family:'Cormorant',Georgia,serif;font-size:1.15rem;color:#2F4F4F;font-weight:400;margin:28px 0 10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.5)}
-.legal-h3{font-size:.88rem;font-weight:500;color:rgba(47,79,79,.75);margin:14px 0 5px}
-.legal-p{font-size:.84rem;font-weight:300;color:rgba(47,79,79,.6);line-height:1.88;margin-bottom:12px}
-.legal-link{color:#C9A96E;text-decoration:none}
+.legal-h2{font-family:'Cormorant',Georgia,serif;font-size:1.15rem;color:var(--c-espresso);font-weight:400;margin:28px 0 10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.5)}
+.legal-h3{font-size:.88rem;font-weight:500;color:rgba(60,43,37,.75);margin:14px 0 5px}
+.legal-p{font-size:.84rem;font-weight:300;color:rgba(60,43,37,.6);line-height:1.88;margin-bottom:12px}
+.legal-link{color:var(--gold-text);text-decoration:none}
 
 /* ── AI ASSET PROMPT BANNERS (visible in dev, hidden in prod) ── */
 .ai-prompt-banner{display:none}/* Set to display:block in development */
@@ -116,8 +139,8 @@
 /* ── HERO SCROLL ARROW ── */
 .hero-scroll-arrow{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;z-index:10;opacity:0;transition:opacity .5s;animation:saFadeIn .9s ease 2.4s forwards}
 .hero-scroll-arrow:hover{opacity:1!important}
-.hero-scroll-arrow:hover .hero-scroll-chevron{background:rgba(255,255,255,.8);border-color:rgba(201,169,110,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 0 0 7px rgba(201,169,110,.1)}
-.hero-scroll-label{font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(47,79,79,.38);font-family:'DM Sans',sans-serif;font-weight:400}
+.hero-scroll-arrow:hover .hero-scroll-chevron{background:rgba(255,255,255,.8);border-color:var(--gold-text);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 0 0 7px rgba(201,169,110,.1)}
+.hero-scroll-label{font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(60,43,37,.38);font-family:'Open Sans',sans-serif;font-weight:400}
 .hero-scroll-chevron{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.52);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border:1px solid rgba(255,255,255,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.88),0 4px 16px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;transition:all .35s cubic-bezier(.16,1,.3,1);animation:heroBounce 2.6s ease-in-out infinite}
 @keyframes heroBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 @keyframes saFadeIn{from{opacity:0}to{opacity:.65}}
@@ -139,10 +162,14 @@
 <canvas id="mesh-canvas"></canvas>
 
 <!-- LOADER -->
-<div id="lc-loader">
-  <div class="loader-logo">LoveLi<span>Care</span></div>
-  <div class="loader-bar"></div>
-  <div class="loader-sub">Biophilic · Clinical · Luxury</div>
+<div id="lc-intro" aria-hidden="true">
+  <div class="intro-panel intro-panel-top"></div>
+  <div class="intro-panel intro-panel-bottom"></div>
+  <div class="intro-core">
+    <div class="intro-word">LoveLi<em>Care</em></div>
+    <div class="intro-rule"></div>
+    <div class="intro-sub">Med Spa &amp; Wellness · Towson, Maryland</div>
+  </div>
 </div>
 
 <!-- CURSOR -->
@@ -154,17 +181,17 @@
 
 <!-- POST-BOOKING SUCCESS (Part 4) -->
 <div id="booking-success">
-  <div id="booking-success-backdrop" style="position:absolute;inset:0;background:rgba(47,79,79,.2);backdrop-filter:blur(20px)" onclick="document.getElementById('booking-success').classList.remove('active')"></div>
+  <div id="booking-success-backdrop" style="position:absolute;inset:0;background:rgba(60,43,37,.2);backdrop-filter:blur(20px)" onclick="document.getElementById('booking-success').classList.remove('active')"></div>
   <div id="booking-success-card">
     <div style="font-size:3rem;margin-bottom:20px;animation:floatReview 3s ease-in-out infinite"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2a4 4 0 010 6 4 4 0 010-6zM12 16a4 4 0 010 6 4 4 0 010-6zM2 12a4 4 0 016 0 4 4 0 01-6 0zM16 12a4 4 0 016 0 4 4 0 01-6 0z"/></svg></div>
-    <div style="font-family:'Italiana','Cormorant',Georgia,serif;font-size:2rem;color:#2F4F4F;margin-bottom:6px">You're Booked!</div>
-    <div style="font-family:'Cormorant',Georgia,serif;font-style:italic;font-size:1rem;color:rgba(47,79,79,.55);margin-bottom:24px">We can't wait to see you, <span id="success-name">Beautiful</span></div>
+    <div style="font-family:'Italiana','Cormorant',Georgia,serif;font-size:2rem;color:var(--c-espresso);margin-bottom:6px">You're Booked!</div>
+    <div style="font-family:'Cormorant',Georgia,serif;font-style:italic;font-size:1rem;color:rgba(60,43,37,.55);margin-bottom:24px">We can't wait to see you, <span id="success-name">Beautiful</span></div>
     <div style="background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.25);border-radius:12px;padding:20px;margin-bottom:24px">
-      <div style="font-size:.56rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:6px">Your Appointment</div>
-      <div style="font-family:'Cormorant',Georgia,serif;font-size:1.05rem;color:#2F4F4F" id="success-service">Your treatment</div>
-      <div style="font-size:.82rem;font-weight:300;color:rgba(47,79,79,.5);margin-top:4px" id="success-date"></div>
+      <div style="font-size:.56rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);margin-bottom:6px">Your Appointment</div>
+      <div style="font-family:'Cormorant',Georgia,serif;font-size:1.05rem;color:var(--c-espresso)" id="success-service">Your treatment</div>
+      <div style="font-size:.82rem;font-weight:300;color:rgba(60,43,37,.5);margin-top:4px" id="success-date"></div>
     </div>
-    <p style="font-size:.78rem;font-weight:300;color:rgba(47,79,79,.5);line-height:1.7;margin-bottom:20px">A WhatsApp welcome card with your prep guide is on its way. <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></p>
+    <p style="font-size:.78rem;font-weight:300;color:rgba(60,43,37,.5);line-height:1.7;margin-bottom:20px">A WhatsApp welcome card with your prep guide is on its way. <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
       <a href="https://lovelicare.com/prepare" target="_blank" class="btn-glass btn-glass-primary btn-glass-sm">View Prep Guide →</a>
       <button id="success-close" class="btn-glass btn-glass-sm">Done</button>
@@ -178,9 +205,9 @@
   <div id="vagaro-modal">
     <div class="vagaro-modal-header">
       <div>
-        <div style="font-size:.52rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Book Online</div>
+        <div style="font-size:.52rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Book Online</div>
         <div class="vagaro-modal-title">LoveLi Care</div>
-        <div style="font-size:.75rem;font-weight:300;color:rgba(47,79,79,.45)" id="vagaro-service-label">Select your service below</div>
+        <div style="font-size:.75rem;font-weight:300;color:rgba(60,43,37,.45)" id="vagaro-service-label">Select your service below</div>
       </div>
       <button class="vagaro-close-btn" onclick="closeVagaro()" aria-label="Close">✕</button>
     </div>
@@ -243,44 +270,43 @@
       </div>
 
       <!-- Smart Nav -->
-      <ul class="lc-nav-links" role="menubar">
-        <li role="none"><button role="menuitem" onclick="navTo('home')">Home</button></li>
+      <ul class="lc-nav-links">
+        <li><button type="button" onclick="navTo('home')">Home</button></li>
 
-        <li class="lc-dropdown" role="none">
-          <button role="menuitem" aria-haspopup="true">Services ▾</button>
-          <div class="lc-dropdown-menu" role="menu">
-            <span class="lc-dropdown-label">Beauty</span>
-            <span class="lc-dropdown-menu" style="display:contents">
-              <span onclick="navTo('medical-aesthetics')" role="menuitem" class="lc-dropdown-menu" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;transition:all .2s;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg> Medical Aesthetics</span>
-              <span onclick="navTo('body-contouring')" role="menuitem" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;transition:all .2s;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg> Body Contouring</span>
-            </span>
+        <li class="lc-dropdown">
+          <button type="button" class="lc-dropdown-trigger" aria-expanded="false" aria-controls="lc-menu-services">Services<svg class="lc-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="lc-dropdown-menu" id="lc-menu-services">
+            <p class="lc-dropdown-label">Beauty</p>
+            
+              <button type="button" class="lc-dropdown-item" onclick="navTo('medical-aesthetics')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg> Medical Aesthetics</button>
+              <button type="button" class="lc-dropdown-item" onclick="navTo('body-contouring')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg> Body Contouring</button>
             <div class="lc-dropdown-divider"></div>
-            <span class="lc-dropdown-label">Wellness</span>
-            <span onclick="navTo('weight-management')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg> Weight Management</span>
-            <span onclick="navTo('nutrition-counseling')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg> Nutrition Counseling</span>
-            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg> IV Therapy</span>
+            <p class="lc-dropdown-label">Wellness</p>
+            <button type="button" class="lc-dropdown-item" onclick="navTo('weight-management')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg> Weight Management</button>
+            <button type="button" class="lc-dropdown-item" onclick="navTo('nutrition-counseling')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg> Nutrition Counseling</button>
+            <button type="button" class="lc-dropdown-item" onclick="navTo('nutritional-wellness')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg> IV Therapy</button>
             <div class="lc-dropdown-divider"></div>
-            <span class="lc-dropdown-label">Medical</span>
-            <span onclick="navTo('non-emergent-care')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg> MMCC & Physicals</span>
+            <p class="lc-dropdown-label">Medical</p>
+            <button type="button" class="lc-dropdown-item" onclick="navTo('non-emergent-care')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg> MMCC & Physicals</button>
           </div>
         </li>
 
-        <li class="lc-dropdown" role="none">
-          <button role="menuitem" aria-haspopup="true">IV Therapy ▾</button>
-          <div class="lc-dropdown-menu" role="menu">
-            <span class="lc-dropdown-label">Drip Menus</span>
-            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg> Build Your Glow</span>
-            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Fat Burn & Energy</span>
-            <span onclick="navTo('nutritional-wellness')" style="display:block;padding:9px 14px;font-size:.78rem;color:rgba(47,79,79,.75);border-radius:8px;cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Immunity Fortress</span>
+        <li class="lc-dropdown">
+          <button type="button" class="lc-dropdown-trigger" aria-expanded="false" aria-controls="lc-menu-iv">IV Therapy<svg class="lc-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="lc-dropdown-menu" id="lc-menu-iv">
+            <p class="lc-dropdown-label">Drip Menus</p>
+            <button type="button" class="lc-dropdown-item" onclick="navTo('nutritional-wellness')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg> Build Your Glow</button>
+            <button type="button" class="lc-dropdown-item" onclick="navTo('nutritional-wellness')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Fat Burn & Energy</button>
+            <button type="button" class="lc-dropdown-item" onclick="navTo('nutritional-wellness')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Immunity Fortress</button>
             <div class="lc-dropdown-divider"></div>
-            <span onclick="navTo('vitamin-cheat-sheet')" style="display:block;padding:9px 14px;font-size:.78rem;color:#C9A96E;border-radius:8px;cursor:pointer;font-weight:500" onmouseover="this.style.background='rgba(255,255,255,.7)'" onmouseout="this.style.background=''"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="2" width="4" height="18" rx="1"/></svg> Vitamin Cheat Sheet →</span>
+            <button type="button" class="lc-dropdown-item lc-dropdown-item-accent" onclick="navTo('vitamin-cheat-sheet')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="2" width="4" height="18" rx="1"/></svg> Vitamin Cheat Sheet →</button>
           </div>
         </li>
 
-        <li role="none"><button role="menuitem" onclick="navTo('wellness-assistant')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> Assistant</button></li>
-        <li role="none"><button role="menuitem" onclick="navTo('online-store')">Shop</button></li>
-        <li role="none"><button role="menuitem" onclick="navTo('contact')">Contact</button></li>
-        <li role="none"><button role="menuitem" onclick="navTo('sitemap')" style="font-size:.65rem;opacity:.55">Map</button></li>
+        <li><button type="button" onclick="navTo('wellness-assistant')"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> Assistant</button></li>
+        <li><button type="button" onclick="navTo('online-store')">Shop</button></li>
+        <li><button type="button" onclick="navTo('contact')">Contact</button></li>
+        <li><button type="button" onclick="navTo('sitemap')" style="font-size:.65rem;opacity:.55">Map</button></li>
       </ul>
 
       <!-- CTA + Mobile Toggle -->
@@ -307,38 +333,45 @@
 <div class="lc-page active" id="page-home">
 
   <!-- Hero -->
-  <section class="lc-hero">
+  <section class="lc-hero lc-home-hero">
     <!-- VEO 3 VIDEO ACCENT: Replace with ./assets/video/ripple-loop.mp4 -->
     <div class="video-bg-container"><div class="video-bg-fallback"></div></div>
-    <div class="lc-container" style="padding-top:40px;padding-bottom:80px">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+    <!-- Drifting light, film grain and vignette: atmosphere, no image weight -->
+    <div class="hero-atmos" aria-hidden="true">
+      <span class="hero-orb orb-1"></span>
+      <span class="hero-orb orb-2"></span>
+      <span class="hero-orb orb-3"></span>
+      <div class="hero-grain"></div>
+      <div class="hero-vignette"></div>
+    </div>
+    <div class="lc-container lc-home-hero-content">
+      <div class="lc-home-hero-layout">
         <!-- Left: Hero glass card -->
-        <div class="hero-glass-card lc-reveal">
+        <div class="hero-glass-card lc-reveal lc-home-copy">
           <div class="lc-eyebrow">
-            <span class="lc-eyebrow-text">Towson, MD · 100 E Pennsylvania Ave</span>
+            <span class="lc-eyebrow-text">Medical aesthetics · wellness · Towson, MD</span>
             <span class="lc-eyebrow-line"></span>
           </div>
-          <h1 class="lc-h1" style="margin-bottom:6px">Revitalize<br>Your <span class="lc-gold-em">Health</span></h1>
-          <p style="font-family:'Cormorant',Georgia,serif;font-size:1.15rem;font-style:italic;font-weight:300;color:rgba(47,79,79,.55);margin-bottom:28px;line-height:1.6">Expert care for a healthier, happier you.</p>
-          <p class="lc-lead" style="font-size:.92rem;margin-bottom:36px;max-width:440px">Where advanced clinical science meets compassionate, personalized wellness — all in one luxury lounge in Towson, MD.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px">
+          <h1 class="lc-h1 lc-home-title"><span class="tl"><span>Care that feels</span></span><span class="tl"><span class="lc-gold-em">like you.</span></span></h1>
+          <p class="lc-home-subtitle">Feel seen. Feel cared for. Feel more like yourself.</p>
+          <p class="lc-lead lc-home-lead">Personalized medical aesthetics and wellness, led by Libra T. Robertson, NP-CRNP, in a calm Towson med spa.</p>
+          <div class="lc-home-actions">
             <!-- PART 3: Native Vagaro glass button -->
-            <button class="vagaro-glass-btn btn-glass-xl" onclick="openVagaro()" style="font-size:.78rem">
-              <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Appointment
+            <button class="vagaro-glass-btn btn-glass-xl lc-home-book" onclick="openVagaro()">
+              <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book your visit
             </button>
-            <button onclick="navTo('wellness-assistant')" class="btn-glass btn-glass-lg"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> Wellness Assistant</button>
+            <button onclick="navTo('wellness-assistant')" class="btn-glass btn-glass-lg lc-home-assistant"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> Meet your wellness assistant</button>
           </div>
           <!-- Trust strip -->
           <div class="trust-glass-strip lc-reveal delay-3">
-            <div class="trust-glass-item"><div class="trust-val">5.0★</div><div class="trust-key">Google Rating</div></div>
-            <div class="trust-glass-item"><div class="trust-val">NP-C</div><div class="trust-key">Board Certified</div></div>
-            <div class="trust-glass-item"><div class="trust-val">HIPAA</div><div class="trust-key">Compliant</div></div>
-            <div class="trust-glass-item"><div class="trust-val">MD·DC·VA</div><div class="trust-key">Region Leader</div></div>
+            <div class="trust-glass-item"><div class="trust-val">NP-CRNP</div><div class="trust-key">Board certified</div></div>
+            <div class="trust-glass-item"><div class="trust-val">MD · DC · VA</div><div class="trust-key">Serving the region</div></div>
+            <div class="trust-glass-item"><div class="trust-val">Towson</div><div class="trust-key">By appointment</div></div>
           </div>
         </div>
 
         <!-- Right: Owner portrait with decorative glass frame -->
-        <div style="display:flex;flex-direction:column;gap:16px" class="lc-reveal delay-2">
+        <div class="lc-home-portrait lc-reveal delay-2">
 
           <!-- Owner Portrait Card -->
           <div class="owner-portrait-frame">
@@ -374,7 +407,7 @@
 
             <!-- Photo container with glass overlay -->
             <div class="owner-photo-container">
-              <img src="./assets/img/owner-portrait.jpg" alt="LoveLi Care Med Spa Owner — Board-Certified NP-CRNP" class="owner-photo" width="1024" height="1536" loading="lazy" decoding="async"/>
+              <img src="./assets/img/owner-portrait.jpg" alt="Libra T. Robertson, founder and clinical director of LoveLi Care" class="owner-photo" width="1024" height="1536" loading="eager" fetchpriority="high" decoding="async"/>
               <!-- Glass shine overlay -->
               <div class="owner-photo-shine"></div>
             </div>
@@ -382,22 +415,14 @@
             <!-- Name plate with glass styling -->
             <div class="owner-nameplate">
               <div class="owner-nameplate-inner">
-                <div style="font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#C9A96E;margin-bottom:2px">Founder & Clinical Director</div>
-                <div style="font-family:'Italiana','Cormorant',Georgia,serif;font-size:1.2rem;color:#2F4F4F;line-height:1.3">Libra T. Robertson</div>
-                <div style="font-size:.68rem;font-weight:300;color:rgba(47,79,79,.5);margin-top:4px;letter-spacing:.02em">NP-CRNP · Board Certified · Towson, MD</div>
+                <div class="owner-role">Founder &amp; Clinical Director</div>
+                <div class="owner-name">Libra T. Robertson</div>
+                <div class="owner-credentials">NP-CRNP · Board certified · Towson, MD</div>
               </div>
             </div>
           </div>
 
-          <!-- Mission glass card -->
-          <div class="glass-card" style="padding:28px">
-            <div style="font-size:.52rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C9A96E;margin-bottom:8px">Our Mission</div>
-            <p style="font-family:'Cormorant',Georgia,serif;font-size:.95rem;font-style:italic;line-height:1.7;color:rgba(47,79,79,.7);font-weight:300">"To nurture confidence, restore balance, and elevate wellness by combining compassionate care with advanced, science-based treatments."</p>
-            <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
-              <button onclick="navTo('contact')" class="btn-glass btn-glass-sm">Contact Us</button>
-              <a href="https://lovelicare.com/m/account" target="_blank" class="btn-glass btn-glass-sm">Sign In ↗</a>
-            </div>
-          </div>
+          <p class="lc-home-mission">Compassionate care, guided by science.</p>
         </div>
       </div>
     </div>
@@ -406,7 +431,7 @@
   <div class="hero-scroll-arrow" id="hero-scroll-arrow" onclick="window.scrollBy({top:window.innerHeight*.72,behavior:'smooth'})" aria-label="Scroll to explore">
     <span class="hero-scroll-label">Explore</span>
     <div class="hero-scroll-chevron">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2F4F4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3C2B25" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </div>
   </div>
 
@@ -415,8 +440,8 @@
   <!-- Free Meal Plan Banner -->
   <div style="background:linear-gradient(135deg,rgba(201,169,110,.75) 0%,rgba(201,169,110,.55) 100%);backdrop-filter:blur(20px) saturate(160%);border-top:1px solid rgba(255,255,255,.4);border-bottom:1px solid rgba(255,255,255,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.5);padding:18px 0">
     <div class="lc-container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:3px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg> Free Download</div><p style="font-family:'Cormorant',Georgia,serif;font-size:1.1rem;color:white;font-weight:400">Get Your Complimentary 12-Day Weight Loss Meal Plan</p></div>
-      <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass" style="background:rgba(255,255,255,.4);color:#2F4F4F;flex-shrink:0">Get Free Plan ↗</a>
+      <div><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(36,25,21,.86);margin-bottom:3px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg> Free Download</div><p style="font-family:'Cormorant',Georgia,serif;font-size:1.1rem;color:#241915;font-weight:400">Get Your Complimentary 12-Day Weight Loss Meal Plan</p></div>
+      <a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass" style="background:rgba(255,255,255,.4);color:var(--c-espresso);flex-shrink:0">Get Free Plan ↗</a>
     </div>
   </div>
 
@@ -500,7 +525,7 @@
   <div class="section-arrow-wrap lc-reveal">
     <div class="section-arrow-line section-arrow-line-top"></div>
     <div class="section-arrow-pill">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2F4F4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3C2B25" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </div>
     <div class="section-arrow-line section-arrow-line-bot"></div>
   </div>
@@ -522,7 +547,7 @@
             <div style="font-size:1.4rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
             <h3 class="lc-h3" style="margin-bottom:8px;font-size:1rem">NEW: AI Wellness Assistant</h3>
             <p class="lc-body" style="margin-bottom:16px">Skip the wait — chat with our AI agent before booking.</p>
-            <a href="https://lovelicare.com/wellness-chatbox" target="_blank" class="btn-glass btn-glass-primary btn-glass-sm">Launch Assistant ↗</a>
+            <a href="/chatbot" target="_blank" rel="noopener" class="btn-glass btn-glass-primary btn-glass-sm">Launch Assistant ↗</a>
           </div>
         </div>
 
@@ -577,9 +602,9 @@
             <div id="planner-result" style="display:none">
               <div class="planner-result">
                 <div style="font-size:2.5rem;margin-bottom:16px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div>
-                <div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:8px">Your Perfect Match</div>
-                <div style="font-family:'Cormorant',Georgia,serif;font-size:1.3rem;color:#2F4F4F;margin-bottom:10px" id="planner-rec-label"></div>
-                <p style="font-size:.82rem;font-weight:300;color:rgba(47,79,79,.6);line-height:1.7;margin-bottom:24px" id="planner-rec-desc"></p>
+                <div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);margin-bottom:8px">Your Perfect Match</div>
+                <div style="font-family:'Cormorant',Georgia,serif;font-size:1.3rem;color:var(--c-espresso);margin-bottom:10px" id="planner-rec-label"></div>
+                <p style="font-size:.82rem;font-weight:300;color:rgba(60,43,37,.6);line-height:1.7;margin-bottom:24px" id="planner-rec-desc"></p>
                 <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
                   <button class="btn-glass btn-glass-primary" onclick="plannerBookRec()"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book This Service</button>
                   <button class="btn-glass btn-glass-sm" onclick="plannerReset()">Start Over</button>
@@ -596,7 +621,7 @@
   <div class="section-arrow-wrap sa-delay lc-reveal">
     <div class="section-arrow-line section-arrow-line-top"></div>
     <div class="section-arrow-pill">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2F4F4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3C2B25" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </div>
     <div class="section-arrow-line section-arrow-line-bot"></div>
   </div>
@@ -641,7 +666,7 @@
       </div>
       <!-- Gear upsell -->
       <div class="glass-gold lc-reveal" style="padding:40px;margin-bottom:40px">
-        <div style="font-size:.54rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C9A96E;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg> Snatch Gear™ — Maximize Your Results</div>
+        <div style="font-size:.54rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-text);margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg> Snatch Gear™ — Maximize Your Results</div>
         <h3 class="lc-h3" style="margin-bottom:8px">Complete the Protocol Between Sessions</h3>
         <p class="lc-body" style="margin-bottom:24px;max-width:540px">Clients who pair Snatch Protocol™ sessions with a Snatch Belt™ worn daily see compounding, accelerated results. Select your gear:</p>
         <div class="gear-grid" style="max-width:480px;margin-bottom:24px">
@@ -981,7 +1006,7 @@
     <h1 class="lc-h1 lc-reveal delay-1">Non-Emergent <span class="lc-gold-em">Care</span></h1>
     <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 40px">Handle the little things that keep life moving — without long wait times or unnecessary ER visits. Clinical efficiency in a boutique setting.</p>
     <div class="grid-3" style="margin-bottom:40px">
-      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-teal" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.8 21.2M17 8c4-1 7.5 2 7 6.5S17 21 12 21c-3 0-5.5-1-7.2-2.5"/><path d="M17 8C17 8 20 4 20 2"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px;color:#C9A96E">MMCC Certification</h3><p class="lc-body" style="margin-bottom:16px">Maryland Medical Cannabis certification. Fast, professional, fully compliant evaluations.</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('MMCC Certification')" style="font-size:.65rem">Book MMCC <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button></div>
+      <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-teal" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.8 21.2M17 8c4-1 7.5 2 7 6.5S17 21 12 21c-3 0-5.5-1-7.2-2.5"/><path d="M17 8C17 8 20 4 20 2"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px;color:var(--gold-text)">MMCC Certification</h3><p class="lc-body" style="margin-bottom:16px">Maryland Medical Cannabis certification. Fast, professional, fully compliant evaluations.</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro('MMCC Certification')" style="font-size:.65rem">Book MMCC <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button></div>
       <div class="glass-card lc-reveal delay-1" style="padding:32px"><div class="glass-icon glass-icon-blue" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9A9 9 0 0120.5 6L23 4M.5 20l2.5-2a9 9 0 0017-3"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">MMCC Renewals</h3><p class="lc-body" style="margin-bottom:16px">Annual MMCC card renewals handled efficiently. Bring your current certification.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('MMCC Renewal')">Book ↗</button></div>
       <div class="glass-card lc-reveal delay-2" style="padding:32px"><div class="glass-icon glass-icon-amber" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="M7 21l3-7 3 2 4-5M16 11l-4 5-3-2-3 7"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Medical Physicals</h3><p class="lc-body" style="margin-bottom:16px">Pre-employment, sports, school, and DOT physicals with certified documentation.</p><button class="btn-glass btn-glass-sm" onclick="openVagaro('Physical Exam')">Book ↗</button></div>
       <div class="glass-card lc-reveal" style="padding:32px"><div class="glass-icon glass-icon-green" style="margin-bottom:16px"><span class="glass-icon-emoji"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4.5" width="15" height="15" rx="7.5" transform="rotate(45 12 12)"/><path d="M8.5 8.5l7 7"/></svg></span></div><h3 class="lc-h3" style="margin-bottom:8px">Medication Refills</h3><p class="lc-body">Bridge prescriptions for established patients needing continuity between primary provider appointments.</p></div>
@@ -996,11 +1021,11 @@
   <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
     <h1 class="lc-h1 lc-reveal" style="margin-bottom:40px">All <span class="lc-gold-em">Services</span></h1>
     <div style="display:flex;flex-direction:column;gap:2px">
-      <div onclick="navTo('medical-aesthetics')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Refine</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Medical Aesthetics</h3><p class="lc-body" style="font-size:.78rem">Botox, fillers, HydraFacial, microneedling, and chemical peels.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
-      <div onclick="navTo('body-contouring')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Sculpt</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Body Contouring & Snatch Protocol™</h3><p class="lc-body" style="font-size:.78rem">360° non-invasive body transformation system.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
-      <div onclick="navTo('weight-management')" class="glass lc-reveal delay-2" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Optimize</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Weight Management</h3><p class="lc-body" style="font-size:.78rem">Vitamin injections, dietary modifications, lifestyle planning.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
-      <div onclick="navTo('nutritional-wellness')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Restore</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">IV & Nutritional Wellness Therapy</h3><p class="lc-body" style="font-size:.78rem">Custom vitamin and mineral infusions for whole-body wellness.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
-      <div onclick="navTo('non-emergent-care')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Concierge Medical</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Non-Emergent Care, MMCC & Physicals</h3><p class="lc-body" style="font-size:.78rem">MMCC certification, physicals, refills, doctor's notes.</p></div><span style="color:#C9A96E;font-size:1.2rem">→</span></div>
+      <div onclick="navTo('medical-aesthetics')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M7.5 13.5L3 18v3h3l4.5-4.5M15 6l-9.5 9.5M10 11l4 4M17.5 6.5l-4-4"/><path d="M12 3l3 3"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Refine</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Medical Aesthetics</h3><p class="lc-body" style="font-size:.78rem">Botox, fillers, HydraFacial, microneedling, and chemical peels.</p></div><span style="color:var(--gold-text);font-size:1.2rem">→</span></div>
+      <div onclick="navTo('body-contouring')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Sculpt</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Body Contouring & Snatch Protocol™</h3><p class="lc-body" style="font-size:.78rem">360° non-invasive body transformation system.</p></div><span style="color:var(--gold-text);font-size:1.2rem">→</span></div>
+      <div onclick="navTo('weight-management')" class="glass lc-reveal delay-2" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l3 8h6l3-8M15 7l3 8h3"/><circle cx="12" cy="3" r="1.5"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Optimize</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Weight Management</h3><p class="lc-body" style="font-size:.78rem">Vitamin injections, dietary modifications, lifestyle planning.</p></div><span style="color:var(--gold-text);font-size:1.2rem">→</span></div>
+      <div onclick="navTo('nutritional-wellness')" class="glass lc-reveal" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S5 10 5 14.5C5 18.6 8.1 22 12 22s7-3.4 7-7.5C19 10 12 2.7 12 2.7z"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Restore</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">IV & Nutritional Wellness Therapy</h3><p class="lc-body" style="font-size:.78rem">Custom vitamin and mineral infusions for whole-body wellness.</p></div><span style="color:var(--gold-text);font-size:1.2rem">→</span></div>
+      <div onclick="navTo('non-emergent-care')" class="glass lc-reveal delay-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:24px 28px;cursor:pointer;transition:all .35s;border-radius:14px" onmouseover="this.style.background='rgba(255,255,255,.55)'" onmouseout="this.style.background=''"><div style="font-size:1.8rem"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div><div><div style="font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Concierge Medical</div><h3 class="lc-h3" style="margin-bottom:4px;font-size:1rem">Non-Emergent Care, MMCC & Physicals</h3><p class="lc-body" style="font-size:.78rem">MMCC certification, physicals, refills, doctor's notes.</p></div><span style="color:var(--gold-text);font-size:1.2rem">→</span></div>
     </div>
   </div></div>
 </div>
@@ -1012,10 +1037,10 @@
       <div>
         <div class="glass-card lc-reveal" style="padding:36px;margin-bottom:16px">
           <div style="display:flex;flex-direction:column;gap:20px">
-            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Address</div><p class="lc-body">100 East Pennsylvania Avenue<br>Towson, MD · Suite 304</p><a href="https://maps.google.com/?q=100+East+Pennsylvania+Avenue+Towson+MD" target="_blank" class="btn-glass btn-glass-sm" style="margin-top:10px;display:inline-flex">Get Directions ↗</a></div></div>
-            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7 12.8 12.8 0 00.7 2.8 2 2 0 01-.4 2.1L8 10a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4 12.8 12.8 0 002.8.7A2 2 0 0122 17z"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Phone & Text</div><p class="lc-body">Office: <a href="tel:4106165451" style="color:#C9A96E;text-decoration:none">410-616-5451</a><br>Text: <a href="tel:4436782254" style="color:#C9A96E;text-decoration:none">443-678-2254</a></p></div></div>
-            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Email</div><a href="mailto:LoveLiCareSvcs@gmail.com" style="color:#C9A96E;text-decoration:none;font-size:.88rem">LoveLiCareSvcs@gmail.com</a></div></div>
-            <div style="display:flex;gap:14px"><div style="color:#C9A96E;font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Hours</div><p class="lc-body">By Appointment · Closed Major Holidays</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro()" style="margin-top:10px;font-size:.65rem">Book Online <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button></div></div>
+            <div style="display:flex;gap:14px"><div style="color:var(--gold-text);font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Address</div><p class="lc-body">100 East Pennsylvania Avenue<br>Towson, MD · Suite 304</p><a href="https://maps.google.com/?q=100+East+Pennsylvania+Avenue+Towson+MD" target="_blank" class="btn-glass btn-glass-sm" style="margin-top:10px;display:inline-flex">Get Directions ↗</a></div></div>
+            <div style="display:flex;gap:14px"><div style="color:var(--gold-text);font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7 12.8 12.8 0 00.7 2.8 2 2 0 01-.4 2.1L8 10a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4 12.8 12.8 0 002.8.7A2 2 0 0122 17z"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Phone & Text</div><p class="lc-body">Office: <a href="tel:4106165451" style="color:var(--gold-text);text-decoration:none">410-616-5451</a><br>Text: <a href="tel:4436782254" style="color:var(--gold-text);text-decoration:none">443-678-2254</a></p></div></div>
+            <div style="display:flex;gap:14px"><div style="color:var(--gold-text);font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Email</div><a href="mailto:LoveLiCareSvcs@gmail.com" style="color:var(--gold-text);text-decoration:none;font-size:.88rem">LoveLiCareSvcs@gmail.com</a></div></div>
+            <div style="display:flex;gap:14px"><div style="color:var(--gold-text);font-size:1.2rem;flex-shrink:0"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><div style="font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Hours</div><p class="lc-body">By Appointment · Closed Major Holidays</p><button class="vagaro-glass-btn btn-glass-sm" onclick="openVagaro()" style="margin-top:10px;font-size:.65rem">Book Online <svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button></div></div>
           </div>
         </div>
         <div style="display:flex;gap:10px">
@@ -1043,7 +1068,7 @@
             </select>
           </div>
           <div class="lc-form-group"><label class="lc-form-label">Message</label><textarea class="lc-form-textarea" name="message" placeholder="How can we help you?"></textarea></div>
-          <p style="font-size:.62rem;font-weight:300;color:rgba(47,79,79,.35);margin-bottom:16px;line-height:1.6">By providing your phone number you consent to receive text messages from LoveLi Care. Reply STOP to opt out. <span onclick="navTo('privacy-policy')" style="color:#C9A96E;cursor:pointer">Privacy Policy</span></p>
+          <p style="font-size:.62rem;font-weight:300;color:rgba(60,43,37,.35);margin-bottom:16px;line-height:1.6">By providing your phone number you consent to receive text messages from LoveLi Care. Reply STOP to opt out. <span onclick="navTo('privacy-policy')" style="color:var(--gold-text);cursor:pointer">Privacy Policy</span></p>
           <button type="submit" class="btn-glass btn-glass-dark" style="width:100%;justify-content:center">Send Message →</button>
         </form>
       </div>
@@ -1056,11 +1081,12 @@
     <div class="lc-eyebrow lc-reveal"><span class="lc-eyebrow-text">NEW · AI-Powered</span></div>
     <h1 class="lc-h1 lc-reveal delay-1">Wellness <span class="lc-gold-em">Assistant</span></h1>
     <p class="lc-lead lc-reveal delay-2" style="margin:16px 0 40px">Skip the wait. Our AI wellness agent can help you learn about treatments, find the right protocol for your goals, and get quick answers before booking.</p>
-    <div class="glass-gold lc-reveal" style="padding:56px;text-align:center;margin-bottom:40px;border-radius:28px">
+    <div class="glass-gold lc-reveal wellness-chat-card">
       <div style="font-size:3.5rem;margin-bottom:20px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
       <h2 class="lc-h2" style="font-size:1.8rem;margin-bottom:12px">Chat with LoveLi Wellness AI</h2>
       <p class="lc-body" style="max-width:440px;margin:0 auto 28px">Available 24/7. Learn about treatments, compare options, and get personalized guidance — all before you book.</p>
-      <a href="https://lovelicare.com/wellness-chatbox" target="_blank" class="vagaro-glass-btn" style="font-size:.78rem;display:inline-flex"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> Launch Wellness Assistant ↗</a>
+      <iframe class="wellness-chat-frame" src="/chatbot" title="Chat with the LoveLi Wellness Assistant" loading="lazy"></iframe>
+      <a href="/chatbot" target="_blank" rel="noopener" class="vagaro-glass-btn" style="font-size:.78rem;display:inline-flex;margin-top:20px">Open Assistant in a New Tab ↗</a>
     </div>
     <div class="grid-2">
       <div class="glass-card lc-reveal" style="padding:28px"><h3 class="lc-h3" style="margin-bottom:8px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4"/><path d="M12 13v4M8 21h8M12 17a5 5 0 005-5"/><path d="M9 5l-2-2M15 5l2-2"/></svg> Treatment Info</h3><p class="lc-body">Learn about any service — from Botox to IV therapy to MMCC — before deciding to book.</p></div>
@@ -1073,8 +1099,8 @@
   <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container">
     <h1 class="lc-h1 lc-reveal" style="margin-bottom:40px">Online <span class="lc-gold-em">Store</span></h1>
     <div class="glass-gold lc-reveal" style="padding:48px;border-radius:24px;margin-bottom:40px;display:flex;gap:40px;align-items:center;flex-wrap:wrap">
-      <div style="flex:1;min-width:240px"><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:10px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg> FREE Download</div><h2 class="lc-h2" style="font-size:1.8rem;margin-bottom:12px">12-Day Weight Loss Meal Plan</h2><p class="lc-body" style="margin-bottom:20px">Your complimentary head-start on your wellness journey.</p><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass btn-glass-primary">Get Free Plan ↗</a></div>
-      <div style="text-align:center;flex-shrink:0"><div style="font-size:4rem;filter:drop-shadow(0 4px 12px rgba(201,169,110,.3))"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg></div><div style="font-family:'Italiana','Cormorant',Georgia,serif;color:#C9A96E;margin-top:8px">Completely Free</div></div>
+      <div style="flex:1;min-width:240px"><div style="font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);margin-bottom:10px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="8" rx="1"/><path d="M12 8v12"/><path d="M12 8c-2-3-6-3-6 0h6M12 8c2-3 6-3 6 0h-6"/></svg> FREE Download</div><h2 class="lc-h2" style="font-size:1.8rem;margin-bottom:12px">12-Day Weight Loss Meal Plan</h2><p class="lc-body" style="margin-bottom:20px">Your complimentary head-start on your wellness journey.</p><a href="https://lovelicare.com/online-store/ols/products/free-12-day-weight-loss-meal-plan" target="_blank" class="btn-glass btn-glass-primary">Get Free Plan ↗</a></div>
+      <div style="text-align:center;flex-shrink:0"><div style="font-size:4rem;filter:drop-shadow(0 4px 12px rgba(201,169,110,.3))"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0116 0H4z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 10c1-2 3-3 4-3s3 1 4 3"/></svg></div><div style="font-family:'Italiana','Cormorant',Georgia,serif;color:var(--gold-text);margin-top:8px">Completely Free</div></div>
     </div>
     <div class="grid-4">
       <a href="https://lovelicare.com/online-store" target="_blank" class="glass-card lc-reveal" style="padding:28px;text-align:center;text-decoration:none"><div style="font-size:2rem;margin-bottom:12px"><svg class="lc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg></div><h3 class="lc-h3">Browse Store ↗</h3></a>
@@ -1086,7 +1112,7 @@
       <h3 class="lc-h3" style="margin-bottom:10px">Subscribe & Save 10%</h3>
       <p class="lc-body" style="margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto">Get 10% off your first purchase when you join our wellness community.</p>
       <form class="lc-subscribe-form" style="display:flex;gap:8px;justify-content:center;max-width:360px;margin:0 auto">
-        <input class="lc-form-input" type="email" placeholder="Your email address" style="flex:1"/>
+        <input class="lc-form-input" type="email" name="email" aria-label="Your email address" placeholder="Your email address" required style="flex:1"/>
         <button type="submit" class="btn-glass btn-glass-dark btn-glass-sm">Sign Up</button>
       </form>
     </div>
@@ -1129,7 +1155,7 @@
 <div class="lc-page" id="page-privacy-policy">
   <div style="padding-top:120px" class="lc-glass-section"><div class="lc-container" style="max-width:860px">
     <h1 class="lc-h1 lc-reveal" style="font-size:2.5rem;margin-bottom:8px">Privacy <span class="lc-gold-em">Policy</span></h1>
-    <p style="font-size:.75rem;font-weight:300;color:rgba(47,79,79,.4);margin-bottom:40px">Last updated: August 20, 2025</p>
+    <p style="font-size:.75rem;font-weight:300;color:rgba(60,43,37,.4);margin-bottom:40px">Last updated: August 20, 2025</p>
     <div class="glass lc-reveal" style="padding:48px">
       <p class="legal-p">At LoveLi Care Med Spa & Wellness Lounge ("we" or "us"), we value the privacy of individuals who use our websites and related services. This Privacy Notice explains how we collect, use, and share the personal information of users.</p>
       <div class="legal-h2">Information You Provide to Us</div>
@@ -1257,19 +1283,19 @@
       <div class="glass lc-reveal" style="padding:36px;border-radius:20px;margin-bottom:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px">
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div style="font-size:1.4rem;flex-shrink:0">🕐</div>
-          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Arrive on time</div><p class="lc-body" style="font-size:.82rem">Plan to arrive 10 minutes early to complete any intake forms and get settled.</p></div>
+          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Arrive on time</div><p class="lc-body" style="font-size:.82rem">Plan to arrive 10 minutes early to complete any intake forms and get settled.</p></div>
         </div>
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div style="font-size:1.4rem;flex-shrink:0">💧</div>
-          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Hydrate well</div><p class="lc-body" style="font-size:.82rem">Drink plenty of water before your visit — especially for IV therapy and body treatments.</p></div>
+          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Hydrate well</div><p class="lc-body" style="font-size:.82rem">Drink plenty of water before your visit — especially for IV therapy and body treatments.</p></div>
         </div>
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div style="font-size:1.4rem;flex-shrink:0">📋</div>
-          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">Bring your ID</div><p class="lc-body" style="font-size:.82rem">A valid photo ID is required. For MMCC appointments, also bring your patient registry documents.</p></div>
+          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">Bring your ID</div><p class="lc-body" style="font-size:.82rem">A valid photo ID is required. For MMCC appointments, also bring your patient registry documents.</p></div>
         </div>
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div style="font-size:1.4rem;flex-shrink:0">💊</div>
-          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A96E;margin-bottom:4px">List your medications</div><p class="lc-body" style="font-size:.82rem">Have a current list of medications, supplements, and any known allergies ready to share.</p></div>
+          <div><div style="font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px">List your medications</div><p class="lc-body" style="font-size:.82rem">Have a current list of medications, supplements, and any known allergies ready to share.</p></div>
         </div>
       </div>
 
@@ -1282,7 +1308,7 @@
           <div style="font-size:1.6rem">💉</div>
           <div>
             <h3 class="lc-h3" style="margin-bottom:4px">Medical Aesthetics — Botox & Dermal Fillers</h3>
-            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">24–48 hours before your appointment</p>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(60,43,37,.5)">24–48 hours before your appointment</p>
           </div>
         </div>
         <ul class="lc-check">
@@ -1301,7 +1327,7 @@
           <div style="font-size:1.6rem">✨</div>
           <div>
             <h3 class="lc-h3" style="margin-bottom:4px">Body Contouring & Snatch Protocol™</h3>
-            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">Day of and 24 hours before</p>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(60,43,37,.5)">Day of and 24 hours before</p>
           </div>
         </div>
         <ul class="lc-check">
@@ -1320,7 +1346,7 @@
           <div style="font-size:1.6rem">💧</div>
           <div>
             <h3 class="lc-h3" style="margin-bottom:4px">IV & Nutritional Wellness Therapy</h3>
-            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">Day of your infusion</p>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(60,43,37,.5)">Day of your infusion</p>
           </div>
         </div>
         <ul class="lc-check">
@@ -1339,7 +1365,7 @@
           <div style="font-size:1.6rem">⚖️</div>
           <div>
             <h3 class="lc-h3" style="margin-bottom:4px">Weight Management & Nutrition Counseling</h3>
-            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">For your initial consultation</p>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(60,43,37,.5)">For your initial consultation</p>
           </div>
         </div>
         <ul class="lc-check">
@@ -1358,7 +1384,7 @@
           <div style="font-size:1.6rem">🌿</div>
           <div>
             <h3 class="lc-h3" style="margin-bottom:4px">MMCC Certification & Renewal</h3>
-            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">Maryland Medical Cannabis Commission</p>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(60,43,37,.5)">Maryland Medical Cannabis Commission</p>
           </div>
         </div>
         <ul class="lc-check">
@@ -1377,7 +1403,7 @@
           <div style="font-size:1.6rem">🏃</div>
           <div>
             <h3 class="lc-h3" style="margin-bottom:4px">Medical Physicals (Pre-Employment, Sports, DOT)</h3>
-            <p class="lc-body" style="font-size:.8rem;color:rgba(47,79,79,.5)">For all physical examination types</p>
+            <p class="lc-body" style="font-size:.8rem;color:rgba(60,43,37,.5)">For all physical examination types</p>
           </div>
         </div>
         <ul class="lc-check">
@@ -1431,7 +1457,7 @@
     <div class="footer-cta-inner">
       <div class="footer-cta-text">
         <div class="footer-cta-eyebrow">Ready to Begin?</div>
-        <h2>Your Wellness Journey<br>Starts <em style="font-style:italic;color:var(--gold)">Here</em></h2>
+        <h2>Your Wellness Journey<br>Starts <em style="font-style:italic;color:var(--gold-text)">Here</em></h2>
         <p>Board-certified care · Towson, MD · MD · DC · VA · PA</p>
       </div>
       <div class="footer-cta-actions">
@@ -1594,7 +1620,7 @@
 
 <!-- ══ COOKIE BANNER ══ -->
 <div id="lc-cookie">
-  <p>This website uses cookies to optimize your experience. <span onclick="navTo('privacy-policy')" style="color:#C9A96E;cursor:pointer">Privacy Policy</span></p>
+  <p>This website uses cookies to optimize your experience. <span onclick="navTo('privacy-policy')" style="color:var(--gold-text);cursor:pointer">Privacy Policy</span></p>
   <button id="lc-cookie-accept" class="btn-glass btn-glass-dark btn-glass-sm">Accept</button>
 </div>
 
@@ -1602,16 +1628,60 @@
 <script src="./assets/js/liquid-glass.js"></script>
 
 <script>
-// ── LOADER ──
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('lc-loader')?.classList.add('gone');
-    // Trigger initial reveals
-    document.querySelectorAll('#page-home .lc-reveal').forEach(el => {
-      setTimeout(() => el.classList.add('in'), 200);
+// ── INTRO SEQUENCE ──
+// Parts the aperture, then hands off to the hero entrance via html.intro-done.
+// The flag lives on <html> because the embedded Vagaro widget overwrites
+// document.body.className, which would silently wipe it off <body>.
+// Wrapped so that any failure still reveals the page rather than stranding
+// the visitor behind an opaque panel.
+(function () {
+  var intro = document.getElementById('lc-intro');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var seen = false;
+  try { seen = sessionStorage.getItem('lcIntroSeen') === '1'; } catch (e) {}
+
+  // Full sequence on the first view of a session; a quick part on returns.
+  var hold = reduced ? 120 : (seen ? 240 : 1500);
+  var partDuration = reduced ? 350 : (seen ? 560 : 950);
+
+  if (intro && seen && !reduced) intro.classList.add('brief');
+
+  function finish() {
+    document.documentElement.classList.add('intro-done');
+    document.querySelectorAll('#page-home .lc-reveal').forEach(function (el, i) {
+      setTimeout(function () { el.classList.add('in'); }, 90 + i * 70);
     });
-  }, 1200);
-});
+    setTimeout(function () { intro && intro.classList.add('lc-intro-done'); }, partDuration + 60);
+    try { sessionStorage.setItem('lcIntroSeen', '1'); } catch (e) {}
+  }
+
+  function start() {
+    try {
+      if (intro) intro.classList.add('split');
+      finish();
+    } catch (e) {
+      // Never leave the panels up if something throws.
+      if (intro) intro.classList.add('lc-intro-done');
+      document.documentElement.classList.add('intro-done');
+    }
+  }
+
+  var started = false;
+  function kick() { if (!started) { started = true; setTimeout(start, hold); } }
+
+  // Hand off as soon as OUR hero image is ready. Deliberately not window.load:
+  // the Vagaro and Affirm embeds routinely delay that event by several seconds
+  // (their API calls fail slowly), which would hold the intro far too long.
+  var portrait = document.querySelector('.lc-home-hero .owner-photo');
+  if (portrait && !portrait.complete) {
+    portrait.addEventListener('load', kick);
+    portrait.addEventListener('error', kick);
+    setTimeout(kick, 900); // never wait on a slow image
+  } else {
+    kick();
+  }
+})();
 </script>
 
 </body>

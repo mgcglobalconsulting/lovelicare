@@ -1,0 +1,14 @@
+# Deploy only the app and its public assets, not local credentials or handoffs.
+.env
+.env.*
+.git
+.claude
+.obsidian
+.superpowers
+_originals
+docs
+scripts
+supabase
+node_modules
+README.md
+AGENTS.md
