@@ -13,7 +13,8 @@ related: ["[[lovelicare-dashboard-v1]]", "[[lovelicare-master-plan-v2]]", "[[lov
 
 # Handoff — 2026-10-06
 
-Read this first, then `docs/DASHBOARD-V1.md`, then `docs/MASTER-PLAN-v2.md`.
+Read this first, then `docs/AUTH-DESIGN.md` (the live decision), then
+`docs/DASHBOARD-V1.md`, then `docs/MASTER-PLAN-v2.md`.
 
 **One-line state:** the owner dashboard is built, redesigned, verified and
 pushed; Supabase is cut over to a new project with the schema applied and
@@ -251,12 +252,14 @@ committed. The last pushed tree held **7 entries and no `public/`** while the
 working tree had 52 pending changes and 26 never-tracked files. **Check
 `git status` before blaming a remote.**
 
-### Uncommitted right now
-```
- M public/assets/js/dashboard.js                 # sign-in / sign-out flow
- M supabase/migrations/0002_project_notes.sql    # search_path hardening
-?? supabase/APPLY-TO-NEW-PROJECT.sql             # combined schema for Studio
-```
+### Working tree is CLEAN — everything pushed
+
+| Commit | What |
+|---|---|
+| `2467924` | dashboard, inventory, the whole working tree (63 files) |
+| `6441255` | browser sign-in, live Supabase reads, funnel empty-state fix |
+| `f60562c` | staff auth + RLS migration `0004` and `AUTH-DESIGN.md` (**not applied**) |
+| `c72c86a` | budget: split the Supabase Pro / Vercel Pro decisions |
 
 ### OneDopeStory is still not connected
 `gh` is authed as **`mgcglobalconsulting`**. A `gh auth login --web` device code
@@ -302,23 +305,52 @@ empty placeholders.
 
 ## 9. Next, in order
 
-1. ~~Add `SUPABASE_SERVICE_ROLE_KEY`~~ — **DONE. Dashboard is LIVE.**
-2. ~~Delete the test inquiry row~~ — **DONE.** `contact_inquiries` is at 0.
-3. **Commit the four pending files** (see §7).
-4. **Decide `origin` visibility** — it is public and holds the budget.
-5. **Point the dashboard at `inventory_items` over the API**, delete the duplicated
-   `INVENTORY` array in `dashboard-data.js`.
-6. **Phase 3 capture** — `chat_sessions`, `site_events`, `booking_intent`.
-   `/chat` persists nothing today; it is the highest-value untapped source and
-   the funnel/journey panels stay thin until it lands.
-7. **Replace the token gate with Supabase Auth** + `staff` table and roles.
-8. Optional: back-port occlusion + single-glyph checks into `audit-contrast.js`.
+### Waiting on Mark — nothing proceeds without these
 
-**Not started, unchanged:** Phase 2 hero video (`docs/HERO-VIDEO-PLAN.md`,
-needs $35–60 of Higgsfield credits, **not approved**). Vagaro replacement.
-Sheets/Slack/X/LinkedIn connectors — all reported honestly as pending or deferred.
+1. **Confirm the two seeded admin emails** — `LoveLiCareSvcs@gmail.com` (Libra)
+   and `onedopementor@gmail.com` (Mark), both `owner`. The trigger matches on
+   email and nothing else; a mismatch means that person signs in *successfully*
+   into a completely empty dashboard. See `AUTH-DESIGN.md` §4.1.
+2. **Answer `AUTH-DESIGN.md` §9** — especially whether `front_desk` should see
+   client phone/email or only name + service. Column-level, far cheaper to
+   decide before the login page exists than after.
+3. **Enable Google in Supabase** — Google Cloud OAuth client, redirect URI
+   `https://tziwrqpvnncddbvlclyg.supabase.co/auth/v1/callback`, paste ID +
+   secret. `AUTH-DESIGN.md` §6. **Claude has no access to this.**
+4. **Supabase Pro, $25/mo** — recommended and *urgent*, not approved. Free tier
+   pauses after 7 days idle; the project now receives live form submissions, so
+   a pause means silent data loss. `BUDGET.md` §5. Mark said he would finalise
+   2026-10-07.
 
----
+### Then, in order
+
+5. **Apply `0004_staff_auth_and_audit.sql`** via the Studio SQL editor.
+   *MCP `apply_migration` is declined by the permission gate — Studio is the
+   path that works.*
+6. **Build the login page and swap the API** — `public/login.html`, replace
+   `auth()` in `lib/dashboard-api.js` with JWT verification, add a per-request
+   Supabase client that forwards the user's JWT so RLS applies.
+   `DASHBOARD_TOKEN` is deleted at this point.
+7. **Test the four cases:** Libra signs in and sees everything · an *uninvited*
+   Google account signs in and sees nothing · a `front_desk` account cannot
+   adjust inventory · the audit log fills on a status change.
+8. **Only then deploy to Vercel.** Mark chose this order deliberately on
+   2026-10-06: shipping an admin surface holding client PII behind one shared
+   token is what the auth work exists to prevent. Vercel is linked
+   (`prj_1RZoqN7MOtBKtqE68nLI3fmWyB2h`) but **nothing has ever been deployed**.
+
+### Lower priority
+
+9. Point the dashboard at `inventory_items` over the API; delete the duplicated
+   `INVENTORY` array in `dashboard-data.js` (§5).
+10. Phase 3 capture — `chat_sessions`, `site_events`, `booking_intent`. `/chat`
+    persists nothing today; the funnel and journey panels stay thin until it lands.
+11. Back-port occlusion + single-glyph checks into `audit-contrast.js`.
+12. Decide `origin` visibility — it is **public** and holds `BUDGET.md`.
+
+**Not started, unchanged:** Phase 2 hero video (`HERO-VIDEO-PLAN.md`, $20–60
+Higgsfield, **not approved**). Vagaro replacement. Sheets/Slack/X/LinkedIn —
+all reported honestly as pending or deferred.
 
 ## 10. Standing rules that bit this session
 
