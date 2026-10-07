@@ -808,9 +808,12 @@
       var dropN = prev === null ? null : prev - stage.n;
       var dropPct = prev ? pct(dropN, prev) : null;
 
+      // With no rows at all, a share-of-total is meaningless. Show an em-dash
+      // rather than a confident "0%", which reads like a measured result.
+      var hasData = f[0].n > 0;
       var meta = el("div", { class: "funnel__meta" }, [
         el("span", { class: "funnel__name", text: stage.name }),
-        el("span", { class: "funnel__pct", text: pct(stage.n, top) + "%" }),
+        el("span", { class: "funnel__pct", text: hasData ? pct(stage.n, top) + "%" : "—" }),
         el("span", { class: "funnel__n", text: fmt(stage.n) })
       ]);
 
@@ -819,11 +822,17 @@
 
       var row = el("div", { class: "funnel__row" }, [meta, track]);
 
+      // Nothing upstream means there is no drop-off to describe. Printing
+      // "0 (null%)" — which is what `prev ? pct(..) : null` produced — looks
+      // like a broken calculation. Say nothing instead.
+      if (dropN !== null && prev === 0) {
+        // no upstream rows; omit the line entirely
+      }
       // A funnel stage can never exceed the one above it. If live data ever
       // produces that, it means the stages are not nested sets — which is a
       // data-model bug, not a number to display. Say so rather than printing
       // a negative drop-off.
-      if (dropN !== null && dropN < 0) {
+      else if (dropN !== null && dropN < 0) {
         row.appendChild(el("div", { class: "funnel__drop", html:
           "<strong>stage exceeds " + f[i - 1].name.toLowerCase() +
           "</strong> — not a nested set, drop-off not meaningful" }));
@@ -1003,6 +1012,10 @@
         (state.reason || "") +
         " A consistent sample set was generated to demonstrate the interface — " +
         "nothing here came from a real client.";
+      // The API is token-gated. Without a way in from the browser the page
+      // would sit in demo forever, so offer the unlock when the server is
+      // actually there and simply refused us.
+      renderUnlock(state.reason || "");
     } else {
       var missing = (state.info && state.info.missingTables) || [];
       $("#mode-text").innerHTML =
@@ -1012,7 +1025,88 @@
           ? " Not yet capturing: <strong>" + missing.join(", ") + "</strong> — " +
             "those panels stay empty until Phase 3 ships."
           : "");
+
+      var old = $("#unlock");
+      if (old) old.remove();
+      var out = el("button", { class: "btn btn--ghost", type: "button", text: "Sign out" });
+      out.addEventListener("click", function () {
+        fetch("/api/dashboard/logout", { method: "POST", credentials: "same-origin" })
+          .then(function () { toast("Signed out"); return refresh(); });
+      });
+      $("#modebar").appendChild(el("div", { class: "modebar__actions", id: "unlock" }, [out]));
     }
+  }
+
+  /* ========================================================================
+     UNLOCK — exchange the dashboard token for an httpOnly cookie.
+     The token is POSTed to /api/dashboard/session and never stored in JS,
+     localStorage or the URL; the server sets an httpOnly SameSite=Strict
+     cookie scoped to /api/dashboard. Reloading keeps you signed in for 12h.
+     ===================================================================== */
+
+  function renderUnlock(reason) {
+    var bar = $("#modebar");
+    var old = $("#unlock");
+    if (old) old.remove();
+
+    // Only offer it when a server actually answered. On the static preview
+    // there is no API to sign in to, so the control would be a dead end.
+    var signedOut = /not signed in/i.test(reason);
+    var notConfigured = /not configured/i.test(reason);
+    if (!signedOut && !notConfigured) return;
+
+    var wrap = el("div", { class: "modebar__actions", id: "unlock" });
+
+    if (notConfigured) {
+      wrap.appendChild(el("span", { class: "badge badge--empty",
+        text: "set DASHBOARD_TOKEN" }));
+      bar.appendChild(wrap);
+      return;
+    }
+
+    var input = el("input", {
+      type: "password",
+      id: "unlock-token",
+      class: "lb__btn",
+      placeholder: "DASHBOARD_TOKEN",
+      autocomplete: "current-password",
+      "aria-label": "Dashboard token"
+    });
+    input.style.minWidth = "210px";
+
+    var go = el("button", { class: "btn btn--primary", type: "button", text: "Use live data" });
+
+    function submit() {
+      var token = input.value.trim();
+      if (!token) { input.focus(); return; }
+      go.disabled = true;
+      go.textContent = "Checking…";
+      fetch("/api/dashboard/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ token: token })
+      }).then(function (res) {
+        if (!res.ok) throw new Error(String(res.status));
+        input.value = "";
+        toast("Signed in · switching to live data");
+        return refresh();
+      }).catch(function (e) {
+        go.disabled = false;
+        go.textContent = "Use live data";
+        toast(e.message === "401" ? "That token was not accepted"
+                                  : "Sign-in failed (" + e.message + ")");
+      });
+    }
+
+    go.addEventListener("click", submit);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); submit(); }
+    });
+
+    wrap.appendChild(input);
+    wrap.appendChild(go);
+    bar.appendChild(wrap);
   }
 
   function renderSideCounts() {

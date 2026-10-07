@@ -60,8 +60,16 @@ create index if not exists project_notes_updated_idx on public.project_notes (up
 create index if not exists project_notes_tags_idx    on public.project_notes using gin (tags);
 
 -- keep updated_at honest
+-- search_path is pinned. Supabase's linter flags a mutable search_path on a
+-- function (0011_function_search_path_mutable): a caller could prepend a schema
+-- and shadow an unqualified name the body resolves. Empty is safest here —
+-- pg_catalog is always implicitly searched, so now() still resolves.
 create or replace function public.touch_updated_at()
-returns trigger language plpgsql as $$
+returns trigger
+language plpgsql
+security invoker
+set search_path = ''
+as $$
 begin
   new.updated_at = now();
   return new;
