@@ -8,7 +8,7 @@ created: 2026-10-06
 updated: 2026-10-06
 tags: [lovelicare, budget, spend, hipaa, supabase, vercel]
 aliases: ["Budget", "Spend Tracker"]
-related: ["[[lovelicare-master-plan-v2]]", "[[lovelicare-hero-video-plan]]"]
+related: ["[[lovelicare-master-plan-v2]]", "[[lovelicare-hero-video-plan]]", "[[lovelicare-auth-design]]", "[[lovelicare-handoff-2026-10-06]]"]
 ---
 
 # LoveLi Care — Budget & Spend Tracker
@@ -47,11 +47,11 @@ Revisit only if revenue justifies ~$950/mo, or if a cheaper BAA-covered store is
 
 | Item | Cost/mo | Cost/wk | Status | Why |
 |---|---:|---:|---|---|
-| **Supabase Pro** | $25 | $5.75 | **Recommend** | Free tier **pauses after 7 days idle** — unacceptable for a live client site. Adds daily backups, 8 GB DB. |
-| **Vercel Pro** | $20 | $4.60 | **Recommend** | Hobby is non-commercial; this is a client production site. Adds analytics + password-protected previews. |
+| **Supabase Pro** | $25 | $5.75 | **Recommend — now urgent** | Free tier **pauses after 7 days idle**. This already bit us: the old project timed out on connect on 2026-10-06. The new project now holds the real inventory **and receives the live site's form submissions** — a pause means the contact form silently stops saving. Adds daily backups, 8 GB DB. |
+| **Vercel Pro** | $20 | $4.60 | **Hold until deploy day** | Still correct eventually — Hobby is non-commercial and this is a client production site. But **nothing is deployed**: on 2026-10-06 Mark chose to build Supabase Auth before shipping anything. Password-protected previews buy nothing while there is no deployment. Revisit when §8 step 7 is reached. |
 | **Anthropic API** (chatbot) | ~$15–40 | ~$3.50–9 | Active | Usage-based. Haiku 4.5 for routine chat turns keeps this at the low end. |
 | Domain (lovelicare.com) | ~$1.50 | ~$0.35 | Active | — |
-| **Recurring subtotal** | **~$62–87** | **~$14–20** | | **~80% of budget unspent** |
+| **Recurring subtotal, as recommended today** | **~$42–67** | **~$9.60–15.40** | | **~85% of budget unspent** |
 
 ## 3. One-off / variable
 
@@ -72,11 +72,43 @@ Revisit only if revenue justifies ~$950/mo, or if a cheaper BAA-covered store is
 
 ---
 
-## 5. Recommendation
+## 5. Recommendation — revised 2026-10-06
 
-Approve **Supabase Pro + Vercel Pro = $45/mo (~$10.40/week)**. With the API that is roughly **$14–20 of the $100**, leaving **~$80/week** of headroom for generative video and anything Phase 3–5 turns up.
+**Split the two. They are no longer the same decision.**
 
-The budget is not the binding constraint. **HIPAA is** — and the answer is to stay out of its scope rather than pay for it.
+### Approve now — Supabase Pro, $25/mo (~$5.75/week)
+
+This stopped being a nice-to-have today. The new project `tziwrqpvnncddbvlclyg`
+now holds the 9 real inventory items **and is wired to the live site's contact
+and subscribe forms**. On the free tier it pauses after 7 days idle, and a
+paused database means **submissions fail silently** — the visitor sees a
+success message and the row never lands. The old project already demonstrated
+the failure mode by timing out earlier the same day.
+
+$5.75/week against a $100 budget to protect the system of record.
+
+### Hold — Vercel Pro, $20/mo
+
+Correct eventually, but premature. Mark chose on 2026-10-06 to build Supabase
+Auth **before** deploying, because shipping an admin surface holding client PII
+behind one shared token is the thing that work exists to prevent. Until there
+is a deployment, Pro's analytics and protected previews buy nothing. Revisit at
+`AUTH-DESIGN.md` §8 step 7.
+
+### Where that leaves the week
+
+| | /mo | /wk |
+|---|---:|---:|
+| Supabase Pro | $25 | $5.75 |
+| Anthropic API | ~$15–40 | ~$3.50–9 |
+| Domain | ~$1.50 | ~$0.35 |
+| **Total** | **~$42–67** | **~$9.60–15.40** |
+
+Roughly **$85/week of headroom** — enough for the Phase 2 hero video ($20–60
+one-off) without touching the rest.
+
+The budget is not the binding constraint. **HIPAA is** — and the answer is to
+stay out of its scope rather than pay for it.
 
 ---
 
@@ -85,6 +117,17 @@ The budget is not the binding constraint. **HIPAA is** — and the answer is to 
 | Date | Item | Amount | Approved by | Running wk total |
 |---|---|---:|---|---:|
 | 2026-10-06 | *(nothing purchased yet)* | $0.00 | — | $0.00 |
+
+### Pending decisions — not purchased, not approved
+
+| Raised | Item | Amount | State |
+|---|---|---:|---|
+| 2026-10-06 | **Supabase Pro** | $25/mo | **Recommended, awaiting Mark's purchase decision.** Protects the live forms from free-tier pausing. |
+| 2026-10-06 | Vercel Pro | $20/mo | **Held** until there is a deployment. |
+| 2026-10-06 | Higgsfield credits (hero video) | $20–60 | Needs OK. Unchanged. |
+
+> Nothing above has been bought. A row only moves into the ledger once Mark
+> approves it **and** the charge exists.
 
 > Claude updates this table whenever spend is approved or incurred. Any new recurring
 > cost gets a row in §2 and a note on what it displaces.
