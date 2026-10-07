@@ -1,0 +1,66 @@
+# Role: Principal Full-Stack Engineer & UX Architect (Claude CLI Master Agent)
+# Project Context: Chef Ty's Kitchen Website (desktop/taste-tys-kitchen)
+# Stack: Next.js (App Router), React, Supabase (Database, Realtime, & Edge Functions), Vercel (Deployment), Slack Web API
+# Source Assets & Guidelines: desktop/taste-tys-kitchen-inspiration-only/
+
+## Overall Goal
+Build a fully functional, production-ready, highly interactive website for "Chef Ty's Kitchen". The application must elegantly cover all core service sectors: Corporate Catering, Private Dinner Events, Non-Profit/Charity Functions, and Public Festivals. It contains an autonomous AI Slack Front Desk Director that acts as a dispatch assistant to read inquiries, answer operational questions, schedule appointments, and process dynamic calendar modifications natively via Slack channels.
+
+## Infrastructure & Environment Setup Checklist
+Before writing code, verify or initialize these connections:
+1. Ensure the root local directory is explicitly initialized at desktop/taste-tys-kitchen.
+2. Connect the repository to GitHub and link it directly to Vercel for continuous deployment (git push testing).
+3. Connect a Supabase project instance and provision a .env.local file containing:
+   - NEXT_PUBLIC_SUPABASE_URL
+   - NEXT_PUBLIC_SUPABASE_ANON_KEY
+   - SLACK_BOT_TOKEN (For dispatch outbox messaging and administrative interactions)
+   - SLACK_SIGNING_SECRET (To securely verify incoming Slack request payloads)
+4. Setup structural folders: /components, /app, /lib, /styles, and /supabase/functions.
+
+## Visual System & Branding Guidelines
+- DO NOT copy inspiration files blindly. Analyze files in desktop/taste-tys-kitchen-inspiration-only/ for spacing, layout rules, and UX flow.
+- Color Palette: Deep culinary obsidian (#121212), high-end artisanal cream (#FBF9F6), and micro-accented burnished copper (#C87A53) for primary CTAs.
+- Structural Layout: Implement Hyperframe geometric boundaries (clean 24px/32px spacing, thin structural borders, zero cluttered visual elements).
+
+---
+
+## Strict Sequential Phase-by-Phase Execution Protocol
+You must execute the following 6 phases sequentially. 
+CRITICAL RULE (Higgsfield Protocol): Write or plan out raw, production-grade code ONLY. Do not output pseudo-code or use "code-block truncation placeholders" (e.g., // rest of code goes here). If a component, edge function, or database trigger is called for, write it completely.
+STEP-STOP PROTOCOL: Execute exactly ONE phase at a time. Upon completing the absolute final functional component of a single phase, you must STOP execution, output the exact phrase "PHASE [X] COMPLETE. PROCEED?", and wait for explicit user confirmation before touching the next phase.
+
+### Phase 1: Database Architecture & Realtime Schema (Supabase)
+- Write the raw SQL scripts to create a bookings table, a corporate_inquiries table, and an events table.
+- Implement columns for: ID, Client Name, Client Email, Event Type, Timestamp Slots, Guest Count, Status (Pending, Confirmed, Blocked), and Dynamic Metadata.
+- Enable Supabase Realtime Replication on the bookings table to support live availability polling.
+- Stop execution here when done.
+
+### Phase 2: Automated Email Infrastructure (Supabase Edge Functions & Webhooks)
+- Create a Supabase Edge Function located at /supabase/functions/send-booking-confirmation/ that handles transactional emails.
+- Write a raw SQL script establishing a Database Webhook that automatically triggers this Edge Function whenever a new row entry is created in the bookings or corporate_inquiries table.
+- Implement the email logic to deliver high-end, clean-text transactional emails containing the reservation overview, dynamic calendar event files (.ics metadata), and custom booking terms.
+- Stop execution here when done.
+
+### Phase 3: Slack Agentic Dispatch & Executive Assistant Integration
+- Build a dedicated Supabase Edge Function located at /supabase/functions/slack-agent-dispatch/ to process Slack Event Subscriptions API verification challenges and interactive command webhooks (`/commands`, `app_mention`).
+- Architect a dynamic inbound dispatch routing engine that parses text inputs from Slack commands to query, patch, insert, or rebook event entries directly in the Supabase database.
+- Integrate outgoing messaging streams allowing the agent to post client updates, suggest alternative timestamp availability blocks, and process custom administrative confirmation messages directly into a private operational Slack channel on the Chef's behalf.
+- Stop execution here when done.
+
+### Phase 4: Corporate Module & Interactive Layouts
+- Create a dedicated Corporate Catering interface layout featuring a flexible geometric UI grid.
+- Build an interactive Headcount Price Slider component that dynamically calculates rough pricing tiers or minimum deposit limits in real-time.
+- Embed explicit, high-contrast Call-to-Action (CTA) elements ("Request Corporate Proposal", "Download Menu Matrix") wrapped in Hyperframe layouts.
+- Stop execution here when done.
+
+### Phase 5: The Live-Time Dynamic Booking Calendar Engine
+- Build a native React calendar component integrated with Supabase Realtime Subscriptions (supabase.channel()).
+- The UI must instantly grey-out or disable date/time blocks when another user creates a row entry, or when the Slack Executive Assistant patches/locks a timestamp via slack.
+- Implement optimistic UI updates so booking transitions feel instantaneous to the desktop client.
+- Stop execution here when done.
+
+### Phase 6: Production Routing, Testing, & Final Vercel Deployment
+- Build out responsive routing for secondary modules: Private Events, Non-Profits, and Festivals.
+- Implement all remaining client intake forms mapping directly to Supabase tables.
+- Run a final workspace build validation (npm run build) to ensure zero TypeScript or routing compiler errors exist before pushing live to Vercel production.
+- Stop execution here when done.
