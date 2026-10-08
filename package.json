@@ -13,7 +13,14 @@
     "notes:list": "node scripts/sync-notes.js list",
     "notes:push": "node scripts/sync-notes.js push",
     "notes:obsidian": "node scripts/sync-notes.js obsidian",
-    "audit:dashboard": "node docs/testing/audit-dashboard.js"
+    "audit:dashboard": "node docs/testing/audit-dashboard.js",
+    "test:inventory": "node --test docs/testing/test-inventory.js",
+    "verify:inventory": "node docs/testing/verify-inventory-browser.js",
+    "verify:overview": "node docs/testing/verify-overview-browser.js",
+    "verify:storefront": "node docs/testing/verify-storefront-browser.js",
+    "clean:test-orders": "node docs/testing/clean-test-orders.js",
+    "fix:photos": "node scripts/crop-inventory-photos.js",
+    "verify:menus": "node docs/testing/verify-menus-browser.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",

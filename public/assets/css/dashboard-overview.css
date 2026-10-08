@@ -1,0 +1,200 @@
+/* ===========================================================================
+   LoveLi Care — practice overview
+   Horizon Homes' two-column shell, rendered in the Bare+ warm monochrome.
+   The reference's dark glass, orange accent and green/red semantic pills are
+   deliberately NOT carried across — see lovelicare-inventory/DASHBOARD-LAYOUT-MAP.md §3.
+   =========================================================================== */
+
+.ov {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 332px;
+  gap: 18px;
+  align-items: start;
+}
+
+.ov__main { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+
+/* The rail sits one value step down from the working column, so the two
+   read as separate surfaces without a border doing the work. */
+.ov__rail {
+  display: flex; flex-direction: column; gap: 18px;
+  position: sticky; top: 18px; min-width: 0;
+}
+
+.ov-card {
+  background: var(--c-mist);
+  border: 1px solid var(--frost-edge);
+  border-radius: 20px;
+  padding: 20px 22px;
+  min-width: 0;
+}
+
+.ov-card__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.ov-card__title { font: 400 21px/1.2 var(--f-display); margin: 0; letter-spacing: -.01em; }
+.ov-card__note  { font-size: 11px; color: var(--c-cacao); margin: 0; }
+
+/* ── KPI tiles ───────────────────────────────────────────────────────────── */
+.ov__kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+
+.ov-kpi {
+  background: var(--c-mist);
+  border: 1px solid var(--frost-edge);
+  border-radius: 18px;
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 5px; min-width: 0;
+}
+.ov-kpi__label { font-size: 11px; color: var(--c-cacao); }
+.ov-kpi__value {
+  font: 400 34px/1.15 var(--f-display);
+  letter-spacing: -.02em; color: var(--c-espresso);
+  overflow-wrap: anywhere;
+}
+/* An unsourced measure reads as a prompt, not as a number. */
+.ov-kpi__value--empty { font-size: 15px; line-height: 1.5; color: var(--c-cacao); }
+.ov-kpi__sub { font-size: 10px; color: var(--c-cacao); line-height: 1.5; }
+
+/* ── Two-up chart row ────────────────────────────────────────────────────── */
+.ov__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+
+/* ── Donut ───────────────────────────────────────────────────────────────── */
+/* Donut and legend get the card's full width — side by side they need ~210px
+   for the legend or the labels collapse to ellipses. The stat strip sits
+   underneath rather than stealing a column from them. */
+.ov-mix { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+
+.ov-mix__chart { display: flex; align-items: center; gap: 18px; min-width: 0; }
+
+.ov-mix__stats {
+  background: var(--c-bone);
+  border-radius: 15px; padding: 14px 16px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+}
+.ov-mix__stats .workspace-eyebrow { grid-column: 1 / -1; margin: 0; }
+
+.ov-donut { width: 132px; height: 132px; flex-shrink: 0; }
+.ov-donut__arc { animation: ov-arc .5s both; animation-delay: calc(var(--arc-index) * 70ms); }
+.ov-donut__total-n {
+  font: 400 26px var(--f-display); fill: var(--c-espresso);
+}
+.ov-donut__total-l {
+  font: 400 9px var(--f-ui); fill: var(--c-cacao);
+  letter-spacing: .1em; text-transform: uppercase;
+}
+
+.ov-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; min-width: 0; flex: 1; }
+.ov-legend--inline { flex-direction: row; gap: 16px; margin-top: 12px; }
+.ov-legend__row { display: flex; align-items: center; gap: 8px; font-size: 11px; min-width: 0; }
+.ov-legend__key { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.ov-legend__label { color: var(--c-espresso); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1 1 auto; min-width: 0; }
+.ov-legend__value { margin-left: auto; color: var(--c-cacao); font-variant-numeric: tabular-nums; }
+
+.ov-stat { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-size: 11px; }
+.ov-stat > span { color: var(--c-cacao); }
+.ov-stat > strong { font-weight: 500; color: var(--c-espresso); text-align: right; }
+
+/* ── Movement bars ───────────────────────────────────────────────────────── */
+.ov-bars { display: flex; align-items: flex-end; gap: 10px; height: 148px; padding-top: 6px; }
+.ov-bars__col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 0; height: 100%; }
+.ov-bars__stack { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; gap: 3px; }
+.ov-bars__in, .ov-bars__out { width: 42%; max-width: 20px; border-radius: 5px 5px 0 0; min-height: 2px; }
+/* Caramel as a fill is allowed — it carries no text. */
+.ov-bars__in  { background: var(--c-gold); }
+.ov-bars__out { background: var(--c-cacao); }
+.ov-bars__label { font-size: 10px; color: var(--c-cacao); }
+.ov-bars__col.is-current .ov-bars__label { color: var(--c-espresso); font-weight: 500; }
+
+/* ── Rail items ──────────────────────────────────────────────────────────── */
+.ov-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 0; border-bottom: 1px solid var(--dash-hair); min-width: 0;
+}
+.ov-item:last-child { border-bottom: 0; }
+.ov-item__thumb {
+  width: 42px; height: 42px; border-radius: 11px; flex-shrink: 0;
+  background: var(--c-bone); display: grid; place-items: center; overflow: hidden;
+}
+/* contain, not cover: several vial photos are wide two-label shots on a dark
+   ground, and a centre crop returns a black square. */
+.ov-item__thumb img { width: 100%; height: 100%; object-fit: contain; padding: 3px; box-sizing: border-box; }
+.ov-item__mono { font: 400 15px var(--f-display); color: var(--c-cacao); }
+.ov-item__body { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1; }
+.ov-item__name {
+  font-size: 12px; font-weight: 500; color: var(--c-espresso);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ov-item__price { text-align: right; display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
+.ov-item__price strong { font-size: 12px; font-weight: 500; }
+.ov-item__price small { font-size: 9px; color: var(--c-cacao); }
+
+.ov-empty { font-size: 12px; color: var(--c-cacao); padding: 22px 0; text-align: center; }
+.ov-note  { font-size: 10px; color: var(--c-cacao); margin-top: 10px; }
+
+@keyframes ov-arc { from { opacity: 0 } to { opacity: 1 } }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1250px) {
+  .ov { grid-template-columns: minmax(0, 1fr) 288px; }
+  .ov__kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ov-mix { grid-template-columns: 1fr; }
+}
+@media (max-width: 1000px) {
+  .ov { grid-template-columns: 1fr; }
+  .ov__rail { position: static; }
+  .ov__row { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .ov-card { padding: 17px; }
+  .ov__kpis { gap: 10px; }
+  .ov-kpi__value { font-size: 28px; }
+  .ov-mix__chart { flex-direction: column; align-items: flex-start; }
+  .ov-legend { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ov-donut__arc { animation: none; }
+}
+
+/* ===========================================================================
+   MATERIAL — frosted glass over the warm field
+   Appended last so it wins on source order. Each translucent fill is tinted
+   toward mist/sand, never neutral white: rgba(255,255,255,a) over an
+   espresso-tinted shadow reads GREY on this palette, which is the exact
+   failure BRANDING.md warns about.
+   =========================================================================== */
+
+/* Opaque fallbacks first. A browser without backdrop-filter must get a solid
+   warm card, never a washed-out one. */
+.ov-card { background: var(--c-mist); box-shadow: var(--dash-shadow), var(--dash-inset); }
+.ov-kpi  { background: var(--c-mist); box-shadow: var(--dash-shadow), var(--dash-inset); }
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .ov-card {
+    background: var(--frost);
+    backdrop-filter: var(--frost-blur);
+    -webkit-backdrop-filter: var(--frost-blur);
+  }
+  /* Dense small numerals sit on the stronger tint so contrast never relies on
+     whatever happens to be behind the panel. */
+  .ov-kpi {
+    background: var(--frost-strong);
+    backdrop-filter: var(--frost-blur-lite);
+    -webkit-backdrop-filter: var(--frost-blur-lite);
+  }
+}
+
+/* The donut card carries the caramel edge-sheen — the one metallic note. */
+#ov-mix { box-shadow: var(--dash-shadow), var(--dash-inset), var(--sheen-gold); }
+
+/* The stat strip stays SOLID bone inside its frosted parent. Blur nested in
+   blur reads muddy, and this is where the value step has to stay legible. */
+.ov-mix__stats { background: var(--c-bone); }
+
+@media (prefers-reduced-transparency: reduce) {
+  .ov-card, .ov-kpi {
+    background: var(--c-mist);
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+}

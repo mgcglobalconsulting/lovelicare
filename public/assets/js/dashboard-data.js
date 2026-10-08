@@ -420,46 +420,10 @@
      honest state; a green light that means nothing is not.
      ===================================================================== */
 
-  function connectors(mode, apiInfo) {
-    var sb = apiInfo && apiInfo.supabase;
-    return [
-      {
-        name: "Supabase",
-        state: mode === "live"
-          ? (sb && sb.rows > 0 ? "live" : "empty")
-          : "off",
-        detail: mode === "live"
-          ? (sb && sb.rows > 0
-              ? "Connected · " + sb.rows + " rows readable"
-              : "Connected · 0 rows. Tables exist, nothing submitted yet.")
-          : "Not reachable from the static preview. Run the Express server to connect."
-      },
-      {
-        name: "Google Sheets",
-        state: "pending",
-        detail: "Adapter stubbed. Ops aggregates out, manual data in. Needs GOOGLE_* env — see docs/BUDGET.md."
-      },
-      {
-        name: "Slack",
-        state: "pending",
-        detail: "Digest route designed. Aggregates + first name / last initial only. Install needs Mark's OK."
-      },
-      {
-        name: "X (Twitter)",
-        state: "off",
-        detail: "Deferred — D5. API is $200/mo = 46% of the weekly budget. Adapter stubbed, no spend."
-      },
-      {
-        name: "LinkedIn",
-        state: "off",
-        detail: "Deferred — D5. Marketing Developer Platform is free but needs multi-week approval. Application not yet filed."
-      },
-      {
-        name: "Vagaro",
-        state: "off",
-        detail: "Tier 2. Revenue, calendar, LTV and memberships unlock when the replacement ships."
-      }
-    ];
+  function connectors(mode) {
+    return [{ name: "Supabase", state: mode === "live" ? "live" : "off",
+      detail: mode === "live" ? "Connected" : "Sign in to check your data source." },
+      { name: "Google Sheets", state: "pending", detail: "Checking your operations sheet connection." }];
   }
 
   /* ========================================================================
@@ -492,14 +456,14 @@
       ndc: "72827-2402-1", mfr: "Empower Pharmacy", vial: "Sterile Single-Dose",
       route: "IV", category: "antioxidant", qty: 10, reorder: 10,
       benefits: ["Skin brightening", "Detoxification"],
-      src: "gluthathione-injection-and-biotin.png" },
+      src: "gluthathione-injection-and-biotin.jpg" },
 
     { name: "BIOTIN SOLUTION FOR INJECTION", common: "Biotin",
       ingredients: "Biotin", strength: "10 mg/mL", vol: 30,
       ndc: "72833-589-30", mfr: "ASP Cares", vial: "Multiple Dose",
       route: "IM or IV", category: "vitamin", qty: 10, reorder: 10,
       benefits: ["Strong hair & nails", "Skin health"],
-      src: "gluthathione-injection-and-biotin.png" },
+      src: "gluthathione-injection-and-biotin.jpg" },
 
     { name: "LIPO INJECTION", common: "Lipotropic",
       ingredients: "Methionine / Inositol / Choline Chloride",
@@ -507,7 +471,7 @@
       ndc: "72827-2415-1", mfr: "Empower Pharmacy", vial: "Sterile Multiple-Dose",
       route: "IM", category: "lipotropic", qty: 10, reorder: 10,
       benefits: ["Burn fat", "Boost metabolism"],
-      src: "libo-injection-and-libo-b-injection.png" },
+      src: "libo-injection-and-libo-b-injection.jpg" },
 
     { name: "LIPO-B INJECTION", common: "Lipotropic B",
       ingredients: "Methionine / Inositol / Choline Chloride / Cyanocobalamin",
@@ -515,7 +479,7 @@
       ndc: "72827-2419-1", mfr: "Empower Pharmacy", vial: "Sterile Multiple-Dose",
       route: "IM", category: "lipotropic", qty: 10, reorder: 10,
       benefits: ["Burn fat", "Energy"],
-      src: "libo-injection-and-libo-b-injection.png" },
+      src: "libo-injection-and-libo-b-injection.jpg" },
 
     { name: "TAURINE INJECTION", common: "Taurine",
       ingredients: "Taurine", strength: "50 mg/mL", vol: 30,
@@ -536,7 +500,7 @@
       ndc: null, mfr: "Empower Pharmacy", vial: "Sterile Multiple Dose",
       route: "IM or SubQ", category: "antioxidant", qty: 10, reorder: 10,
       benefits: ["Cellular energy", "Antioxidant"],
-      src: "coenzyme-q-10.png" },
+      src: "coenzyme-q-10.jpg" },
 
     { name: "VITAMIN D3 INJECTION", common: "Vitamin D3",
       ingredients: "Cholecalciferol", strength: "50,000 IU/mL", vol: 30,
@@ -550,7 +514,7 @@
       ndc: null, mfr: "Olympia Pharmaceuticals", vial: "Multi-Dose",
       route: "IV", category: "mineral", qty: 10, reorder: 10,
       benefits: ["Immune support", "Skin healing"],
-      src: "zinc-chloride.png" }
+      src: "zinc-chloride.jpg" }
   ];
 
   // The eight stages a client moves through. Counts are derived from inquiry
@@ -620,7 +584,7 @@
         else if (err.status === 503)  why = err.detail || "The dashboard API is not configured.";
         else                          why = err.detail || ("The API returned " + err.status + ".");
 
-        var all = generateRows(90);
+        var all = {inquiries:[], subscribers:[], chats:[], events:[]};
         var filtered = applyFilters(all, filters);
         return {
           mode: "demo",

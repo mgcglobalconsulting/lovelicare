@@ -61,7 +61,9 @@ reports `transparent` for most grounds on this site, so only a real screenshot s
 - `liquid-glass.css` **already has a `:root` variable layer** (`--cream`, `--teal`, `--gold`, `--glass-*`).
   **Recolor through that seam** — redefine the vars, then convert residual raw literals. Do not value-snap
   every file; that destroys hue and deletes the caramel.
-- Supabase (`lphudfgjbsyhroqmhomh`): 2 tables, **0 rows**, insert-only RLS. No revenue/appointment data exists.
+- Supabase project is **`tziwrqpvnncddbvlclyg`** (confirmed by Mark 2026-10-07; the old
+  `lphudfgjbsyhroqmhomh` ref is wrong). `inventory_items` holds **9 live products**
+  (90 units, 9 ledger rows, 0 priced). `orders`/`order_items` exist and are empty.
 - `/chat` **persists nothing** — every chatbot conversation is discarded. Highest-value untapped data source.
 - Site nav is sound: 17 `navTo()` targets ↔ 17 `id="page-*"` sections, all matched. Not broken.
 - `index.html` is 1688 lines, single-file SPA. **The dashboard does not go in it.**
@@ -104,8 +106,9 @@ npm run notes:push                              # upsert into Supabase project_n
   internal notes must never be readable from a browser. Push needs `SUPABASE_SERVICE_ROLE_KEY`.
 - **Never put client data or PHI in these notes.** Project documentation only.
 
-> ⚠️ `supabase/migrations/0002_project_notes.sql` is **written but NOT applied.**
-> Applying it is a production migration and needs Mark's explicit OK.
+> **Migration state, verified 2026-10-07:** 0001, 0002, 0003, 0005 and 0006 are
+> **applied**. Only `0004_staff_auth_and_audit.sql` remains written-but-not-applied.
+> Applying a migration is a production change and needs Mark's explicit OK.
 
 ## Phase 2 (hero video) — PLANNED, not started
 

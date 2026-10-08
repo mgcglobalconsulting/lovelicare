@@ -18,6 +18,7 @@
 // Requires a static server on :4321 (npm run serve:static) and `pngjs`.
 
 const { spawn } = require("child_process");
+require('dotenv').config();
 const os = require("os"), fs = require("fs"), path = require("path");
 const PNG = require("pngjs").PNG;
 
@@ -72,6 +73,11 @@ async function target() {
 
   await send("Page.enable");
   await send("Runtime.enable");
+  if (process.env.DASHBOARD_AUTH === '1') {
+    await send('Network.enable');
+    await send('Network.setCookie', { name:'lc_dash', value:process.env.DASHBOARD_TOKEN,
+      url:BASE, path:'/api/dashboard', httpOnly:true, sameSite:'Strict' });
+  }
 
   const all = [];
 
@@ -79,12 +85,15 @@ async function target() {
   // floating listbox gets sampled against what it actually sits on.
   const passes = [
     { name: "default", setup: null },
-    { name: "dropdown-open", setup: `document.querySelector('.lb__btn').click()` }
+    { name: "dropdown-open", setup: `document.querySelector('.lb__btn').click()` },
+    { name: "inventory", hash: '#p-inventory', setup: null },
+    { name: "product-editor", hash: '#p-inventory', setup: `document.querySelector('.product-name')?.click()` },
+    { name: "connectors", hash: '#p-connectors', setup: null }
   ];
 
   for (const pass of passes) {
     await send("Emulation.setDeviceMetricsOverride", { width: 1440, height: 950, deviceScaleFactor: 1, mobile: false });
-    await send("Page.navigate", { url: `${BASE}/dashboard.html` });
+    await send("Page.navigate", { url: `${BASE}/dashboard.html${pass.hash || ''}` });
     await sleep(3200);
     if (pass.setup) { await ev(pass.setup); await sleep(500); }
 

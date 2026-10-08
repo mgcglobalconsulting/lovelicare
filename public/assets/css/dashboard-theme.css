@@ -34,6 +34,16 @@
   --frost-soft: rgba(253, 251, 249, .55);
   --frost-edge: rgba(255, 255, 255, .85);
   --frost-blur: blur(22px) saturate(165%);
+  /* A lighter blur for surfaces that repeat. backdrop-filter is per-element
+     GPU work; 22px across a 65-product grid drops frames on an integrated GPU. */
+  --frost-blur-lite: blur(10px) saturate(140%);
+
+  /* Monochrome fractal-noise tooth, ~5.5% — enough to break gradient banding,
+     far below where it reads as texture. */
+  --dash-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)' opacity='.055'/%3E%3C/svg%3E");
+
+  /* Caramel as metal: a single bright edge, never a fill and never text. */
+  --sheen-gold: inset 0 1px 0 rgba(201, 169, 110, .28);
 
   /* Shadows stay espresso-tinted. Black on a warm palette reads grey. */
   --dash-shadow: 0 1px 2px rgba(60, 43, 37, .05),
@@ -53,14 +63,38 @@
   --f-ui: 'Jost', system-ui, -apple-system, sans-serif;
 }
 
+/* =========================================================================
+   THE FIELD
+   Three warm pools and a grain tooth. Large soft gradients band visibly on a
+   wide monitor; the grain is what breaks the banding up, and it is also what
+   keeps the ground reading as a material rather than as a fill.
+
+   Grain is a monochrome fractal-noise SVG, inline as a data URI — no network
+   request, and it tiles at 160px so it never repeats visibly. feColorMatrix
+   desaturates it, because coloured noise tints a warm palette green.
+   ========================================================================= */
 body {
-  background: var(--dash-field);
-  /* Two soft warm pools so the tan field has depth instead of reading flat. */
+  background-color: var(--dash-field);
   background-image:
-    radial-gradient(1100px 620px at 12% -8%, rgba(253, 251, 249, .80), transparent 60%),
-    radial-gradient(900px 540px at 95% 4%, rgba(233, 218, 209, .75), transparent 62%);
+    var(--dash-grain),
+    /* bone, top-left: the light source. Held at .70 rather than full strength —
+       washing the field to near-white removes the very contrast the frosted
+       panels need in order to read as glass rather than as paper. */
+    radial-gradient(1180px 660px at 10% -10%, rgba(253, 251, 249, .70), transparent 60%),
+    /* shell, top-right: the warm counterweight */
+    radial-gradient(940px 560px at 96%  2%, rgba(233, 218, 209, .78), transparent 62%),
+    /* cacao, low-right: stops a long page dying into a flat slab at the bottom */
+    radial-gradient(1000px 700px at 88% 92%, rgba(110,  86,  78, .085), transparent 68%);
+  background-size: 160px 160px, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
   background-attachment: fixed;
   font-weight: 400;
+}
+
+/* Reduced transparency is an accessibility preference, not a taste one: drop
+   the grain and flatten to the plain warm field. */
+@media (prefers-reduced-transparency: reduce) {
+  body { background-image: none; background-color: var(--dash-field-2); }
 }
 
 /* =========================================================================

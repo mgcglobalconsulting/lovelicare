@@ -283,12 +283,13 @@
   }
 
   function writeURL(push) {
-    var p = new URLSearchParams();
+    var p = new URLSearchParams(location.search);
     Object.keys(DEFAULTS).forEach(function (k) {
       if (filters[k] !== DEFAULTS[k]) p.set(k, filters[k]);
+      else p.delete(k);
     });
     var qs = p.toString();
-    var url = location.pathname + (qs ? "?" + qs : "");
+    var url = location.pathname + (qs ? "?" + qs : "") + location.hash;
     history[push ? "pushState" : "replaceState"]({ filters: Object.assign({}, filters) }, "", url);
   }
 
@@ -426,7 +427,7 @@
     // Badge first, then source, then freshness — so the demo flag sits in the
     // same place on every tile instead of wrapping to a second line on some.
     var meta = el("div", { class: "tile__meta" }, [
-      mode === "demo" ? el("span", { class: "badge badge--demo", text: "demo" }) : null,
+      mode === "demo" ? el("span", { class: "badge badge--empty", text: "not connected" }) : null,
       el("span", { class: "tile__src", text: t.src }),
       el("span", { text: ago(state.generatedAt) })
     ]);
@@ -489,7 +490,7 @@
     var now = new Date();
     var h = now.getHours();
     var part = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
-    $("#greeting").textContent = part + ", Libra";
+    $("#greeting").textContent = document.body.dataset.workspace === 'inventory' ? 'Your product collection' : document.body.dataset.workspace === 'connectors' ? 'Connected workspace' : part + ", Libra";
     $("#todaydate").textContent = now.toLocaleDateString("en-US", {
       weekday: "long", day: "numeric", month: "long"
     });
@@ -517,8 +518,8 @@
       tags.appendChild(el("span", { class: "hero__tag", text: "No service interest recorded in range" }));
     }
     top.forEach(function (s) {
-      tags.appendChild(el("span", { class: "hero__tag", html:
-        s.name.replace(/ \(.*\)$/, "") + " <b>" + s.n + "</b>" }));
+      tags.appendChild(el("span", { class: "hero__tag", text:
+        s.name.replace(/ \(.*\)$/, "") + " · " + s.n }));
     });
     host.appendChild(tags);
   }
@@ -599,91 +600,8 @@
 
   /* ---------------------------------------------------------- INVENTORY */
 
-  // Stock lives in memory for the preview. In live mode this is where the
-  // inventory_movements ledger write goes -- quantity is never set directly,
-  // it is the sum of its movements.
-  var stock = null;
-
   function renderInventory() {
-    if (!stock) {
-      stock = LCData.INVENTORY.map(function (p) {
-        return Object.assign({}, p);
-      });
-    }
-    var host = $("#inventory");
-    host.innerHTML = "";
-
-    var low = stock.filter(function (p) { return p.qty <= p.reorder; }).length;
-    var total = stock.reduce(function (a, p) { return a + p.qty; }, 0);
-    var sum = $("#inv-summary");
-    sum.textContent = stock.length + " items · " + total + " vials" +
-                      (low ? " · " + low + " at/below base" : "");
-    sum.className = "badge " + (low ? "badge--empty" : "badge--live");
-    $("#c-inv").textContent = String(stock.length);
-
-    stock.forEach(function (p, i) {
-      var isLow = p.qty <= p.reorder;
-
-      var minus = el("button", { class: "invbtn", type: "button",
-        "aria-label": "Use one " + p.common, text: "−" });
-      var plus = el("button", { class: "invbtn", type: "button",
-        "aria-label": "Receive one " + p.common, text: "+" });
-      if (p.qty === 0) minus.disabled = true;
-
-      var fill = el("div", { class: "invcard__fill" });
-
-      var spec = el("div", { class: "invcard__spec" }, [
-        el("span", { class: "chip chip--gold", text: p.strength }),
-        el("span", { class: "chip chip--route", text: p.route }),
-        el("span", { class: "chip", text: p.vol + " mL " + p.vial })
-      ]);
-
-      var card = el("div", { class: "card invcard" + (isLow ? " invcard--low" : "") }, [
-        el("div", { class: "invcard__top" }, [
-          el("div", {}, [
-            el("div", { class: "invcard__common", text: p.common }),
-            el("div", { class: "invcard__name", text: p.name })
-          ]),
-          el("div", { class: "invcard__qty" }, [
-            el("span", { class: "invcard__n", text: String(p.qty) }),
-            el("span", { class: "invcard__unit", text: "VIALS" })
-          ])
-        ]),
-        spec,
-        el("div", { class: "invcard__bar" }, [fill]),
-        el("div", { class: "invcard__foot" }, [
-          el("span", { text: p.mfr }),
-          el("span", { class: "invcard__adj" }, [minus, plus])
-        ])
-      ]);
-
-      if (p.ndc) {
-        card.querySelector(".invcard__foot").insertBefore(
-          el("span", { class: "tile__src", text: "NDC " + p.ndc }),
-          card.querySelector(".invcard__adj"));
-      }
-
-      minus.addEventListener("click", function () { adjust(i, -1); });
-      plus.addEventListener("click", function () { adjust(i, +1); });
-
-      host.appendChild(card);
-      requestAnimationFrame(function () {
-        // Scale against twice the base count so 10/10 reads as half-full
-        // and a restock to 20 reads as full.
-        fill.style.width = Math.min(100, (p.qty / (p.reorder * 2)) * 100) + "%";
-      });
-    });
-  }
-
-  function adjust(i, delta) {
-    var p = stock[i];
-    var next = p.qty + delta;
-    if (next < 0) return;
-    p.qty = next;
-    renderInventory();
-    toast(p.common + " → " + next + " vials · " +
-          (state.mode === "demo" ? "demo only, not persisted"
-                                 : "logged to inventory_movements"));
+    window.LCInventory.refresh(true);
   }
 
   /* -------------------------------------------------------------- TABS */
@@ -739,7 +657,7 @@
 
       t.items.forEach(function (it) {
         var mi = el("button", { class: "lb__opt", type: "button", role: "menuitem",
-          text: it.label });
+          text: it.label, "data-target": it.target });
         mi.addEventListener("click", function () { close(); goTo(it.target); });
         menu.appendChild(mi);
       });
@@ -986,6 +904,7 @@
   }
 
   function renderConnectors() {
+    if (window.LCWorkspace) { window.LCWorkspace.connectors(true); return; }
     var host = $("#connectors");
     host.innerHTML = "";
     state.connectors.forEach(function (c) {
@@ -1005,13 +924,12 @@
   function renderModebar() {
     var bar = $("#modebar");
     bar.className = "modebar modebar--" + state.mode;
-    $("#mode-tag").textContent = state.mode === "demo" ? "Demo data" : "Live";
+    $("#mode-tag").textContent = state.mode === "demo" ? "Not connected" : "Live";
     if (state.mode === "demo") {
       $("#mode-text").innerHTML =
-        "<strong>Every number on this page is synthetic.</strong> " +
+        "<strong>Sign in to your owner workspace.</strong> " +
         (state.reason || "") +
-        " A consistent sample set was generated to demonstrate the interface — " +
-        "nothing here came from a real client.";
+        " Live operations remain empty until the connection is available.";
       // The API is token-gated. Without a way in from the browser the page
       // would sit in demo forever, so offer the unlock when the server is
       // actually there and simply refused us.
@@ -1019,11 +937,9 @@
     } else {
       var missing = (state.info && state.info.missingTables) || [];
       $("#mode-text").innerHTML =
-        "<strong>Live.</strong> Read from Supabase through the server. " +
-        "Tiles with no rows show an empty state rather than a number." +
+        "<strong>Connected to your practice.</strong> Inventory refreshes every 30 seconds. " +
         (missing.length
-          ? " Not yet capturing: <strong>" + missing.join(", ") + "</strong> — " +
-            "those panels stay empty until Phase 3 ships."
+          ? " Chat and website activity are not being captured yet."
           : "");
 
       var old = $("#unlock");

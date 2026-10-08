@@ -22,6 +22,9 @@
 <link rel="stylesheet" href="./assets/css/dashboard.css"/>
 <!-- Theme override: tan field + white-frost panels. Must load last. -->
 <link rel="stylesheet" href="./assets/css/dashboard-theme.css"/>
+<link rel="stylesheet" href="./assets/css/dashboard-workspace.css"/>
+<link rel="stylesheet" href="./assets/css/dashboard-overview.css"/>
+<link rel="stylesheet" href="./assets/css/dashboard-storefront.css"/>
 </head>
 
 <body>
@@ -52,6 +55,11 @@
         Client journey
       </button>
 
+      <button class="side__link" data-target="#p-overview" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8a6 6 0 1 1 12 0 M8 8l3-2"/></svg>
+        Practice overview
+      </button>
+
       <button class="side__link" data-target="#p-funnel" type="button">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h12l-4.5 5v5l-3 1V8z"/></svg>
         Funnel
@@ -75,6 +83,11 @@
         <span class="side__count" id="c-inv">—</span>
       </button>
 
+      <button class="side__link" data-target="#p-storefront" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.5h11l-1 8h-9z M5.5 5.5a2.5 2.5 0 0 1 5 0"/></svg>
+        Products &amp; orders
+      </button>
+
       <button class="side__link" data-target="#p-audience" type="button">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 13v-1a3 3 0 0 0-3-3H5a3 3 0 0 0-3 3v1 M6.5 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg>
         Audience
@@ -82,7 +95,7 @@
       </button>
     </nav>
 
-    <p class="side__section">Not yet live</p>
+    <p class="side__section">Business</p>
     <nav class="side__nav" aria-label="Deferred sections">
       <button class="side__link" data-target="#p-deferred" type="button">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h8v6H4z M6 7V5a2 2 0 0 1 4 0v2"/></svg>
@@ -95,8 +108,8 @@
     </nav>
 
     <div class="side__foot">
-      <strong>Honesty rule.</strong> No tile shows a number it cannot trace
-      to a row. Deferred metrics stay empty until their source ships.
+      <img src="/assets/img/owner-portrait.jpg" alt="" class="owner-avatar"/>
+      <div><strong>Libra Robertson</strong><br/>Owner workspace · Towson</div>
     </div>
   </aside>
 
@@ -136,6 +149,61 @@
 
     <div class="content">
 
+      <!-- ────────────────────────────────────────── PRACTICE OVERVIEW ─ -->
+      <section class="panel" id="p-overview" aria-labelledby="h-overview">
+        <div class="panel__head">
+          <div>
+            <p class="workspace-eyebrow">LOVELI CARE · OWNER WORKSPACE</p>
+            <h2 class="panel__title" id="h-overview">Your practice</h2>
+            <p class="panel__note" id="ov-stamp">Loading your overview…</p>
+          </div>
+        </div>
+
+        <div class="ov">
+          <div class="ov__main">
+            <div class="ov__kpis" id="ov-kpis"></div>
+
+            <div class="ov__row">
+              <section class="ov-card" id="ov-movement" aria-labelledby="h-ov-movement">
+                <div class="ov-card__head">
+                  <h3 class="ov-card__title" id="h-ov-movement">Stock movement</h3>
+                  <p class="ov-card__note">Received vs. used, from the ledger</p>
+                </div>
+                <div id="ov-movement-body"></div>
+              </section>
+
+              <!-- The lower-right chart. Real counts, traceable to rows. -->
+              <section class="ov-card" id="ov-mix" aria-labelledby="h-ov-mix">
+                <div class="ov-card__head">
+                  <h3 class="ov-card__title" id="h-ov-mix">Collection by category</h3>
+                  <p class="ov-card__note">Every product, grouped</p>
+                </div>
+                <div id="ov-mix-body"></div>
+              </section>
+            </div>
+          </div>
+
+          <aside class="ov__rail" aria-label="Practice summary">
+            <section class="ov-card" id="ov-practice" aria-labelledby="h-ov-practice">
+              <div class="ov-card__head">
+                <h3 class="ov-card__title" id="h-ov-practice">The practice</h3>
+              </div>
+              <div id="ov-practice-body"></div>
+            </section>
+
+            <section class="ov-card" id="ov-collection" aria-labelledby="h-ov-collection">
+              <div class="ov-card__head">
+                <h3 class="ov-card__title" id="h-ov-collection">Your collection</h3>
+                <p class="ov-card__note"><a href="#p-inventory" data-target="#p-inventory">See all ↗</a></p>
+              </div>
+              <div id="ov-collection-body"></div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <hr class="rule-gold"/>
+
       <!-- ─────────────────────────────────────────── GREETING + TILES ─ -->
       <section class="panel" id="p-today" aria-labelledby="h-today">
         <div class="panel__head">
@@ -164,6 +232,119 @@
             Hollow stages have no owned source yet — they light up when the
             Vagaro replacement ships. They are never estimated.
           </p>
+        </div>
+      </section>
+
+
+      <hr class="rule-gold"/>
+
+      <!-- ──────────────────────────────────────── COLLECTION & ORDERS ─ -->
+      <section class="panel" id="p-storefront" aria-labelledby="h-sf">
+        <div class="panel__head">
+          <div>
+            <p class="workspace-eyebrow">LOVELI CARE · THE COLLECTION</p>
+            <h2 class="panel__title" id="h-sf">Products &amp; orders</h2>
+            <p class="panel__note">Browse the collection and record an itemized order.</p>
+          </div>
+        </div>
+
+        <div class="sf">
+          <div class="sf__main">
+            <div class="sf-hero">
+              <p class="workspace-eyebrow">CARE, THOUGHTFULLY MADE</p>
+              <h2>Know what <em>goes in.</em></h2>
+              <p>Every product Libra uses and sells, with its strength, its source
+                 and what is left on the shelf. An order recorded here adjusts stock
+                 through the same ledger the rest of the dashboard reads.</p>
+              <hr class="sf-hero__rule"/>
+            </div>
+
+            <div class="sf-filters">
+              <label class="sf-search">Search
+                <input id="sf-search" type="search" placeholder="Product, brand or SKU"
+                       aria-label="Search the collection"/>
+              </label>
+              <label>Category
+                <select id="sf-category"><option value="all">All categories</option></select>
+              </label>
+              <label>Availability
+                <select id="sf-availability">
+                  <option value="all">Everything</option>
+                  <option value="sellable">Ready to sell</option>
+                  <option value="unpriced">Needs a price</option>
+                </select>
+              </label>
+              <label>Sort
+                <select id="sf-sort">
+                  <option value="name">Name A–Z</option>
+                  <option value="price-low">Price: low to high</option>
+                  <option value="price-high">Price: high to low</option>
+                  <option value="stock">Stock: low to high</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="sf-caption">
+              <span id="sf-count" role="status">Loading the collection…</span>
+              <button class="filters__reset" id="sf-reset" type="button">Clear filters</button>
+            </div>
+
+            <div class="sf-grid" id="sf-grid" aria-live="polite"></div>
+          </div>
+
+          <aside class="sf__rail" aria-label="Order desk">
+            <section class="sf-order" aria-labelledby="h-sf-order">
+              <h3 id="h-sf-order">This order</h3>
+              <p class="sf-order__note">Prices come from the catalog. Stock is checked when you record.</p>
+
+              <div id="sf-lines"></div>
+
+              <div class="sf-form">
+                <label class="is-wide">Customer label — first name and last initial only
+                  <input id="sf-customer" type="text" maxlength="60" placeholder="Jasmine R."
+                         autocomplete="off"/>
+                </label>
+                <label>Channel<select id="sf-channel"></select></label>
+                <label>Discount ($)
+                  <input id="sf-discount" type="number" min="0" step="0.01" value="0"/>
+                </label>
+                <label>Tax ($)
+                  <input id="sf-tax" type="number" min="0" step="0.01" value="0"/>
+                </label>
+                <label class="is-wide">Order note — no client information
+                  <textarea id="sf-note" maxlength="1000"></textarea>
+                </label>
+              </div>
+
+              <div class="sf-totals">
+                <div class="sf-totals__row"><span>Subtotal</span><span id="sf-subtotal">$0.00</span></div>
+                <div class="sf-totals__row sf-totals__row--grand">
+                  <span>Total</span><strong id="sf-total">$0.00</strong>
+                </div>
+              </div>
+
+              <div class="sf-actions">
+                <button class="btn btn--ghost" id="sf-clear" type="button" disabled>Clear</button>
+                <button class="btn btn--primary" id="sf-record" type="button" disabled>Record order</button>
+              </div>
+
+              <p class="sf-error" id="sf-error" role="alert"></p>
+              <p class="sf-receipt" id="sf-receipt" role="status" hidden></p>
+
+              <p class="sf-disclosure">
+                Rx products are prescription compounded medications, dispensed under
+                Libra T. Robertson, NP-CRNP. Recording an order here is an internal
+                stock and sales record — it is not a patient chart and never carries
+                clinical information. Clinical intake stays in Vagaro.
+              </p>
+            </section>
+
+            <section class="sf-order" aria-labelledby="h-sf-recent">
+              <h3 id="h-sf-recent">Recent orders</h3>
+              <p class="sf-order__note">The ten most recent, newest first.</p>
+              <div id="sf-orders"></div>
+            </section>
+          </aside>
         </div>
       </section>
 
@@ -228,14 +409,29 @@
       <!-- ──────────────────────────────────────────────────── INVENTORY ─ -->
       <section class="panel" id="p-inventory" aria-labelledby="h-inv">
         <div class="panel__head">
-          <h2 class="panel__title" id="h-inv">Injectable &amp; IV inventory</h2>
-          <p class="panel__note">
-            Transcribed from vial photographs · base count 10 · click ± to adjust
-          </p>
+          <div><p class="workspace-eyebrow">THE LOVELICARE COLLECTION</p><h2 class="panel__title" id="h-inv">Product inventory</h2>
+          <p class="panel__note">Every product. Every detail. In one place.</p></div>
           <span class="panel__spacer"></span>
-          <span class="badge badge--live" id="inv-summary">—</span>
+          <div class="inventory-actions">
+            <button class="btn btn--ghost" id="inventory-import" type="button">↓ Import</button>
+            <button class="btn btn--ghost" id="inventory-export" type="button">↑ Export</button>
+            <button class="btn btn--primary" id="inventory-add" type="button">＋ Add product</button>
+          </div>
         </div>
-        <div class="inv" id="inventory"></div>
+        <div class="collection-banner"><div><span class="workspace-eyebrow">CARE, BEAUTIFULLY ORGANIZED</span><h3>A thoughtful collection.<br/><em>A clearer view.</em></h3><p>Products, pricing &amp; the essentials behind every visit.</p><a href="https://www.lovelicare.com" target="_blank" rel="noopener">Visit LoveLi Care ↗</a></div><img src="/assets/img/inventory/gluthathione-injection-and-biotin.jpg" alt="Lovelicare's Glutathione and Biotin product labels"/></div>
+        <div id="inventory-stats" class="inventory-stats"></div>
+        <div class="inventory-toolbar">
+          <label class="inventory-search"><span aria-hidden="true">⌕</span><input id="inventory-search" type="search" placeholder="Search products, brands or SKU" aria-label="Search inventory"/></label>
+          <label>Category<select id="inventory-category"><option value="all">All categories</option></select></label>
+          <label>Brand<select id="inventory-brand"><option value="all">All brands</option></select></label>
+          <label>Stock<select id="inventory-stock"><option value="all">All stock</option><option value="low">Low stock</option><option value="out">Out of stock</option><option value="in">In stock</option></select></label>
+          <label>Sort<select id="inventory-sort"><option value="name">Name A–Z</option><option value="price">Price: low to high</option><option value="quantity">Stock: low to high</option><option value="recent">Recently updated</option></select></label>
+          <div class="view-switch" role="group" aria-label="Inventory view"><button id="inventory-grid" aria-label="Grid view" aria-pressed="true" type="button">▦</button><button id="inventory-list" aria-label="List view" aria-pressed="false" type="button">☰</button></div>
+        </div>
+        <div class="inventory-caption"><span id="inv-summary" role="status">Connecting to inventory…</span><button id="inventory-reset" class="filters__reset" type="button">Clear filters</button></div>
+        <div class="inventory-notice" id="inventory-notice" role="status"></div>
+        <div class="product-grid" id="inventory" aria-live="polite"></div>
+        <p class="inventory-footnote">Stock is measured in each product’s listed unit. Costs and retail prices are in USD; missing prices stay unset.</p>
       </section>
 
       <hr class="rule-gold"/>
@@ -289,8 +485,8 @@
       <!-- ────────────────────────────────────────────────── CONNECTORS ─ -->
       <section class="panel" id="p-connectors" aria-labelledby="h-conn">
         <div class="panel__head">
-          <h2 class="panel__title" id="h-conn">Connectors</h2>
-          <p class="panel__note">Real status. A light here always means something.</p>
+          <h2 class="panel__title" id="h-conn">Your connected workspace</h2>
+          <p class="panel__note">Live source checks, clear account status, and operations metrics.</p>
         </div>
         <div class="grid grid--half" id="connectors"></div>
       </section>
@@ -302,6 +498,10 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="./assets/js/dashboard-data.js"></script>
+<script src="./assets/js/dashboard-inventory.js"></script>
 <script src="./assets/js/dashboard.js"></script>
+<script src="./assets/js/dashboard-overview.js"></script>
+<script src="./assets/js/dashboard-storefront.js"></script>
+<script src="./assets/js/dashboard-workspace.js"></script>
 </body>
 </html>

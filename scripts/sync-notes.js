@@ -28,6 +28,7 @@ const ROOT = path.join(__dirname, "..");
 const SCAN = [
   path.join(ROOT, "docs"),
   path.join(ROOT, "libra-lovelicare-images", "brand"),
+  path.join(ROOT, "lovelicare-inventory"),
 ];
 
 /** Minimal YAML frontmatter reader — enough for the flat keys we author. */
